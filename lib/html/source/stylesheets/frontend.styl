@@ -1,0 +1,109 @@
+@charset "utf-8";
+@import 'colors.styl'
+
+body
+  background-color $bg-color
+  color $fg-color
+  padding 0px
+  margin 0px
+  height 100%
+  width 100%
+  overflow hidden
+
+html
+  padding 0px
+  height 100%
+  width 100%
+  overflow hidden
+
+a
+  text-decoration none
+
+.hidden
+  display none
+
+#status
+  background-color #000
+  margin 0px
+  padding 5px
+  padding-bottom 10px
+  font-family Monospace
+  height 2%
+  &:before
+    color #781111
+    content "Detached"
+  & > .left
+    float left
+  & > .right
+    float right
+  & > .center
+  // Not working right now
+    display none
+
+  .connected &
+    &:before
+      color #378137
+      content "Attached"
+      margin-right 2em
+      float left
+
+.pane
+  margin 0px
+  overflow auto
+  padding 8px
+  width 100%
+  height 100%
+  box-sizing: border-box;
+  word-wrap: break-word;
+  position relative
+
+.pane > .pane
+  margin -8px
+  margin-right -16px
+
+#panes
+  height calc(98% - 15px)
+  width 100%
+  box-sizing: border-box
+
+.horizontal .pane
+  height 100%
+  float left
+
+.plot
+  width 100%
+  height 100%
+  border 1px solid #333
+  margin -1px
+  overflow none
+
+#plot-mouseover
+  position absolute
+  background-color rgba(0, 0, 0, 0.5)
+  color $fg-color
+  pointer-events none
+  font-family Monospace
+
+#plot-zoom-element
+  position absolute
+  background-color rgba(0, 3, 10, 0.75)
+  pointer-events none
+  border 1px solid #012
+
+.hljs
+  background-color $bg-color
+
+#dialog
+  position absolute
+  top 10%
+  left 10%
+  width 70%
+  height 70%
+  padding 1em
+  background-color darken($bg-color, 20%)
+  border $normal-border
+  & > #message
+    margin 0
+    height calc(100% - 3em)
+  & > .full-button
+    height 1em

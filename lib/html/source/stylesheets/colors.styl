@@ -1,0 +1,18 @@
+activate(color, ammount)
+  if dark(color)
+    lighten(color, ammount)
+  else
+    darken(color, ammount)
+
+$bg-color = #120018
+
+if dark($bg-color)
+  $fg-color = #eee
+else
+  $fg-color = #333
+
+$highlight = activate($bg-color, 10%)
+$active-highlight = activate($bg-color, 20%)
+$normal-border = 1px solid darken($fg-color, 30%)
+$scrollbar-track-color = desaturate($active-highlight, 80%)
+$scrollbar-thumb-color = desaturate(activate($scrollbar-track-color, 30%), 20%)

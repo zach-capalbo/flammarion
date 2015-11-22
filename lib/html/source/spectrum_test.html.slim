@@ -1,0 +1,39 @@
+---
+layout: false
+---
+    
+doctype html
+html
+  head
+    meta[http-equiv="content-type" content="text/html; charset=UTF-8"]
+    meta charset="utf-8"
+    meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"
+    meta[name="viewport" content="width=device-width, initial-scale=1.0"]
+    = stylesheet_link_tag("railscasts.css")
+    = stylesheet_link_tag("all")
+    = stylesheet_link_tag("scrollbar")
+    = javascript_include_tag("all")
+    javascript:
+      hljs.initHighlightingOnLoad();
+    coffee:
+      $(document).ready ->
+        $ws.actions.plot {
+          target: "default"
+          data: [-0.38,1.12,1.51,1.22,-0.41,0.12,0.71,-1.03,0.77,0.34,-0.09,-0.05,0.28,-0.04,1.62,0.42,0.19,0.66,-0.42,0.16,0.34,0.15,1.03,-0.56,1.79,-0.55,-0.53,0.25,0.69,2.57,0.71,0.8,1.09,0.56,0.16,-0.07,0.37,0.19,1.49,0.67,1.31,0.91,-0.33,-0.39,-0.13,0.13,1.37,1.82,0.7,1.06,1.02,0.68,0.03,1.48,0.07,0.78,1.6,-0.28,1.06,0.55,0.37,-0.31,0.36,0.34,0.51,-0.74,0.54,-0.54,0.93,1.29,-0.45,0.8,0.67,-0.51,0.14,1.43,1.81,0.35,0.72,0.59,1.44,0.46,0.62,0.49,0.65,0.71,0.14,2.96,-1.02,1.74,0.36,1.11,0.56,1.0,0.27,-0.5,0.52,0.12,1.49,0.73]
+          #data: [0, 1, 0, 2, 0, 1, 0]
+          id: 'ii3'
+          xscale: 0.5
+        }
+  body
+    #toolbar.hidden
+      a.tool-button[href="#"] Open
+      a.tool-button[href="#"] Save
+    #panes
+      pre#console-default.pane[style="height:100%"]
+    #dialog.hidden
+      pre#message Hi World
+      a.full-button[href="#"] Ok
+    #status
+      .left
+      .center
+      .right
