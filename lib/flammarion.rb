@@ -8,6 +8,7 @@ require 'coffee-script'
 require 'sass'
 require 'colorize'
 require 'filewatcher'
+require 'rbconfig'
 
 require_relative 'flammarion/writeable.rb'
 require_relative 'flammarion/pane.rb'
@@ -81,12 +82,16 @@ module Flammarion
 
     CHROME_PATH = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
     def open_a_window_on_windows
-      resource = %[file\://#{File.absolute_path(File.dirname(__FILE__))}/html/build/index.html]
-      spawn(CHROME_PATH, %[--app=#{resource}?path=#{@window_id}&port=#{@@server.port}])
+      file_path = File.absolute_path(File.dirname(__FILE__))
+      file_path = `cygpath -w '#{file_path}'`.strip if RbConfig::CONFIG["host_os"] == "cygwin"
+      resource = %[file\://#{file_path}/html/build/index.html]
+      chrome_path = CHROME_PATH
+      chrome_path = `cygpath -u '#{CHROME_PATH}'`.strip if RbConfig::CONFIG["host_os"] == "cygwin"
+      spawn(chrome_path, %[--app=#{resource}?path=#{@window_id}&port=#{@@server.port}])
     end
 
     def open_a_window
-      return open_a_window_on_windows if Gem.win_platform?
+      return open_a_window_on_windows if RbConfig::CONFIG["host_os"] =~ /cygwin|mswin|mingw/
       developmentMode = system("lsof -i:#{4567}", out: '/dev/null')
       host = "file://#{File.dirname(File.absolute_path(__FILE__))}/html/build/index.html"
       host = "http://localhost:4567/" if developmentMode
