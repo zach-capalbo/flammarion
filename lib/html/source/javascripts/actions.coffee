@@ -172,6 +172,10 @@ $.extend WSClient.prototype.actions,
   script: (data) ->
     eval(data.data)
 
+  style: (data) ->
+    target = @__parent.check_target(data)
+    target.css(data.attribute, data.value)
+
   table: (data) ->
     target = @__parent.check_target(data)
     html = "<table>"

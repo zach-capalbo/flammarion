@@ -120,9 +120,13 @@ module Flammarion
       send_json({action:'replace', text:data, raw:true})
     end
 
-    def script(coffee)
-      data = CoffeeScript.compile(coffee)
-      send_json({action:'script', data:data})
+    def script(coffee, options = {})
+      data = options.fetch(:coffee, true) ? CoffeeScript.compile(coffee) : coffee
+      send_json({action:'script', data:data}.merge(options))
+    end
+
+    def style(attribute, value)
+      send_json({action: 'style', attribute: attribute, value: value})
     end
 
     def template(file)
