@@ -194,3 +194,9 @@ $.extend WSClient.prototype.actions,
         pos = $(this).index()
         html.find("td:nth-child(#{(pos+1)})").toggleClass("hover")
     @__parent.add(html, target, data)
+
+  focus: (data) ->
+    window.show()
+
+  close: (data) ->
+    window.close()

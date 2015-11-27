@@ -1,5 +1,7 @@
 # Flammarion GUI Toolkit
 
+[![Gem Version](https://badge.fury.io/rb/flammarion.svg)](https://badge.fury.io/rb/flammarion)
+
 ## Overview
 
 Flammarion is an easy-to-use library for displaying information that you might

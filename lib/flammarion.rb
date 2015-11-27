@@ -101,6 +101,9 @@ module Flammarion
 
       @expect_title = "Flammarion-#{rand.to_s[2..-1]}"
 
+      Process.detach(spawn("electron #{File.dirname(File.absolute_path(__FILE__))}/../electron '#{host}?path=#{@window_id}&port=#{@@server.port}&title=#{@expect_title}'"))
+      return
+
       %w[google-chrome google-chrome-stable chromium chromium-browser chrome C:\Program\ Files\ (x86)\Google\Chrome\Application\chrome.exe].each do |executable|
         @chrome.in, @chrome.out, @chrome.err, @chrome.thread = Open3.popen3("#{executable} --app='#{host}?path=#{@window_id}&port=#{@@server.port}&title=#{@expect_title}'")
         break if @chrome.in

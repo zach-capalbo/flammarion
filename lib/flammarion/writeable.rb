@@ -87,6 +87,12 @@ module Flammarion
       @front_end.callbacks[id] = block
     end
 
+    def embedded_button(label, options = {}, &block)
+      id = @front_end.make_id
+      @front_end.callbacks[id] = block
+      %|<a class="floating-button" href="#" onClick="$ws.send({id:'#{id}', action:'callback', source:'embedded_button'})">#{label}</a>|
+    end
+
     def input(label, options = {}, &block)
       id = @front_end.make_id
       send_json({action:'input', label:label, id:id}.merge(options))
