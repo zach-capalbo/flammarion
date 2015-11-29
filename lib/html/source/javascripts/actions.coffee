@@ -54,12 +54,7 @@ $.extend WSClient.prototype.actions,
       target.addClass("horizontal")
     else
       target.removeClass("horizontal")
-
     @__parent.resize_panes(data)
-
-  # plot: (data) ->
-    # @__parent.check_target(data)
-    # drawPlot("#console-#{data.target}", data.data, $.extend({orientation:@__parent.orientation}, data))
 
   highlight: (data) ->
     target = @__parent.check_target(data)
@@ -67,6 +62,12 @@ $.extend WSClient.prototype.actions,
     code.addClass data.language if data.language
     @__parent.add(code, target, data)
     hljs.highlightBlock(code[0])
+
+  markdown: (data) ->
+    target = @__parent.check_target(data)
+    newblock = $("<div class='markdown'></div>")
+    newblock.html(data.text)
+    @__parent.add(newblock, target, data)
 
   button: (data) ->
     target = @__parent.check_target(data)

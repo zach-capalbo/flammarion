@@ -144,6 +144,17 @@ module Flammarion
       FileWatcher.new(file).watch {|file| template(file) }
     end
 
+    def markdown(text, options = {})
+      markdown_html = Redcarpet::Markdown.new(Redcarpet::Render::HTML, {
+        tables: true,
+        fenced_code_blocks: true,
+        autolink: true,
+        strikethrough: true,
+        superscript: true,
+      }.merge(options[:markdown_extensions] || {})).render(text)
+      send_json({action:'markdown', text: markdown_html}.merge(options))
+    end
+
     def hide
       send_json({action:'hidepane'})
     end

@@ -1,14 +1,16 @@
-require 'monitor'
 require 'open3'
 require 'ostruct'
 require 'em-websocket'
 require 'json'
-require 'slim'
-require 'coffee-script'
-require 'sass'
 require 'colorize'
 require 'filewatcher'
 require 'rbconfig'
+
+# Optional requires
+require 'sass'
+require 'slim'
+require 'coffee-script'
+require 'redcarpet'
 
 require_relative 'flammarion/writeable.rb'
 require_relative 'flammarion/pane.rb'
@@ -26,15 +28,18 @@ module Flammarion
       @actions = {}
       @front_end = self
       @pane_name = "default"
+      @on_connect = options[:on_connect]
+      @ignore_old = options.fetch(:ignore_old, false)
+      @on_disconnect = options[:on_disconnect]
+      @exit_on_disconnect = options.fetch(:exit_on_disconnect, false)
+
       start_server
       @window_id = @@server.register_window(self)
       open_a_window unless options[:no_chrome]
       @callbacks = {}
-      @exit_on_disconnect = options.fetch(:exit_on_disconnect, false)
       wait_for_a_connection unless options[:no_wait]
-      @on_disconnect = options[:on_disconnect]
-      @ignore_old = options.fetch(:ignore_old, false)
-      @on_connect = options[:on_connect]
+
+      at_exit {close} if options.fetch(:close_on_exit, false)
     end
 
     def disconnect(ws)
@@ -146,6 +151,10 @@ module Flammarion
     def layout(file)
       data = Slim::Template.new(file).render
       send_json({action:'layout', data:data})
+    end
+
+    def close
+      send_json({action:'close'})
     end
 
     def live_reload_layout(file)

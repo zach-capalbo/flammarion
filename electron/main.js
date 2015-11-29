@@ -20,9 +20,7 @@
       "web-security": false,
       preload: preload
     });
-    console.log(preload);
-    main_window.loadUrl(process.argv[2]);
-    return main_window.openDevTools();
+    return main_window.loadUrl(process.argv[2]);
   });
 
 }).call(this);
