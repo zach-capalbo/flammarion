@@ -3,8 +3,7 @@
 # Service Example
 #
 # A simple example that lists the services on the system with buttons to start
-# and stop them.
-
+# and stop them. Uses the `service` command to interace with services.
 require_relative '../lib/flammarion'
 require 'colorize'
 require 'ostruct'
@@ -16,12 +15,17 @@ services = `service --status-all`.split("\n").map{|l| m = l.match(/ \[ (.) \]\s*
 f = Flammarion::Engraving.new(exit_on_disconnect:true)
 
 # Now show everything in a table:
-
 f.table(
-  [["Status", "Service"].map{|h|h.light_magenta}] + # Headers for readability
+
+  # Headers for readability. Flammarion can handle standard ANSI colors just fine.
+  [["Status", "Service"].map{|h|h.light_magenta}] +
   services.collect do |service|
+
+    # Create buttons which we can embed in the text. When they are clicked, the
+    # blocks will be called.
     start_button = f.embedded_button("Start") { puts "Starting #{service.name}"}
     stop_button = f.embedded_button("Stop") { puts "Stopping #{service.name}"}
     [service.status, service.name, start_button, stop_button]
   end, escape_html:false)
+
 sleep 1000 while true

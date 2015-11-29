@@ -19,6 +19,10 @@ module Flammarion
         end
       end
       sleep 0.5 while not @started
+
+      # This is a hack. For some reason, you need to wait a bit for everything
+      # to get written.
+      at_exit { sleep 0.1 }
     end
     def start_server_internal
       EM.run {

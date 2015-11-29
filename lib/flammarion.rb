@@ -13,6 +13,7 @@ require 'rbconfig'
 require_relative 'flammarion/writeable.rb'
 require_relative 'flammarion/pane.rb'
 require_relative 'flammarion/server.rb'
+require_relative 'flammarion/version.rb'
 
 module Flammarion
   class Engraving
