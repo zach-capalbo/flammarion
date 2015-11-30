@@ -18,7 +18,7 @@ module Flammarion
       resource = %[file\://#{file_path}/html/build/index.html]
       chrome_path = CHROME_PATH
       chrome_path = `cygpath -u '#{CHROME_PATH}'`.strip if RbConfig::CONFIG["host_os"] == "cygwin"
-      spawn(chrome_path, %[--app=#{resource}?path=#{@window_id}&port=#{@@server.port}])
+      spawn(chrome_path, %[--app=#{resource}?path=#{@window_id}&port=#{server.port}])
     end
 
     def open_a_window

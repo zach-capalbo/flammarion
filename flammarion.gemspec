@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "sass"
   s.add_runtime_dependency "slim"
   s.add_runtime_dependency "coffee-script"
+  s.add_runtime_dependency "redcarpet"
 
   s.add_development_dependency "bundler", "~> 1.7"
   s.add_development_dependency "middleman", "~> 3.3"
