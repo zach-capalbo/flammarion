@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.description = 'An easy to use gui toolkit for Ruby'
   s.authors     = ["Zach Capalbo"]
   s.email       = "zach.geek@gmail.com"
-  s.files       = Dir["lib/**/*"] + %w[LICENSE Readme.md]
+  s.files       = Dir["lib/**/*"] + %w[LICENSE Readme.md] + Dir["electron/**/*"]
   s.homepage    = 'https://github.com/zach-capalbo/flammarion'
   s.license     = 'MIT'
   s.add_runtime_dependency "em-websocket", "~> 0.5"
