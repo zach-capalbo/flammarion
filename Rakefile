@@ -13,7 +13,7 @@ task :html do
 end
 
 task :build => [:html] do
-
+  system("gem build flammarion.gemspec")
 end
 
 task :publish => [:build] do
