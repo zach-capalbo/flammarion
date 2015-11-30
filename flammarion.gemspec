@@ -4,7 +4,7 @@ require 'flammarion/version'
 
 
 Gem::Specification.new do |s|
-  s.name        = 'Flammarion'
+  s.name        = 'flammarion'
   s.version     = Flammarion::VERSION
   s.date        = '2015-11-21'
   s.summary     = 'Flammarion GUI Toolkit'
