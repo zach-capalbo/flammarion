@@ -1,4 +1,7 @@
 require "bundler/gem_tasks"
+require_relative 'lib/flammarion/version'
+
+class VersionControlError < CommandFailedError; end
 
 task :serve do
   Dir.chdir("lib/html") do
@@ -17,4 +20,8 @@ task :build => [:html] do
 end
 
 task :publish => [:build] do
+  raise VersionControlError.new("Uncommited Changes!") if `hg id`.include?("+")
+  system("hg tag v#{Flammarion::VERSION}")
+  system("gem push flammarion-#{Flammarion::VERSION}.gem")
+  system("hg push")
 end
