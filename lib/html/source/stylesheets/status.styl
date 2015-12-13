@@ -1,0 +1,33 @@
+@import 'colors.styl'
+@import 'mixins.styl'
+
+#status
+  background-color #000
+  margin 0px
+  padding 5px
+  padding-bottom 10px
+  font-family Monospace
+  height 2%
+  overflow none
+  user-select none
+  &:before
+    color #781111
+    content "Detached"
+  & > .left
+    float left
+    width 33%
+    cursor pointer
+  & > .right
+    float right
+    width 33%
+    cursor pointer
+  & > .center
+  // Not working right now
+    display none
+
+  .connected &
+    &:before
+      color #378137
+      content "Attached"
+      margin-right 2em
+      float left

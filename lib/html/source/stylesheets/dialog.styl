@@ -1,0 +1,21 @@
+@import 'colors.styl'
+@import 'mixins.styl'
+
+#dialog
+  position absolute
+  top 10%
+  left 10%
+  width 70%
+  height 70%
+  padding 1em
+  background-color darken($bg-color, 20%)
+  border $normal-border
+  user-select none
+  & > #message
+    user-select all
+    margin 0
+    height calc(100% - 3em)
+    word-wrap normal
+    overflow auto
+  & > .full-button
+    height 1em

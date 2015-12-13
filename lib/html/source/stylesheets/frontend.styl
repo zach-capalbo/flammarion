@@ -9,6 +9,7 @@ body
   height 100%
   width 100%
   overflow hidden
+  user-select none
 
 html
   padding 0px
@@ -26,31 +27,6 @@ a
 
 .hidden
   display none
-
-#status
-  background-color #000
-  margin 0px
-  padding 5px
-  padding-bottom 10px
-  font-family Monospace
-  height 2%
-  &:before
-    color #781111
-    content "Detached"
-  & > .left
-    float left
-  & > .right
-    float right
-  & > .center
-  // Not working right now
-    display none
-
-  .connected &
-    &:before
-      color #378137
-      content "Attached"
-      margin-right 2em
-      float left
 
 .pane
   margin 0px
@@ -72,7 +48,7 @@ a
   width 100%
   box-sizing: border-box
 
-.horizontal .pane
+.horizontal > .pane
   height 100%
   float left
 
@@ -98,18 +74,3 @@ a
 
 .hljs
   background-color $bg-color
-
-#dialog
-  position absolute
-  top 10%
-  left 10%
-  width 70%
-  height 70%
-  padding 1em
-  background-color darken($bg-color, 20%)
-  border $normal-border
-  & > #message
-    margin 0
-    height calc(100% - 3em)
-  & > .full-button
-    height 1em

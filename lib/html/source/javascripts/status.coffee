@@ -9,9 +9,15 @@ class StatusDisplay
 
   show_status: (data) ->
     @target.html(@ws.escape(data.text, data))
-    @status_history << data
+    @status_history.push data
+    console.log(@status_history)
 
   show_history: ->
-    alert(@status_history)
+    console.log(@status_history)
+    message = "<ul>#{("<li>#{@ws.escape(item.text, item)}</li>" for item in @status_history).join("\n")}</ul>"
+    $('#dialog > #message').html(message)
+    $('#dialog').show()
+    $('#dialog > #ok').click ->
+      $('#dialog').hide()
 
 window.StatusDisplay = StatusDisplay

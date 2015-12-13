@@ -1,6 +1,7 @@
 require "bundler/gem_tasks"
 require_relative 'lib/flammarion/version'
 
+class CommandFailedError < StandardError; end
 class VersionControlError < CommandFailedError; end
 
 task :serve do

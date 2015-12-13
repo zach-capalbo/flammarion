@@ -85,6 +85,7 @@ module Flammarion
       id = @front_end.make_id
       send_json({action:'button', label:label, id:id}.merge(options))
       @front_end.callbacks[id] = block
+      id
     end
 
     def embedded_button(label, options = {}, &block)
