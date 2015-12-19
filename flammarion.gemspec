@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version     = Flammarion::VERSION
   s.date        = '2015-11-21'
   s.summary     = 'Flammarion GUI Toolkit'
-  s.description = 'An easy to use gui toolkit for Ruby'
+  s.description = 'The nifty Ruby gui toolkit. An easy to use gui toolkit built with scripting in mind.'
   s.authors     = ["Zach Capalbo"]
   s.email       = "zach.geek@gmail.com"
   s.files       = Dir["lib/**/*"] + %w[LICENSE Readme.md] + Dir["electron/**/*"]

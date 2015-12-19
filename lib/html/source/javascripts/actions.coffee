@@ -4,10 +4,20 @@ $.extend WSClient.prototype.actions,
     @__parent.check_target(data)
     element = $("#console-#{data.target}")
     marginSize = 16
-    atBottom = element.scrollTop() >= element[0].scrollHeight - element.height() - marginSize - 2 or element[0].scrollHeight - marginSize < element.height()
-    console.log "top: #{element.scrollTop()} height: #{element[0].scrollHeight - element.height() - marginSize} marginSize: #{marginSize} atBottom: #{atBottom}"
+
+    atBottomStack = []
+    while element.hasClass("pane")
+      atBottom = element.scrollTop() >= element[0].scrollHeight - element.height() - marginSize - 2 or element[0].scrollHeight - marginSize < element.height()
+      atBottomStack.push atBottom
+      element = element.parent()
+
+    element = $("#console-#{data.target}")
     element.append(@__parent.escape(data.text, data))
-    element.scrollTop(element[0].scrollHeight - element.height() - marginSize) if atBottom
+
+    while element.hasClass("pane")
+      atBottom = atBottomStack.pop()
+      element.scrollTop(element[0].scrollHeight - element.height() - marginSize) if atBottom
+      element = element.parent()
 
   replace: (data) ->
     @__parent.check_target(data)
@@ -124,6 +134,8 @@ $.extend WSClient.prototype.actions,
           replaceText = @__parent.escape("#{element[0].value}\n")
           replaceText = "#{data.label}#{replaceText}" if data.keep_label
           element.replaceWith(replaceText)
+        if data.autoclear
+          element[0].value = ""
 
     target.append(element)
 
