@@ -61,11 +61,14 @@ class WSClient
       raw: false
       colorize: true
       escape_html: true
+      escape_icons: false
     $.extend(options, input_options)
     return text if options.raw
     text = "#{text}"
     text = ansi_up.escape_for_html(text) if options.escape_html
     text = ansi_up.ansi_to_html(text) if options.colorize
+    text = text.replace(/:[\w-]+:/g, (match) ->
+      "<i class='fa fa-#{match[1..-2]}'></i>") if options.escape_icons
     return text
 
   add: (object, target, data) ->

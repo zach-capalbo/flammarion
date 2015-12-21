@@ -100,6 +100,10 @@ module Flammarion
       %|<a href="#" onClick="$ws.send({id:'#{id}', action:'callback', source:'link'})">#{label}</a>|
     end
 
+    def icon(name, additional_classes = [])
+      %|<i class="fa fa-#{name} #{additional_classes.collect{|c| "fa-#{c}"}.join(" ")}"></i>|
+    end
+
     def input(label, options = {}, &block)
       id = @front_end.make_id
       send_json({action:'input', label:label, id:id}.merge(options))
