@@ -5,3 +5,4 @@ lib/html/build/stylesheets/*
 lib/html/build/*
 lib/html/build/**/*
 flammarion*.gem
+.yardoc

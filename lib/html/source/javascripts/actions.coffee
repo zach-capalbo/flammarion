@@ -15,7 +15,7 @@ $.extend WSClient.prototype.actions,
     element.append(@__parent.escape(data.text, data))
 
     while element.hasClass("pane")
-      atBottom = atBottomStack.pop()
+      atBottom = atBottomStack.shift()
       element.scrollTop(element[0].scrollHeight - element.height() - marginSize) if atBottom
       element = element.parent()
 
