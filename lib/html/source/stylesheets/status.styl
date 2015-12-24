@@ -10,6 +10,8 @@
   height 2%
   overflow none
   user-select none
+  if $enable-gradients
+    background-linear-gradient top, lighten($status-bg-color, 10%), 10%, darken($status-bg-color, 10%), 100%
   &:before
     color #781111
     content "Detached"
@@ -29,6 +31,6 @@
   .connected &
     &:before
       color #378137
-      content "Attached"
+      content ""
       margin-right 2em
       float left

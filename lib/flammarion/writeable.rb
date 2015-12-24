@@ -293,14 +293,26 @@ module Flammarion
       return Pane.new(@front_end, name)
     end
 
-    def status(str, position = :right)
-      @front_end.send_json({action:'status', text: str, position:position})
+    # Displays a message to the bottom status bar.
+    # @param str [String] The message to display
+    # @overload status(str, position)
+    #  @param position [Symbol] Where to put it. May be +:left+ or +:right+
+    # @overload status(str, options = {})
+    #  @option options [Symbol] :position Where to put it. May be +:left+ or +:right+
+    #  @escape_options
+    def status(str, options = {})
+      options = {position: options} if options.is_a? Symbol
+      @front_end.send_json({action:'status', text: str}.merge(options))
     end
 
     def table(rows, options = {})
       send_json({action:'table', rows: rows}.merge(options))
     end
 
+    # Prompts the user for a sting. Blocks until a string has been entered.
+    # @param prompt [String] A prompt to tell the user what to input.
+    # @param options (See #input)
+    # @return [String] The text that the user has entered.
     def gets(prompt = "", options = {})
       str = nil
       input(prompt, {once:true, focus:true}.merge(options)) {|msg| str = msg["text"]}

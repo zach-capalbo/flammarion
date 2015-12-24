@@ -4,7 +4,8 @@ activate(color, ammount)
   else
     darken(color, ammount)
 
-$bg-color = #120018
+// $bg-color = #120018
+$bg-color = #383e40
 
 if dark($bg-color)
   $fg-color = #eee
@@ -23,3 +24,5 @@ $scrollbar-track-color = desaturate($active-highlight, 80%)
 $scrollbar-thumb-color = desaturate(activate($scrollbar-track-color, 30%), 20%)
 $fg-highlight = mix($fg-color, $highlight, 50%)
 $fg-active-highlight = mix($fg-color, $active-highlight, 50%)
+
+$enable-gradients = true
