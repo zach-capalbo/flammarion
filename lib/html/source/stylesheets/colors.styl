@@ -5,8 +5,9 @@ activate(color, ammount)
     darken(color, ammount)
 
 // $bg-color = #120018
-// $bg-color = #383e40
-$bg-color = #202520
+$bg-color = #383e40
+// $bg-color = #202520
+// $bg-color = #eee
 
 if dark($bg-color)
   $fg-color = #eee
@@ -17,6 +18,11 @@ if dark($bg-color)
   $status-bg-color = #000
 else
   $status-bg-color = #aaa
+
+if dark($bg-color)
+  $code-bg-color = $bg-color
+else
+  $code-bg-color = darken($bg-color, 85%)
 
 $highlight = activate($bg-color, 10%)
 $active-highlight = activate($bg-color, 20%)

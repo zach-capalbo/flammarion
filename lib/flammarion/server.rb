@@ -72,7 +72,6 @@ module Flammarion
       rescue RuntimeError => e
         if e.message == "no acceptor (port is in use or requires root privileges)"
           @port = rand(65000 - 1024) + 1024
-          Kernel.puts "New port: #{port}"
           retry
         else
           raise

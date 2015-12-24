@@ -33,7 +33,7 @@ $.extend WSClient.prototype.actions,
     else
       target = $('#panes')
 
-    target.append("<pre class='pane' id='console-#{data.name}'><pre>") if target.find("#console-#{data.name}").size() is 0
+    target.append("<pre class='pane full-pane' id='console-#{data.name}'><pre>") if target.find("#console-#{data.name}").size() is 0
     @__parent.resize_panes(data)
 
   closepane: (data) ->
@@ -116,7 +116,8 @@ $.extend WSClient.prototype.actions,
     target = @__parent.check_target(data)
     element = target.find("#console-#{data.name}")
     if element.size() is 0
-      target.append("<pre id='console-#{data.name}' class='pane'></pre>")
+      other_classes = "subpane-fill" if data.fill
+      target.append("<pre id='console-#{data.name}' class='subpane pane #{other_classes}'></pre>")
 
   input: (data) ->
     target = @__parent.check_target(data)

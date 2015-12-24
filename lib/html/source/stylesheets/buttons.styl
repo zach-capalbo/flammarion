@@ -94,9 +94,10 @@ input:focus::-webkit-input-placeholder
   position: absolute
   top: 0.5em
   right: 0.5em
-  margin-right: 0.5em
+  margin-right: 1.0em
   background-color: rgba(0, 0, 0, 0.5)
-  padding: 0.5em
+  drop-shadow()
+  padding: 0
   z-index: 3
 
   & .full-button, .inline-text-input, .inline-checkbox
@@ -113,6 +114,8 @@ input:focus::-webkit-input-placeholder
     &:before
       border 1px solid darken($fg-color, 70%)
       height 50%
+  & .label-icon-left, & .label-icon-right
+    margin 0px 5px
 
 .inline-button
   buttony()

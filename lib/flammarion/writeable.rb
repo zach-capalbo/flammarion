@@ -273,8 +273,8 @@ module Flammarion
       send_json({action:'showpane'})
     end
 
-    def subpane(name)
-      send_json({action:'subpane', name:name})
+    def subpane(name, options = {})
+      send_json({action:'subpane', name:name}.merge(options))
       return Pane.new(@front_end, name)
     end
 

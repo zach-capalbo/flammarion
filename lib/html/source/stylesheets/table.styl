@@ -1,4 +1,5 @@
 @import "colors.styl"
+@import "mixins.styl"
 
 table
   border-collapse collapse
@@ -26,3 +27,5 @@ tr:hover
   & td.hover
     outline 1px solid #333
     background activate($bg-color, 0%)
+    if $gradient-enabled
+      box-shadow-inset()

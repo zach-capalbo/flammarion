@@ -17,6 +17,7 @@ require_relative 'flammarion/pane.rb'
 require_relative 'flammarion/server.rb'
 require_relative 'flammarion/version.rb'
 require_relative 'flammarion/revelator.rb'
+require_relative 'flammarion/about.rb'
 
 module Flammarion
   class Engraving
@@ -53,6 +54,10 @@ module Flammarion
       @sockets.delete ws
       exit 0 if @exit_on_disconnect
       @on_disconnect.call if @on_disconnect
+    end
+
+    def wait_until_closed
+      sleep 1 until @sockets.empty?
     end
 
     def process_message(msg)
