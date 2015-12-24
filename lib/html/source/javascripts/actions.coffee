@@ -219,3 +219,9 @@ $.extend WSClient.prototype.actions,
 
   close: (data) ->
     window.close()
+
+  search: (data) ->
+    if window.find(data.text, 0, 0, 1)
+      anchor = window.getSelection().anchorNode
+      anchor = anchor.parentNode unless anchor.nodeType == 1
+      anchor.scrollIntoView()

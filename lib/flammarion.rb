@@ -30,7 +30,6 @@ module Flammarion
     #  connected (i.e., displayed)
     # @option options [Proc] :on_disconnect Called when the display windows is
     #   disconnected (i.e., closed)
-    # @option
     def initialize(options = {})
       @chrome = OpenStruct.new
       @sockets = []

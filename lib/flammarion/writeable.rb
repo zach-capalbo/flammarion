@@ -341,5 +341,9 @@ module Flammarion
       end
       send_json({action:'map'}.merge(options))
     end
+
+    def search(string)
+      send_json({action:'search', text: string})
+    end
   end
 end
