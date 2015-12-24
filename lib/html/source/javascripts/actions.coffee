@@ -82,7 +82,13 @@ $.extend WSClient.prototype.actions,
   button: (data) ->
     target = @__parent.check_target(data)
     class_name = if data.inline then 'inline-button' else 'full-button'
-    element = $("<a href='#' class='#{class_name}'>#{@__parent.escape(data.label, data)}</a>")
+    left_icon = ""
+    data.right_icon ||= data.icon
+    left_icon = "<i class='fa fa-#{data.left_icon} label-icon-left'></i>" if data.left_icon
+    right_icon = ""
+    right_icon = "<i class='fa fa-#{data.right_icon} label-icon-right'></i>" if data.right_icon
+
+    element = $("<a href='#' class='#{class_name}'>#{left_icon}#{@__parent.escape(data.label, data)}#{right_icon}</a>")
     element.click =>
       @__parent.send({
         id:data.id

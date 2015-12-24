@@ -11,6 +11,11 @@ if dark($bg-color)
 else
   $fg-color = #333
 
+if dark($bg-color)
+  $status-bg-color = #000
+else
+  $status-bg-color = #aaa
+
 $highlight = activate($bg-color, 10%)
 $active-highlight = activate($bg-color, 20%)
 $normal-border = 1px solid darken($fg-color, 30%)

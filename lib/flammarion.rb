@@ -24,6 +24,13 @@ module Flammarion
     attr_reader :chrome
     attr_accessor :callbacks, :sockets, :on_disconnect, :on_connect, :actions
     include Writeable
+
+    # Creates a new Engraving (i.e., a new display window)
+    # @option options [Proc] :on_connect Called when the display window is
+    #  connected (i.e., displayed)
+    # @option options [Proc] :on_disconnect Called when the display windows is
+    #   disconnected (i.e., closed)
+    # @option
     def initialize(options = {})
       @chrome = OpenStruct.new
       @sockets = []
@@ -31,7 +38,6 @@ module Flammarion
       @front_end = self
       @pane_name = "default"
       @on_connect = options[:on_connect]
-      @ignore_old = options.fetch(:ignore_old, false)
       @on_disconnect = options[:on_disconnect]
       @exit_on_disconnect = options.fetch(:exit_on_disconnect, false)
 
