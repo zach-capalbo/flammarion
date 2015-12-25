@@ -74,3 +74,15 @@ or add it to your Gemfile.
 
 Flammarion uses Chrome to display a simple html page, and WebSockets to communicate
 between the Javascript and ruby.
+
+# Bundled Packages
+
+Flammarion is distributed with a bunch of useful tools to make everyone's life easier.
+They are:
+
+ * [ansi up](https://github.com/drudru/ansi_up)
+ * [highlihgt.js](https://highlightjs.org/)
+ * [jquery](https://jquery.com/)
+ * [jquery transit](http://ricostacruz.com/jquery.transit/)
+ * [leaflet](http://leafletjs.com/)
+ * [font awesome](https://fortawesome.github.io/Font-Awesome/)

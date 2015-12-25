@@ -1,3 +1,3 @@
-module Flammarion
-  VERSION = "0.0.11"
-end
+  module Flammarion
+    VERSION = "0.0.12"
+  end
