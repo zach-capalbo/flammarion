@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Flammarion by zach-capalbo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Flammarion</h1>
+      <h2 class="project-tagline">The nifty ruby gui toolkit.</h2>
+      <a href="https://github.com/zach-capalbo/flammarion" class="btn">View on GitHub</a>
+      <a href="https://github.com/zach-capalbo/flammarion/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/zach-capalbo/flammarion/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="flammarion-gui-toolkit" class="anchor" href="#flammarion-gui-toolkit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Flammarion GUI Toolkit</h1>
+
+<p><a href="https://badge.fury.io/rb/flammarion"><img src="https://badge.fury.io/rb/flammarion.svg" alt="Gem Version"></a></p>
+
+<h2>
+<a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
+
+<p>Flammarion is an easy-to-use library for displaying information that you might
+normally display to the command line in a slightly easier-to-access way.</p>
+
+<p>It is not intended to be a full fledged application development toolkit. It is
+intended instead for small scripts where you just want to show some information
+without going through too much trouble.</p>
+
+<h2>
+<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h2>
+
+<p>The easiest way to use Flammarion, is similar to how you might use STDOUT:</p>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>flammarion<span class="pl-pds">'</span></span>
+f <span class="pl-k">=</span> <span class="pl-c1">Flammarion</span>::<span class="pl-c1">Engraving</span>.<span class="pl-k">new</span>
+f.puts <span class="pl-s"><span class="pl-pds">"</span>Hello World!<span class="pl-pds">"</span></span></pre></div>
+
+<p>It can even support standard console color codes: (Thanks to <a href="http://github.com/drudru/ansi_up">ansi_up</a>!)</p>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>colorized<span class="pl-pds">'</span></span>
+f.puts <span class="pl-s"><span class="pl-pds">"</span>This line will be red!<span class="pl-pds">"</span></span>.red
+f.puts <span class="pl-s"><span class="pl-pds">"</span>This <span class="pl-pse">#{</span><span class="pl-s1"><span class="pl-s"><span class="pl-pds">"</span>word<span class="pl-pds">"</span></span>.colorize(<span class="pl-c1">:green</span>)</span><span class="pl-pse"><span class="pl-s1">}</span></span> will not be blue.<span class="pl-pds">"</span></span></pre></div>
+
+<p>However, you can also do more advanced things. Say you want to show a table. Easy!</p>
+
+<div class="highlight highlight-source-ruby"><pre>f.table(
+  [<span class="pl-s"><span class="pl-pds">%w[</span>Number Squared Sqrt<span class="pl-pds">]</span></span>.map{|<span class="pl-smi">h</span>| h.light_magenta}] <span class="pl-k">+</span> <span class="pl-c"># Make the header a different color</span>
+  <span class="pl-c1">10</span>.times.collect{|<span class="pl-smi">x</span>| [x, x <span class="pl-k">*</span> x, <span class="pl-c1">Math</span>.sqrt(x)]})</pre></div>
+
+<p>Or maybe you want to know where something is:</p>
+
+<div class="highlight highlight-source-ruby"><pre>f.map(<span class="pl-s"><span class="pl-pds">"</span>Boston, MA<span class="pl-pds">"</span></span>)</pre></div>
+
+<p>Maybe you even want to see both of those things <em>at the same time</em>!</p>
+
+<div class="highlight highlight-source-ruby"><pre>f.pane(<span class="pl-s"><span class="pl-pds">"</span>numberstuff<span class="pl-pds">"</span></span>).table([<span class="pl-s"><span class="pl-pds">%w[</span>Number Squared Sqrt<span class="pl-pds">]</span></span>.map{|<span class="pl-smi">h</span>| h.light_magenta}] <span class="pl-k">+</span>
+  <span class="pl-c1">10</span>.times.collect{|<span class="pl-smi">x</span>| [x, x <span class="pl-k">*</span> x, <span class="pl-c1">Math</span>.sqrt(x)]})
+f.pane(<span class="pl-s"><span class="pl-pds">"</span>mapstuff<span class="pl-pds">"</span></span>).map(<span class="pl-s"><span class="pl-pds">"</span>Big Ben<span class="pl-pds">"</span></span>)</pre></div>
+
+<p>If you need feedback, there's a simple callback mechanism for buttons and text
+boxes:</p>
+
+<div class="highlight highlight-source-ruby"><pre>f.button(<span class="pl-s"><span class="pl-pds">"</span>Click Here!!!<span class="pl-pds">"</span></span>) {f.puts <span class="pl-s"><span class="pl-pds">"</span>You clicked the button!<span class="pl-pds">"</span></span>}
+f.input(<span class="pl-s"><span class="pl-pds">"</span>Placeholder &gt; <span class="pl-pds">"</span></span>) {|<span class="pl-smi">msg</span>| f.puts <span class="pl-s"><span class="pl-pds">"</span>You wrote: <span class="pl-pse">#{</span><span class="pl-s1">msg[<span class="pl-s"><span class="pl-pds">'</span>text<span class="pl-pds">'</span></span>].light_magenta</span><span class="pl-pse"><span class="pl-s1">}</span></span><span class="pl-pds">"</span></span>}</pre></div>
+
+<p>There's lots more, too. I'll write more documentation eventually.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>First you need to install <a href="https://www.google.com/chrome/browser/desktop/index.html">Google Chrome</a>
+and make sure it's in your path. Then you can install the gem:</p>
+
+<p><code>gem install flammarion</code></p>
+
+<p>or add it to your Gemfile.</p>
+
+<h2>
+<a id="behind-the-scenes" class="anchor" href="#behind-the-scenes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Behind the scenes</h2>
+
+<p>Flammarion uses Chrome to display a simple html page, and WebSockets to communicate
+between the Javascript and ruby.</p>
+
+<h1>
+<a id="bundled-packages" class="anchor" href="#bundled-packages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bundled Packages</h1>
+
+<p>Flammarion is distributed with a bunch of useful tools to make everyone's life easier.
+They are:</p>
+
+<ul>
+<li><a href="https://github.com/drudru/ansi_up">ansi up</a></li>
+<li><a href="https://highlightjs.org/">highlihgt.js</a></li>
+<li><a href="https://jquery.com/">jquery</a></li>
+<li><a href="http://ricostacruz.com/jquery.transit/">jquery transit</a></li>
+<li><a href="http://leafletjs.com/">leaflet</a></li>
+<li><a href="https://fortawesome.github.io/Font-Awesome/">font awesome</a></li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/zach-capalbo/flammarion">Flammarion</a> is maintained by <a href="https://github.com/zach-capalbo">zach-capalbo</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
