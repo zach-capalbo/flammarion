@@ -1,8 +1,15 @@
+@import 'colors.styl'
+
 set-ansi(val)
   &-fg
-    color val
+    if light($bg-color)
+      color darken(val, 60%)
+    else
+      color val
   &-bg
     background-color val
+  &-bg&-fg
+    color val
 
 .ansi-black
   set-ansi(rgb(41, 41, 41))

@@ -31,7 +31,7 @@ END
   File.write('lib/flammarion')
 end
 
-task :bump_version => do
+task :bump_version do
   bump_version
 end
 

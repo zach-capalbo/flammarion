@@ -7,15 +7,18 @@ user-select(n)
     user-select: n
 
 background-linear-gradient(startPoint, startColor, startInterval, endColor, endInterval)
-	background-color startColor
-	background-image -webkit-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
-	background-image -moz-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
-	background-image -ms-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
-	background-image -o-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
-	background-image linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+  if $enable-gradients
+  	background-color startColor
+  	background-image -webkit-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+  	background-image -moz-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+  	background-image -ms-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+  	background-image -o-linear-gradient(startPoint, startColor startInterval, endColor endInterval)
+  	background-image linear-gradient(startPoint, startColor startInterval, endColor endInterval)
 
 box-shadow-inset(ammount = 2)
-  box-shadow inset 0px 0px 2px 2px darken($bg-color, 20%)
+  if $enable-gradients
+    box-shadow inset 0px 0px 2px 2px darken($bg-color, 20%)
 
 drop-shadow(ammount = 2)
-  box-shadow 2px 2px 4px 2px darken($bg-color, 20%)
+  if $enable-gradients
+    box-shadow 2px 2px 4px 2px darken($bg-color, 20%)

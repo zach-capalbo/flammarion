@@ -1,5 +1,6 @@
 require_relative "../lib/flammarion.rb"
 require 'faker'
+require 'optparse'
 
 def sample(name)
   return if ARGV[0] and name.to_s != ARGV[0]
@@ -16,8 +17,11 @@ sample :message_sender_with_contacts do |f|
   f.input("Body", multiline:true)
   f.button("Send") {f.status("Error: #{ArgumentError.new("Dummy Error")}".red)}
   f.pane("contacts").puts("Contacts", replace:true)
-  30.times do
-    f.pane("contacts").button(Faker::Name.name)
+  icons = %w[thumbs-up meh-o bicycle gears star-o star] + [nil] * 5
+  30.times do |i|
+    right_icon = icons.sample
+    left_icon = icons.sample
+    f.pane("contacts").button(Faker::Name.name, right_icon:right_icon, left_icon: left_icon)
   end
 end
 
@@ -36,4 +40,20 @@ sample :log_viewer do |f|
   f.button_box("b").button("Clear", right_icon:'trash-o') {f.subpane('s').clear}
   f.button_box("b").button("w-w") { f.subpane('s').style('word-wrap', 'initial')}
   20.times { f.subpane('s', fill:true).puts(Faker::Hipster.paragraph) }
+end
+
+sample :readme do |f|
+  f.orientation = :horizontal
+  f.markdown(File.read("#{File.dirname(__FILE__)}/../Readme.md"))
+  f.pane("code").highlight(File.read(__FILE__))
+end
+
+sample :colors do |f|
+  colors = %w[black red green yellow blue magenta cyan white]
+  ([:none] + colors + colors.collect{|b| "light_#{b}"}).each do |bg|
+    f.table(colors.collect do|c|
+      [c.colorize(:color => c.to_sym, :background => bg.to_sym),
+        "light_#{c}".colorize(:color => "light_#{c}".to_sym, :background => bg.to_sym)]
+    end)
+  end
 end

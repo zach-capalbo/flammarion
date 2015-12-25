@@ -8,7 +8,9 @@
   padding-bottom 10px
   font-family Monospace
   height 2%
-  overflow none
+  white-space nowrap
+  overflow hidden
+  text-overflow ellipsis
   user-select none
   if $enable-gradients
     background-linear-gradient top, lighten($status-bg-color, 10%), 10%, darken($status-bg-color, 10%), 100%
@@ -17,11 +19,9 @@
     content "Detached"
   & > .left
     float left
-    width 33%
     cursor pointer
   & > .right
     float right
-    width 33%
     cursor pointer
     text-align right
   & > .center

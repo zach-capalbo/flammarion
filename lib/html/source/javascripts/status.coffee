@@ -15,9 +15,9 @@ class StatusDisplay
   show_history: ->
     console.log(@status_history)
     message = "<ul>#{("<li>#{@ws.escape(item.text, item)}</li>" for item in @status_history).join("\n")}</ul>"
-    $('#dialog > #message').html(message)
+    $('#dialog > #content > #message').html(message)
     $('#dialog').show()
-    $('#dialog > #ok').click ->
+    $('#dialog > #content > #ok').click ->
       $('#dialog').hide()
 
 window.StatusDisplay = StatusDisplay

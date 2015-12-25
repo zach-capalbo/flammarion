@@ -78,6 +78,7 @@ $.extend WSClient.prototype.actions,
     newblock = $("<div class='markdown'></div>")
     newblock.html(data.text)
     @__parent.add(newblock, target, data)
+    hljs.highlightBlock(code) for code in newblock.find('code')
 
   button: (data) ->
     target = @__parent.check_target(data)
