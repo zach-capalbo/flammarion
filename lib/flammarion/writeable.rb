@@ -203,6 +203,27 @@ module Flammarion
       end
     end
 
+    # Creates a dropdown menu for a user to choose a list of options
+    # @param items [Array<#to_s>] The possible choices
+    # @overload dropdown(items, options = {})
+    #  @return [DeferredValue] An object representing the currently selected
+    #   item, which can be converted to text using +#to_s+
+    # @overload dropdown(item, options = {})
+    #  @yield [message_hash] Invokes the block every time the user selects a
+    #   different option. Current item text can be obtained from the +"text"+
+    #   key of the +message_hash+
+    def dropdown(items, options = {}, &block)
+      id = @front_end.make_id
+      send_json({action:'dropdown', id:id, options:items}.merge(options))
+      if block_given?
+        @front_end.callbacks[id] = block
+      else
+        d = DeferredValue.new
+        @front_end.callbacks[id] = Proc.new {|v| d.__setobj__ v["text"]}
+        return d
+      end
+    end
+
     # Creates a new checkbox which the user can click.
     # @param label [String] The placeholder text for the input
     # @macro escape_options
