@@ -70,6 +70,82 @@ and make sure it's in your path. Then you can install the gem:
 
 or add it to your Gemfile.
 
+## Screenshots / Samples
+
+### Message Composer with Address Book
+
+```ruby
+f = Flammarion::Engraving.new
+f.orientation = :horizontal
+recipient = f.subpane("number").input("Phone Number")
+text = f.input("Body", multiline:true)
+f.button("Send") { send_message(recipient.to_s, text.to_s); f.status("Message Sent!")}
+f.pane("contacts").puts("Contacts", replace:true)
+icons = %w[thumbs-up meh-o bicycle gears star-o star] + [nil] * 5
+30.times do |i|
+  right_icon = icons.sample
+  left_icon = icons.sample
+  name = Faker::Name.name
+  f.pane("contacts").button(name, right_icon:right_icon, left_icon: left_icon) do
+    recipient = name
+    f.subpane("numer").replace(name)
+  end
+end
+```
+
+![Message Sample](http://zach-capalbo.github.io/flammarion/img/messagesample.png)
+
+### Rake Task Runner
+
+```ruby
+f = Flammarion::Engraving.new(exit_on_disconnect:true)
+f.title "frake #{Dir.pwd}"
+
+def run(task)
+  f2 = Flammarion::Engraving.new
+  f2.title task
+  f2.puts "Running #{task.light_magenta}"
+  Open3.popen3(task) do |i,o,e,t|
+    Thread.new {e.each_line{|l| f2.print l.red}}
+    o.each_line {|l| f2.print l}
+    f2.status t.value.success? ? "Done!".light_green : "Failed!".light_red
+  end
+end
+
+f.markdown "# Rake Tasks: "
+`rake -T`.each_line do |l|
+  f.break
+  parts = l.split("#")
+  task = parts[0]
+  desc = parts[1]
+  f.puts desc
+  f.button(task) do
+    run(task)
+  end
+end
+
+f.wait_until_closed
+```
+
+![Frake](http://zach-capalbo.github.io/flammarion/img/frake.png)
+
+### Tables
+
+```ruby
+f = Flammerion::Engraving.new
+f.orientation = :horizontal
+f.table([["Id", "Name", "Address"].map{|h| h.light_magenta}] + 20.times.map do |i|
+  [i, Faker::Name.name, Faker::Address.street_address]
+end)
+f.pane("sidebar").pane("side1").puts Faker::Hipster.paragraph.red
+f.pane("sidebar").pane("side2").puts Faker::Hipster.paragraph.green
+
+3.times { f.status(Faker::Hipster.sentence.light_green)}
+```
+
+![Table Sample](http://zach-capalbo.github.io/flammarion/img/table.png)
+
+
 ## Behind the scenes
 
 Flammarion uses Chrome to display a simple html page, and WebSockets to communicate
