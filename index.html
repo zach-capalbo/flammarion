@@ -84,6 +84,79 @@ and make sure it's in your path. Then you can install the gem:</p>
 <p>or add it to your Gemfile.</p>
 
 <h2>
+<a id="screenshots--samples" class="anchor" href="#screenshots--samples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Screenshots / Samples</h2>
+
+<h3>
+<a id="message-composer-with-address-book" class="anchor" href="#message-composer-with-address-book" aria-hidden="true"><span class="octicon octicon-link"></span></a>Message Composer with Address Book</h3>
+
+<div class="highlight highlight-source-ruby"><pre>f <span class="pl-k">=</span> <span class="pl-c1">Flammarion</span>::<span class="pl-c1">Engraving</span>.<span class="pl-k">new</span>
+f.orientation <span class="pl-k">=</span> <span class="pl-c1">:horizontal</span>
+recipient <span class="pl-k">=</span> f.subpane(<span class="pl-s"><span class="pl-pds">"</span>number<span class="pl-pds">"</span></span>).input(<span class="pl-s"><span class="pl-pds">"</span>Phone Number<span class="pl-pds">"</span></span>)
+text <span class="pl-k">=</span> f.input(<span class="pl-s"><span class="pl-pds">"</span>Body<span class="pl-pds">"</span></span>, <span class="pl-c1">multiline:</span><span class="pl-c1">true</span>)
+f.button(<span class="pl-s"><span class="pl-pds">"</span>Send<span class="pl-pds">"</span></span>) { send_message(recipient.to_s, text.to_s); f.status(<span class="pl-s"><span class="pl-pds">"</span>Message Sent!<span class="pl-pds">"</span></span>)}
+f.pane(<span class="pl-s"><span class="pl-pds">"</span>contacts<span class="pl-pds">"</span></span>).puts(<span class="pl-s"><span class="pl-pds">"</span>Contacts<span class="pl-pds">"</span></span>, <span class="pl-c1">replace:</span><span class="pl-c1">true</span>)
+icons <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">%w[</span>thumbs-up meh-o bicycle gears star-o star<span class="pl-pds">]</span></span> <span class="pl-k">+</span> [<span class="pl-c1">nil</span>] <span class="pl-k">*</span> <span class="pl-c1">5</span>
+<span class="pl-c1">30</span>.times <span class="pl-k">do </span>|<span class="pl-smi">i</span>|
+  right_icon <span class="pl-k">=</span> icons.sample
+  left_icon <span class="pl-k">=</span> icons.sample
+  name <span class="pl-k">=</span> <span class="pl-c1">Faker</span>::<span class="pl-c1">Name</span>.name
+  f.pane(<span class="pl-s"><span class="pl-pds">"</span>contacts<span class="pl-pds">"</span></span>).button(name, <span class="pl-c1">right_icon:</span>right_icon, <span class="pl-c1">left_icon:</span> left_icon) <span class="pl-k">do</span>
+    recipient <span class="pl-k">=</span> name
+    f.subpane(<span class="pl-s"><span class="pl-pds">"</span>numer<span class="pl-pds">"</span></span>).replace(name)
+  <span class="pl-k">end</span>
+<span class="pl-k">end</span></pre></div>
+
+<p><img src="http://zach-capalbo.github.io/flammarion/img/messagesample.png" alt="Message Sample"></p>
+
+<h3>
+<a id="rake-task-runner" class="anchor" href="#rake-task-runner" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rake Task Runner</h3>
+
+<div class="highlight highlight-source-ruby"><pre>f <span class="pl-k">=</span> <span class="pl-c1">Flammarion</span>::<span class="pl-c1">Engraving</span>.<span class="pl-k">new</span>(<span class="pl-c1">exit_on_disconnect:</span><span class="pl-c1">true</span>)
+f.title <span class="pl-s"><span class="pl-pds">"</span>frake <span class="pl-pse">#{</span><span class="pl-s1"><span class="pl-c1">Dir</span>.pwd</span><span class="pl-pse"><span class="pl-s1">}</span></span><span class="pl-pds">"</span></span>
+
+<span class="pl-k">def</span> <span class="pl-en">run</span>(<span class="pl-smi">task</span>)
+  f2 <span class="pl-k">=</span> <span class="pl-c1">Flammarion</span>::<span class="pl-c1">Engraving</span>.<span class="pl-k">new</span>
+  f2.title task
+  f2.puts <span class="pl-s"><span class="pl-pds">"</span>Running <span class="pl-pse">#{</span><span class="pl-s1">task.light_magenta</span><span class="pl-pse"><span class="pl-s1">}</span></span><span class="pl-pds">"</span></span>
+  <span class="pl-c1">Open3</span>.popen3(task) <span class="pl-k">do </span>|<span class="pl-smi">i</span>,<span class="pl-smi">o</span>,<span class="pl-smi">e</span>,<span class="pl-smi">t</span>|
+    <span class="pl-c1">Thread</span>.<span class="pl-k">new</span> {e.each_line{|<span class="pl-smi">l</span>| f2.print l.red}}
+    o.each_line {|<span class="pl-smi">l</span>| f2.print l}
+    f2.status t.value.success? <span class="pl-k">?</span> <span class="pl-s"><span class="pl-pds">"</span>Done!<span class="pl-pds">"</span></span>.light_green : <span class="pl-s"><span class="pl-pds">"</span>Failed!<span class="pl-pds">"</span></span>.light_red
+  <span class="pl-k">end</span>
+<span class="pl-k">end</span>
+
+f.markdown <span class="pl-s"><span class="pl-pds">"</span># Rake Tasks: <span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">`</span>rake -T<span class="pl-pds">`</span></span>.each_line <span class="pl-k">do </span>|<span class="pl-smi">l</span>|
+  f.break
+  parts <span class="pl-k">=</span> l.split(<span class="pl-s"><span class="pl-pds">"</span>#<span class="pl-pds">"</span></span>)
+  task <span class="pl-k">=</span> parts[<span class="pl-c1">0</span>]
+  desc <span class="pl-k">=</span> parts[<span class="pl-c1">1</span>]
+  f.puts desc
+  f.button(task) <span class="pl-k">do</span>
+    run(task)
+  <span class="pl-k">end</span>
+<span class="pl-k">end</span>
+
+f.wait_until_closed</pre></div>
+
+<p><img src="http://zach-capalbo.github.io/flammarion/img/frake.png" alt="Frake"></p>
+
+<h3>
+<a id="tables" class="anchor" href="#tables" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tables</h3>
+
+<div class="highlight highlight-source-ruby"><pre>f <span class="pl-k">=</span> <span class="pl-c1">Flammerion</span>::<span class="pl-c1">Engraving</span>.<span class="pl-k">new</span>
+f.orientation <span class="pl-k">=</span> <span class="pl-c1">:horizontal</span>
+f.table([[<span class="pl-s"><span class="pl-pds">"</span>Id<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>Name<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>Address<span class="pl-pds">"</span></span>].map{|<span class="pl-smi">h</span>| h.light_magenta}] <span class="pl-k">+</span> <span class="pl-c1">20</span>.times.map <span class="pl-k">do </span>|<span class="pl-smi">i</span>|
+  [i, <span class="pl-c1">Faker</span>::<span class="pl-c1">Name</span>.name, <span class="pl-c1">Faker</span>::<span class="pl-c1">Address</span>.street_address]
+<span class="pl-k">end</span>)
+f.pane(<span class="pl-s"><span class="pl-pds">"</span>sidebar<span class="pl-pds">"</span></span>).pane(<span class="pl-s"><span class="pl-pds">"</span>side1<span class="pl-pds">"</span></span>).puts <span class="pl-c1">Faker</span>::<span class="pl-c1">Hipster</span>.paragraph.red
+f.pane(<span class="pl-s"><span class="pl-pds">"</span>sidebar<span class="pl-pds">"</span></span>).pane(<span class="pl-s"><span class="pl-pds">"</span>side2<span class="pl-pds">"</span></span>).puts <span class="pl-c1">Faker</span>::<span class="pl-c1">Hipster</span>.paragraph.green
+
+<span class="pl-c1">3</span>.times { f.status(<span class="pl-c1">Faker</span>::<span class="pl-c1">Hipster</span>.sentence.light_green)}</pre></div>
+
+<p><img src="http://zach-capalbo.github.io/flammarion/img/table.png" alt="Table Sample"></p>
+
+<h2>
 <a id="behind-the-scenes" class="anchor" href="#behind-the-scenes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Behind the scenes</h2>
 
 <p>Flammarion uses Chrome to display a simple html page, and WebSockets to communicate
