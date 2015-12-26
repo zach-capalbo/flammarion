@@ -113,12 +113,6 @@ module Flammarion
       nil
     end
 
-    # Creates a new pane, and resizes the existing panes to fit it.
-    # @param name [String] The name of the pane.
-    def pane(name)
-      return Pane.new(self, name)
-    end
-
     def alert(text)
       send_json(action:'alert', text:text)
     end

@@ -11,6 +11,15 @@ It is not intended to be a full fledged application development toolkit. It is
 intended instead for small scripts where you just want to show some information
 without going through too much trouble.
 
+## Installation
+
+First you need to install [electron](http://electron.atom.io/)
+and make sure it's in your path. Then you can install the gem:
+
+`gem install flammarion`
+
+or add it to your Gemfile.
+
 ## Documentation
 
 The easiest way to use Flammarion, is similar to how you might use STDOUT:
@@ -61,15 +70,6 @@ f.input("Placeholder > ") {|msg| f.puts "You wrote: #{msg['text'].light_magenta}
 
 There's lots more, too. I'll write more documentation eventually.
 
-## Installation
-
-First you need to install [Google Chrome](https://www.google.com/chrome/browser/desktop/index.html)
-and make sure it's in your path. Then you can install the gem:
-
-`gem install flammarion`
-
-or add it to your Gemfile.
-
 ## Screenshots / Samples
 
 ### Message Composer with Address Book
@@ -83,10 +83,8 @@ f.button("Send") { send_message(recipient.to_s, text.to_s); f.status("Message Se
 f.pane("contacts").puts("Contacts", replace:true)
 icons = %w[thumbs-up meh-o bicycle gears star-o star] + [nil] * 5
 30.times do |i|
-  right_icon = icons.sample
-  left_icon = icons.sample
   name = Faker::Name.name
-  f.pane("contacts").button(name, right_icon:right_icon, left_icon: left_icon) do
+  f.pane("contacts").button(name, right_icon:icons.sample, left_icon:icons.sample) do
     recipient = name
     f.subpane("numer").replace(name)
   end

@@ -33,7 +33,10 @@ $.extend WSClient.prototype.actions,
     else
       target = $('#panes')
 
-    target.append("<pre class='pane full-pane' id='console-#{data.name}'><pre>") if target.find("#console-#{data.name}").size() is 0
+    if target.find("#console-#{data.name}").size() is 0
+      element = $("<pre class='pane full-pane' id='console-#{data.name}'><pre>")
+      element.attr('pane-weight', data.weight || 1)
+      target.append(element)
     @__parent.resize_panes(data)
 
   closepane: (data) ->

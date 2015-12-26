@@ -299,8 +299,8 @@ module Flammarion
       return Pane.new(@front_end, name)
     end
 
-    def pane(name)
-      send_json({action:'addpane', name:name})
+    def pane(name, options = {})
+      send_json({action:'addpane', name:name}.merge(options))
       return Pane.new(@front_end, name)
     end
 

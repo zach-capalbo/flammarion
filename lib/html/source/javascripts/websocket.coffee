@@ -41,19 +41,22 @@ class WSClient
       target = $('#panes')
 
     allPanes =  target.find('> .pane')
-    height = (100.0 / allPanes.size()).toFixed(0) + "%"
     if target.hasClass('horizontal')
       orientation = 'horizontal'
     else
       orientation = 'vertical'
 
-    console.log target, allPanes.size(), 100.0 / allPanes.size(), height, orientation
+    total_weight = ((parseFloat($(i).attr('pane-weight') || 1.0)) for i in allPanes).reduce (t,s) -> t + s
+    # total_weight = (allPanes.map((i) -> parseFloat(i[].attr('pane-weight')))).reduce (t, s) -> t + s
+
+    p_height = (pane) -> (parseFloat($(pane).attr('pane-weight') || 1.0) / total_weight * 100).toFixed(0) + "%"
+    console.log target, allPanes.size(), 100.0 / allPanes.size(), total_weight, orientation
     for pane in allPanes
       if orientation is 'horizontal'
-        $(pane).css "width", height
+        $(pane).css "width", p_height(pane)
         $(pane).css "height", '100%'
       else
-        $(pane).css "height", height
+        $(pane).css "height", p_height(pane)
         $(pane).css "width", '100%'
 
   escape: (text, input_options) ->
