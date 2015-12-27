@@ -2,4 +2,10 @@
 (function() {
   window.$remote = require('remote');
 
+  window.onkeyup = function(e) {
+    if (e.ctrlKey && e.keyCode === 70) {
+      return window.show_search_bar();
+    }
+  };
+
 }).call(this);

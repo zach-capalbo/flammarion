@@ -38,8 +38,7 @@ buttony(raised = false)
   text-align left
   box-sizing border-box
   width 100%
-  if $enable-gradients
-    box-shadow inset 0px 0px 2px 2px darken($bg-color, 20%)
+  box-shadow-inset()
   &.unclicked
     color darken($fg-color, 50%)
   textarea&

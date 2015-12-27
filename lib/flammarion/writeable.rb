@@ -176,6 +176,8 @@ module Flammarion
     # @option options [Boolean] :autoclear (false) Automatically clears the
     #  input field every time the user changes the value. The callback will only
     #  be called for user initiated changes, not for auto-clear changes.
+    # @option options [Boolean] :history (false) Keeps track of entered values,
+    #  letting the user choose betwen them with the up and down keys.
     # @option options [String] :value Sets the starting value of the field and
     #  the returned +DeferredValue+.
     # @option options [Boolean] :once (false) If true, then the input box will

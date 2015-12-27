@@ -9,7 +9,7 @@ class FlammarionRepl
   def initialize
     @f = Flammarion::Engraving.new(exit_on_disconnect:true)
     @f.subpane("output")
-    @f.input("> ", autoclear:true) {|msg| repl(msg['text']) }
+    @f.input("> ", autoclear:true, history:true) {|msg| repl(msg['text']) }
   end
 
   def repl(str)

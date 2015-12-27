@@ -9,7 +9,7 @@ i, o, e, t = Open3.popen3(*ARGV.to_a)
 
 f.subpane("out").print("")
 
-f.subpane("in").input("> ", autoclear:true) do |msg|
+f.subpane("in").input("> ", autoclear:true, history:true) do |msg|
   i.puts msg['text']
 end
 

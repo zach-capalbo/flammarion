@@ -14,6 +14,7 @@ end
 sample :message_sender_with_contacts do |f|
   f.orientation = :horizontal
   f.subpane("number").input("Phone Number")
+  f.checkbox("Request Read Receipt")
   f.input("Body", multiline:true)
   f.button("Send") {f.status("Error: #{ArgumentError.new("Dummy Error")}".red)}
   f.pane("contacts", weight:0.7).puts("Contacts", replace:true)
