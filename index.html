@@ -1,31 +1,8 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>Flammarion by zach-capalbo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">Flammarion</h1>
-      <h2 class="project-tagline">The nifty ruby gui toolkit.</h2>
-      <a href="https://github.com/zach-capalbo/flammarion" class="btn">View on GitHub</a>
-      <a href="https://github.com/zach-capalbo/flammarion/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/zach-capalbo/flammarion/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
-
-    <section class="main-content">
-      <h1>
-<a id="flammarion-gui-toolkit" class="anchor" href="#flammarion-gui-toolkit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Flammarion GUI Toolkit</h1>
+<!DOCTYPE html><html lang="en-us"><head><meta charset="UTF-8" /><title>Flammarion by zach-capalbo</title><meta content="width=device-width, initial-scale=1" name="viewport" /><link href="stylesheets/normalize.css" media="screen" rel="stylesheet" type="text/css" /><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css" /><link href="stylesheets/stylesheet.css" media="screen" rel="stylesheet" type="text/css" /><link href="stylesheets/github-light.css" media="screen" rel="stylesheet" type="text/css" /><link href="stylesheets/code.css" media="screen" rel="stylesheet" type="text/css" /></head><body><section class="page-header"><h1 class="project-name">Flammarion</h1><h2 class="project-tagline">The nifty ruby gui toolkit.</h2><a class="btn" href="https://github.com/zach-capalbo/flammarion">View on GitHub</a><a class="btn" href="doc/index.html">API Documentations</a></section><section class="main-content"><h1>Flammarion GUI Toolkit</h1>
 
 <p><a href="https://badge.fury.io/rb/flammarion"><img src="https://badge.fury.io/rb/flammarion.svg" alt="Gem Version"></a></p>
 
-<h2>
-<a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
+<h2>Overview</h2>
 
 <p>Flammarion is an easy-to-use library for displaying information that you might
 normally display to the command line in a slightly easier-to-access way.</p>
@@ -34,65 +11,128 @@ normally display to the command line in a slightly easier-to-access way.</p>
 intended instead for small scripts where you just want to show some information
 without going through too much trouble.</p>
 
-<h2>
-<a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Documentation</h2>
+<h2>Installation</h2>
 
-<p>The easiest way to use Flammarion, is similar to how you might use STDOUT:</p>
-
-<div class="highlight highlight-source-ruby"><pre><span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>flammarion<span class="pl-pds">'</span></span>
-f <span class="pl-k">=</span> <span class="pl-c1">Flammarion</span>::<span class="pl-c1">Engraving</span>.<span class="pl-k">new</span>
-f.puts <span class="pl-s"><span class="pl-pds">"</span>Hello World!<span class="pl-pds">"</span></span></pre></div>
-
-<p>It can even support standard console color codes: (Thanks to <a href="http://github.com/drudru/ansi_up">ansi_up</a>!)</p>
-
-<div class="highlight highlight-source-ruby"><pre><span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>colorized<span class="pl-pds">'</span></span>
-f.puts <span class="pl-s"><span class="pl-pds">"</span>This line will be red!<span class="pl-pds">"</span></span>.red
-f.puts <span class="pl-s"><span class="pl-pds">"</span>This <span class="pl-pse">#{</span><span class="pl-s1"><span class="pl-s"><span class="pl-pds">"</span>word<span class="pl-pds">"</span></span>.colorize(<span class="pl-c1">:green</span>)</span><span class="pl-pse"><span class="pl-s1">}</span></span> will not be blue.<span class="pl-pds">"</span></span></pre></div>
-
-<p>However, you can also do more advanced things. Say you want to show a table. Easy!</p>
-
-<div class="highlight highlight-source-ruby"><pre>f.table(
-  [<span class="pl-s"><span class="pl-pds">%w[</span>Number Squared Sqrt<span class="pl-pds">]</span></span>.map{|<span class="pl-smi">h</span>| h.light_magenta}] <span class="pl-k">+</span> <span class="pl-c"># Make the header a different color</span>
-  <span class="pl-c1">10</span>.times.collect{|<span class="pl-smi">x</span>| [x, x <span class="pl-k">*</span> x, <span class="pl-c1">Math</span>.sqrt(x)]})</pre></div>
-
-<p>Or maybe you want to know where something is:</p>
-
-<div class="highlight highlight-source-ruby"><pre>f.map(<span class="pl-s"><span class="pl-pds">"</span>Boston, MA<span class="pl-pds">"</span></span>)</pre></div>
-
-<p>Maybe you even want to see both of those things <em>at the same time</em>!</p>
-
-<div class="highlight highlight-source-ruby"><pre>f.pane(<span class="pl-s"><span class="pl-pds">"</span>numberstuff<span class="pl-pds">"</span></span>).table([<span class="pl-s"><span class="pl-pds">%w[</span>Number Squared Sqrt<span class="pl-pds">]</span></span>.map{|<span class="pl-smi">h</span>| h.light_magenta}] <span class="pl-k">+</span>
-  <span class="pl-c1">10</span>.times.collect{|<span class="pl-smi">x</span>| [x, x <span class="pl-k">*</span> x, <span class="pl-c1">Math</span>.sqrt(x)]})
-f.pane(<span class="pl-s"><span class="pl-pds">"</span>mapstuff<span class="pl-pds">"</span></span>).map(<span class="pl-s"><span class="pl-pds">"</span>Big Ben<span class="pl-pds">"</span></span>)</pre></div>
-
-<p>If you need feedback, there's a simple callback mechanism for buttons and text
-boxes:</p>
-
-<div class="highlight highlight-source-ruby"><pre>f.button(<span class="pl-s"><span class="pl-pds">"</span>Click Here!!!<span class="pl-pds">"</span></span>) {f.puts <span class="pl-s"><span class="pl-pds">"</span>You clicked the button!<span class="pl-pds">"</span></span>}
-f.input(<span class="pl-s"><span class="pl-pds">"</span>Placeholder &gt; <span class="pl-pds">"</span></span>) {|<span class="pl-smi">msg</span>| f.puts <span class="pl-s"><span class="pl-pds">"</span>You wrote: <span class="pl-pse">#{</span><span class="pl-s1">msg[<span class="pl-s"><span class="pl-pds">'</span>text<span class="pl-pds">'</span></span>].light_magenta</span><span class="pl-pse"><span class="pl-s1">}</span></span><span class="pl-pds">"</span></span>}</pre></div>
-
-<p>There's lots more, too. I'll write more documentation eventually.</p>
-
-<h2>
-<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
-
-<p>First you need to install <a href="https://www.google.com/chrome/browser/desktop/index.html">Google Chrome</a>
-and make sure it's in your path. Then you can install the gem:</p>
+<p>First you need to install <a href="http://electron.atom.io/">electron</a>
+and make sure it&#39;s in your path. Then you can install the gem:</p>
 
 <p><code>gem install flammarion</code></p>
 
 <p>or add it to your Gemfile.</p>
 
-<h2>
-<a id="behind-the-scenes" class="anchor" href="#behind-the-scenes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Behind the scenes</h2>
+<h2>Documentation</h2>
+
+<p>The easiest way to use Flammarion, is similar to how you might use STDOUT:</p>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'flammarion'</span>
+<span class="n">f</span> <span class="o">=</span> <span class="no">Flammarion</span><span class="o">::</span><span class="no">Engraving</span><span class="p">.</span><span class="nf">new</span>
+<span class="n">f</span><span class="p">.</span><span class="nf">puts</span> <span class="s2">"Hello World!"</span>
+</code></pre>
+
+<p>It can even support standard console color codes: (Thanks to <a href="http://github.com/drudru/ansi_up">ansi_up</a>!)</p>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'colorized'</span>
+<span class="n">f</span><span class="p">.</span><span class="nf">puts</span> <span class="s2">"This line will be red!"</span><span class="p">.</span><span class="nf">red</span>
+<span class="n">f</span><span class="p">.</span><span class="nf">puts</span> <span class="s2">"This </span><span class="si">#{</span><span class="s2">"word"</span><span class="p">.</span><span class="nf">colorize</span><span class="p">(</span><span class="ss">:green</span><span class="p">)</span><span class="si">}</span><span class="s2"> will not be blue."</span>
+</code></pre>
+
+<p>However, you can also do more advanced things. Say you want to show a table. Easy!</p>
+<pre class="highlight ruby"><code><span class="n">f</span><span class="p">.</span><span class="nf">table</span><span class="p">(</span>
+  <span class="p">[</span><span class="sx">%w[Number Squared Sqrt]</span><span class="p">.</span><span class="nf">map</span><span class="p">{</span><span class="o">|</span><span class="n">h</span><span class="o">|</span> <span class="n">h</span><span class="p">.</span><span class="nf">light_magenta</span><span class="p">}]</span> <span class="o">+</span> <span class="c1"># Make the header a different color</span>
+  <span class="mi">10</span><span class="p">.</span><span class="nf">times</span><span class="p">.</span><span class="nf">collect</span><span class="p">{</span><span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="no">Math</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)]})</span>
+</code></pre>
+
+<p>Or maybe you want to know where something is:</p>
+<pre class="highlight ruby"><code><span class="n">f</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="s2">"Boston, MA"</span><span class="p">)</span>
+</code></pre>
+
+<p>Maybe you even want to see both of those things <em>at the same time</em>!</p>
+<pre class="highlight ruby"><code><span class="n">f</span><span class="p">.</span><span class="nf">pane</span><span class="p">(</span><span class="s2">"numberstuff"</span><span class="p">).</span><span class="nf">table</span><span class="p">([</span><span class="sx">%w[Number Squared Sqrt]</span><span class="p">.</span><span class="nf">map</span><span class="p">{</span><span class="o">|</span><span class="n">h</span><span class="o">|</span> <span class="n">h</span><span class="p">.</span><span class="nf">light_magenta</span><span class="p">}]</span> <span class="o">+</span>
+  <span class="mi">10</span><span class="p">.</span><span class="nf">times</span><span class="p">.</span><span class="nf">collect</span><span class="p">{</span><span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="no">Math</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)]})</span>
+<span class="n">f</span><span class="p">.</span><span class="nf">pane</span><span class="p">(</span><span class="s2">"mapstuff"</span><span class="p">).</span><span class="nf">map</span><span class="p">(</span><span class="s2">"Big Ben"</span><span class="p">)</span>
+</code></pre>
+
+<p>If you need feedback, there&#39;s a simple callback mechanism for buttons and text
+boxes:</p>
+<pre class="highlight ruby"><code><span class="n">f</span><span class="p">.</span><span class="nf">button</span><span class="p">(</span><span class="s2">"Click Here!!!"</span><span class="p">)</span> <span class="p">{</span><span class="n">f</span><span class="p">.</span><span class="nf">puts</span> <span class="s2">"You clicked the button!"</span><span class="p">}</span>
+<span class="n">f</span><span class="p">.</span><span class="nf">input</span><span class="p">(</span><span class="s2">"Placeholder &gt; "</span><span class="p">)</span> <span class="p">{</span><span class="o">|</span><span class="n">msg</span><span class="o">|</span> <span class="n">f</span><span class="p">.</span><span class="nf">puts</span> <span class="s2">"You wrote: </span><span class="si">#{</span><span class="n">msg</span><span class="p">[</span><span class="s1">'text'</span><span class="p">].</span><span class="nf">light_magenta</span><span class="si">}</span><span class="s2">"</span><span class="p">}</span>
+</code></pre>
+
+<p>There&#39;s lots more, too. I&#39;ll write more documentation eventually.</p>
+
+<h2>Screenshots / Samples</h2>
+
+<h3>Message Composer with Address Book</h3>
+<pre class="highlight ruby"><code><span class="n">f</span> <span class="o">=</span> <span class="no">Flammarion</span><span class="o">::</span><span class="no">Engraving</span><span class="p">.</span><span class="nf">new</span>
+<span class="n">f</span><span class="p">.</span><span class="nf">orientation</span> <span class="o">=</span> <span class="ss">:horizontal</span>
+<span class="n">recipient</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">subpane</span><span class="p">(</span><span class="s2">"number"</span><span class="p">).</span><span class="nf">input</span><span class="p">(</span><span class="s2">"Phone Number"</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">input</span><span class="p">(</span><span class="s2">"Body"</span><span class="p">,</span> <span class="n">multiline</span><span class="ss">:true</span><span class="p">)</span>
+<span class="n">f</span><span class="p">.</span><span class="nf">button</span><span class="p">(</span><span class="s2">"Send"</span><span class="p">)</span> <span class="p">{</span> <span class="n">send_message</span><span class="p">(</span><span class="n">recipient</span><span class="p">.</span><span class="nf">to_s</span><span class="p">,</span> <span class="n">text</span><span class="p">.</span><span class="nf">to_s</span><span class="p">);</span> <span class="n">f</span><span class="p">.</span><span class="nf">status</span><span class="p">(</span><span class="s2">"Message Sent!"</span><span class="p">)}</span>
+<span class="n">f</span><span class="p">.</span><span class="nf">pane</span><span class="p">(</span><span class="s2">"contacts"</span><span class="p">).</span><span class="nf">puts</span><span class="p">(</span><span class="s2">"Contacts"</span><span class="p">,</span> <span class="n">replace</span><span class="ss">:true</span><span class="p">)</span>
+<span class="n">icons</span> <span class="o">=</span> <span class="sx">%w[thumbs-up meh-o bicycle gears star-o star]</span> <span class="o">+</span> <span class="p">[</span><span class="kp">nil</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span>
+<span class="mi">30</span><span class="p">.</span><span class="nf">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+  <span class="nb">name</span> <span class="o">=</span> <span class="no">Faker</span><span class="o">::</span><span class="no">Name</span><span class="p">.</span><span class="nf">name</span>
+  <span class="n">f</span><span class="p">.</span><span class="nf">pane</span><span class="p">(</span><span class="s2">"contacts"</span><span class="p">).</span><span class="nf">button</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">right_icon</span><span class="ss">:icons</span><span class="p">.</span><span class="nf">sample</span><span class="p">,</span> <span class="n">left_icon</span><span class="ss">:icons</span><span class="p">.</span><span class="nf">sample</span><span class="p">)</span> <span class="k">do</span>
+    <span class="n">recipient</span> <span class="o">=</span> <span class="nb">name</span>
+    <span class="n">f</span><span class="p">.</span><span class="nf">subpane</span><span class="p">(</span><span class="s2">"numer"</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+
+<p><img src="http://zach-capalbo.github.io/flammarion/img/messagesample.png" alt="Message Sample"></p>
+
+<h3>Rake Task Runner</h3>
+<pre class="highlight ruby"><code><span class="n">f</span> <span class="o">=</span> <span class="no">Flammarion</span><span class="o">::</span><span class="no">Engraving</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">exit_on_disconnect</span><span class="ss">:true</span><span class="p">)</span>
+<span class="n">f</span><span class="p">.</span><span class="nf">title</span> <span class="s2">"frake </span><span class="si">#{</span><span class="no">Dir</span><span class="p">.</span><span class="nf">pwd</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+  <span class="n">f2</span> <span class="o">=</span> <span class="no">Flammarion</span><span class="o">::</span><span class="no">Engraving</span><span class="p">.</span><span class="nf">new</span>
+  <span class="n">f2</span><span class="p">.</span><span class="nf">title</span> <span class="n">task</span>
+  <span class="n">f2</span><span class="p">.</span><span class="nf">puts</span> <span class="s2">"Running </span><span class="si">#{</span><span class="n">task</span><span class="p">.</span><span class="nf">light_magenta</span><span class="si">}</span><span class="s2">"</span>
+  <span class="no">Open3</span><span class="p">.</span><span class="nf">popen3</span><span class="p">(</span><span class="n">task</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="p">,</span><span class="n">o</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">t</span><span class="o">|</span>
+    <span class="no">Thread</span><span class="p">.</span><span class="nf">new</span> <span class="p">{</span><span class="n">e</span><span class="p">.</span><span class="nf">each_line</span><span class="p">{</span><span class="o">|</span><span class="n">l</span><span class="o">|</span> <span class="n">f2</span><span class="p">.</span><span class="nf">print</span> <span class="n">l</span><span class="p">.</span><span class="nf">red</span><span class="p">}}</span>
+    <span class="n">o</span><span class="p">.</span><span class="nf">each_line</span> <span class="p">{</span><span class="o">|</span><span class="n">l</span><span class="o">|</span> <span class="n">f2</span><span class="p">.</span><span class="nf">print</span> <span class="n">l</span><span class="p">}</span>
+    <span class="n">f2</span><span class="p">.</span><span class="nf">status</span> <span class="n">t</span><span class="p">.</span><span class="nf">value</span><span class="p">.</span><span class="nf">success?</span> <span class="p">?</span> <span class="s2">"Done!"</span><span class="p">.</span><span class="nf">light_green</span> <span class="p">:</span> <span class="s2">"Failed!"</span><span class="p">.</span><span class="nf">light_red</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">f</span><span class="p">.</span><span class="nf">markdown</span> <span class="s2">"# Rake Tasks: "</span>
+<span class="sb">`rake -T`</span><span class="p">.</span><span class="nf">each_line</span> <span class="k">do</span> <span class="o">|</span><span class="n">l</span><span class="o">|</span>
+  <span class="n">f</span><span class="p">.</span><span class="nf">break</span>
+  <span class="n">parts</span> <span class="o">=</span> <span class="n">l</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s2">"#"</span><span class="p">)</span>
+  <span class="n">task</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="n">desc</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+  <span class="n">f</span><span class="p">.</span><span class="nf">puts</span> <span class="n">desc</span>
+  <span class="n">f</span><span class="p">.</span><span class="nf">button</span><span class="p">(</span><span class="n">task</span><span class="p">)</span> <span class="k">do</span>
+    <span class="n">run</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">f</span><span class="p">.</span><span class="nf">wait_until_closed</span>
+</code></pre>
+
+<p><img src="http://zach-capalbo.github.io/flammarion/img/frake.png" alt="Frake"></p>
+
+<h3>Tables</h3>
+<pre class="highlight ruby"><code><span class="n">f</span> <span class="o">=</span> <span class="no">Flammerion</span><span class="o">::</span><span class="no">Engraving</span><span class="p">.</span><span class="nf">new</span>
+<span class="n">f</span><span class="p">.</span><span class="nf">orientation</span> <span class="o">=</span> <span class="ss">:horizontal</span>
+<span class="n">f</span><span class="p">.</span><span class="nf">table</span><span class="p">([[</span><span class="s2">"Id"</span><span class="p">,</span> <span class="s2">"Name"</span><span class="p">,</span> <span class="s2">"Address"</span><span class="p">].</span><span class="nf">map</span><span class="p">{</span><span class="o">|</span><span class="n">h</span><span class="o">|</span> <span class="n">h</span><span class="p">.</span><span class="nf">light_magenta</span><span class="p">}]</span> <span class="o">+</span> <span class="mi">20</span><span class="p">.</span><span class="nf">times</span><span class="p">.</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+  <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="no">Faker</span><span class="o">::</span><span class="no">Name</span><span class="p">.</span><span class="nf">name</span><span class="p">,</span> <span class="no">Faker</span><span class="o">::</span><span class="no">Address</span><span class="p">.</span><span class="nf">street_address</span><span class="p">]</span>
+<span class="k">end</span><span class="p">)</span>
+<span class="n">f</span><span class="p">.</span><span class="nf">pane</span><span class="p">(</span><span class="s2">"sidebar"</span><span class="p">).</span><span class="nf">pane</span><span class="p">(</span><span class="s2">"side1"</span><span class="p">).</span><span class="nf">puts</span> <span class="no">Faker</span><span class="o">::</span><span class="no">Hipster</span><span class="p">.</span><span class="nf">paragraph</span><span class="p">.</span><span class="nf">red</span>
+<span class="n">f</span><span class="p">.</span><span class="nf">pane</span><span class="p">(</span><span class="s2">"sidebar"</span><span class="p">).</span><span class="nf">pane</span><span class="p">(</span><span class="s2">"side2"</span><span class="p">).</span><span class="nf">puts</span> <span class="no">Faker</span><span class="o">::</span><span class="no">Hipster</span><span class="p">.</span><span class="nf">paragraph</span><span class="p">.</span><span class="nf">green</span>
+
+<span class="mi">3</span><span class="p">.</span><span class="nf">times</span> <span class="p">{</span> <span class="n">f</span><span class="p">.</span><span class="nf">status</span><span class="p">(</span><span class="no">Faker</span><span class="o">::</span><span class="no">Hipster</span><span class="p">.</span><span class="nf">sentence</span><span class="p">.</span><span class="nf">light_green</span><span class="p">)}</span>
+</code></pre>
+
+<p><img src="http://zach-capalbo.github.io/flammarion/img/table.png" alt="Table Sample"></p>
+
+<h2>Behind the scenes</h2>
 
 <p>Flammarion uses Chrome to display a simple html page, and WebSockets to communicate
 between the Javascript and ruby.</p>
 
-<h1>
-<a id="bundled-packages" class="anchor" href="#bundled-packages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bundled Packages</h1>
+<h1>Bundled Packages</h1>
 
-<p>Flammarion is distributed with a bunch of useful tools to make everyone's life easier.
+<p>Flammarion is distributed with a bunch of useful tools to make everyone&#39;s life easier.
 They are:</p>
 
 <ul>
@@ -103,15 +143,4 @@ They are:</p>
 <li><a href="http://leafletjs.com/">leaflet</a></li>
 <li><a href="https://fortawesome.github.io/Font-Awesome/">font awesome</a></li>
 </ul>
-
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/zach-capalbo/flammarion">Flammarion</a> is maintained by <a href="https://github.com/zach-capalbo">zach-capalbo</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
-
-    </section>
-
-  
-  </body>
-</html>
+<footer class="site-footer"><span class="site-footer-owner"><a href="https://github.com/zach-capalbo/flammarion">Flammarion</a> is maintained by <a href="https://github.com/zach-capalbo">zach-capalbo</a>.</span><span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span></footer></section></body></html>
