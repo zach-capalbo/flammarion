@@ -1,4 +1,6 @@
 module Flammarion
+  
+  # Pops up a little about box.
   def self.about
     f = Engraving.new(close_on_exit:true)
     f.title "Flammarion #{VERSION}"

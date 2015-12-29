@@ -23,5 +23,8 @@ require_relative 'flammarion/revelator.rb'
 require_relative 'flammarion/about.rb'
 require_relative 'flammarion/engraving.rb'
 
+# This is the main namespace for Flammarion.
+# @see Engraving
+# @see Writeable
 module Flammarion
 end

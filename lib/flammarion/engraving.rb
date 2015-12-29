@@ -1,4 +1,15 @@
 module Flammarion
+
+  # The engraving class represents a window. It contains everything you need to
+  # display on the screen and interacts with a user. An +Engraving+ contains
+  # one or more panes, which are containers for writeable areas. Most of the
+  # power of the panes comes from the +Writeable+ module, which is also included
+  # in +Engraving+ (operating on the default pane) for convenience.
+  # @see Writeable
+  # @note Right now, there is no persistence of Engravings. Once it is closed,
+  #   everything is erased, and you'll need to set it up all over again.
+  # @note If you try to display something to a closed window, it will open a new
+  #   blank window, and then display that thing.
   class Engraving
     include Revelator
     attr_reader :chrome
@@ -29,14 +40,66 @@ module Flammarion
       at_exit {close} if options.fetch(:close_on_exit, false)
     end
 
+    # Blocks the current thread until the window has been closed. All user
+    # interactions and callbacks will continue in other threads.
+    def wait_until_closed
+      sleep 1 until @sockets.empty?
+    end
+
+    # Is thie Engraving displayed on the screen.
+    def window_open?
+      not @sockets.empty?
+    end
+
+    # Pops up an alert message containing +text+.
+    def alert(text)
+      send_json(action:'alert', text:text)
+    end
+
+    # Changes the orientation of the panes in this engraving. Options are
+    # - :horizontal
+    # - :vertical
+    def orientation=(orientation)
+      raise ArgumentError.new("Orientation must be :horizontal or :vertical") unless [:horizontal, :vertical].include?(orientation)
+      send_json({action:'reorient', orientation:orientation})
+    end
+
+    # Sets the title of the window
+    def title(str)
+      send_json({action:'title', title:str})
+    end
+
+    # Attempts to close the window.
+    def close
+      send_json({action:'close'})
+    end
+
+    # Opens a native "Save File" Dialog box, prompting the user for a file.
+    def get_save_path
+      if Gem.win_platform?
+        `powershell "Add-Type -AssemblyName System.windows.forms|Out-Null;$f=New-Object System.Windows.Forms.SaveFileDialog;$f.InitialDirectory='%cd%';$f.Filter='All Files (*.*)|*.*';$f.showHelp=$true;$f.ShowDialog()|Out-Null;$f.FileName"`.strip
+      else
+        `zenity --file-selection --save --confirm-overwrite`.strip
+      end
+    end
+
+    # Allows you to load a custom layout file. This replaces all html in the
+    # window with a custom slim layout. You probably don't want this unless your
+    # writing a very complex application.
+    def layout(file)
+      data = Slim::Template.new(file).render
+      send_json({action:'layout', data:data})
+    end
+
+    def live_reload_layout(file)
+      layout(file); yield if block_given?
+      FileWatcher.new(file).watch {|file| layout(file); yield if block_given? }
+    end
+
     def disconnect(ws)
       @sockets.delete ws
       exit 0 if @exit_on_disconnect
       @on_disconnect.call if @on_disconnect
-    end
-
-    def wait_until_closed
-      sleep 1 until @sockets.empty?
     end
 
     def process_message(msg)
@@ -79,10 +142,6 @@ module Flammarion
       sleep 0.5 while @sockets.empty?
     end
 
-    def window_open?
-      not @sockets.empty?
-    end
-
     def send_json(val)
       if @sockets.empty? then
         open_a_window
@@ -90,41 +149,6 @@ module Flammarion
       end
       @sockets.each{|ws| ws.send val.to_json}
       nil
-    end
-
-    def alert(text)
-      send_json(action:'alert', text:text)
-    end
-
-    def orientation=(orientation)
-      raise ArgumentError.new("Orientation must be :horizontal or :vertical") unless [:horizontal, :vertical].include?(orientation)
-      send_json({action:'reorient', orientation:orientation})
-    end
-
-    def title(str)
-      send_json({action:'title', title:str})
-    end
-
-    def layout(file)
-      data = Slim::Template.new(file).render
-      send_json({action:'layout', data:data})
-    end
-
-    def close
-      send_json({action:'close'})
-    end
-
-    def live_reload_layout(file)
-      layout(file); yield if block_given?
-      FileWatcher.new(file).watch {|file| layout(file); yield if block_given? }
-    end
-
-    def get_save_path
-      if Gem.win_platform?
-        `powershell "Add-Type -AssemblyName System.windows.forms|Out-Null;$f=New-Object System.Windows.Forms.SaveFileDialog;$f.InitialDirectory='%cd%';$f.Filter='All Files (*.*)|*.*';$f.showHelp=$true;$f.ShowDialog()|Out-Null;$f.FileName"`.strip
-      else
-        `zenity --file-selection --save --confirm-overwrite`.strip
-      end
     end
   end
 end

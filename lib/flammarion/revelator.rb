@@ -1,16 +1,5 @@
 module Flammarion
   module Revelator
-    def which(cmd)
-      exts = ENV['PATHEXT'] ? ENV['PATHEXT'].split(';') : ['']
-      ENV['PATH'].split(File::PATH_SEPARATOR).each do |path|
-        exts.each do |ext|
-          exe = File.join(path, "#{cmd}#{ext}")
-          return exe if File.executable?(exe) && !File.directory?(exe)
-        end
-      end
-      return nil
-    end
-
     CHROME_PATH = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
     def open_a_window_on_windows
       file_path = File.absolute_path(File.join(File.dirname(__FILE__), ".."))
@@ -43,6 +32,18 @@ module Flammarion
       end
 
       raise StandardError.new("Cannot launch any browser") unless @chrome.in
+    end
+
+    private
+    def which(cmd)
+      exts = ENV['PATHEXT'] ? ENV['PATHEXT'].split(';') : ['']
+      ENV['PATH'].split(File::PATH_SEPARATOR).each do |path|
+        exts.each do |ext|
+          exe = File.join(path, "#{cmd}#{ext}")
+          return exe if File.executable?(exe) && !File.directory?(exe)
+        end
+      end
+      return nil
     end
   end
 end

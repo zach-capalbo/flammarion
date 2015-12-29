@@ -13,7 +13,7 @@ $.extend WSClient.prototype.actions,
 
 class Plot
   default_options:
-    color: "#fff"
+    color: $(document.body).css("color")
     replace: true
     size: 1.0
     orientation: 'vertical'

@@ -55,6 +55,11 @@ sample :colors do |f|
     f.table(colors.collect do|c|
       [c.colorize(:color => c.to_sym, :background => bg.to_sym),
         "light_#{c}".colorize(:color => "light_#{c}".to_sym, :background => bg.to_sym)]
-    end)
+    end, style:{'float' => 'left'})
   end
+end
+
+sample :spectrum do |f|
+  data = 100.times.collect {|x| Math.sin(x / 100.0 * 2.0 * Math::PI)}
+  f.plot(data)
 end

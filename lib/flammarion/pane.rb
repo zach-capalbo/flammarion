@@ -1,6 +1,7 @@
 require_relative 'writeable.rb'
 
 module Flammarion
+  # @see Writeable
   class Pane
     attr_reader :pane_name
     include Writeable

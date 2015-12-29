@@ -1,8 +1,0 @@
-syntax: glob
-lib/html/build/javascripts/*
-lib/html/build/images/*
-lib/html/build/stylesheets/*
-lib/html/build/*
-lib/html/build/**/*
-flammarion*.gem
-.yardoc

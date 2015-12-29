@@ -75,6 +75,8 @@ class WSClient
     return text
 
   add: (object, target, data) ->
+    if data.style
+      object.css(key, val) for own key, val of data.style
     if data.replace
       target.html(object)
     else
