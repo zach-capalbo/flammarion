@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII" />
+<title>
+  File: Readme
+  
+    &mdash; Documentation by YARD 0.8.7.6
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!file.Readme.html";
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: Readme</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><div id='filecontents'><h1>Flammarion GUI Toolkit</h1>
+
+<p><a href="https://badge.fury.io/rb/flammarion"><img src="https://badge.fury.io/rb/flammarion.svg" alt="Gem Version"></a></p>
+
+<h2>Overview</h2>
+
+<p>Flammarion is an easy-to-use library for displaying information that you might
+normally display to the command line in a slightly easier-to-access way.</p>
+
+<p>It is not intended to be a full fledged application development toolkit. It is
+intended instead for small scripts where you just want to show some information
+without going through too much trouble.</p>
+
+<h2>Installation</h2>
+
+<p>First you need to install <a href="http://electron.atom.io/">electron</a>
+and make sure it&#39;s in your path. Then you can install the gem:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='id identifier rubyid_install'>install</span> <span class='id identifier rubyid_flammarion'>flammarion</span>
+</code></pre>
+
+<p>or add it to your Gemfile.</p>
+
+<h2>Documentation</h2>
+
+<p>The easiest way to use Flammarion, is similar to how you might use STDOUT:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>flammarion</span><span class='tstring_end'>'</span></span>
+<span class='id identifier rubyid_f'>f</span> <span class='op'>=</span> <span class='const'>Flammarion</span><span class='op'>::</span><span class='const'>Engraving</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Hello World!</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>It can even support standard console color codes: (Thanks to <a href="http://github.com/drudru/ansi_up">ansi_up</a>!)</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>colorized</span><span class='tstring_end'>'</span></span>
+<span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>This line will be red!</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_red'>red</span>
+<span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>This </span><span class='embexpr_beg'>#{</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>word</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_colorize'>colorize</span><span class='lparen'>(</span><span class='symbol'>:green</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_content'> will not be blue.</span><span class='tstring_end'>&quot;</span></span>
+</code></pre>
+
+<p>However, you can also do more advanced things. Say you want to show a table. Easy!</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span><span class='lparen'>(</span>
+  <span class='lbracket'>[</span><span class='qwords_beg'>%w[</span><span class='tstring_content'>Number</span><span class='words_sep'> </span><span class='tstring_content'>Squared</span><span class='words_sep'> </span><span class='tstring_content'>Sqrt</span><span class='words_sep'>]</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_h'>h</span><span class='op'>|</span> <span class='id identifier rubyid_h'>h</span><span class='period'>.</span><span class='id identifier rubyid_light_magenta'>light_magenta</span><span class='rbrace'>}</span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='comment'># Make the header a different color
+</span>  <span class='int'>10</span><span class='period'>.</span><span class='id identifier rubyid_times'>times</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_x'>x</span><span class='op'>|</span> <span class='lbracket'>[</span><span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='const'>Math</span><span class='period'>.</span><span class='id identifier rubyid_sqrt'>sqrt</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+</code></pre>
+
+<p>Or maybe you want to know where something is:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Boston, MA</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+</code></pre>
+
+<p>Maybe you even want to see both of those things <em>at the same time</em>!</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_pane'>pane</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>numberstuff</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='qwords_beg'>%w[</span><span class='tstring_content'>Number</span><span class='words_sep'> </span><span class='tstring_content'>Squared</span><span class='words_sep'> </span><span class='tstring_content'>Sqrt</span><span class='words_sep'>]</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_h'>h</span><span class='op'>|</span> <span class='id identifier rubyid_h'>h</span><span class='period'>.</span><span class='id identifier rubyid_light_magenta'>light_magenta</span><span class='rbrace'>}</span><span class='rbracket'>]</span> <span class='op'>+</span>
+  <span class='int'>10</span><span class='period'>.</span><span class='id identifier rubyid_times'>times</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_x'>x</span><span class='op'>|</span> <span class='lbracket'>[</span><span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='id identifier rubyid_x'>x</span> <span class='op'>*</span> <span class='id identifier rubyid_x'>x</span><span class='comma'>,</span> <span class='const'>Math</span><span class='period'>.</span><span class='id identifier rubyid_sqrt'>sqrt</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='rparen'>)</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_pane'>pane</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>mapstuff</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Big Ben</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+</code></pre>
+
+<p>If you need feedback, there&#39;s a simple callback mechanism for buttons and text
+boxes:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_button'>button</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Click Here!!!</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span><span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>You clicked the button!</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span>
+<span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_input'>input</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Placeholder &gt; </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_msg'>msg</span><span class='op'>|</span> <span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>You wrote: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_msg'>msg</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>text</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_light_magenta'>light_magenta</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span>
+</code></pre>
+
+<p>The (<em>almost</em>) full <a href="http://zach-capalbo.github.io/flammarion/doc/">api documetaion</a> is available at <a href="http://zach-capalbo.github.io/flammarion/doc/">http://zach-capalbo.github.io/flammarion/doc/</a></p>
+
+<h2>Screenshots / Samples</h2>
+
+<h3>Message Composer with Address Book</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_f'>f</span> <span class='op'>=</span> <span class='const'>Flammarion</span><span class='op'>::</span><span class='const'>Engraving</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_orientation'>orientation</span> <span class='op'>=</span> <span class='symbol'>:horizontal</span>
+<span class='id identifier rubyid_recipient'>recipient</span> <span class='op'>=</span> <span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_subpane'>subpane</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>number</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_input'>input</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Phone Number</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_text'>text</span> <span class='op'>=</span> <span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_input'>input</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Body</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>multiline:</span><span class='kw'>true</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_button'>button</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Send</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_send_message'>send_message</span><span class='lparen'>(</span><span class='id identifier rubyid_recipient'>recipient</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span> <span class='id identifier rubyid_text'>text</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Message Sent!</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbrace'>}</span>
+<span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_pane'>pane</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>contacts</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Contacts</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>replace:</span><span class='kw'>true</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_icons'>icons</span> <span class='op'>=</span> <span class='qwords_beg'>%w[</span><span class='tstring_content'>thumbs-up</span><span class='words_sep'> </span><span class='tstring_content'>meh-o</span><span class='words_sep'> </span><span class='tstring_content'>bicycle</span><span class='words_sep'> </span><span class='tstring_content'>gears</span><span class='words_sep'> </span><span class='tstring_content'>star-o</span><span class='words_sep'> </span><span class='tstring_content'>star</span><span class='words_sep'>]</span> <span class='op'>+</span> <span class='lbracket'>[</span><span class='kw'>nil</span><span class='rbracket'>]</span> <span class='op'>*</span> <span class='int'>5</span>
+<span class='int'>30</span><span class='period'>.</span><span class='id identifier rubyid_times'>times</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='op'>|</span>
+  <span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='const'>Faker</span><span class='op'>::</span><span class='const'>Name</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+  <span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_pane'>pane</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>contacts</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_button'>button</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='label'>right_icon:</span><span class='id identifier rubyid_icons'>icons</span><span class='period'>.</span><span class='id identifier rubyid_sample'>sample</span><span class='comma'>,</span> <span class='label'>left_icon:</span><span class='id identifier rubyid_icons'>icons</span><span class='period'>.</span><span class='id identifier rubyid_sample'>sample</span><span class='rparen'>)</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_recipient'>recipient</span> <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span>
+    <span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_subpane'>subpane</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>numer</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_replace'>replace</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p><img src="http://zach-capalbo.github.io/flammarion/img/messagesample.png" alt="Message Sample"></p>
+
+<h3>Rake Task Runner</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_f'>f</span> <span class='op'>=</span> <span class='const'>Flammarion</span><span class='op'>::</span><span class='const'>Engraving</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>exit_on_disconnect:</span><span class='kw'>true</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>frake </span><span class='embexpr_beg'>#{</span><span class='const'>Dir</span><span class='period'>.</span><span class='id identifier rubyid_pwd'>pwd</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='id identifier rubyid_task'>task</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_f2'>f2</span> <span class='op'>=</span> <span class='const'>Flammarion</span><span class='op'>::</span><span class='const'>Engraving</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='id identifier rubyid_f2'>f2</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span> <span class='id identifier rubyid_task'>task</span>
+  <span class='id identifier rubyid_f2'>f2</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Running </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_task'>task</span><span class='period'>.</span><span class='id identifier rubyid_light_magenta'>light_magenta</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='const'>Open3</span><span class='period'>.</span><span class='id identifier rubyid_popen3'>popen3</span><span class='lparen'>(</span><span class='id identifier rubyid_task'>task</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span><span class='id identifier rubyid_o'>o</span><span class='comma'>,</span><span class='id identifier rubyid_e'>e</span><span class='comma'>,</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+    <span class='const'>Thread</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='lbrace'>{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_each_line'>each_line</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_l'>l</span><span class='op'>|</span> <span class='id identifier rubyid_f2'>f2</span><span class='period'>.</span><span class='id identifier rubyid_print'>print</span> <span class='id identifier rubyid_l'>l</span><span class='period'>.</span><span class='id identifier rubyid_red'>red</span><span class='rbrace'>}</span><span class='rbrace'>}</span>
+    <span class='id identifier rubyid_o'>o</span><span class='period'>.</span><span class='id identifier rubyid_each_line'>each_line</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_l'>l</span><span class='op'>|</span> <span class='id identifier rubyid_f2'>f2</span><span class='period'>.</span><span class='id identifier rubyid_print'>print</span> <span class='id identifier rubyid_l'>l</span><span class='rbrace'>}</span>
+    <span class='id identifier rubyid_f2'>f2</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span> <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_success?'>success?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Done!</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_light_green'>light_green</span> <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Failed!</span><span class='tstring_end'>&quot;</span></span><span class='period'>.</span><span class='id identifier rubyid_light_red'>light_red</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_markdown'>markdown</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'># Rake Tasks: </span><span class='tstring_end'>&quot;</span></span>
+<span class='backtick'>`</span><span class='tstring_content'>rake -T</span><span class='tstring_end'>`</span></span><span class='period'>.</span><span class='id identifier rubyid_each_line'>each_line</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_l'>l</span><span class='op'>|</span>
+  <span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_break'>break</span>
+  <span class='id identifier rubyid_parts'>parts</span> <span class='op'>=</span> <span class='id identifier rubyid_l'>l</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>#</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_task'>task</span> <span class='op'>=</span> <span class='id identifier rubyid_parts'>parts</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_desc'>desc</span> <span class='op'>=</span> <span class='id identifier rubyid_parts'>parts</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_desc'>desc</span>
+  <span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_button'>button</span><span class='lparen'>(</span><span class='id identifier rubyid_task'>task</span><span class='rparen'>)</span> <span class='kw'>do</span>
+    <span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='id identifier rubyid_task'>task</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+
+<span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_wait_until_closed'>wait_until_closed</span>
+</code></pre>
+
+<p><img src="http://zach-capalbo.github.io/flammarion/img/frake.png" alt="Frake"></p>
+
+<h3>Tables</h3>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_f'>f</span> <span class='op'>=</span> <span class='const'>Flammerion</span><span class='op'>::</span><span class='const'>Engraving</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_orientation'>orientation</span> <span class='op'>=</span> <span class='symbol'>:horizontal</span>
+<span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_table'>table</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Id</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Name</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Address</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_h'>h</span><span class='op'>|</span> <span class='id identifier rubyid_h'>h</span><span class='period'>.</span><span class='id identifier rubyid_light_magenta'>light_magenta</span><span class='rbrace'>}</span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='int'>20</span><span class='period'>.</span><span class='id identifier rubyid_times'>times</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='op'>|</span>
+  <span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='const'>Faker</span><span class='op'>::</span><span class='const'>Name</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='const'>Faker</span><span class='op'>::</span><span class='const'>Address</span><span class='period'>.</span><span class='id identifier rubyid_street_address'>street_address</span><span class='rbracket'>]</span>
+<span class='kw'>end</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_pane'>pane</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sidebar</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_pane'>pane</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>side1</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='const'>Faker</span><span class='op'>::</span><span class='const'>Hipster</span><span class='period'>.</span><span class='id identifier rubyid_paragraph'>paragraph</span><span class='period'>.</span><span class='id identifier rubyid_red'>red</span>
+<span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_pane'>pane</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>sidebar</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_pane'>pane</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>side2</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='const'>Faker</span><span class='op'>::</span><span class='const'>Hipster</span><span class='period'>.</span><span class='id identifier rubyid_paragraph'>paragraph</span><span class='period'>.</span><span class='id identifier rubyid_green'>green</span>
+
+<span class='int'>3</span><span class='period'>.</span><span class='id identifier rubyid_times'>times</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_f'>f</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span><span class='lparen'>(</span><span class='const'>Faker</span><span class='op'>::</span><span class='const'>Hipster</span><span class='period'>.</span><span class='id identifier rubyid_sentence'>sentence</span><span class='period'>.</span><span class='id identifier rubyid_light_green'>light_green</span><span class='rparen'>)</span><span class='rbrace'>}</span>
+</code></pre>
+
+<p><img src="http://zach-capalbo.github.io/flammarion/img/table.png" alt="Table Sample"></p>
+
+<h2>Examples</h2>
+
+<p>There are a number of useful examples in the <a href="https://github.com/zach-capalbo/flammarion">examples directory.</a></p>
+
+<h1>Bundled Packages</h1>
+
+<p>Flammarion is distributed with a bunch of useful tools to make everyone&#39;s life easier.
+They are:</p>
+
+<ul>
+<li><a href="https://github.com/drudru/ansi_up">ansi up</a></li>
+<li><a href="https://highlightjs.org/">highlihgt.js</a></li>
+<li><a href="https://jquery.com/">jquery</a></li>
+<li><a href="http://ricostacruz.com/jquery.transit/">jquery transit</a></li>
+<li><a href="http://leafletjs.com/">leaflet</a></li>
+<li><a href="https://fortawesome.github.io/Font-Awesome/">font awesome</a></li>
+</ul>
+</div></div>
+
+    <div id="footer">
+  Generated on Mon Dec 28 21:51:34 2015 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-1.9.3).
+</div>
+
+  </body>
+</html>
