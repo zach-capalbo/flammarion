@@ -43,7 +43,7 @@ task :bump_version do
 end
 
 task :documentation do
-  system("yardoc - Readme.md")
+  system("yardoc")
   system("rm -r ../../html/flammarion/doc")
   system("mv doc ../../html/flammarion")
   Dir.chdir("../../html/flammarion") do
@@ -56,10 +56,10 @@ end
 
 desc "Build and push to rubgems"
 task :publish => [:build, :documentation] do
-  raise VersionControlError.new("Uncommited Changes!") if `hg id`.include?("+")
-  system("hg tag v#{Flammarion::VERSION}")
+  raise VersionControlError.new("Uncommited Changes!") unless system("git diff --quiet HEAD")
+  system("git tag v#{Flammarion::VERSION}")
   system("gem push flammarion-#{Flammarion::VERSION}.gem")
   bump_version
   system("sudo gem install flammarion-#{Flammarion::VERSION}.gem")
-  system("hg push")
+  system("git push")
 end

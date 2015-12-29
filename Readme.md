@@ -2,6 +2,9 @@
 
 [![Gem Version](https://badge.fury.io/rb/flammarion.svg)](https://badge.fury.io/rb/flammarion)
 
+* [Source](https://github.com/zach-capalbo/flammarion)
+* [Documentation](http://zach-capalbo.github.io/flammarion/doc/)
+
 ## Overview
 
 Flammarion is an easy-to-use library for displaying information that you might
@@ -70,7 +73,9 @@ f.button("Click Here!!!") {f.puts "You clicked the button!"}
 f.input("Placeholder > ") {|msg| f.puts "You wrote: #{msg['text'].light_magenta}"}
 ```
 
-The (_almost_) full [api documentation](http://zach-capalbo.github.io/flammarion/doc/) is available at http://zach-capalbo.github.io/flammarion/doc/
+The (_almost_) full [api documetaion](http://zach-capalbo.github.io/flammarion/doc/)
+is available at <<http://zach-capalbo.github.io/flammarion/doc/>>. See especially
+the [Writeable Module](http://zach-capalbo.github.io/flammarion/doc/Flammarion/Writeable.html)
 
 ## Screenshots / Samples
 

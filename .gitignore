@@ -3,3 +3,5 @@ lib/html/build/images/*
 lib/html/build/stylesheets/*
 lib/html/build/*
 lib/html/build/**/*
+.yardoc
+doc
