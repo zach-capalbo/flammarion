@@ -80,13 +80,33 @@
   
     <dt class="r1 last">Defined in:</dt>
     <dd class="r1 last">lib/flammarion.rb<span class="defines">,<br />
-  lib/flammarion/pane.rb,<br /> lib/flammarion/about.rb,<br /> lib/flammarion/server.rb,<br /> lib/flammarion/version.rb,<br /> lib/flammarion/writeable.rb,<br /> lib/flammarion/revelator.rb</span>
+  lib/flammarion/pane.rb,<br /> lib/flammarion/about.rb,<br /> lib/flammarion/server.rb,<br /> lib/flammarion/version.rb,<br /> lib/flammarion/writeable.rb,<br /> lib/flammarion/revelator.rb,<br /> lib/flammarion/engraving.rb</span>
 </dd>
   
 </dl>
 <div class="clear"></div>
 
-<h2>Defined Under Namespace</h2>
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>This is the main namespace for Flammarion.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="Flammarion/Engraving.html" title="Flammarion::Engraving (class)">Engraving</a></span></li>
+    
+      <li><span class='object_link'><a href="Flammarion/Writeable.html" title="Flammarion::Writeable (module)">Writeable</a></span></li>
+    
+  </ul>
+
+</div><h2>Defined Under Namespace</h2>
 <p class="children">
   
     
@@ -142,7 +162,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Pops up a little about box.</p>
+</div></span>
   
 </li>
 
@@ -165,24 +187,35 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Pops up a little about box.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-2
-3
 4
 5
 6
 7
 8
 9
-10</pre>
+10
+11
+12</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/about.rb', line 2</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/about.rb', line 4</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_about'>about</span>
   <span class='id identifier rubyid_f'>f</span> <span class='op'>=</span> <span class='const'>Engraving</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>close_on_exit:</span><span class='kw'>true</span><span class='rparen'>)</span>
@@ -203,7 +236,7 @@
 </div>
 
     <div id="footer">
-  Generated on Tue Dec 29 06:55:39 2015 by
+  Generated on Tue Dec 29 07:57:42 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>
