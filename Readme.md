@@ -146,10 +146,9 @@ f.pane("sidebar").pane("side2").puts Faker::Hipster.paragraph.green
 ![Table Sample](http://zach-capalbo.github.io/flammarion/img/table.png)
 
 
-## Behind the scenes
+## Examples
 
-Flammarion uses Chrome to display a simple html page, and WebSockets to communicate
-between the Javascript and ruby.
+There are a number of useful examples in the [examples directory.](https://github.com/zach-capalbo/flammarion)
 
 # Bundled Packages
 
