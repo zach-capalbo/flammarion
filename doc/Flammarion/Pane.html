@@ -146,7 +146,7 @@
   
   
   <h3 class="inherited">Attributes included from <span class='object_link'><a href="Writeable.html" title="Flammarion::Writeable (module)">Writeable</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Writeable.html#front_end-instance_method" title="Flammarion::Writeable#front_end (method)">#front_end</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Writeable.html#engraving-instance_method" title="Flammarion::Writeable#engraving (method)">#engraving</a></span></p>
 
 
   
@@ -160,7 +160,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Pane) <strong>initialize</strong>(front_end, name, options = {}) </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Pane) <strong>initialize</strong>(engraving, name, options = {}) </a>
     
 
     
@@ -203,7 +203,7 @@
     <div class="method_details first">
   <h3 class="signature first" id="initialize-instance_method">
   
-    - (<tt><span class='object_link'><a href="" title="Flammarion::Pane (class)">Pane</a></span></tt>) <strong>initialize</strong>(front_end, name, options = {}) 
+    - (<tt><span class='object_link'><a href="" title="Flammarion::Pane (class)">Pane</a></span></tt>) <strong>initialize</strong>(engraving, name, options = {}) 
   
 
   
@@ -235,8 +235,8 @@
     <td>
       <pre class="code"><span class="info file"># File 'lib/flammarion/pane.rb', line 7</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_front_end'>front_end</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='ivar'>@front_end</span> <span class='op'>=</span> <span class='id identifier rubyid_front_end'>front_end</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_engraving'>engraving</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@engraving</span> <span class='op'>=</span> <span class='id identifier rubyid_engraving'>engraving</span>
   <span class='ivar'>@pane_name</span> <span class='op'>=</span> <span class='id identifier rubyid_name'>name</span>
   <span class='ivar'>@options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
@@ -299,7 +299,7 @@
 </div>
 
     <div id="footer">
-  Generated on Mon Dec 28 08:01:56 2015 by
+  Generated on Mon Dec 28 21:51:34 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>
