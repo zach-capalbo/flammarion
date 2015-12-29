@@ -35,7 +35,7 @@ module Flammarion
       @chrome = OpenStruct.new
       @sockets = []
       @actions = {}
-      @front_end = self
+      @engraving = self
       @pane_name = "default"
       @on_connect = options[:on_connect]
       @on_disconnect = options[:on_disconnect]

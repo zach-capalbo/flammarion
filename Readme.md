@@ -16,7 +16,9 @@ without going through too much trouble.
 First you need to install [electron](http://electron.atom.io/)
 and make sure it's in your path. Then you can install the gem:
 
-`gem install flammarion`
+```
+gem install flammarion
+```
 
 or add it to your Gemfile.
 
@@ -68,7 +70,7 @@ f.button("Click Here!!!") {f.puts "You clicked the button!"}
 f.input("Placeholder > ") {|msg| f.puts "You wrote: #{msg['text'].light_magenta}"}
 ```
 
-There's lots more, too. I'll write more documentation eventually.
+The (_almost_) full [api documetaion](http://zach-capalbo.github.io/flammarion/doc/) is available at http://zach-capalbo.github.io/flammarion/doc/
 
 ## Screenshots / Samples
 

@@ -16,6 +16,10 @@
   if $enable-gradients
     background-linear-gradient left, lighten($scrollbar-thumb-color, 30%), 40%, darken($scrollbar-thumb-color, 10%), 50%
 
+  &:horizontal
+    if $enable-gradients
+      background-linear-gradient top, lighten($scrollbar-thumb-color, 30%), 40%, darken($scrollbar-thumb-color, 10%), 50%
+
 ::-webkit-scrollbar-track
   background $scrollbar-track-color
   if $enable-gradients

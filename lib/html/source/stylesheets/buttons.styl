@@ -66,8 +66,15 @@ input:focus::-webkit-input-placeholder
     height 1em
     border $normal-border
     margin-right 0.5em
+    if $enable-gradients
+      background-linear-gradient top, lighten($bg-color, 10%), 40%, darken($bg-color, 10%), 100%
   &.checked:before
-    background-color activate($bg-color, 40%)
+    content "X"
+    font-weight 900
+    color activate($bg-color, 40%)
+    text-align center
+    if $enable-gradients
+      background-linear-gradient top, darken($highlight, 10%), 40%, lighten($highlight, 10%), 100%
   &:hover
     background-color $highlight
 

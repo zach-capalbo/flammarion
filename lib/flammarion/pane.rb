@@ -4,8 +4,8 @@ module Flammarion
   class Pane
     attr_reader :pane_name
     include Writeable
-    def initialize(front_end, name, options = {})
-      @front_end = front_end
+    def initialize(engraving, name, options = {})
+      @engraving = engraving
       @pane_name = name
       @options = {}
     end

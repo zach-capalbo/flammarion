@@ -42,8 +42,20 @@ task :bump_version do
   bump_version
 end
 
+task :documentation do
+  system("yardoc - Readme.md")
+  system("rm -r ../../html/flammarion/doc")
+  system("mv doc ../../html/flammarion")
+  Dir.chdir("../../html/flammarion") do
+    system(%|slimrb index.slim --trace -r 'redcarpet' -r 'rouge' -r 'rouge/plugins/redcarpet' > index.html|)
+    system("git add doc")
+    system("git commit -a -m 'Updated Documentation'")
+    system("git push")
+  end
+end
+
 desc "Build and push to rubgems"
-task :publish => [:build] do
+task :publish => [:build, :documentation] do
   raise VersionControlError.new("Uncommited Changes!") if `hg id`.include?("+")
   system("hg tag v#{Flammarion::VERSION}")
   system("gem push flammarion-#{Flammarion::VERSION}.gem")

@@ -3,7 +3,17 @@
 set-ansi(val)
   &-fg
     if light($bg-color)
-      color darken(val, 60%)
+      newval = darken(val, 10%)
+      if contrast(newval, $bg-color).ratio < 1.2
+        color darken(newval, 30%)
+      else
+        color newval
+
+      if contrast(newval, $status-bg-color).ratio < 1.5
+        #status &
+          color activate(val, 50%)
+        #dialog &
+          color activate(val, 50%)
     else
       color val
   &-bg

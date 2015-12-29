@@ -1,6 +1,6 @@
 module Flammarion
   module Writeable
-    attr_reader :front_end
+    attr_reader :engraving
     class DeferredValue < Delegator
       def initialize
         super @value
@@ -27,15 +27,15 @@ module Flammarion
     end
 
     class Spectrum
-      attr_reader :front_end
-      def initialize(id, target, front_end)
+      attr_reader :engraving
+      def initialize(id, target, engraving)
         @id = id
         @target = target
-        @front_end = front_end
+        @engraving = engraving
       end
 
       def plot(data, options = {})
-        @front_end.send_json({action:'plot', id:@id, target:@target, data:data}.merge(options))
+        @engraving.send_json({action:'plot', id:@id, target:@target, data:data}.merge(options))
       end
     end
 
@@ -56,14 +56,14 @@ module Flammarion
     #    this string.
 
     def send_json(hash)
-      @front_end.send_json({target: @pane_name}.merge(hash))
+      @engraving.send_json({target: @pane_name}.merge(hash))
     end
 
     # Adds text to the writeable area without appending a newline.
     # @param str [String] The text to append
     # @macro escape_options
     def send(str, options = {})
-      @front_end.send_json({action:'append', text:str, target:@pane_name}.merge(options))
+      @engraving.send_json({action:'append', text:str, target:@pane_name}.merge(options))
     end
     alias_method :print, :send
 
@@ -101,9 +101,9 @@ module Flammarion
     # TODO: @options
     # @return [Spectrum] A Spectrum object for manipulation after creation.
     def plot(values, options = {})
-      id = @front_end.make_id
+      id = @engraving.make_id
       send_json({action:'plot', data:values, id:id}.merge(options))
-      return Spectrum.new(id, @pane_name, @front_end)
+      return Spectrum.new(id, @pane_name, @engraving)
     end
 
     # @overload highlight(data, options)
@@ -128,9 +128,9 @@ module Flammarion
     #    of the writeable area.
     # @macro escape_options
     def button(label, options = {}, &block)
-      id = @front_end.make_id
+      id = @engraving.make_id
       send_json({action:'button', label:label, id:id}.merge(options))
-      @front_end.callbacks[id] = block
+      @engraving.callbacks[id] = block
       id
     end
 
@@ -140,8 +140,8 @@ module Flammarion
     # @param label [String] The label on the button
     # @return A string representing the html for the button.
     def embedded_button(label, options = {}, &block)
-      id = @front_end.make_id
-      @front_end.callbacks[id] = block
+      id = @engraving.make_id
+      @engraving.callbacks[id] = block
       %|<a class="floating-button" href="#" onClick="$ws.send({id:'#{id}', action:'callback', source:'embedded_button'})">#{label}</a>|
     end
 
@@ -151,8 +151,8 @@ module Flammarion
     # @param label [String] The text to become the link
     # @return a string representing the html for the link.
     def callback_link(label, options = {}, &block)
-      id = @front_end.make_id
-      @front_end.callbacks[id] = block
+      id = @engraving.make_id
+      @engraving.callbacks[id] = block
       %|<a href="#" onClick="$ws.send({id:'#{id}', action:'callback', source:'link'})">#{label}</a>|
     end
 
@@ -194,13 +194,13 @@ module Flammarion
     #   new text of the input can be obtained from the +"text"+ key of the
     #   +message_hash+.
     def input(label, options = {}, &block)
-      id = @front_end.make_id
+      id = @engraving.make_id
       send_json({action:'input', label:label, id:id}.merge(options))
       if block_given?
-        @front_end.callbacks[id] = block
+        @engraving.callbacks[id] = block
       else
         d = DeferredValue.new
-        @front_end.callbacks[id] = Proc.new {|v| d.__setobj__ v["text"] }
+        @engraving.callbacks[id] = Proc.new {|v| d.__setobj__ v["text"] }
         return d
       end
     end
@@ -215,13 +215,13 @@ module Flammarion
     #   different option. Current item text can be obtained from the +"text"+
     #   key of the +message_hash+
     def dropdown(items, options = {}, &block)
-      id = @front_end.make_id
+      id = @engraving.make_id
       send_json({action:'dropdown', id:id, options:items}.merge(options))
       if block_given?
-        @front_end.callbacks[id] = block
+        @engraving.callbacks[id] = block
       else
         d = DeferredValue.new
-        @front_end.callbacks[id] = Proc.new {|v| d.__setobj__ v["text"]}
+        @engraving.callbacks[id] = Proc.new {|v| d.__setobj__ v["text"]}
         return d
       end
     end
@@ -237,14 +237,14 @@ module Flammarion
     #   toggled. Use the "checked" field of +message_hash+ to get the new state
     #   of the checkbox.
     def checkbox(label, options = {}, &block)
-      id = @front_end.make_id
+      id = @engraving.make_id
       send_json({action:'checkbox', label:label, id:id}.merge(options))
       if block_given?
-        @front_end.callbacks[id] = block
+        @engraving.callbacks[id] = block
       else
         d = DeferredValue.new
         d.__setobj__(options[:value] || options['value'])
-        @front_end.callbacks[id] = Proc.new {|v| d.__setobj__(v["checked"])}
+        @engraving.callbacks[id] = Proc.new {|v| d.__setobj__(v["checked"])}
         return d
       end
     end
@@ -298,12 +298,12 @@ module Flammarion
 
     def subpane(name, options = {})
       send_json({action:'subpane', name:name}.merge(options))
-      return Pane.new(@front_end, name)
+      return Pane.new(@engraving, name)
     end
 
     def pane(name, options = {})
       send_json({action:'addpane', name:name}.merge(options))
-      return Pane.new(@front_end, name)
+      return Pane.new(@engraving, name)
     end
 
     def orientation=(orientation)
@@ -313,7 +313,7 @@ module Flammarion
 
     def button_box(name = "buttonbox")
       send_json({action:'buttonbox', name:name})
-      return Pane.new(@front_end, name)
+      return Pane.new(@engraving, name)
     end
 
     # Displays a message to the bottom status bar.
@@ -325,7 +325,7 @@ module Flammarion
     #  @escape_options
     def status(str, options = {})
       options = {position: options} if options.is_a? Symbol
-      @front_end.send_json({action:'status', text: str}.merge(options))
+      @engraving.send_json({action:'status', text: str}.merge(options))
     end
 
     def table(rows, options = {})
