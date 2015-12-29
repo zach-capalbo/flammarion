@@ -70,7 +70,7 @@ f.button("Click Here!!!") {f.puts "You clicked the button!"}
 f.input("Placeholder > ") {|msg| f.puts "You wrote: #{msg['text'].light_magenta}"}
 ```
 
-The (_almost_) full [api documetation](http://zach-capalbo.github.io/flammarion/doc/) is available at http://zach-capalbo.github.io/flammarion/doc/
+The (_almost_) full [api documentation](http://zach-capalbo.github.io/flammarion/doc/) is available at http://zach-capalbo.github.io/flammarion/doc/
 
 ## Screenshots / Samples
 
@@ -148,7 +148,7 @@ f.pane("sidebar").pane("side2").puts Faker::Hipster.paragraph.green
 
 ## Examples
 
-There are a number of useful examples in the [examples directory.](https://github.com/zach-capalbo/flammarion)
+There are a number of useful examples in the [examples directory.](https://github.com/zach-capalbo/flammarion/tree/master/examples)
 
 # Bundled Packages
 
