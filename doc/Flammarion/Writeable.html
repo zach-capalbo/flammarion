@@ -404,7 +404,9 @@ is clicked.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Hides (but doesn't close) the pane.</p>
+</div></span>
   
 </li>
 
@@ -542,7 +544,9 @@ is clicked.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Adds an interactive street map of a specified location.</p>
+</div></span>
   
 </li>
 
@@ -564,7 +568,9 @@ is clicked.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Renders the given markdown text into the pane.</p>
+</div></span>
   
 </li>
 
@@ -594,7 +600,7 @@ is clicked.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#pane-instance_method" title="#pane (instance method)">- (Object) <strong>pane</strong>(name, options = {}) </a>
+      <a href="#pane-instance_method" title="#pane (instance method)">- (Pane) <strong>pane</strong>(name, options = {}) </a>
     
 
     
@@ -608,7 +614,9 @@ is clicked.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a scaled pane within the current writeable area.</p>
+</div></span>
   
 </li>
 
@@ -631,7 +639,7 @@ is clicked.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Creates a new plot to display single axis data TODO: @options.</p>
+<p>Creates a new plot to display single axis data.</p>
 </div></span>
   
 </li>
@@ -688,7 +696,7 @@ is clicked.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#script-instance_method" title="#script (instance method)">- (Object) <strong>script</strong>(coffee, options = {}) </a>
+      <a href="#script-instance_method" title="#script (instance method)">- (Object) <strong>script</strong>(text, options = {}) </a>
     
 
     
@@ -702,7 +710,9 @@ is clicked.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Runs a script in the engraving window.</p>
+</div></span>
   
 </li>
 
@@ -769,13 +779,10 @@ is clicked.</p>
   
   
   
-  
+  <span class="private note title">private</span>
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>The string can be included in text for text-accepting methods (such as
-<tt>#puts</tt>, <tt>#table</tt>, etc).</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -797,7 +804,9 @@ is clicked.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Shows a hidden pane.</p>
+</div></span>
   
 </li>
 
@@ -843,7 +852,9 @@ is clicked.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Sets a CSS styles attribute on the current pane.</p>
+</div></span>
   
 </li>
 
@@ -851,7 +862,7 @@ is clicked.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#subpane-instance_method" title="#subpane (instance method)">- (Object) <strong>subpane</strong>(name, options = {}) </a>
+      <a href="#subpane-instance_method" title="#subpane (instance method)">- (Pane) <strong>subpane</strong>(name, options = {}) </a>
     
 
     
@@ -865,7 +876,9 @@ is clicked.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a writeable area within the current writeable area.</p>
+</div></span>
   
 </li>
 
@@ -909,7 +922,9 @@ is clicked.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Will render the given Slim template into the pane.</p>
+</div></span>
   
 </li>
 
@@ -997,12 +1012,12 @@ is clicked.</p>
       <pre class="lines">
 
 
-253
-254
-255</pre>
+260
+261
+262</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 253</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 260</span>
 
 <span class='kw'>def</span> <span class='kw'>break</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>action:</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>break</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -1172,15 +1187,15 @@ be rendered in the writeable area.</p>
       <pre class="lines">
 
 
-130
-131
-132
-133
-134
-135</pre>
+137
+138
+139
+140
+141
+142</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 130</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 137</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_button'>button</span><span class='lparen'>(</span><span class='id identifier rubyid_label'>label</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_id'>id</span> <span class='op'>=</span> <span class='ivar'>@engraving</span><span class='period'>.</span><span class='id identifier rubyid_make_id'>make_id</span>
@@ -1208,13 +1223,13 @@ be rendered in the writeable area.</p>
       <pre class="lines">
 
 
-314
-315
-316
-317</pre>
+369
+370
+371
+372</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 314</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 369</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_button_box'>button_box</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>buttonbox</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>action:</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>buttonbox</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>name:</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -1300,14 +1315,14 @@ given block. The string can be included in text for text-accepting methods
       <pre class="lines">
 
 
-153
-154
-155
-156
-157</pre>
+160
+161
+162
+163
+164</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 153</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 160</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_callback_link'>callback_link</span><span class='lparen'>(</span><span class='id identifier rubyid_label'>label</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_id'>id</span> <span class='op'>=</span> <span class='ivar'>@engraving</span><span class='period'>.</span><span class='id identifier rubyid_make_id'>make_id</span>
@@ -1542,21 +1557,21 @@ be rendered in the writeable area.</p>
       <pre class="lines">
 
 
-239
-240
-241
-242
-243
-244
-245
 246
 247
 248
 249
-250</pre>
+250
+251
+252
+253
+254
+255
+256
+257</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 239</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 246</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_checkbox'>checkbox</span><span class='lparen'>(</span><span class='id identifier rubyid_label'>label</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_id'>id</span> <span class='op'>=</span> <span class='ivar'>@engraving</span><span class='period'>.</span><span class='id identifier rubyid_make_id'>make_id</span>
@@ -1601,13 +1616,13 @@ be rendered in the writeable area.</p>
       <pre class="lines">
 
 
-88
-89
-90
-91</pre>
+95
+96
+97
+98</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 88</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 95</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_clear'>clear</span>
   <span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>action:</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>clear</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -1644,13 +1659,13 @@ be rendered in the writeable area.</p>
       <pre class="lines">
 
 
-94
-95
-96
-97</pre>
+101
+102
+103
+104</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 94</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 101</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_close'>close</span>
   <span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>action:</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>closepane</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -1788,20 +1803,20 @@ item text can be obtained from the <tt>“text”</tt> key of the
       <pre class="lines">
 
 
-217
-218
-219
-220
-221
-222
-223
 224
 225
 226
-227</pre>
+227
+228
+229
+230
+231
+232
+233
+234</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 217</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 224</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dropdown'>dropdown</span><span class='lparen'>(</span><span class='id identifier rubyid_items'>items</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_id'>id</span> <span class='op'>=</span> <span class='ivar'>@engraving</span><span class='period'>.</span><span class='id identifier rubyid_make_id'>make_id</span>
@@ -1894,14 +1909,14 @@ is clicked. The string can be included in text for text-accepting methods
       <pre class="lines">
 
 
-142
-143
-144
-145
-146</pre>
+149
+150
+151
+152
+153</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 142</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 149</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_embedded_button'>embedded_button</span><span class='lparen'>(</span><span class='id identifier rubyid_label'>label</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_id'>id</span> <span class='op'>=</span> <span class='ivar'>@engraving</span><span class='period'>.</span><span class='id identifier rubyid_make_id'>make_id</span>
@@ -1992,15 +2007,15 @@ is clicked. The string can be included in text for text-accepting methods
       <pre class="lines">
 
 
-339
-340
-341
-342
-343
-344</pre>
+394
+395
+396
+397
+398
+399</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 339</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 394</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_gets'>gets</span><span class='lparen'>(</span><span class='id identifier rubyid_prompt'>prompt</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_str'>str</span> <span class='op'>=</span> <span class='kw'>nil</span>
@@ -2022,18 +2037,37 @@ is clicked. The string can be included in text for text-accepting methods
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Hides (but doesn't close) the pane. This allows the pane to be written to
+without it opening up again.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li>show</li>
+    
+  </ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-291
-292
-293</pre>
+318
+319
+320</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 291</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 318</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_hide'>hide</span>
   <span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>action:</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>hidepane</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -2304,15 +2338,15 @@ be rendered in the writeable area.</p>
       <pre class="lines">
 
 
-117
-118
-119
-120
-121
-122</pre>
+124
+125
+126
+127
+128
+129</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 117</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 124</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_highlight'>highlight</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_output'>output</span> <span class='op'>=</span> <span class='id identifier rubyid_text'>text</span>
@@ -2351,12 +2385,12 @@ be rendered in the writeable area.</p>
       <pre class="lines">
 
 
-258
-259
-260</pre>
+265
+266
+267</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 258</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 265</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_html'>html</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>action:</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>replace</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>text:</span><span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='label'>raw:</span><span class='kw'>true</span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -2420,7 +2454,7 @@ included in text for text-accepting methods (such as <tt>#puts</tt>,
   <p class="tag_title">See Also:</p>
   <ul class="see">
     
-      <li><a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_parent" title="for the list.">for the list.</a></li>
+      <li><a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_parent" title="https://fortawesome.github.io/Font-Awesome/icons/">https://fortawesome.github.io/Font-Awesome/icons/</a></li>
     
   </ul>
 
@@ -2430,12 +2464,12 @@ included in text for text-accepting methods (such as <tt>#puts</tt>,
       <pre class="lines">
 
 
-163
-164
-165</pre>
+170
+171
+172</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 163</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 170</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_icon'>icon</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_additional_classes'>additional_classes</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='tstring'><span class='tstring_beg'>%|</span><span class='tstring_content'>&lt;i class=&quot;fa fa-</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_additional_classes'>additional_classes</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_c'>c</span><span class='op'>|</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>fa-</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_c'>c</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_content'>&quot;&gt;&lt;/i&gt;</span><span class='tstring_end'>|</span></span>
@@ -2708,20 +2742,20 @@ converting the input to plain text.</p>
       <pre class="lines">
 
 
-196
-197
-198
-199
-200
-201
-202
 203
 204
 205
-206</pre>
+206
+207
+208
+209
+210
+211
+212
+213</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 196</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 203</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_input'>input</span><span class='lparen'>(</span><span class='id identifier rubyid_label'>label</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_id'>id</span> <span class='op'>=</span> <span class='ivar'>@engraving</span><span class='period'>.</span><span class='id identifier rubyid_make_id'>make_id</span>
@@ -2754,12 +2788,12 @@ converting the input to plain text.</p>
       <pre class="lines">
 
 
-276
-277
-278</pre>
+295
+296
+297</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 276</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 295</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_live_reload_template'>live_reload_template</span><span class='lparen'>(</span><span class='id identifier rubyid_file'>file</span><span class='rparen'>)</span>
   <span class='const'>FileWatcher</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_file'>file</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_watch'>watch</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_file'>file</span><span class='op'>|</span> <span class='id identifier rubyid_template'>template</span><span class='lparen'>(</span><span class='id identifier rubyid_file'>file</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
@@ -2772,42 +2806,184 @@ converting the input to plain text.</p>
       <div class="method_details ">
   <h3 class="signature " id="map-instance_method">
   
-    - (<tt>Object</tt>) <strong>map</strong>(*args) 
+    
+      <span class="overload">- (<tt>Object</tt>) <strong>map</strong>(options) </span>
+    
+      <span class="overload">- (<tt>Object</tt>) <strong>map</strong>(address, options = {}) </span>
+    
+      <span class="overload">- (<tt>Object</tt>) <strong>map</strong>(latitude, longitude, options = {}) </span>
+    
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>Street map provided by <a
+href="http://openstreetmap.org">openstreetmap.org</a></p>
+</div>
+  </div>
+
+
+<p>Adds an interactive street map of a specified location.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <p class="tag_title">Overloads:</p>
+  <ul class="overload">
+    
+      
+      
+      <li class="overload_item">
+        <span class="signature">- (<tt>Object</tt>) <strong>map</strong>(address, options = {}) </span>
+        <div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>address</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The address or landmark to look up and display.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+      </li>
+    
+      
+      <li class="overload_item">
+        <span class="signature">- (<tt>Object</tt>) <strong>map</strong>(latitude, longitude, options = {}) </span>
+        <div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>latitude</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The latitude to display</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>longitude</span>
+      
+      
+        <span class='type'>(<tt>Float</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The longitude to display</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div>
+      </li>
+    
+  </ul>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a customizable set of options</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-346
-347
-348
-349
-350
-351
-352
-353
-354
-355
-356
-357
-358
-359
-360
-361
-362
-363
-364
-365
-366</pre>
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 346</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 413</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
   <span class='kw'>case</span> <span class='lparen'>(</span><span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span><span class='rparen'>)</span>
@@ -2844,25 +3020,98 @@ converting the input to plain text.</p>
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Renders the given markdown text into the pane.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The markdown text to render.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a customizable set of options</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    <p class="tag_title">Options Hash (<tt>options</tt>):</p>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:markdown_extensions</span>
+          <span class="type">(<tt>Hash</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'>
+<p>Additional Redcarpet extensions to enable.</p>
+</div>
+          
+        </li>
+      
+    </ul>
+  
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-280
-281
-282
-283
-284
-285
-286
-287
-288
-289</pre>
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 280</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 304</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_markdown'>markdown</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_markdown_html'>markdown_html</span> <span class='op'>=</span> <span class='const'>Redcarpet</span><span class='op'>::</span><span class='const'>Markdown</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='const'>Redcarpet</span><span class='op'>::</span><span class='const'>Render</span><span class='op'>::</span><span class='const'>HTML</span><span class='comma'>,</span> <span class='lbrace'>{</span>
@@ -2916,13 +3165,13 @@ converting the input to plain text.</p>
       <pre class="lines">
 
 
-309
-310
-311
-312</pre>
+364
+365
+366
+367</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 309</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 364</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_orientation='>orientation=</span><span class='lparen'>(</span><span class='id identifier rubyid_orientation'>orientation</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Orientation must be :horizontal or :vertical</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='lbracket'>[</span><span class='symbol'>:horizontal</span><span class='comma'>,</span> <span class='symbol'>:vertical</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_orientation'>orientation</span><span class='rparen'>)</span>
@@ -2936,25 +3185,97 @@ converting the input to plain text.</p>
       <div class="method_details ">
   <h3 class="signature " id="pane-instance_method">
   
-    - (<tt>Object</tt>) <strong>pane</strong>(name, options = {}) 
+    - (<tt><span class='object_link'><a href="Pane.html" title="Flammarion::Pane (class)">Pane</a></span></tt>) <strong>pane</strong>(name, options = {}) 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>The difference between pane and subpane is that a pane is automatically
+scaled depending on the number of other panes and the current orientation,
+while subpanes are automatically the size of their contents. Another way to
+think about it might be that pane creates structural layout elements, while
+subpane creates embedded sections within other panes.</p>
+</div>
+  </div>
+
+
+<p>Creates a scaled pane within the current writeable area. Where it goes
+depends on the orientation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an identifier for the subpane. All panes and subpanes share the same scope,
+so you want to be careful with your naming.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pane.html" title="Flammarion::Pane (class)">Pane</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The newly created or already existing pane.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li>pane</li>
+    
+      <li>orientation=</li>
+    
+  </ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-304
-305
-306
-307</pre>
+359
+360
+361
+362</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 304</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 359</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_pane'>pane</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>action:</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>addpane</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>name:</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -2977,7 +3298,15 @@ converting the input to plain text.</p>
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Creates a new plot to display single axis data TODO: @options</p>
+  <div class="note todo">
+    <strong>TODO:</strong>
+    <div class='inline'>
+<p>finish documenting options</p>
+</div>
+  </div>
+
+
+<p>Creates a new plot to display single axis data</p>
 
 
   </div>
@@ -3029,14 +3358,14 @@ converting the input to plain text.</p>
       <pre class="lines">
 
 
-103
-104
-105
-106
-107</pre>
+110
+111
+112
+113
+114</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 110</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_plot'>plot</span><span class='lparen'>(</span><span class='id identifier rubyid_values'>values</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_id'>id</span> <span class='op'>=</span> <span class='ivar'>@engraving</span><span class='period'>.</span><span class='id identifier rubyid_make_id'>make_id</span>
@@ -3191,14 +3520,14 @@ be rendered in the writeable area.</p>
       <pre class="lines">
 
 
-73
-74
-75
-76
-77</pre>
+80
+81
+82
+83
+84</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 73</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 80</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_puts'>puts</span><span class='lparen'>(</span><span class='id identifier rubyid_str'>str</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_send'>send</span> <span class='id identifier rubyid_str'>str</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span>
@@ -3351,13 +3680,13 @@ be rendered in the writeable area.</p>
       <pre class="lines">
 
 
-82
-83
-84
-85</pre>
+89
+90
+91
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 82</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 89</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_replace'>replace</span><span class='lparen'>(</span><span class='id identifier rubyid_str'>str</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>action:</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>replace</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>text:</span><span class='id identifier rubyid_str'>str</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -3371,28 +3700,106 @@ be rendered in the writeable area.</p>
       <div class="method_details ">
   <h3 class="signature " id="script-instance_method">
   
-    - (<tt>Object</tt>) <strong>script</strong>(coffee, options = {}) 
+    - (<tt>Object</tt>) <strong>script</strong>(text, options = {}) 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Runs a script in the engraving window.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>text</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The script to run. Lanuage of the script depends on the options given.
+Defaults to CoffeeScript</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>options</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a customizable set of options</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  
+    
+    
+    
+    
+    <p class="tag_title">Options Hash (<tt>options</tt>):</p>
+    <ul class="option">
+      
+        <li>
+          <span class="name">:coffee</span>
+          <span class="type">(<tt>Boolean</tt>)</span>
+          <span class="default">
+            
+              &mdash; default:
+              <tt>true</tt>
+            
+          </span>
+          
+            &mdash; <div class='inline'>
+<p>If true, will compile <tt>text</tt> from CoffeeScript to JavaScript. If
+false, will pass text as plain JavaScript</p>
+</div>
+          
+        </li>
+      
+    </ul>
+  
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-262
-263
-264
-265</pre>
+274
+275
+276
+277</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 262</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 274</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_script'>script</span><span class='lparen'>(</span><span class='id identifier rubyid_coffee'>coffee</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:coffee</span><span class='comma'>,</span> <span class='kw'>true</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='const'>CoffeeScript</span><span class='period'>.</span><span class='id identifier rubyid_compile'>compile</span><span class='lparen'>(</span><span class='id identifier rubyid_coffee'>coffee</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_coffee'>coffee</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_script'>script</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:coffee</span><span class='comma'>,</span> <span class='kw'>true</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='const'>CoffeeScript</span><span class='period'>.</span><span class='id identifier rubyid_compile'>compile</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_text'>text</span>
   <span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>action:</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>script</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>data:</span><span class='id identifier rubyid_data'>data</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -3415,12 +3822,12 @@ be rendered in the writeable area.</p>
       <pre class="lines">
 
 
-368
-369
-370</pre>
+435
+436
+437</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 368</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 435</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search'>search</span><span class='lparen'>(</span><span class='id identifier rubyid_string'>string</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>action:</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>search</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>text:</span> <span class='id identifier rubyid_string'>string</span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -3575,12 +3982,12 @@ be rendered in the writeable area.</p>
       <pre class="lines">
 
 
-65
-66
-67</pre>
+72
+73
+74</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 65</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 72</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_str'>str</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='ivar'>@engraving</span><span class='period'>.</span><span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>action:</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>append</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>text:</span><span class='id identifier rubyid_str'>str</span><span class='comma'>,</span> <span class='label'>target:</span><span class='ivar'>@pane_name</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -3601,18 +4008,10 @@ be rendered in the writeable area.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-  <div class="note notetag">
-    <strong>Note:</strong>
-    <div class='inline'>
-<p>Don’t forget to set the :escape_html option to false when including this
-string.</p>
-</div>
-  </div>
-
-
-<p>The string can be included in text for text-accepting methods (such as
-<tt>#puts</tt>, <tt>#table</tt>, etc).</p>
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
 
 
   </div>
@@ -3626,12 +4025,12 @@ string.</p>
       <pre class="lines">
 
 
-58
-59
-60</pre>
+65
+66
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 65</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span><span class='rparen'>)</span>
   <span class='ivar'>@engraving</span><span class='period'>.</span><span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>target:</span> <span class='ivar'>@pane_name</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_hash'>hash</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -3650,18 +4049,36 @@ string.</p>
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Shows a hidden pane.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li>hide</li>
+    
+  </ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-295
-296
-297</pre>
+324
+325
+326</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 295</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 324</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_show'>show</span>
   <span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>action:</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>showpane</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -3800,13 +4217,13 @@ string.</p>
       <pre class="lines">
 
 
-326
-327
-328
-329</pre>
+381
+382
+383
+384</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 326</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 381</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_status'>status</span><span class='lparen'>(</span><span class='id identifier rubyid_str'>str</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='label'>position:</span> <span class='id identifier rubyid_options'>options</span><span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'>Symbol</span>
@@ -3826,18 +4243,65 @@ string.</p>
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Sets a CSS styles attribute on the current pane.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>attribute</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The css attribute to set. Currently does not support selectors or anything.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>value</span>
+      
+      
+        <span class='type'>(<tt>#to_s</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The value to set the attribute to. (Don’t forget units!)</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-267
-268
-269</pre>
+284
+285
+286</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 267</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 284</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_style'>style</span><span class='lparen'>(</span><span class='id identifier rubyid_attribute'>attribute</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>action:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>style</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>attribute:</span> <span class='id identifier rubyid_attribute'>attribute</span><span class='comma'>,</span> <span class='label'>value:</span> <span class='id identifier rubyid_value'>value</span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -3850,25 +4314,97 @@ string.</p>
       <div class="method_details ">
   <h3 class="signature " id="subpane-instance_method">
   
-    - (<tt>Object</tt>) <strong>subpane</strong>(name, options = {}) 
+    - (<tt><span class='object_link'><a href="Pane.html" title="Flammarion::Pane (class)">Pane</a></span></tt>) <strong>subpane</strong>(name, options = {}) 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>The difference between pane and subpane is that a pane is automatically
+scaled depending on the number of other panes and the current orientation,
+while subpanes are automatically the size of their contents. Another way to
+think about it might be that pane creates structural layout elements, while
+subpane creates embedded sections within other panes.</p>
+</div>
+  </div>
+
+
+<p>Creates a writeable area within the current writeable area. This lets you
+update the contents of the writeable later, without disturbing the rest of
+the curent pane. If a pane or subpane with the given name already exists,
+it will just use that one instead.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an identifier for the subpane. All panes and subpanes share the same scope,
+so you want to be careful with your naming.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Pane.html" title="Flammarion::Pane (class)">Pane</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The newly created or already existing pane.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li>pane</li>
+    
+  </ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-299
-300
-301
-302</pre>
+346
+347
+348
+349</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 299</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 346</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_subpane'>subpane</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>action:</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>subpane</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>name:</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -3894,12 +4430,12 @@ string.</p>
       <pre class="lines">
 
 
-331
-332
-333</pre>
+386
+387
+388</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 386</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_table'>table</span><span class='lparen'>(</span><span class='id identifier rubyid_rows'>rows</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>action:</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>table</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>rows:</span> <span class='id identifier rubyid_rows'>rows</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -3918,19 +4454,50 @@ string.</p>
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Will render the given Slim template into the pane</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>file</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Path to the template file to render</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-271
-272
-273
-274</pre>
+290
+291
+292
+293</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 271</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/writeable.rb', line 290</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_template'>template</span><span class='lparen'>(</span><span class='id identifier rubyid_file'>file</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='const'>Slim</span><span class='op'>::</span><span class='const'>Template</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_file'>file</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span>
@@ -3946,7 +4513,7 @@ string.</p>
 </div>
 
     <div id="footer">
-  Generated on Tue Dec 29 07:57:43 2015 by
+  Generated on Wed Dec 30 00:04:02 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>
