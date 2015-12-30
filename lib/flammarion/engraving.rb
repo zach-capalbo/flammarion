@@ -20,8 +20,16 @@ module Flammarion
     # @option options [Proc] :on_connect Called when the display window is
     #  connected (i.e., displayed)
     # @option options [Proc] :on_disconnect Called when the display windows is
-    #   disconnected (i.e., closed)
+    #  disconnected (i.e., closed)
+    # @option options [Boolean] :exit_on_disconnect (false) Will call +exit+
+    #  when the widow is closed if this option is true.
+    # @option options [Boolean] :close_on_exit (false) Will close the window
+    #  when the process exits if this is true. Otherwise, it will just stay
+    #  around, but not actually be interactive.
+    # @opion options [String] :title The initial title of the engraving. If
+    #  empty, a random title will be generated.
     def initialize(options = {})
+      options = {:title => options} if options.is_a?(String)
       @chrome = OpenStruct.new
       @sockets = []
       @actions = {}
@@ -33,11 +41,13 @@ module Flammarion
 
       start_server
       @window_id = @@server.register_window(self)
-      open_a_window unless options[:no_chrome]
+      open_a_window(options) unless options[:no_window]
       @callbacks = {}
       wait_for_a_connection unless options[:no_wait]
 
-      at_exit {close} if options.fetch(:close_on_exit, false)
+      at_exit {close if window_open?} if options.fetch(:close_on_exit, true)
+
+      title options[:title] if options[:title]
     end
 
     # Blocks the current thread until the window has been closed. All user
@@ -96,12 +106,14 @@ module Flammarion
       FileWatcher.new(file).watch {|file| layout(file); yield if block_given? }
     end
 
+    # @api private
     def disconnect(ws)
       @sockets.delete ws
       exit 0 if @exit_on_disconnect
       @on_disconnect.call if @on_disconnect
     end
 
+    # @api private
     def process_message(msg)
       @last_msg = msg
       m = {}
@@ -126,22 +138,27 @@ module Flammarion
       @actions[m["action"]].call(m) if @actions.include?(m["action"])
     end
 
+    # @api private
     def make_id
       @id ||= 0
       @id += 1
       "i#{@id}"
     end
 
+    # @api private
     def start_server
       @@server ||= Server.new
     end
 
+    # @api private
     def server; @@server; end;
 
+    # @api private
     def wait_for_a_connection
       sleep 0.5 while @sockets.empty?
     end
 
+    # @api private
     def send_json(val)
       if @sockets.empty? then
         open_a_window

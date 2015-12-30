@@ -16,8 +16,11 @@ without going through too much trouble.
 
 ## Installation
 
-First you need to install [electron](http://electron.atom.io/)
-and make sure it's in your path. Then you can install the gem:
+First, you need to install [electron](http://electron.atom.io/) or [chrome](http://www.google.com/chrome)
+and make sure it's in your path. (*Note:* On Windows, currently only chrome
+works, but you don't need to worry about putting it in your path.)
+
+Then you can install the gem:
 
 ```
 gem install flammarion
@@ -74,7 +77,7 @@ f.input("Placeholder > ") {|msg| f.puts "You wrote: #{msg['text'].light_magenta}
 ```
 
 The (_almost_) full [api documetaion](http://zach-capalbo.github.io/flammarion/doc/)
-is available at <<http://zach-capalbo.github.io/flammarion/doc/>>. See especially
+is available at <http://zach-capalbo.github.io/flammarion/doc/>. See especially
 the [Writeable Module](http://zach-capalbo.github.io/flammarion/doc/Flammarion/Writeable.html)
 
 ## Screenshots / Samples

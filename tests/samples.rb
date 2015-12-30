@@ -5,8 +5,7 @@ require 'optparse'
 def sample(name)
   return if ARGV[0] and name.to_s != ARGV[0]
   puts "Showing: #{name}"
-  f = Flammarion::Engraving.new
-  f.title(name.to_s.split("_").collect{|w| w[0] = w[0].upcase; w}.join(" "))
+  f = Flammarion::Engraving.new(title:name.to_s.split("_").collect{|w| w[0] = w[0].upcase; w}.join(" "))
   yield(f)
   f.wait_until_closed
 end

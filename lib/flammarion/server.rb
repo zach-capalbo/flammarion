@@ -1,4 +1,5 @@
 module Flammarion
+  # @api private
   class Server
     attr_reader :port
     def initialize

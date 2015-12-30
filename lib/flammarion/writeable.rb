@@ -55,6 +55,13 @@ module Flammarion
     #   @note Don't forget to set the :escape_html option to false when including
     #    this string.
 
+    # @!macro [new] add_options
+    # @option options [Boolean] :replace If true, will replace any existing
+    #  contents of the writeable area.
+    # @option options [Hash] :style A map of css style attributes and values to
+    #  be applied to the element before it is added.
+
+    # @api private
     def send_json(hash)
       @engraving.send_json({target: @pane_name}.merge(hash))
     end
@@ -98,7 +105,7 @@ module Flammarion
 
     # Creates a new plot to display single axis data
     # @param [Array<Number>] values A list of numbers to plot
-    # TODO: @options
+    # @todo finish documenting options
     # @return [Spectrum] A Spectrum object for manipulation after creation.
     def plot(values, options = {})
       id = @engraving.make_id
@@ -159,7 +166,7 @@ module Flammarion
     # Creates a string representing a Font Awesome icon.
     # @macro string_representation
     # @param name [String] The name of a Font Awesome icon class. See
-    # @see https://fortawesome.github.io/Font-Awesome/icons/ for the list.
+    # @see https://fortawesome.github.io/Font-Awesome/icons/
     def icon(name, additional_classes = [])
       %|<i class="fa fa-#{name} #{additional_classes.collect{|c| "fa-#{c}"}.join(" ")}"></i>|
     end
@@ -259,15 +266,27 @@ module Flammarion
       send_json({action:'replace', text:data, raw:true})
     end
 
-    def script(coffee, options = {})
-      data = options.fetch(:coffee, true) ? CoffeeScript.compile(coffee) : coffee
+    # Runs a script in the engraving window.
+    # @param text [String] The script to run. Lanuage of the script depends on
+    #  the options given. Defaults to CoffeeScript
+    # @option options [Boolean] :coffee (true) If true, will compile +text+ from
+    #  CoffeeScript to JavaScript. If false, will pass text as plain JavaScript
+    def script(text, options = {})
+      data = options.fetch(:coffee, true) ? CoffeeScript.compile(text) : text
       send_json({action:'script', data:data}.merge(options))
     end
 
+    # Sets a CSS styles attribute on the current pane.
+    # @param attribute [String] The css attribute to set. Currently does not
+    #  support selectors or anything.
+    # @param value [#to_s] The value to set the attribute to. (Don't forget
+    #  units!)
     def style(attribute, value)
       send_json({action: 'style', attribute: attribute, value: value})
     end
 
+    # Will render the given Slim template into the pane
+    # @param file [String] Path to the template file to render
     def template(file)
       data = Slim::Template.new(file).render
       send_json({action:'replace', text:data, raw:true})
@@ -277,6 +296,11 @@ module Flammarion
       FileWatcher.new(file).watch {|file| template(file) }
     end
 
+    # Renders the given markdown text into the pane.
+    # @param text [String] The markdown text to render.
+    # @option options [Hash] :markdown_extensions Additional Redcarpet
+    #  extensions to enable.
+    # @macro add_options
     def markdown(text, options = {})
       markdown_html = Redcarpet::Markdown.new(Redcarpet::Render::HTML, {
         tables: true,
@@ -288,19 +312,50 @@ module Flammarion
       send_json({action:'markdown', text: markdown_html}.merge(options))
     end
 
+    # Hides (but doesn't close) the pane. This allows the pane to be written
+    # to without it opening up again.
+    # @see show
     def hide
       send_json({action:'hidepane'})
     end
 
+    # Shows a hidden pane.
+    # @see hide
     def show
       send_json({action:'showpane'})
     end
 
+    # @!macro [new] pane_difference
+    #  @note The difference between pane and subpane is that a pane is
+    #   automatically scaled depending on the number of other panes and the
+    #   current orientation, while subpanes are automatically the size of their
+    #   contents.
+    #   Another way to think about it might be that pane creates structural
+    #   layout elements, while subpane creates embedded sections within other
+    #   panes.
+
+    # Creates a writeable area within the current writeable area. This lets you
+    # update the contents of the writeable later, without disturbing the rest
+    # of the curent pane. If a pane or subpane with the given name already
+    # exists, it will just use that one instead.
+    # @param name [String] an identifier for the subpane. All panes and subpanes
+    #  share the same scope, so you want to be careful with your naming.
+    # @return [Pane] The newly created or already existing pane.
+    # @macro pane_difference
+    # @see pane
     def subpane(name, options = {})
       send_json({action:'subpane', name:name}.merge(options))
       return Pane.new(@engraving, name)
     end
 
+    # Creates a scaled pane within the current writeable area. Where it goes
+    # depends on the orientation.
+    # @param name [String] an identifier for the subpane. All panes and subpanes
+    #  share the same scope, so you want to be careful with your naming.
+    # @return [Pane] The newly created or already existing pane.
+    # @macro pane_difference
+    # @see pane
+    # @see orientation=
     def pane(name, options = {})
       send_json({action:'addpane', name:name}.merge(options))
       return Pane.new(@engraving, name)
@@ -343,6 +398,18 @@ module Flammarion
       return str
     end
 
+    # Adds an interactive street map of a specified location.
+    # @option options [Integer] :zoom (13) The initial zoom level
+    # @option options [Boolean] :marker (true) Display a marker on the
+    #  identified address or coordinates
+    # @macro add_options
+    # @overload map(options)
+    # @overload map(address, options = {})
+    #  @param address [String] The address or landmark to look up and display.
+    # @overload map(latitude, longitude, options = {})
+    #  @param latitude [Float] The latitude to display
+    #  @param longitude [Float] The longitude to display
+    # @note Street map provided by http://openstreetmap.org
     def map(*args)
       case (args.size)
       when 1
