@@ -177,7 +177,7 @@ module Flammarion
     # which can be used to get the value at any time.
     # @param label [String] The displayed placeholder text for the input. This
     #  does not set the actual value of the input field or the returned
-    #  +DeferredValue+. Use the +:value+ option for that.
+    #  {DeferredValue}. Use the +:value+ option for that.
     # @option options [Boolean] :multiline (false) Creates a large text box if
     #  true; otherwise creates a single line input box.
     # @option options [Boolean] :autoclear (false) Automatically clears the
@@ -186,7 +186,7 @@ module Flammarion
     # @option options [Boolean] :history (false) Keeps track of entered values,
     #  letting the user choose betwen them with the up and down keys.
     # @option options [String] :value Sets the starting value of the field and
-    #  the returned +DeferredValue+.
+    #  the returned {DeferredValue}.
     # @option options [Boolean] :once (false) If true, then the input box will
     #  be converted into a normal line of text once the user has changed it.
     #  The callback will still be called, but the user will no longer be able
@@ -228,6 +228,8 @@ module Flammarion
         @engraving.callbacks[id] = block
       else
         d = DeferredValue.new
+        d.__setobj__(items[0].to_s) if items.is_a? Array
+        d.__setobj__(items[items.keys.first].to_s) if items.is_a? Hash
         @engraving.callbacks[id] = Proc.new {|v| d.__setobj__ v["text"]}
         return d
       end
@@ -342,7 +344,7 @@ module Flammarion
     #  share the same scope, so you want to be careful with your naming.
     # @return [Pane] The newly created or already existing pane.
     # @macro pane_difference
-    # @see pane
+    # @see #pane
     def subpane(name, options = {})
       send_json({action:'subpane', name:name}.merge(options))
       return Pane.new(@engraving, name)
@@ -354,8 +356,8 @@ module Flammarion
     #  share the same scope, so you want to be careful with your naming.
     # @return [Pane] The newly created or already existing pane.
     # @macro pane_difference
-    # @see pane
-    # @see orientation=
+    # @see #pane
+    # @see #orientation=
     def pane(name, options = {})
       send_json({action:'addpane', name:name}.merge(options))
       return Pane.new(@engraving, name)
@@ -366,6 +368,11 @@ module Flammarion
       send_json({action:'reorient', orientation:orientation})
     end
 
+    # Pops up a little floating writeable pane for buttons and stuff.
+    # @overload button_box()
+    #  @return [Pane] The {Writeable} associated with the button box
+    # @overload button_box(name)
+    #  @deprecated
     def button_box(name = "buttonbox")
       send_json({action:'buttonbox', name:name})
       return Pane.new(@engraving, name)

@@ -5,3 +5,5 @@ lib/html/build/*
 lib/html/build/**/*
 .yardoc
 doc
+pkg
+flammarion-*.gem

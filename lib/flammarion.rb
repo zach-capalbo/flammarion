@@ -23,7 +23,9 @@ require_relative 'flammarion/revelator.rb'
 require_relative 'flammarion/about.rb'
 require_relative 'flammarion/engraving.rb'
 
-# This is the main namespace for Flammarion.
+# This is the main namespace for Flammarion. You really need an {Engraving} to
+# do anything useful. If you just want to test that everything is setup
+# correctly, you can use {Flammarion.about}
 # @see Engraving
 # @see Writeable
 module Flammarion

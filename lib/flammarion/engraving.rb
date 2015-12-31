@@ -1,10 +1,10 @@
 module Flammarion
 
   # The engraving class represents a window. It contains everything you need to
-  # display on the screen and interacts with a user. An +Engraving+ contains
+  # display on the screen and interacts with a user. An {Engraving} contains
   # one or more panes, which are containers for writeable areas. Most of the
-  # power of the panes comes from the +Writeable+ module, which is also included
-  # in +Engraving+ (operating on the default pane) for convenience.
+  # power of the panes comes from the {Writeable} module, which is also included
+  # in {Engraving} (operating on the default pane) for convenience.
   # @see Writeable
   # @note Right now, there is no persistence of Engravings. Once it is closed,
   #   everything is erased, and you'll need to set it up all over again.
@@ -12,8 +12,8 @@ module Flammarion
   #   blank window, and then display that thing.
   class Engraving
     include Revelator
-    attr_reader :chrome
-    attr_accessor :callbacks, :sockets, :on_disconnect, :on_connect, :actions
+    attr_accessor :on_disconnect, :on_connect, :actions
+    attr_accessor :callbacks, :sockets # @api private
     include Writeable
 
     # Creates a new Engraving (i.e., a new display window)
@@ -56,7 +56,7 @@ module Flammarion
       sleep 1 until @sockets.empty?
     end
 
-    # Is thie Engraving displayed on the screen.
+    # Is this Engraving displayed on the screen.
     def window_open?
       not @sockets.empty?
     end

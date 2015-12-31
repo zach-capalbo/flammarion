@@ -106,12 +106,19 @@ $.extend WSClient.prototype.actions,
   dropdown: (data) ->
     target = @__parent.check_target(data)
     element = $("<select class='inline-dropdown' name='#{data.id}'></select>")
-    element.append($("<option>#{item}</option>")) for item in data.options
+    console.log data.options
+    if data.options instanceof Array
+      element.append($("<option>#{item}</option>")) for item in data.options
+    else
+      for k, v of data.options
+        option = $("<option>#{k}</option>")
+        option.val(v)
+        element.append(option)
     element.change (e) =>
       @__parent.send({
         id:data.id
         action:'callback'
         source:'dropdown'
-        text: element.find('option:selected').text()
+        text: element.find('option:selected')[0].value || element.find('option:selected').text()
         })
     @__parent.add(element, target, data)
