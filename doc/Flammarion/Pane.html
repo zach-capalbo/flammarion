@@ -106,6 +106,8 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
+<p>A reference to some writeable area within the <span class='object_link'><a href="Engraving.html" title="Flammarion::Engraving (class)">Engraving</a></span></p>
+
 
   </div>
 </div>
@@ -117,49 +119,17 @@
     
       <li><span class='object_link'><a href="Writeable.html" title="Flammarion::Writeable (module)">Writeable</a></span></li>
     
+      <li><span class='object_link'><a href="Engraving.html" title="Flammarion::Engraving (class)">Engraving</a></span></li>
+    
   </ul>
 
 </div>
 
 
 
-  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
-  <ul class="summary">
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#pane_name-instance_method" title="#pane_name (instance method)">- (Object) <strong>pane_name</strong> </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute pane_name.</p>
-</div></span>
-  
-</li>
-
-    
-  </ul>
 
 
-
-  
+  <h2>Instance Attribute Summary</h2>
   
   <h3 class="inherited">Attributes included from <span class='object_link'><a href="Writeable.html" title="Flammarion::Writeable (module)">Writeable</a></span></h3>
   <p class="inherited"><span class='object_link'><a href="Writeable.html#engraving-instance_method" title="Flammarion::Writeable#engraving (method)">#engraving</a></span></p>
@@ -189,7 +159,7 @@
   
   
   
-  
+  <span class="private note title">private</span>
 
   
     <span class="summary_desc"><div class='inline'>
@@ -227,7 +197,11 @@
   
 </h3><div class="docstring">
   <div class="discussion">
-    
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
+
 <p>Returns a new instance of Pane</p>
 
 
@@ -242,14 +216,14 @@
       <pre class="lines">
 
 
-8
-9
-10
 11
-12</pre>
+12
+13
+14
+15</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/pane.rb', line 8</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/pane.rb', line 11</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_engraving'>engraving</span><span class='comma'>,</span> <span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='ivar'>@engraving</span> <span class='op'>=</span> <span class='id identifier rubyid_engraving'>engraving</span>
@@ -263,59 +237,11 @@
   
 </div>
 
-  <div id="instance_attr_details" class="attr_details">
-    <h2>Instance Attribute Details</h2>
-    
-      
-      <span id=""></span>
-      <div class="method_details first">
-  <h3 class="signature first" id="pane_name-instance_method">
-  
-    - (<tt>Object</tt>) <strong>pane_name</strong>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-<p>Returns the value of attribute pane_name</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-6
-7
-8</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/pane.rb', line 6</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_pane_name'>pane_name</span>
-  <span class='ivar'>@pane_name</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-  </div>
-
 
 </div>
 
     <div id="footer">
-  Generated on Wed Dec 30 00:04:02 2015 by
+  Generated on Thu Dec 31 16:32:37 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>

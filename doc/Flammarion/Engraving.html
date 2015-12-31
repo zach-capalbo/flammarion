@@ -124,11 +124,10 @@ blank window, and then display that thing.</p>
 
 
 <p>The engraving class represents a window. It contains everything you need to
-display on the screen and interacts with a user. An <tt>Engraving</tt>
-contains one or more panes, which are containers for writeable areas. Most
-of the power of the panes comes from the <tt>Writeable</tt> module, which
-is also included in <tt>Engraving</tt> (operating on the default pane) for
-convenience.</p>
+display on the screen and interacts with a user. An <span class='object_link'><a href="" title="Flammarion::Engraving (class)">Engraving</a></span> contains
+one or more panes, which are containers for writeable areas. Most of the
+power of the panes comes from the <span class='object_link'><a href="Writeable.html" title="Flammarion::Writeable (module)">Writeable</a></span> module, which is also
+included in <span class='object_link'><a href="" title="Flammarion::Engraving (class)">Engraving</a></span> (operating on the default pane) for convenience.</p>
 
 
   </div>
@@ -203,41 +202,10 @@ convenience.</p>
   
   
   
-  
+  <span class="private note title">private</span>
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute callbacks.</p>
-</div></span>
-  
-</li>
-
-    
-      <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#chrome-instance_method" title="#chrome (instance method)">- (Object) <strong>chrome</strong> </a>
-    
-
-    
-  </span>
-  
-  
-  
-    
-      <span class="note title readonly">readonly</span>
-    
-    
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute chrome.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -313,12 +281,10 @@ convenience.</p>
   
   
   
-  
+  <span class="private note title">private</span>
 
   
-    <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute sockets.</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -729,7 +695,7 @@ convenience.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Is thie Engraving displayed on the screen.</p>
+<p>Is this Engraving displayed on the screen.</p>
 </div></span>
   
 </li>
@@ -963,12 +929,12 @@ will just stay around, but not actually be interactive.</p>
       <pre class="lines">
 
 
+15
 16
-17
-18</pre>
+17</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 15</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_actions'>actions</span>
   <span class='ivar'>@actions</span>
@@ -991,8 +957,10 @@ will just stay around, but not actually be interactive.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns the value of attribute callbacks</p>
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
 
 
   </div>
@@ -1015,49 +983,6 @@ will just stay around, but not actually be interactive.</p>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_callbacks'>callbacks</span>
   <span class='ivar'>@callbacks</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      
-      <span id=""></span>
-      <div class="method_details ">
-  <h3 class="signature " id="chrome-instance_method">
-  
-    - (<tt>Object</tt>) <strong>chrome</strong>  <span class="extras">(readonly)</span>
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-<p>Returns the value of attribute chrome</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-15
-16
-17</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 15</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_chrome'>chrome</span>
-  <span class='ivar'>@chrome</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1092,12 +1017,12 @@ will just stay around, but not actually be interactive.</p>
       <pre class="lines">
 
 
+15
 16
-17
-18</pre>
+17</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 15</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_on_connect'>on_connect</span>
   <span class='ivar'>@on_connect</span>
@@ -1135,12 +1060,12 @@ will just stay around, but not actually be interactive.</p>
       <pre class="lines">
 
 
+15
 16
-17
-18</pre>
+17</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 16</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 15</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_on_disconnect'>on_disconnect</span>
   <span class='ivar'>@on_disconnect</span>
@@ -1163,8 +1088,10 @@ will just stay around, but not actually be interactive.</p>
   
 </h3><div class="docstring">
   <div class="discussion">
-    
-<p>Returns the value of attribute sockets</p>
+    <p class="note private">
+  <strong>This method is part of a private API.</strong>
+  You should avoid using this method if possible, as it may be removed or be changed in the future.
+</p>
 
 
   </div>
@@ -1919,7 +1846,7 @@ interactions and callbacks will continue in other threads.</p>
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Is thie Engraving displayed on the screen.</p>
+<p>Is this Engraving displayed on the screen.</p>
 
 
   </div>
@@ -1966,7 +1893,7 @@ interactions and callbacks will continue in other threads.</p>
 </div>
 
     <div id="footer">
-  Generated on Wed Dec 30 00:04:03 2015 by
+  Generated on Thu Dec 31 16:32:37 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>
