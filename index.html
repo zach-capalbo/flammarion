@@ -4,7 +4,7 @@
 
 <ul>
 <li><a href="https://github.com/zach-capalbo/flammarion">Source</a></li>
-<li><a href="http://zach-capalbo.github.io/flammarion/doc/">Documentation</a></li>
+<li><a href="http://zach-capalbo.github.io/flammarion/doc/Flammarion">Documentation</a></li>
 </ul>
 
 <h2>Overview</h2>
@@ -14,7 +14,7 @@ normally display to the command line in a slightly easier-to-access way.</p>
 
 <p>It is not intended to be a full fledged application development toolkit. It is
 intended instead for small scripts where you just want to show some information
-without going through too much trouble.</p>
+or buttons without going through too much trouble.</p>
 
 <h2>Installation</h2>
 
@@ -28,7 +28,7 @@ works, but you don&#39;t need to worry about putting it in your path.)</p>
 
 <p>or add it to your Gemfile.</p>
 
-<h2>Documentation</h2>
+<h2>Tutorial</h2>
 
 <p>The easiest way to use Flammarion, is similar to how you might use STDOUT:</p>
 <pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'flammarion'</span>
@@ -64,9 +64,8 @@ boxes:</p>
 <span class="n">f</span><span class="p">.</span><span class="nf">input</span><span class="p">(</span><span class="s2">"Placeholder &gt; "</span><span class="p">)</span> <span class="p">{</span><span class="o">|</span><span class="n">msg</span><span class="o">|</span> <span class="n">f</span><span class="p">.</span><span class="nf">puts</span> <span class="s2">"You wrote: </span><span class="si">#{</span><span class="n">msg</span><span class="p">[</span><span class="s1">'text'</span><span class="p">].</span><span class="nf">light_magenta</span><span class="si">}</span><span class="s2">"</span><span class="p">}</span>
 </code></pre>
 
-<p>The (<em>almost</em>) full <a href="http://zach-capalbo.github.io/flammarion/doc/">api documetaion</a>
-is available at <a href="http://zach-capalbo.github.io/flammarion/doc/">http://zach-capalbo.github.io/flammarion/doc/</a>. See especially
-the <a href="http://zach-capalbo.github.io/flammarion/doc/Flammarion/Writeable.html">Writeable Module</a></p>
+<p>The <a href="http://zach-capalbo.github.io/flammarion/doc/Flammarion">api documetaion</a>
+is available at <a href="http://zach-capalbo.github.io/flammarion/doc/Flammarion">http://zach-capalbo.github.io/flammarion/doc/Flammarion</a>.</p>
 
 <h2>Screenshots / Samples</h2>
 
@@ -82,7 +81,7 @@ the <a href="http://zach-capalbo.github.io/flammarion/doc/Flammarion/Writeable.h
   <span class="nb">name</span> <span class="o">=</span> <span class="no">Faker</span><span class="o">::</span><span class="no">Name</span><span class="p">.</span><span class="nf">name</span>
   <span class="n">f</span><span class="p">.</span><span class="nf">pane</span><span class="p">(</span><span class="s2">"contacts"</span><span class="p">).</span><span class="nf">button</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">right_icon</span><span class="ss">:icons</span><span class="p">.</span><span class="nf">sample</span><span class="p">,</span> <span class="n">left_icon</span><span class="ss">:icons</span><span class="p">.</span><span class="nf">sample</span><span class="p">)</span> <span class="k">do</span>
     <span class="n">recipient</span> <span class="o">=</span> <span class="nb">name</span>
-    <span class="n">f</span><span class="p">.</span><span class="nf">subpane</span><span class="p">(</span><span class="s2">"numer"</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">.</span><span class="nf">subpane</span><span class="p">(</span><span class="s2">"number"</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </code></pre>
