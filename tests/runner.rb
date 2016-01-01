@@ -20,11 +20,10 @@ case
 when options[:list]
   $r = Flammarion::Engraving.new(exit_on_disconnect: true)
   def sample(name, &block)
-    name.to_s.split("_").collect{|w| w[0] = w[0].upcase; w}.join(" ")
-    $r.button(name) do
+    $r.button(name.to_s.split("_").collect{|w| w[0] = w[0].upcase; w}.join(" ")) do
       # Launch a new process so that it will automatically reload any needed
       # changes.
-      system("ruby #{__FILE__} #{name}")
+      system("ruby #{__FILE__} #{options[:reload] ? "-r" : ""} #{name}")
     end
   end
 else

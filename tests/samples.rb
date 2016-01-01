@@ -22,15 +22,18 @@ sample :message_sender_with_contacts do |f|
   30.times do |i|
     right_icon = icons.sample
     left_icon = icons.sample
-    f.pane("contacts").button(Faker::Name.name, right_icon:right_icon, left_icon: left_icon)
+    name = Faker::Name.name
+    f.pane("contacts").button(name, right_icon:right_icon, left_icon: left_icon) do
+      f.subpane("number").replace("To: #{name.light_magenta}")
+    end
   end
 end
 
 sample :table_with_side_panes do |f|
   f.orientation = :horizontal
-  f.table([["Id", "Name", "Address"].map{|h| h.light_magenta}] + 20.times.map do |i|
+  f.table( 20.times.map do |i|
     [i, Faker::Name.name, Faker::Address.street_address]
-  end)
+  end, headers: ["Id", "Name", "Address"].map{|h| h.light_magenta})
   f.pane("sidebar").pane("side1").puts Faker::Hipster.paragraph.red
   f.pane("sidebar").pane("side2").puts Faker::Hipster.paragraph.green
 
@@ -59,7 +62,7 @@ sample :colors do |f|
   end
 end
 
-sample :spectrum do |f|
-  data = 100.times.collect {|x| Math.sin(x / 100.0 * 2.0 * Math::PI)}
+sample :sine_wave_plot do |f|
+  data = 100.times.collect {|x| Math.sin(x / 100.0 * 5.0 * Math::PI)}
   f.plot(data)
 end

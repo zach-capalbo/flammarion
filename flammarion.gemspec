@@ -6,7 +6,7 @@ require 'flammarion/version'
 Gem::Specification.new do |s|
   s.name        = 'flammarion'
   s.version     = Flammarion::VERSION
-  s.date        = '2015-11-21'
+  s.date        = Date.today
   s.summary     = 'Flammarion GUI Toolkit'
   s.description = 'The nifty Ruby gui toolkit. An easy to use gui toolkit built with scripting in mind.'
   s.authors     = ["Zach Capalbo"]

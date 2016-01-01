@@ -3,7 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/flammarion.svg)](https://badge.fury.io/rb/flammarion)
 
 * [Source](https://github.com/zach-capalbo/flammarion)
-* [Documentation](http://zach-capalbo.github.io/flammarion/doc/)
+* [Documentation](http://zach-capalbo.github.io/flammarion/doc/Flammarion)
 
 ## Overview
 
@@ -12,7 +12,7 @@ normally display to the command line in a slightly easier-to-access way.
 
 It is not intended to be a full fledged application development toolkit. It is
 intended instead for small scripts where you just want to show some information
-without going through too much trouble.
+or buttons without going through too much trouble.
 
 ## Installation
 
@@ -95,7 +95,7 @@ icons = %w[thumbs-up meh-o bicycle gears star-o star] + [nil] * 5
   name = Faker::Name.name
   f.pane("contacts").button(name, right_icon:icons.sample, left_icon:icons.sample) do
     recipient = name
-    f.subpane("numer").replace(name)
+    f.subpane("number").replace(name)
   end
 end
 ```
