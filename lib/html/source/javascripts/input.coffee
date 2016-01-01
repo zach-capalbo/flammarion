@@ -112,13 +112,17 @@ $.extend WSClient.prototype.actions,
     else
       for k, v of data.options
         option = $("<option>#{k}</option>")
-        option.val(v)
+        option.val(JSON.stringify(v))
         element.append(option)
     element.change (e) =>
+      val = element.find('option:selected').text()
+      if element.find('option:selected')[0].value
+        val = $.parseJSON(element.find('option:selected')[0].value)
       @__parent.send({
         id:data.id
         action:'callback'
         source:'dropdown'
-        text: element.find('option:selected')[0].value || element.find('option:selected').text()
+        value: val
+        text: element.find('option:selected').text()
         })
     @__parent.add(element, target, data)

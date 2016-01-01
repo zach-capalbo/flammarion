@@ -36,5 +36,5 @@ end
 
 if __FILE__ == $0 then
   $repl = FlammarionRepl.new
-  sleep 1000 while true
+  $repl.wait_until_closed
 end

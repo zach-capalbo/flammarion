@@ -11,25 +11,26 @@ $.extend WSClient.prototype.actions,
     else
       @__plots[data.id] = new Plot(target, @__parent, data)
 
-class Plot
-  default_options:
-    color: $(document.body).css("color")
-    replace: true
-    size: 1.0
-    orientation: 'vertical'
-    xscale: 1.0
-    yscale: 1.0
-    tick_height: 15
-    number_of_ticks: 10
-    tick_color: "rgba(255,255,255,0.5)"
-    tick_precision: 2
-    id: "spec0"
-    draw_zero: true
-    fill_color: null
-    draw_line: true
-    draw_marker: false
-    marker_color: '#88F'
+$(document).ready ->
+    Plot.prototype.default_options =
+      color: $('#plot-style').css("color")
+      replace: true
+      size: 1.0
+      orientation: 'vertical'
+      xscale: 1.0
+      yscale: 1.0
+      tick_height: 15
+      number_of_ticks: 10
+      tick_color: $("#plot-style > .tickmarks").css("color")
+      tick_precision: 2
+      id: "spec0"
+      draw_zero: true
+      fill_color: null
+      draw_line: true
+      draw_marker: false
+      marker_color: $("#plot-style > .markers").css("color")
 
+class Plot
   parse_property: (prop) ->
     parseInt(prop.slice(0, -1))
 
@@ -54,7 +55,7 @@ class Plot
     mouse_x_value = relative_x_pos * @xscaled_end_value + (1.0 - relative_x_pos) * @xscaled_start_value
     mouse_x_value = mouse_x_value * @xvalue_scale
     mouse_y_value = relative_y_pos * @yscaled_end_value + (1.0 - relative_y_pos) * @yscaled_start_value
-    @mouse_element.text "#{mouse_x_value.toFixed(2)}. #{mouse_y_value.toFixed(2)}"
+    @mouse_element.text "#{mouse_x_value.toFixed(2)}, #{mouse_y_value.toFixed(2)}"
 
     @move_zoom(event) if @mouse_is_down
 

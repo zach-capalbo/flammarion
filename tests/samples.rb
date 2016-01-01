@@ -1,13 +1,14 @@
 require_relative "../lib/flammarion.rb"
 require 'faker'
-require 'optparse'
 
+unless defined?("sample")
 def sample(name)
   return if ARGV[0] and name.to_s != ARGV[0]
   puts "Showing: #{name}"
   f = Flammarion::Engraving.new(title:name.to_s.split("_").collect{|w| w[0] = w[0].upcase; w}.join(" "))
   yield(f)
   f.wait_until_closed
+end
 end
 
 sample :message_sender_with_contacts do |f|

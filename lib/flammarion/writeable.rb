@@ -1,26 +1,40 @@
 module Flammarion
   module Writeable
+    # @api private
     attr_reader :engraving
+
+    # A way to retrieve the current value of a user interacterive component.
+    # @see Writeable#input
+    # @see Writeable#checkbox
+    # @see Writeable#dropdown
     class DeferredValue < Delegator
+      # @api private
       def initialize
         super @value
       end
+
+      # @api private
       def __setobj__(value)
         @value = value
       end
 
+      # @return [Object] the current value of the remote component
       def value
         @value
       end
 
+      # @api private
       def __getobj__
         @value
       end
 
+      # @return [String] a string representing the remote component's value
       def inspect
         "#R#{@value.inspect}"
       end
 
+      # @return [Boolean] true if the component is checked and false if it is
+      #  not. Undefined if the component is not a checkbox.
       def checked?
         return @value
       end
@@ -113,12 +127,13 @@ module Flammarion
       return Spectrum.new(id, @pane_name, @engraving)
     end
 
+    # Adds a pretty-printed, colorful display of data or code
     # @overload highlight(data, options)
     #   Adds a pretty-printed, highlighted display of data
     #   @param text [Hash, Array] A dataset to be displayed
     #   @macro escape_options
     # @overload highlight(text, options)
-    #   Adds syntax-highlighted text or code to the writeable area
+    #   Adds syntax-highlighted code to the writeable area
     #   @param text [String] Code to be highlighed
     #   @macro escape_options
     def highlight(text, options = {})
@@ -216,7 +231,7 @@ module Flammarion
     # @param items [Array<#to_s>] The possible choices
     # @overload dropdown(items, options = {})
     #  @return [DeferredValue] An object representing the currently selected
-    #   item, which can be converted to text using +#to_s+
+    #   item, which can be retrieved using {DeferredValue#value}
     # @overload dropdown(item, options = {})
     #  @yield [message_hash] Invokes the block every time the user selects a
     #   different option. Current item text can be obtained from the +"text"+
@@ -228,9 +243,9 @@ module Flammarion
         @engraving.callbacks[id] = block
       else
         d = DeferredValue.new
-        d.__setobj__(items[0].to_s) if items.is_a? Array
-        d.__setobj__(items[items.keys.first].to_s) if items.is_a? Hash
-        @engraving.callbacks[id] = Proc.new {|v| d.__setobj__ v["text"]}
+        d.__setobj__(items[0]) if items.is_a? Array
+        d.__setobj__(items[items.keys.first]) if items.is_a? Hash
+        @engraving.callbacks[id] = Proc.new {|v| d.__setobj__ v["value"]}
         return d
       end
     end
@@ -263,7 +278,7 @@ module Flammarion
       send_json({action:'break'}.merge(options))
     end
 
-    # Adds raw html
+    # Renders raw html into the writeable area
     def html(data)
       send_json({action:'replace', text:data, raw:true})
     end
@@ -287,13 +302,21 @@ module Flammarion
       send_json({action: 'style', attribute: attribute, value: value})
     end
 
-    # Will render the given Slim template into the pane
-    # @param file [String] Path to the template file to render
+    # Will render the given Slim template into the Writeable area. This is
+    # useful for creating complex or custom application layouts components
+    # beyond what's built into Flammarion.
+    # @note If you just want to include html (or outut from another template
+    #  engine, you can just use {#html})
+    # @param file [String] Path to the Slim file to render
+    # @see http://slim-lang.com/
     def template(file)
       data = Slim::Template.new(file).render
       send_json({action:'replace', text:data, raw:true})
     end
 
+    # Reloads a template every time the file changes. This is mostly just useful
+    # when developing a template file.
+    # @see #template
     def live_reload_template(file)
       FileWatcher.new(file).watch {|file| template(file) }
     end
@@ -363,6 +386,16 @@ module Flammarion
       return Pane.new(@engraving, name)
     end
 
+    # Changes the orientation of the panes within this Writeable area. If
+    # +orientation+ is +:vertical+ (the default), the panes will be stacked on
+    # top of each other, each occupying 1/nth of the height (where n is the
+    # number of panes) and 100% of the width. If +orientation+ is +:horizontal+,
+    # the panes will be placed next to each other, with each pane occupying 1/n of
+    # the width (where n is the number of panes) and 100% of the heigh.
+    # @note This applies only to panes, not to subpanes.
+    # @see #pane
+    # @param orientation [Symbol]  can be +:horizontal+ or +:vertical+
+    # @raise ArgumentError if the orientation is not one of the allowed values
     def orientation=(orientation)
       raise ArgumentError.new("Orientation must be :horizontal or :vertical") unless [:horizontal, :vertical].include?(orientation)
       send_json({action:'reorient', orientation:orientation})
@@ -390,14 +423,25 @@ module Flammarion
       @engraving.send_json({action:'status', text: str}.merge(options))
     end
 
+    # Displays a table of data
+    # @param rows [Array<Array<#to_s>>] an array of rows, where each row is an
+    #  array of objects which will be converted to a string and diplayed in the
+    #  table.
+    # @macro escape_options
+    # @option options [Array<#to_s>] :headers An array of column headers to put
+    #  at the top of the table.
+    # @option options [Boolean] :interactive (true) Allows the user to mouse
+    #  over the table and have it styled. Set to false if you experience
+    #  performance issues with large datasets.
     def table(rows, options = {})
       send_json({action:'table', rows: rows}.merge(options))
     end
 
     # Prompts the user for a sting. Blocks until a string has been entered.
     # @param prompt [String] A prompt to tell the user what to input.
-    # @param options (See #input)
+    # @param options Same as {#input}
     # @return [String] The text that the user has entered.
+    # @see #input
     def gets(prompt = "", options = {})
       str = nil
       input(prompt, {once:true, focus:true}.merge(options)) {|msg| str = msg["text"]}
@@ -439,6 +483,7 @@ module Flammarion
       send_json({action:'map'}.merge(options))
     end
 
+    # Searches for and highlights the string in the engraving.
     def search(string)
       send_json({action:'search', text: string})
     end

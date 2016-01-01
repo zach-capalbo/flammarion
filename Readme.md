@@ -28,7 +28,7 @@ gem install flammarion
 
 or add it to your Gemfile.
 
-## Documentation
+## Tutorial
 
 The easiest way to use Flammarion, is similar to how you might use STDOUT:
 
@@ -76,9 +76,8 @@ f.button("Click Here!!!") {f.puts "You clicked the button!"}
 f.input("Placeholder > ") {|msg| f.puts "You wrote: #{msg['text'].light_magenta}"}
 ```
 
-The (_almost_) full [api documetaion](http://zach-capalbo.github.io/flammarion/doc/)
-is available at <http://zach-capalbo.github.io/flammarion/doc/>. See especially
-the [Writeable Module](http://zach-capalbo.github.io/flammarion/doc/Flammarion/Writeable.html)
+The [api documetaion](http://zach-capalbo.github.io/flammarion/doc/Flammarion)
+is available at <http://zach-capalbo.github.io/flammarion/doc/Flammarion>.
 
 ## Screenshots / Samples
 

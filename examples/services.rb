@@ -23,9 +23,9 @@ f.table(
 
     # Create buttons which we can embed in the text. When they are clicked, the
     # blocks will be called.
-    start_button = f.embedded_button("Start") { puts "Starting #{service.name}"}
-    stop_button = f.embedded_button("Stop") { puts "Stopping #{service.name}"}
+    start_button = f.embedded_button("Start") { f.status "Starting #{service.name}"; system("service start #{service.name}"); f.status "Started #{service.name}".green}
+    stop_button = f.embedded_button("Stop") { f.status "Stopping #{service.name}"; system("service stop #{service.name}"); f.status "Stopped #{service.name}".green}
     [service.status, service.name, start_button, stop_button]
   end, escape_html:false)
 
-sleep 1000 while true
+f.wait_until_closed

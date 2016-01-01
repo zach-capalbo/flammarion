@@ -12,3 +12,5 @@ f.status("Flammarion version: #{Flammarion::VERSION.green}", :right)
 ARGF.each_line do |l|
   f.print l
 end
+
+f.wait_until_closed

@@ -25,8 +25,12 @@ require_relative 'flammarion/engraving.rb'
 
 # This is the main namespace for Flammarion. You really need an {Engraving} to
 # do anything useful. If you just want to test that everything is setup
-# correctly, you can use {Flammarion.about}
+# correctly, you can use {Flammarion.about}. You can find samples and
+# screenshots at https://github.com/zach-capalbo/flammarion and some examples
+# at https://github.com/zach-capalbo/flammarion/tree/master/examples
 # @see Engraving
 # @see Writeable
+# @see https://github.com/zach-capalbo/flammarion
+# @see https://github.com/zach-capalbo/flammarion/tree/master/examples
 module Flammarion
 end
