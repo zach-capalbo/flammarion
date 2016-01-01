@@ -40,7 +40,8 @@ module Flammarion
       end
     end
 
-    class Spectrum
+    # A representation of a plot in a writeable area. See {Writeable#plot}
+    class Plot
       attr_reader :engraving
       def initialize(id, target, engraving)
         @id = id
@@ -119,12 +120,27 @@ module Flammarion
 
     # Creates a new plot to display single axis data
     # @param [Array<Number>] values A list of numbers to plot
-    # @todo finish documenting options
-    # @return [Spectrum] A Spectrum object for manipulation after creation.
+    # @macro add_options
+    # @option options [Integer] :number_of_ticks The number of tick marks to
+    #  display across the bottom
+    # @option options [Integer] :tick_precision The number of digits after the
+    #  decimal point to display next to the tick marks
+    # @option options [Float] :xstart (0.0) The starting value for the x-axis
+    # @option options [Float, String] :ystart ('min') The starting value for the
+    #  y-axis. Can be 'min' to start at the minimum value.
+    # @option options [Boolean] :draw_zero (true) draw a line through y = 0
+    # @option options [Boolean] :draw_mark (false) place a + at each point on
+    #  the line.
+    # @option options [Boolean] :draw_line (true) draw a line through all the
+    #  points.
+    # @option options [Boolean] :fill (false) fill in the area between the curve
+    #  and zero
+    # @note You can press 'a' while hovering the plot to reset the zoom.
+    # @return [Plot] A Plot object for manipulation after creation.
     def plot(values, options = {})
       id = @engraving.make_id
       send_json({action:'plot', data:values, id:id}.merge(options))
-      return Spectrum.new(id, @pane_name, @engraving)
+      return Plot.new(id, @pane_name, @engraving)
     end
 
     # Adds a pretty-printed, colorful display of data or code

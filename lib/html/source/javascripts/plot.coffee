@@ -29,6 +29,10 @@ $(document).ready ->
       draw_line: true
       draw_marker: false
       marker_color: $("#plot-style > .markers").css("color")
+      ystart: 'min'
+      fill: false
+      fill_color: $('#plot-style').css("background-color")
+      zero_color: $('#plot-style > .zero').css("color")
 
 class Plot
   parse_property: (prop) ->
@@ -95,7 +99,7 @@ class Plot
     zoom_ystart_value = relative_ystart_pos * @yscaled_end_value + (1.0 - relative_ystart_pos) * @yscaled_start_value
     zoom_yend_value = relative_yend_pos * @yscaled_end_value + (1.0 - relative_yend_pos) * @yscaled_start_value
 
-    console.log zoom_ystart_value, zoom_yend_value
+    # console.log zoom_ystart_value, zoom_yend_value
 
     @zoom_to(zoom_xstart_value, zoom_xend_value, zoom_ystart_value, zoom_yend_value)
 
@@ -179,9 +183,10 @@ class Plot
     @ctx.closePath()
 
     @ctx.fillStyle = @options.fill_color
-    @ctx.fill() if @options.fill_color
+    @ctx.fill() if @options.fill_color and @options.fill
     @ctx.stroke()
     @draw_ticks()
+    @draw_zero() if @options.draw_zero
 
   draw_ticks: ->
     @ctx.font = "#{@options.tick_height - 3}px Monospace";
@@ -209,6 +214,13 @@ class Plot
     @ctx.beginPath()
     @ctx.moveTo(0, @plot_height)
     @ctx.lineTo(@canvas_width, @plot_height)
+    @ctx.stroke()
+
+  draw_zero: ->
+    @ctx.strokeStyle = @options.zero_color
+    @ctx.beginPath()
+    @ctx.moveTo(0, @y_value_to_pixel(0))
+    @ctx.lineTo(@canvas_width, @y_value_to_pixel(0))
     @ctx.stroke()
 
   update: (data) ->

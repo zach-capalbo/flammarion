@@ -23,9 +23,14 @@
   pointer-events none
   border 1px solid #012
 
+// Note: You have to add a div with each of these to
+// index.html.slim for this to take effect.
 #plot-style
   color $fg-color
+  background-color activate($bg-color, 10%)
   & .tickmarks
     color activate($fg-color, 30%)
   & .markers
     color activate($fg-color, 30%)
+  & .zero
+    color rgba(activate($bg-color, 20%), 0.75)
