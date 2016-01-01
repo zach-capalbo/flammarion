@@ -3,7 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/flammarion.svg)](https://badge.fury.io/rb/flammarion)
 
 * [Source](https://github.com/zach-capalbo/flammarion)
-* [Documentation](http://zach-capalbo.github.io/flammarion/doc/Flammarion)
+* [Documentation](http://zach-capalbo.github.io/flammarion/doc/Flammarion.html)
 
 ## Overview
 
@@ -76,8 +76,8 @@ f.button("Click Here!!!") {f.puts "You clicked the button!"}
 f.input("Placeholder > ") {|msg| f.puts "You wrote: #{msg['text'].light_magenta}"}
 ```
 
-The [api documetaion](http://zach-capalbo.github.io/flammarion/doc/Flammarion)
-is available at <http://zach-capalbo.github.io/flammarion/doc/Flammarion>.
+The [api documetaion](http://zach-capalbo.github.io/flammarion/doc/Flammarion.html)
+is available at <http://zach-capalbo.github.io/flammarion/doc/Flammarion.html>.
 
 ## Screenshots / Samples
 

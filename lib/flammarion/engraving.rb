@@ -26,7 +26,7 @@ module Flammarion
     # @option options [Boolean] :close_on_exit (false) Will close the window
     #  when the process exits if this is true. Otherwise, it will just stay
     #  around, but not actually be interactive.
-    # @opion options [String] :title The initial title of the engraving. If
+    # @option options [String] :title The initial title of the engraving. If
     #  empty, a random title will be generated.
     def initialize(options = {})
       options = {:title => options} if options.is_a?(String)
