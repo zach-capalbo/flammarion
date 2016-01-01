@@ -18,6 +18,13 @@ html
   width 100%
   overflow hidden
 
+  if $enable-gradients
+    padding 2px
+    padding-bottom 0px
+    height calc(100% - 2px)
+    width calc(100% - 4px)
+    box-shadow-inset()
+
 a
   text-decoration none
   p &
@@ -51,11 +58,6 @@ a
   height calc(100% - 1em - 14px)
   width 100%
   box-sizing: border-box
-
-html
-  if $enable-gradients
-    padding-top 2px
-    box-shadow-inset()
 
 .horizontal > .pane
   height 100%
