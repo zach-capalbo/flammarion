@@ -1,8 +1,10 @@
 module Flammarion
+  class SetupError < StandardError; end
+
   # @api private
   # @todo This all needs a lot of clean up
   module Revelator
-    CHROME_PATH = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+    CHROME_PATH = ENV["FLAMMARION_REVELATOR_PATH"] || 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
     def open_a_window_on_windows(options)
       file_path = File.absolute_path(File.join(File.dirname(__FILE__), ".."))
       file_path = `cygpath -w '#{file_path}'`.strip if RbConfig::CONFIG["host_os"] == "cygwin"
@@ -10,6 +12,7 @@ module Flammarion
       resource = "http://localhost:4567/" if ENV["FLAMMARION_DEVELOPMENT"] == "true"
       chrome_path = CHROME_PATH
       chrome_path = `cygpath -u '#{CHROME_PATH}'`.strip if RbConfig::CONFIG["host_os"] == "cygwin"
+      raise SetupError.new("Cannot find #{chrome_path}. You need to install Google Chrome or set the environment variable FLAMMARION_REVELATOR_PATH to point to chrome.exe") unless File.exist?(chrome_path)
       Process.detach(spawn(chrome_path, %[--app=#{resource}?path=#{@window_id}&port=#{server.port}&title="#{options[:title] || "Flammarion%20Engraving"}"]))
     end
 
@@ -26,12 +29,12 @@ module Flammarion
         return
       end
 
-      %w[google-chrome google-chrome-stable chromium chromium-browser chrome C:\Program\ Files\ (x86)\Google\Chrome\Application\chrome.exe].each do |executable|
+      %w[google-chrome google-chrome-stable chromium chromium-browser chrome].each do |executable|
         @chrome.in, @chrome.out, @chrome.err, @chrome.thread = Open3.popen3("#{executable} --app='#{host}?path=#{@window_id}&port=#{server.port}&title=#{@expect_title}'")
         break if @chrome.in
       end
 
-      raise StandardError.new("Cannot launch any browser") unless @chrome.in
+      raise SetupError.new("You must have either electron or google-chrome installed and accesible via your path.") unless @chrome.in
     end
 
     private
