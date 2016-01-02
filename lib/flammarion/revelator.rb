@@ -1,4 +1,13 @@
 module Flammarion
+  # Raised when flammarion cannot find any way to display an engraving.
+  # On Linux, Flammarion will first try to launch Electron using the command
+  # +electron+. If that fails, it will try common aliases of Google Chrome. If
+  # none of them execute succesfully, it will raise this error. On Windows, it
+  # will try to launch Google Chrome from Program Files (x86). If chrome has
+  # been installed somewhere else, the user can set the environment variable
+  # FLAMMARION_REVELATOR_PATH to point to +chrome.exe+.
+  # @see http://electron.atom.io/
+  # @see http://www.google.com/chrome/
   class SetupError < StandardError; end
 
   # @api private
@@ -30,6 +39,7 @@ module Flammarion
       end
 
       %w[google-chrome google-chrome-stable chromium chromium-browser chrome].each do |executable|
+        next unless which(executable)
         @chrome.in, @chrome.out, @chrome.err, @chrome.thread = Open3.popen3("#{executable} --app='#{host}?path=#{@window_id}&port=#{server.port}&title=#{@expect_title}'")
         break if @chrome.in
       end

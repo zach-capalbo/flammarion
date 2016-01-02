@@ -28,6 +28,8 @@ module Flammarion
     #  around, but not actually be interactive.
     # @option options [String] :title The initial title of the engraving. If
     #  empty, a random title will be generated.
+    # @raise {SetupError} if neither chrome nor electron is set up correctly and
+    #  and Flammarion is unable to display the engraving.
     def initialize(options = {})
       options = {:title => options} if options.is_a?(String)
       @chrome = OpenStruct.new

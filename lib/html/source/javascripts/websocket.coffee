@@ -7,7 +7,7 @@ class WSClient
     console.log "Path: #{$qs.get("path")}, Port: #{$qs.get("port")}, Host: #{host}"
     @ws = new WebSocket "ws://#{host}:#{$qs.get("port")}/#{$qs.get("path")}"
     @actions["__parent"] = this
-    document.title = $qs.get("title") || "Flammarion Unconnected"
+    document.title = decodeURIComponent($qs.get("title")) || "Flammarion"
     @ws.onopen = (msg) ->
       $('body').addClass("connected")
 
