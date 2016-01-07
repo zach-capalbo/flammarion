@@ -1,3 +1,5 @@
+require 'ostruct'
+
 module Flammarion
   # Raised when flammarion cannot find any way to display an engraving.
   # On Linux, Flammarion will first try to launch Electron using the command
@@ -32,22 +34,58 @@ module Flammarion
       host = "http://localhost:4567/" if developmentMode
 
       @expect_title = options[:title] || "Flammarion-#{rand.to_s[2..-1]}"
+      url = "#{host}?path=#{@window_id}&port=#{server.port}&title=#{@expect_title}"
+      @browser_options = options.merge({url: url, developmentMode: developmentMode})
+      @requested_browser = ENV["FLAMMARION_BROWSER"] || options[:browser]
 
-      if which('electron') then
-        Process.detach(spawn("electron #{File.dirname(File.absolute_path(__FILE__))}/../../electron '#{host}?path=#{@window_id}&port=#{server.port}&title=#{@expect_title}'"))
-        return
+      @browser = @@browsers.find do |browser|
+        next if @requested_browser and browser.name.to_s != @requested_browser
+        begin
+          __send__(browser.name, @browser_options)
+        rescue Exception
+          next
+        end
       end
 
-      %w[google-chrome google-chrome-stable chromium chromium-browser chrome].each do |executable|
-        next unless which(executable)
-        @chrome.in, @chrome.out, @chrome.err, @chrome.thread = Open3.popen3("#{executable} --app='#{host}?path=#{@window_id}&port=#{server.port}&title=#{@expect_title}'")
-        break if @chrome.in
-      end
+      raise SetupError.new("You must have either electron or google-chrome installed and accesible via your path.") unless @browser
+    end
 
-      raise SetupError.new("You must have either electron or google-chrome installed and accesible via your path.") unless @chrome.in
+    # @api private
+    def wait_for_a_connection
+       Timeout.timeout(20) { sleep 0.5 while @sockets.empty? }
+     rescue Timeout::Error
+       raise SetupError.new("Timed out while waiting for a connecting using #{@browser.name}.")
     end
 
     private
+    @@browsers = []
+    def self.browser(name, &block)
+      @@browsers << OpenStruct.new(name: name, method:define_method(name, block))
+    end
+
+    browser :electron do |options|
+      if which('electron') then
+        Process.detach(spawn("electron #{File.dirname(File.absolute_path(__FILE__))}/../../electron '#{options[:url]}'"))
+        return true
+      end
+      false
+    end
+
+    browser :chrome do |options|
+      %w[google-chrome google-chrome-stable chromium chromium-browser chrome].each do |executable|
+        next unless which(executable)
+        @chrome.in, @chrome.out, @chrome.err, @chrome.thread = Open3.popen3("#{executable} --app='#{options[:url]}'")
+        return true if @chrome.in
+      end
+      return false
+    end
+
+    browser :www do |options|
+      # Last ditch effort to display something
+      Process.detach(spawn("sensible-browser '#{options[:url]}'"))
+      return true
+    end
+
     def which(cmd)
       exts = ENV['PATHEXT'] ? ENV['PATHEXT'].split(';') : ['']
       ENV['PATH'].split(File::PATH_SEPARATOR).each do |path|

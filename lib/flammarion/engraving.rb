@@ -156,11 +156,6 @@ module Flammarion
     def server; @@server; end;
 
     # @api private
-    def wait_for_a_connection
-      sleep 0.5 while @sockets.empty?
-    end
-
-    # @api private
     def send_json(val)
       if @sockets.empty? then
         open_a_window
