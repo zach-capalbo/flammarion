@@ -1,4 +1,5 @@
 require 'ostruct'
+require 'launchy'
 
 module Flammarion
   # Raised when flammarion cannot find any way to display an engraving.
@@ -16,26 +17,19 @@ module Flammarion
   # @todo This all needs a lot of clean up
   module Revelator
     CHROME_PATH = ENV["FLAMMARION_REVELATOR_PATH"] || 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
-    def open_a_window_on_windows(options)
-      file_path = File.absolute_path(File.join(File.dirname(__FILE__), ".."))
-      file_path = `cygpath -w '#{file_path}'`.strip if RbConfig::CONFIG["host_os"] == "cygwin"
-      resource = %[file\://#{file_path}/html/build/index.html]
-      resource = "http://localhost:4567/" if ENV["FLAMMARION_DEVELOPMENT"] == "true"
-      chrome_path = CHROME_PATH
-      chrome_path = `cygpath -u '#{CHROME_PATH}'`.strip if RbConfig::CONFIG["host_os"] == "cygwin"
-      raise SetupError.new("Cannot find #{chrome_path}. You need to install Google Chrome or set the environment variable FLAMMARION_REVELATOR_PATH to point to chrome.exe") unless File.exist?(chrome_path)
-      Process.detach(spawn(chrome_path, %[--app=#{resource}?path=#{@window_id}&port=#{server.port}&title="#{options[:title] || "Flammarion%20Engraving"}"]))
-    end
 
     def open_a_window(options = {})
-      return open_a_window_on_windows(options) if RbConfig::CONFIG["host_os"] =~ /cygwin|mswin|mingw/
-      developmentMode = system("lsof -i:#{4567}", out: '/dev/null') and File.exist?("#{File.dirname(__FILE__)}/../html/source/index.html.slim")
+      if RbConfig::CONFIG["host_os"] =~ /cygwin|mswin|mingw/
+        development_mode = ENV["FLAMMARION_DEVELOPMENT"] == "true"
+      else
+        development_mode = system("lsof -i:#{4567}", out: '/dev/null') and File.exist?("#{File.dirname(__FILE__)}/../html/source/index.html.slim")
+      end
       host = "file://#{File.dirname(File.absolute_path(__FILE__))}/../html/build/index.html"
-      host = "http://localhost:4567/" if developmentMode
+      host = "http://localhost:4567/" if development_mode
 
       @expect_title = options[:title] || "Flammarion-#{rand.to_s[2..-1]}"
       url = "#{host}?path=#{@window_id}&port=#{server.port}&title=#{@expect_title}"
-      @browser_options = options.merge({url: url, developmentMode: developmentMode})
+      @browser_options = options.merge({url: url, development_mode: development_mode})
       @requested_browser = ENV["FLAMMARION_BROWSER"] || options[:browser]
 
       @browser = @@browsers.find do |browser|
@@ -63,6 +57,18 @@ module Flammarion
       @@browsers << OpenStruct.new(name: name, method:define_method(name, block))
     end
 
+    browser :chrome_windows do |options|
+      return false unless RbConfig::CONFIG["host_os"] =~ /cygwin|mswin|mingw/
+      file_path = File.absolute_path(File.join(File.dirname(__FILE__), ".."))
+      file_path = `cygpath -w '#{file_path}'`.strip if RbConfig::CONFIG["host_os"] == "cygwin"
+      resource = %[file\://#{file_path}/html/build/index.html]
+      resource = "http://localhost:4567/" if options[:development_mode]
+      chrome_path = CHROME_PATH
+      chrome_path = `cygpath -u '#{CHROME_PATH}'`.strip if RbConfig::CONFIG["host_os"] == "cygwin"
+      return false unless File.exist?(chrome_path)
+      Process.detach(spawn(chrome_path, %[--app=#{resource}?path=#{@window_id}&port=#{server.port}&title="#{options[:title] || "Flammarion%20Engraving"}"]))
+    end
+
     browser :electron do |options|
       if which('electron') then
         Process.detach(spawn("electron #{File.dirname(File.absolute_path(__FILE__))}/../../electron '#{options[:url]}'"))
@@ -82,7 +88,9 @@ module Flammarion
 
     browser :www do |options|
       # Last ditch effort to display something
-      Process.detach(spawn("sensible-browser '#{options[:url]}'"))
+      Launchy.open(options[:url]) do |error|
+        return false
+      end
       return true
     end
 
