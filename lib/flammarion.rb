@@ -1,6 +1,6 @@
 require 'open3'
 require 'ostruct'
-require 'em-websocket'
+require 'rubame'
 require 'json'
 require 'colorize'
 require 'filewatcher'

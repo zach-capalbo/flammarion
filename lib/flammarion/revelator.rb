@@ -1,5 +1,6 @@
 require 'ostruct'
 require 'launchy'
+require 'timeout'
 
 module Flammarion
   # Raised when flammarion cannot find any way to display an engraving.

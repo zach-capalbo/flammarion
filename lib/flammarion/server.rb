@@ -26,49 +26,44 @@ module Flammarion
       at_exit { sleep 0.1 }
     end
     def start_server_internal
-      EM.run {
       @port = 7870
       @port = rand(65000 - 1024) + 1024 if Gem.win_platform?
       begin
-        EM::WebSocket.run(:host => "0.0.0.0", :port => @port) do |ws|
-          ws.onopen { |handshake|
-            log "WebSocket connection open"
-            if @windows.include?(handshake.path)
-              @windows[handshake.path].sockets << ws
-              @windows[handshake.path].on_connect.call() if @windows[handshake.path].on_connect
-              @socket_paths[ws] = handshake.path
-            else
-              log "No such window: #{handshake.path}"
+        @server = Rubame::Server.new("0.0.0.0", @port)
+        while true do
+          @started = true
+          @server.run do |ws|
+            ws.onopen {
+              log "WebSocket connection open"
+              if @windows.include?(ws.handshake.path)
+                @windows[ws.handshake.path].sockets << ws
+                @windows[ws.handshake.path].on_connect.call() if @windows[ws.handshake.path].on_connect
+                @socket_paths[ws] = ws.handshake.path
+              else
+                log "No such window: #{handshake.path}"
+              end
+            }
+
+            ws.onclose do
+              log "Connection closed";
+              @windows[@socket_paths[ws]].disconnect(ws) if @windows[@socket_paths[ws]]
             end
-          }
 
-          ws.onclose do
-            log "Connection closed";
-            @windows[@socket_paths[ws]].disconnect(ws) if @windows[@socket_paths[ws]]
-          end
-
-          ws.onmessage { |msg|
-            Thread.new do
-              begin
-                @windows[@socket_paths[ws]].process_message(msg)
-              rescue Exception => e
-                Kernel.puts "#{e.message.to_s.red}\n#{e.backtrace.join("\n").light_red}"
-                if binding.respond_to? :pry
-                  binding.pry
-                else
-                  raise
+            ws.onmessage { |msg|
+              Thread.new do
+                begin
+                  @windows[@socket_paths[ws]].process_message(msg)
+                rescue Exception => e
+                  Kernel.puts "#{e.message.to_s.red}\n#{e.backtrace.join("\n").light_red}"
+                  if binding.respond_to? :pry
+                    binding.pry
+                  else
+                    raise
+                  end
                 end
               end
-            end
-          }
-
-          ws.onerror { |err|
-            if binding.respond_to? :pry
-              binding.pry
-            else
-              raise
-            end
-          }
+            }
+          end
         end
       rescue RuntimeError => e
         if e.message == "no acceptor (port is in use or requires root privileges)"
@@ -79,9 +74,8 @@ module Flammarion
         end
       end
       @started = true
-      }
     rescue Exception => e
-      unless e.is_a? SystemExit
+      unless e.is_a? SystemExit or e.is_a? Interrupt
         Kernel.puts "Error in server:"
         binding.pry if binding.respond_to? :pry
         Kernel.puts e.message
