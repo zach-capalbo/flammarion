@@ -88,7 +88,7 @@ module Flammarion
 
     browser :www do |options|
       # Last ditch effort to display something
-      Launchy.open(options[:url]) do |error|
+      Launchy.open(options[:url].gsub(/\s/, "%20")) do |error|
         return false
       end
       return true
