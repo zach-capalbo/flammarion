@@ -4,7 +4,7 @@
 buttony(raised = false)
   background-color lighten($bg-color, 0%)
   color darken($fg-color, 0%)
-  font-family Monospace
+  font-family $main-font
   border $normal-border
   padding 1em
   text-decoration none
@@ -54,6 +54,8 @@ input:focus::-webkit-input-placeholder
   padding 0.2em
   -webkit-user-select none
   user-select none
+  font-family $main-font
+  min-height 1.4em
   & > span
     vertical-align middle
   & input[type=checkbox]
@@ -81,7 +83,7 @@ input:focus::-webkit-input-placeholder
 #toolbar
   background-color #000
   margin 0px
-  font-family Monospace
+  font-family $main-font
   height calc(2% + 15px)
 
 .tool-button
