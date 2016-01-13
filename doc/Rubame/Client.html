@@ -284,28 +284,6 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#get_lazy_fiber-instance_method" title="#get_lazy_fiber (instance method)">- (Object) <strong>get_lazy_fiber</strong> </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#initialize-instance_method" title="#initialize (instance method)">- (Client) <strong>initialize</strong>(socket, handshake, server) </a>
     
 
@@ -325,28 +303,6 @@
     <span class="summary_desc"><div class='inline'>
 <p>A new instance of Client.</p>
 </div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#lazy_send-instance_method" title="#lazy_send (instance method)">- (Object) <strong>lazy_send</strong>(data) </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -442,28 +398,6 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#send_some_lazy-instance_method" title="#send_some_lazy (instance method)">- (Object) <strong>send_some_lazy</strong>(count) </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#write-instance_method" title="#write (instance method)">- (Object) <strong>write</strong>(data) </a>
     
 
@@ -515,20 +449,18 @@
       <pre class="lines">
 
 
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123</pre>
+102
+103
+104
+105
+106
+107
+108
+109
+110</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 113</span>
+      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 102</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_socket'>socket</span><span class='comma'>,</span> <span class='id identifier rubyid_handshake'>handshake</span><span class='comma'>,</span> <span class='id identifier rubyid_server'>server</span><span class='rparen'>)</span>
   <span class='ivar'>@socket</span> <span class='op'>=</span> <span class='id identifier rubyid_socket'>socket</span>
@@ -536,8 +468,6 @@
   <span class='ivar'>@frame</span> <span class='op'>=</span> <span class='const'>WebSocket</span><span class='op'>::</span><span class='const'>Frame</span><span class='op'>::</span><span class='const'>Incoming</span><span class='op'>::</span><span class='const'>Server</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='symbol'>:version</span> <span class='op'>=&gt;</span> <span class='ivar'>@handshake</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='rparen'>)</span>
   <span class='ivar'>@opened</span> <span class='op'>=</span> <span class='kw'>false</span>
   <span class='ivar'>@messaged</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-  <span class='ivar'>@lazy_queue</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-  <span class='ivar'>@lazy_current_queue</span> <span class='op'>=</span> <span class='kw'>nil</span>
   <span class='ivar'>@closed</span> <span class='op'>=</span> <span class='kw'>false</span>
   <span class='ivar'>@server</span> <span class='op'>=</span> <span class='id identifier rubyid_server'>server</span>
 <span class='kw'>end</span></pre>
@@ -579,12 +509,12 @@
       <pre class="lines">
 
 
-111
-112
-113</pre>
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 111</span>
+      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 100</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_closed'>closed</span>
   <span class='ivar'>@closed</span>
@@ -622,12 +552,12 @@
       <pre class="lines">
 
 
-111
-112
-113</pre>
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 111</span>
+      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 100</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_frame'>frame</span>
   <span class='ivar'>@frame</span>
@@ -665,12 +595,12 @@
       <pre class="lines">
 
 
-111
-112
-113</pre>
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 111</span>
+      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 100</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_handshake'>handshake</span>
   <span class='ivar'>@handshake</span>
@@ -708,12 +638,12 @@
       <pre class="lines">
 
 
-111
-112
-113</pre>
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 111</span>
+      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 100</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_messaged'>messaged</span>
   <span class='ivar'>@messaged</span>
@@ -751,12 +681,12 @@
       <pre class="lines">
 
 
-111
-112
-113</pre>
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 111</span>
+      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 100</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_opened'>opened</span>
   <span class='ivar'>@opened</span>
@@ -794,12 +724,12 @@
       <pre class="lines">
 
 
-111
-112
-113</pre>
+100
+101
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 111</span>
+      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 100</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_socket'>socket</span>
   <span class='ivar'>@socket</span>
@@ -817,87 +747,7 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="get_lazy_fiber-instance_method">
-  
-    - (<tt>Object</tt>) <strong>get_lazy_fiber</strong> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 143</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_get_lazy_fiber'>get_lazy_fiber</span>
-  <span class='comment'># Create the fiber if needed
-</span>  <span class='kw'>if</span> <span class='ivar'>@lazy_fiber</span> <span class='op'>==</span> <span class='kw'>nil</span> <span class='kw'>or</span> <span class='op'>!</span><span class='ivar'>@lazy_fiber</span><span class='period'>.</span><span class='id identifier rubyid_alive?'>alive?</span>
-    <span class='ivar'>@lazy_fiber</span> <span class='op'>=</span> <span class='const'>Fiber</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>do</span>
-      <span class='ivar'>@lazy_current_queue</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_data'>data</span><span class='op'>|</span>
-        <span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
-        <span class='const'>Fiber</span><span class='period'>.</span><span class='id identifier rubyid_yield'>yield</span> <span class='kw'>unless</span> <span class='ivar'>@lazy_current_queue</span><span class='lbracket'>[</span><span class='op'>-</span><span class='int'>1</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='id identifier rubyid_data'>data</span>
-      <span class='kw'>end</span>
-    <span class='kw'>end</span>
-  <span class='kw'>end</span>
-
-  <span class='kw'>return</span> <span class='ivar'>@lazy_fiber</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="lazy_send-instance_method">
-  
-    - (<tt>Object</tt>) <strong>lazy_send</strong>(data) 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-139
-140
-141</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 139</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_lazy_send'>lazy_send</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
-  <span class='ivar'>@lazy_queue</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='id identifier rubyid_data'>data</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="onclose-instance_method">
+  <h3 class="signature first" id="onclose-instance_method">
   
     - (<tt>Object</tt>) <strong>onclose</strong>(&amp;blk) 
   
@@ -911,17 +761,17 @@
       <pre class="lines">
 
 
-195
-196
-197
-198
-199
-200
-201
-202</pre>
+148
+149
+150
+151
+152
+153
+154
+155</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 195</span>
+      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 148</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_onclose'>onclose</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_blk'>blk</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='ivar'>@closed</span>
@@ -951,20 +801,20 @@
       <pre class="lines">
 
 
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193</pre>
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 183</span>
+      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 136</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_onmessage'>onmessage</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_blk'>blk</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='ivar'>@messaged</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span> <span class='op'>&gt;</span> <span class='int'>0</span>
@@ -997,18 +847,18 @@
       <pre class="lines">
 
 
-173
-174
-175
-176
-177
-178
-179
-180
-181</pre>
+126
+127
+128
+129
+130
+131
+132
+133
+134</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 173</span>
+      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 126</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_onopen'>onopen</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_blk'>blk</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='ivar'>@opened</span>
@@ -1039,18 +889,18 @@
       <pre class="lines">
 
 
-129
-130
-131
-132
-133
-134
-135
-136
-137</pre>
+116
+117
+118
+119
+120
+121
+122
+123
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 129</span>
+      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 116</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_frame'>frame</span> <span class='op'>=</span> <span class='const'>WebSocket</span><span class='op'>::</span><span class='const'>Frame</span><span class='op'>::</span><span class='const'>Outgoing</span><span class='op'>::</span><span class='const'>Server</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='symbol'>:version</span> <span class='op'>=&gt;</span> <span class='ivar'>@handshake</span><span class='period'>.</span><span class='id identifier rubyid_version'>version</span><span class='comma'>,</span> <span class='symbol'>:data</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='symbol'>:type</span> <span class='op'>=&gt;</span> <span class='symbol'>:text</span><span class='rparen'>)</span>
@@ -1060,60 +910,6 @@
   <span class='kw'>rescue</span>
     <span class='ivar'>@server</span><span class='period'>.</span><span class='id identifier rubyid_close'>close</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@closed</span>
   <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="send_some_lazy-instance_method">
-  
-    - (<tt>Object</tt>) <strong>send_some_lazy</strong>(count) 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 157</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_send_some_lazy'>send_some_lazy</span><span class='lparen'>(</span><span class='id identifier rubyid_count'>count</span><span class='rparen'>)</span>
-  <span class='comment'># To save on cpu cycles, we don't want to be chopping and changing arrays, which could get quite large.  Instead,
-</span>  <span class='comment'># we iterate over an array which we are sure won't change out from underneath us.
-</span>  <span class='kw'>unless</span> <span class='ivar'>@lazy_current_queue</span>
-    <span class='ivar'>@lazy_current_queue</span> <span class='op'>=</span> <span class='ivar'>@lazy_queue</span>
-    <span class='ivar'>@lazy_queue</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
-  <span class='kw'>end</span>
-
-  <span class='id identifier rubyid_completed'>completed</span> <span class='op'>=</span> <span class='int'>0</span>
-  <span class='kw'>begin</span>
-    <span class='id identifier rubyid_get_lazy_fiber'>get_lazy_fiber</span><span class='period'>.</span><span class='id identifier rubyid_resume'>resume</span>
-    <span class='id identifier rubyid_completed'>completed</span> <span class='op'>+=</span> <span class='int'>1</span>
-  <span class='kw'>end</span> <span class='kw'>while</span> <span class='lparen'>(</span><span class='ivar'>@lazy_queue</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='op'>&gt;</span> <span class='int'>0</span> <span class='kw'>or</span> <span class='ivar'>@lazy_current_queue</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span> <span class='op'>&gt;</span> <span class='int'>0</span><span class='rparen'>)</span> <span class='kw'>and</span> <span class='id identifier rubyid_completed'>completed</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_count'>count</span>
-
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1135,12 +931,12 @@
       <pre class="lines">
 
 
-125
-126
-127</pre>
+112
+113
+114</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 112</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_write'>write</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
   <span class='ivar'>@socket</span><span class='period'>.</span><span class='id identifier rubyid_write'>write</span> <span class='id identifier rubyid_data'>data</span>
@@ -1155,7 +951,7 @@
 </div>
 
     <div id="footer">
-  Generated on Tue Jan 12 22:43:47 2016 by
+  Generated on Wed Jan 13 05:55:54 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>
