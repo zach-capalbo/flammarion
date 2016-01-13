@@ -1,10 +1,10 @@
 require 'open3'
 require 'ostruct'
-require 'rubame'
 require 'json'
 require 'colorize'
 require 'filewatcher'
 require 'rbconfig'
+require_relative 'rubame/rubame.rb'
 
 begin
   # Optional Requires

@@ -65,8 +65,8 @@ module Flammarion
             }
           end
         end
-      rescue RuntimeError => e
-        if e.message == "no acceptor (port is in use or requires root privileges)"
+      rescue RuntimeError, Errno::EADDRINUSE
+        if $!.message == "no acceptor (port is in use or requires root privileges)" or $!.is_a? Errno::EADDRINUSE
           @port = rand(65000 - 1024) + 1024
           retry
         else
