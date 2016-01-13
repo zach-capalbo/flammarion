@@ -449,12 +449,12 @@
       <pre class="lines">
 
 
-96
-97
-98</pre>
+90
+91
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/server.rb', line 96</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/server.rb', line 90</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_log'>log</span><span class='lparen'>(</span><span class='id identifier rubyid_str'>str</span><span class='rparen'>)</span>
   <span class='comment'># Kernel.puts str
@@ -492,15 +492,15 @@
       <pre class="lines">
 
 
-100
-101
-102
-103
-104
-105</pre>
+94
+95
+96
+97
+98
+99</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/server.rb', line 100</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/server.rb', line 94</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_register_window'>register_window</span><span class='lparen'>(</span><span class='id identifier rubyid_window'>window</span><span class='rparen'>)</span>
   <span class='ivar'>@new_path</span> <span class='op'>||=</span> <span class='int'>0</span>
@@ -598,64 +598,53 @@
 82
 83
 84
-85
-86
-87
-88
-89
-90
-91</pre>
+85</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/flammarion/server.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_start_server_internal'>start_server_internal</span>
-  <span class='const'>EM</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='lbrace'>{</span>
   <span class='ivar'>@port</span> <span class='op'>=</span> <span class='int'>7870</span>
   <span class='ivar'>@port</span> <span class='op'>=</span> <span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='int'>65000</span> <span class='op'>-</span> <span class='int'>1024</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='int'>1024</span> <span class='kw'>if</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_win_platform?'>win_platform?</span>
   <span class='kw'>begin</span>
-    <span class='const'>EM</span><span class='op'>::</span><span class='const'>WebSocket</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='symbol'>:host</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0.0.0.0</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:port</span> <span class='op'>=&gt;</span> <span class='ivar'>@port</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_ws'>ws</span><span class='op'>|</span>
-      <span class='id identifier rubyid_ws'>ws</span><span class='period'>.</span><span class='id identifier rubyid_onopen'>onopen</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_handshake'>handshake</span><span class='op'>|</span>
-        <span class='id identifier rubyid_log'>log</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>WebSocket connection open</span><span class='tstring_end'>&quot;</span></span>
-        <span class='kw'>if</span> <span class='ivar'>@windows</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_handshake'>handshake</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
-          <span class='ivar'>@windows</span><span class='lbracket'>[</span><span class='id identifier rubyid_handshake'>handshake</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_sockets'>sockets</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_ws'>ws</span>
-          <span class='ivar'>@windows</span><span class='lbracket'>[</span><span class='id identifier rubyid_handshake'>handshake</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_on_connect'>on_connect</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@windows</span><span class='lbracket'>[</span><span class='id identifier rubyid_handshake'>handshake</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_on_connect'>on_connect</span>
-          <span class='ivar'>@socket_paths</span><span class='lbracket'>[</span><span class='id identifier rubyid_ws'>ws</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_handshake'>handshake</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span>
-        <span class='kw'>else</span>
-          <span class='id identifier rubyid_log'>log</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No such window: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_handshake'>handshake</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='ivar'>@server</span> <span class='op'>=</span> <span class='const'>Rubame</span><span class='op'>::</span><span class='const'>Server</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>0.0.0.0</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='ivar'>@port</span><span class='rparen'>)</span>
+    <span class='kw'>while</span> <span class='kw'>true</span> <span class='kw'>do</span>
+      <span class='ivar'>@started</span> <span class='op'>=</span> <span class='kw'>true</span>
+      <span class='ivar'>@server</span><span class='period'>.</span><span class='id identifier rubyid_run'>run</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_ws'>ws</span><span class='op'>|</span>
+        <span class='id identifier rubyid_ws'>ws</span><span class='period'>.</span><span class='id identifier rubyid_onopen'>onopen</span> <span class='lbrace'>{</span>
+          <span class='id identifier rubyid_log'>log</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>WebSocket connection open</span><span class='tstring_end'>&quot;</span></span>
+          <span class='kw'>if</span> <span class='ivar'>@windows</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_ws'>ws</span><span class='period'>.</span><span class='id identifier rubyid_handshake'>handshake</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span><span class='rparen'>)</span>
+            <span class='ivar'>@windows</span><span class='lbracket'>[</span><span class='id identifier rubyid_ws'>ws</span><span class='period'>.</span><span class='id identifier rubyid_handshake'>handshake</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_sockets'>sockets</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_ws'>ws</span>
+            <span class='ivar'>@windows</span><span class='lbracket'>[</span><span class='id identifier rubyid_ws'>ws</span><span class='period'>.</span><span class='id identifier rubyid_handshake'>handshake</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_on_connect'>on_connect</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@windows</span><span class='lbracket'>[</span><span class='id identifier rubyid_ws'>ws</span><span class='period'>.</span><span class='id identifier rubyid_handshake'>handshake</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_on_connect'>on_connect</span>
+            <span class='ivar'>@socket_paths</span><span class='lbracket'>[</span><span class='id identifier rubyid_ws'>ws</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_ws'>ws</span><span class='period'>.</span><span class='id identifier rubyid_handshake'>handshake</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span>
+          <span class='kw'>else</span>
+            <span class='id identifier rubyid_log'>log</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No such window: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_handshake'>handshake</span><span class='period'>.</span><span class='id identifier rubyid_path'>path</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+          <span class='kw'>end</span>
+        <span class='rbrace'>}</span>
+
+        <span class='id identifier rubyid_ws'>ws</span><span class='period'>.</span><span class='id identifier rubyid_onclose'>onclose</span> <span class='kw'>do</span>
+          <span class='id identifier rubyid_log'>log</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Connection closed</span><span class='tstring_end'>&quot;</span></span><span class='semicolon'>;</span>
+          <span class='ivar'>@windows</span><span class='lbracket'>[</span><span class='ivar'>@socket_paths</span><span class='lbracket'>[</span><span class='id identifier rubyid_ws'>ws</span><span class='rbracket'>]</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_disconnect'>disconnect</span><span class='lparen'>(</span><span class='id identifier rubyid_ws'>ws</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@windows</span><span class='lbracket'>[</span><span class='ivar'>@socket_paths</span><span class='lbracket'>[</span><span class='id identifier rubyid_ws'>ws</span><span class='rbracket'>]</span><span class='rbracket'>]</span>
         <span class='kw'>end</span>
-      <span class='rbrace'>}</span>
 
-      <span class='id identifier rubyid_ws'>ws</span><span class='period'>.</span><span class='id identifier rubyid_onclose'>onclose</span> <span class='kw'>do</span>
-        <span class='id identifier rubyid_log'>log</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Connection closed</span><span class='tstring_end'>&quot;</span></span><span class='semicolon'>;</span>
-        <span class='ivar'>@windows</span><span class='lbracket'>[</span><span class='ivar'>@socket_paths</span><span class='lbracket'>[</span><span class='id identifier rubyid_ws'>ws</span><span class='rbracket'>]</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_disconnect'>disconnect</span><span class='lparen'>(</span><span class='id identifier rubyid_ws'>ws</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@windows</span><span class='lbracket'>[</span><span class='ivar'>@socket_paths</span><span class='lbracket'>[</span><span class='id identifier rubyid_ws'>ws</span><span class='rbracket'>]</span><span class='rbracket'>]</span>
-      <span class='kw'>end</span>
-
-      <span class='id identifier rubyid_ws'>ws</span><span class='period'>.</span><span class='id identifier rubyid_onmessage'>onmessage</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_msg'>msg</span><span class='op'>|</span>
-        <span class='const'>Thread</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>do</span>
-          <span class='kw'>begin</span>
-            <span class='ivar'>@windows</span><span class='lbracket'>[</span><span class='ivar'>@socket_paths</span><span class='lbracket'>[</span><span class='id identifier rubyid_ws'>ws</span><span class='rbracket'>]</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_process_message'>process_message</span><span class='lparen'>(</span><span class='id identifier rubyid_msg'>msg</span><span class='rparen'>)</span>
-          <span class='kw'>rescue</span> <span class='const'>Exception</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
-            <span class='const'>Kernel</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_red'>red</span><span class='rbrace'>}</span><span class='tstring_content'>\n</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_backtrace'>backtrace</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_light_red'>light_red</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
-            <span class='kw'>if</span> <span class='id identifier rubyid_binding'>binding</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span> <span class='symbol'>:pry</span>
-              <span class='id identifier rubyid_binding'>binding</span><span class='period'>.</span><span class='id identifier rubyid_pry'>pry</span>
-            <span class='kw'>else</span>
-              <span class='id identifier rubyid_raise'>raise</span>
+        <span class='id identifier rubyid_ws'>ws</span><span class='period'>.</span><span class='id identifier rubyid_onmessage'>onmessage</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_msg'>msg</span><span class='op'>|</span>
+          <span class='const'>Thread</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>do</span>
+            <span class='kw'>begin</span>
+              <span class='ivar'>@windows</span><span class='lbracket'>[</span><span class='ivar'>@socket_paths</span><span class='lbracket'>[</span><span class='id identifier rubyid_ws'>ws</span><span class='rbracket'>]</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_process_message'>process_message</span><span class='lparen'>(</span><span class='id identifier rubyid_msg'>msg</span><span class='rparen'>)</span>
+            <span class='kw'>rescue</span> <span class='const'>Exception</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
+              <span class='const'>Kernel</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='period'>.</span><span class='id identifier rubyid_red'>red</span><span class='rbrace'>}</span><span class='tstring_content'>\n</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_backtrace'>backtrace</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_light_red'>light_red</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+              <span class='kw'>if</span> <span class='id identifier rubyid_binding'>binding</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span> <span class='symbol'>:pry</span>
+                <span class='id identifier rubyid_binding'>binding</span><span class='period'>.</span><span class='id identifier rubyid_pry'>pry</span>
+              <span class='kw'>else</span>
+                <span class='id identifier rubyid_raise'>raise</span>
+              <span class='kw'>end</span>
             <span class='kw'>end</span>
           <span class='kw'>end</span>
-        <span class='kw'>end</span>
-      <span class='rbrace'>}</span>
-
-      <span class='id identifier rubyid_ws'>ws</span><span class='period'>.</span><span class='id identifier rubyid_onerror'>onerror</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_err'>err</span><span class='op'>|</span>
-        <span class='kw'>if</span> <span class='id identifier rubyid_binding'>binding</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span> <span class='symbol'>:pry</span>
-          <span class='id identifier rubyid_binding'>binding</span><span class='period'>.</span><span class='id identifier rubyid_pry'>pry</span>
-        <span class='kw'>else</span>
-          <span class='id identifier rubyid_raise'>raise</span>
-        <span class='kw'>end</span>
-      <span class='rbrace'>}</span>
+        <span class='rbrace'>}</span>
+      <span class='kw'>end</span>
     <span class='kw'>end</span>
-  <span class='kw'>rescue</span> <span class='const'>RuntimeError</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>no acceptor (port is in use or requires root privileges)</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>rescue</span> <span class='const'>RuntimeError</span><span class='comma'>,</span> <span class='const'>Errno</span><span class='op'>::</span><span class='const'>EADDRINUSE</span>
+    <span class='kw'>if</span> <span class='gvar'>$!</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>no acceptor (port is in use or requires root privileges)</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>or</span> <span class='gvar'>$!</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'>Errno</span><span class='op'>::</span><span class='const'>EADDRINUSE</span>
       <span class='ivar'>@port</span> <span class='op'>=</span> <span class='id identifier rubyid_rand'>rand</span><span class='lparen'>(</span><span class='int'>65000</span> <span class='op'>-</span> <span class='int'>1024</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='int'>1024</span>
       <span class='kw'>retry</span>
     <span class='kw'>else</span>
@@ -663,9 +652,8 @@
     <span class='kw'>end</span>
   <span class='kw'>end</span>
   <span class='ivar'>@started</span> <span class='op'>=</span> <span class='kw'>true</span>
-  <span class='rbrace'>}</span>
 <span class='kw'>rescue</span> <span class='const'>Exception</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
-  <span class='kw'>unless</span> <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'>SystemExit</span>
+  <span class='kw'>unless</span> <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'>SystemExit</span> <span class='kw'>or</span> <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span> <span class='const'>Interrupt</span>
     <span class='const'>Kernel</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Error in server:</span><span class='tstring_end'>&quot;</span></span>
     <span class='id identifier rubyid_binding'>binding</span><span class='period'>.</span><span class='id identifier rubyid_pry'>pry</span> <span class='kw'>if</span> <span class='id identifier rubyid_binding'>binding</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span> <span class='symbol'>:pry</span>
     <span class='const'>Kernel</span><span class='period'>.</span><span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span>
@@ -706,11 +694,11 @@
       <pre class="lines">
 
 
-93
-94</pre>
+87
+88</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/server.rb', line 93</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/server.rb', line 87</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stop'>stop</span>
 <span class='kw'>end</span></pre>
@@ -724,7 +712,7 @@
 </div>
 
     <div id="footer">
-  Generated on Sat Jan  2 15:03:32 2016 by
+  Generated on Tue Jan 12 22:42:43 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>

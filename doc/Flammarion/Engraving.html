@@ -634,28 +634,6 @@ included in <span class='object_link'><a href="" title="Flammarion::Engraving (c
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#wait_for_a_connection-instance_method" title="#wait_for_a_connection (instance method)">- (Object) <strong>wait_for_a_connection</strong> </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  <span class="private note title">private</span>
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#wait_until_closed-instance_method" title="#wait_until_closed (instance method)">- (Object) <strong>wait_until_closed</strong> </a>
     
 
@@ -725,7 +703,7 @@ included in <span class='object_link'><a href="" title="Flammarion::Engraving (c
   
   
   <h3 class="inherited">Methods included from <span class='object_link'><a href="Revelator.html" title="Flammarion::Revelator (module)">Revelator</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Revelator.html#open_a_window-instance_method" title="Flammarion::Revelator#open_a_window (method)">#open_a_window</a></span>, <span class='object_link'><a href="Revelator.html#open_a_window_on_windows-instance_method" title="Flammarion::Revelator#open_a_window_on_windows (method)">#open_a_window_on_windows</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Revelator.html#open_a_window-instance_method" title="Flammarion::Revelator#open_a_window (method)">#open_a_window</a></span>, <span class='object_link'><a href="Revelator.html#wait_for_a_connection-instance_method" title="Flammarion::Revelator#wait_for_a_connection (method)">#wait_for_a_connection</a></span></p>
 <div id="constructor_details" class="method_details_list">
   <h2>Constructor Details</h2>
   
@@ -1634,17 +1612,17 @@ writing a very complex application.</p>
       <pre class="lines">
 
 
+159
+160
+161
+162
+163
 164
 165
-166
-167
-168
-169
-170
-171</pre>
+166</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 164</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 159</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='ivar'>@sockets</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> <span class='kw'>then</span>
@@ -1783,49 +1761,6 @@ writing a very complex application.</p>
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="wait_for_a_connection-instance_method">
-  
-    - (<tt>Object</tt>) <strong>wait_for_a_connection</strong> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    <p class="note private">
-  <strong>This method is part of a private API.</strong>
-  You should avoid using this method if possible, as it may be removed or be changed in the future.
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-159
-160
-161</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 159</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_wait_for_a_connection'>wait_for_a_connection</span>
-  <span class='id identifier rubyid_sleep'>sleep</span> <span class='float'>0.5</span> <span class='kw'>while</span> <span class='ivar'>@sockets</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
   <h3 class="signature " id="wait_until_closed-instance_method">
   
     - (<tt>Object</tt>) <strong>wait_until_closed</strong> 
@@ -1926,7 +1861,7 @@ interactions and callbacks will continue in other threads.</p>
 </div>
 
     <div id="footer">
-  Generated on Sat Jan  2 15:03:32 2016 by
+  Generated on Tue Jan 12 22:42:43 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>

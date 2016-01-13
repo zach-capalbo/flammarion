@@ -174,7 +174,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#open_a_window_on_windows-instance_method" title="#open_a_window_on_windows (instance method)">- (Object) <strong>open_a_window_on_windows</strong>(options) </a>
+      <a href="#wait_for_a_connection-instance_method" title="#wait_for_a_connection (instance method)">- (Object) <strong>wait_for_a_connection</strong> </a>
     
 
     
@@ -243,6 +243,12 @@
       <pre class="lines">
 
 
+22
+23
+24
+25
+26
+27
 28
 29
 30
@@ -261,33 +267,35 @@
 43
 44
 45
-46
-47
-48</pre>
+46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/revelator.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/revelator.rb', line 22</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_open_a_window'>open_a_window</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
-  <span class='kw'>return</span> <span class='id identifier rubyid_open_a_window_on_windows'>open_a_window_on_windows</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='const'>RbConfig</span><span class='op'>::</span><span class='const'>CONFIG</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>host_os</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>cygwin|mswin|mingw</span><span class='regexp_end'>/</span></span>
-  <span class='id identifier rubyid_developmentMode'>developmentMode</span> <span class='op'>=</span> <span class='id identifier rubyid_system'>system</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lsof -i:</span><span class='embexpr_beg'>#{</span><span class='int'>4567</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>out:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>/dev/null</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='kw'>and</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_dirname'>dirname</span><span class='lparen'>(</span><span class='kw'>__FILE__</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_content'>/../html/source/index.html.slim</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='const'>RbConfig</span><span class='op'>::</span><span class='const'>CONFIG</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>host_os</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>cygwin|mswin|mingw</span><span class='regexp_end'>/</span></span>
+    <span class='id identifier rubyid_development_mode'>development_mode</span> <span class='op'>=</span> <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>FLAMMARION_DEVELOPMENT</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_development_mode'>development_mode</span> <span class='op'>=</span> <span class='id identifier rubyid_system'>system</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lsof -i:</span><span class='embexpr_beg'>#{</span><span class='int'>4567</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>out:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>/dev/null</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='kw'>and</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_dirname'>dirname</span><span class='lparen'>(</span><span class='kw'>__FILE__</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_content'>/../html/source/index.html.slim</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
   <span class='id identifier rubyid_host'>host</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>file://</span><span class='embexpr_beg'>#{</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_dirname'>dirname</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_absolute_path'>absolute_path</span><span class='lparen'>(</span><span class='kw'>__FILE__</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_content'>/../html/build/index.html</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_host'>host</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://localhost:4567/</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_developmentMode'>developmentMode</span>
+  <span class='id identifier rubyid_host'>host</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://localhost:4567/</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_development_mode'>development_mode</span>
 
   <span class='ivar'>@expect_title</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:title</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Flammarion-</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_rand'>rand</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='lbracket'>[</span><span class='int'>2</span><span class='op'>..</span><span class='op'>-</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_url'>url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_host'>host</span><span class='rbrace'>}</span><span class='tstring_content'>?path=</span><span class='embexpr_beg'>#{</span><span class='ivar'>@window_id</span><span class='rbrace'>}</span><span class='tstring_content'>&amp;port=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_server'>server</span><span class='period'>.</span><span class='id identifier rubyid_port'>port</span><span class='rbrace'>}</span><span class='tstring_content'>&amp;title=</span><span class='embexpr_beg'>#{</span><span class='ivar'>@expect_title</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='ivar'>@browser_options</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>url:</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='label'>development_mode:</span> <span class='id identifier rubyid_development_mode'>development_mode</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@requested_browser</span> <span class='op'>=</span> <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>FLAMMARION_BROWSER</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:browser</span><span class='rbracket'>]</span>
 
-  <span class='kw'>if</span> <span class='id identifier rubyid_which'>which</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>electron</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='kw'>then</span>
-    <span class='const'>Process</span><span class='period'>.</span><span class='id identifier rubyid_detach'>detach</span><span class='lparen'>(</span><span class='id identifier rubyid_spawn'>spawn</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>electron </span><span class='embexpr_beg'>#{</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_dirname'>dirname</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_absolute_path'>absolute_path</span><span class='lparen'>(</span><span class='kw'>__FILE__</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_content'>/../../electron '</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_host'>host</span><span class='rbrace'>}</span><span class='tstring_content'>?path=</span><span class='embexpr_beg'>#{</span><span class='ivar'>@window_id</span><span class='rbrace'>}</span><span class='tstring_content'>&amp;port=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_server'>server</span><span class='period'>.</span><span class='id identifier rubyid_port'>port</span><span class='rbrace'>}</span><span class='tstring_content'>&amp;title=</span><span class='embexpr_beg'>#{</span><span class='ivar'>@expect_title</span><span class='rbrace'>}</span><span class='tstring_content'>'</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
-    <span class='kw'>return</span>
+  <span class='ivar'>@browser</span> <span class='op'>=</span> <span class='cvar'>@@browsers</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_browser'>browser</span><span class='op'>|</span>
+    <span class='kw'>next</span> <span class='kw'>if</span> <span class='ivar'>@requested_browser</span> <span class='kw'>and</span> <span class='id identifier rubyid_browser'>browser</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>!=</span> <span class='ivar'>@requested_browser</span>
+    <span class='kw'>begin</span>
+      <span class='id identifier rubyid___send__'>__send__</span><span class='lparen'>(</span><span class='id identifier rubyid_browser'>browser</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='ivar'>@browser_options</span><span class='rparen'>)</span>
+    <span class='kw'>rescue</span> <span class='const'>Exception</span>
+      <span class='kw'>next</span>
+    <span class='kw'>end</span>
   <span class='kw'>end</span>
 
-  <span class='qwords_beg'>%w[</span><span class='tstring_content'>google-chrome</span><span class='words_sep'> </span><span class='tstring_content'>google-chrome-stable</span><span class='words_sep'> </span><span class='tstring_content'>chromium</span><span class='words_sep'> </span><span class='tstring_content'>chromium-browser</span><span class='words_sep'> </span><span class='tstring_content'>chrome</span><span class='words_sep'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_executable'>executable</span><span class='op'>|</span>
-    <span class='kw'>next</span> <span class='kw'>unless</span> <span class='id identifier rubyid_which'>which</span><span class='lparen'>(</span><span class='id identifier rubyid_executable'>executable</span><span class='rparen'>)</span>
-    <span class='ivar'>@chrome</span><span class='period'>.</span><span class='id identifier rubyid_in'>in</span><span class='comma'>,</span> <span class='ivar'>@chrome</span><span class='period'>.</span><span class='id identifier rubyid_out'>out</span><span class='comma'>,</span> <span class='ivar'>@chrome</span><span class='period'>.</span><span class='id identifier rubyid_err'>err</span><span class='comma'>,</span> <span class='ivar'>@chrome</span><span class='period'>.</span><span class='id identifier rubyid_thread'>thread</span> <span class='op'>=</span> <span class='const'>Open3</span><span class='period'>.</span><span class='id identifier rubyid_popen3'>popen3</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_executable'>executable</span><span class='rbrace'>}</span><span class='tstring_content'> --app='</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_host'>host</span><span class='rbrace'>}</span><span class='tstring_content'>?path=</span><span class='embexpr_beg'>#{</span><span class='ivar'>@window_id</span><span class='rbrace'>}</span><span class='tstring_content'>&amp;port=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_server'>server</span><span class='period'>.</span><span class='id identifier rubyid_port'>port</span><span class='rbrace'>}</span><span class='tstring_content'>&amp;title=</span><span class='embexpr_beg'>#{</span><span class='ivar'>@expect_title</span><span class='rbrace'>}</span><span class='tstring_content'>'</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-    <span class='kw'>break</span> <span class='kw'>if</span> <span class='ivar'>@chrome</span><span class='period'>.</span><span class='id identifier rubyid_in'>in</span>
-  <span class='kw'>end</span>
-
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>SetupError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>You must have either electron or google-chrome installed and accesible via your path.</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@chrome</span><span class='period'>.</span><span class='id identifier rubyid_in'>in</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>SetupError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>You must have either electron or google-chrome installed and accesible via your path.</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='ivar'>@browser</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -295,9 +303,9 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="open_a_window_on_windows-instance_method">
+  <h3 class="signature " id="wait_for_a_connection-instance_method">
   
-    - (<tt>Object</tt>) <strong>open_a_window_on_windows</strong>(options) 
+    - (<tt>Object</tt>) <strong>wait_for_a_connection</strong> 
   
 
   
@@ -315,19 +323,6 @@
 </div>
 <div class="tags">
   
-<p class="tag_title">Raises:</p>
-<ul class="raise">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="SetupError.html" title="Flammarion::SetupError (class)">SetupError</a></span></tt>)</span>
-      
-      
-      
-    </li>
-  
-</ul>
 
 </div><table class="source_code">
   <tr>
@@ -335,29 +330,19 @@
       <pre class="lines">
 
 
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26</pre>
+49
+50
+51
+52
+53</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/revelator.rb', line 17</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/revelator.rb', line 49</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_open_a_window_on_windows'>open_a_window_on_windows</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_file_path'>file_path</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_absolute_path'>absolute_path</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_dirname'>dirname</span><span class='lparen'>(</span><span class='kw'>__FILE__</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>..</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_file_path'>file_path</span> <span class='op'>=</span> <span class='backtick'>`</span><span class='tstring_content'>cygpath -w '</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_file_path'>file_path</span><span class='rbrace'>}</span><span class='tstring_content'>'</span><span class='tstring_end'>`</span></span><span class='period'>.</span><span class='id identifier rubyid_strip'>strip</span> <span class='kw'>if</span> <span class='const'>RbConfig</span><span class='op'>::</span><span class='const'>CONFIG</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>host_os</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cygwin</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>%[</span><span class='tstring_content'>file\://</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_file_path'>file_path</span><span class='rbrace'>}</span><span class='tstring_content'>/html/build/index.html</span><span class='tstring_end'>]</span></span>
-  <span class='id identifier rubyid_resource'>resource</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://localhost:4567/</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>FLAMMARION_DEVELOPMENT</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_chrome_path'>chrome_path</span> <span class='op'>=</span> <span class='const'>CHROME_PATH</span>
-  <span class='id identifier rubyid_chrome_path'>chrome_path</span> <span class='op'>=</span> <span class='backtick'>`</span><span class='tstring_content'>cygpath -u '</span><span class='embexpr_beg'>#{</span><span class='const'>CHROME_PATH</span><span class='rbrace'>}</span><span class='tstring_content'>'</span><span class='tstring_end'>`</span></span><span class='period'>.</span><span class='id identifier rubyid_strip'>strip</span> <span class='kw'>if</span> <span class='const'>RbConfig</span><span class='op'>::</span><span class='const'>CONFIG</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>host_os</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cygwin</span><span class='tstring_end'>&quot;</span></span>
-  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>SetupError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Cannot find </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_chrome_path'>chrome_path</span><span class='rbrace'>}</span><span class='tstring_content'>. You need to install Google Chrome or set the environment variable FLAMMARION_REVELATOR_PATH to point to chrome.exe</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span><span class='lparen'>(</span><span class='id identifier rubyid_chrome_path'>chrome_path</span><span class='rparen'>)</span>
-  <span class='const'>Process</span><span class='period'>.</span><span class='id identifier rubyid_detach'>detach</span><span class='lparen'>(</span><span class='id identifier rubyid_spawn'>spawn</span><span class='lparen'>(</span><span class='id identifier rubyid_chrome_path'>chrome_path</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>%[</span><span class='tstring_content'>--app=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_resource'>resource</span><span class='rbrace'>}</span><span class='tstring_content'>?path=</span><span class='embexpr_beg'>#{</span><span class='ivar'>@window_id</span><span class='rbrace'>}</span><span class='tstring_content'>&amp;port=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_server'>server</span><span class='period'>.</span><span class='id identifier rubyid_port'>port</span><span class='rbrace'>}</span><span class='tstring_content'>&amp;title=&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:title</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Flammarion%20Engraving</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span><span class='tstring_content'>&quot;</span><span class='tstring_end'>]</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_wait_for_a_connection'>wait_for_a_connection</span>
+   <span class='const'>Timeout</span><span class='period'>.</span><span class='id identifier rubyid_timeout'>timeout</span><span class='lparen'>(</span><span class='int'>20</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_sleep'>sleep</span> <span class='float'>0.5</span> <span class='kw'>while</span> <span class='ivar'>@sockets</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> <span class='rbrace'>}</span>
+ <span class='kw'>rescue</span> <span class='const'>Timeout</span><span class='op'>::</span><span class='const'>Error</span>
+   <span class='id identifier rubyid_raise'>raise</span> <span class='const'>SetupError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Timed out while waiting for a connecting using </span><span class='embexpr_beg'>#{</span><span class='ivar'>@browser</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span><span class='tstring_content'>.</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -369,7 +354,7 @@
 </div>
 
     <div id="footer">
-  Generated on Sat Jan  2 15:03:32 2016 by
+  Generated on Tue Jan 12 22:42:43 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>
