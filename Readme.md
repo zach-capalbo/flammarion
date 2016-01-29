@@ -139,7 +139,7 @@ f.wait_until_closed
 ### Tables
 
 ```ruby
-f = Flammerion::Engraving.new
+f = Flammarion::Engraving.new
 f.orientation = :horizontal
 f.table([["Id", "Name", "Address"].map{|h| h.light_magenta}] + 20.times.map do |i|
   [i, Faker::Name.name, Faker::Address.street_address]
