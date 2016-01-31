@@ -11,6 +11,9 @@ task :serve do
   end
 end
 
+task :server => [:serve] do
+end
+
 desc "Build all html/css/js files"
 task :html do
   Dir.chdir("lib/html") do

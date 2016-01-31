@@ -66,3 +66,10 @@ sample :sine_wave_plot do |f|
   data = 100.times.collect {|x| Math.sin(x / 100.0 * 5.0 * Math::PI)}
   f.plot(data)
 end
+
+sample :echo do |f|
+  f.subpane("o")
+  f.input("> ", history:true, autoclear: true, enter_only:true) do |m|
+    f.subpane("o").highlight(m)
+  end
+end

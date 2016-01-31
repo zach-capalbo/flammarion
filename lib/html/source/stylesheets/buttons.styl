@@ -14,16 +14,17 @@ buttony(raised = false)
   margin-bottom 0.5em
   user-select none
   if raised and $enable-gradients
-    background-linear-gradient top, lighten($bg-color, 10%), 40%, darken($bg-color, 10%), 100%
+    button-gradient $bg-color
 
   &:hover
+    color darken($fg-color, 0%)
     background-color $highlight
     if raised and $enable-gradients
-      background-linear-gradient top, lighten($highlight, 10%), 40%, darken($highlight, 10%), 100%
+      button-gradient $highlight
   &:active
     background-color $active-highlight
     if raised and $enable-gradients
-      background-linear-gradient top, darken($highlight, 10%), 40%, lighten($highlight, 10%), 100%
+      button-gradient $highlight, true
 
   & > .label-icon-left
     float left
@@ -68,15 +69,13 @@ input:focus::-webkit-input-placeholder
     height 1em
     border $normal-border
     margin-right 0.5em
-    if $enable-gradients
-      background-linear-gradient top, lighten($bg-color, 10%), 40%, darken($bg-color, 10%), 100%
+    button-gradient $bg-color
   &.checked:before
     content "X"
     font-weight 900
     color activate($bg-color, 40%)
     text-align center
-    if $enable-gradients
-      background-linear-gradient top, darken($highlight, 10%), 40%, lighten($highlight, 10%), 100%
+    button-gradient $highlight, true
   &:hover
     background-color $highlight
 

@@ -27,11 +27,11 @@ html
 
 a
   text-decoration none
-  p &
+  color $fg-highlight
+  &:hover
+    color $fg-active-highlight
+  p &, .markdown &
     text-decoration underline
-    color $fg-highlight
-    &:hover
-      color $fg-active-highlight
 
 .hidden
   display none

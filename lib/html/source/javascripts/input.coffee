@@ -37,26 +37,29 @@ $.extend WSClient.prototype.actions,
     if data.value
       element[0].value = data.value
 
+    accept = (data) =>
+      @__parent.send({
+        id:data.id
+        action:'callback'
+        source:'input'
+        text: element[0].value
+        original_msg:data
+        })
+      if data.once
+        replaceText = @__parent.escape("#{element[0].value}\n")
+        replaceText = "#{data.label}#{replaceText}" if data.keep_label
+        element.replaceWith(replaceText)
+      if data.history
+        history = element.data('history') || []
+        history.push element[0].value
+        element.data('history', history)
+        element.data('history-index', history.length)
+      if data.autoclear
+        element[0].value = ""
+
     element.change =>
-      unless element.hasClass("unclicked")
-        @__parent.send({
-          id:data.id
-          action:'callback'
-          source:'input'
-          text: element[0].value
-          original_msg:data
-          })
-        if data.once
-          replaceText = @__parent.escape("#{element[0].value}\n")
-          replaceText = "#{data.label}#{replaceText}" if data.keep_label
-          element.replaceWith(replaceText)
-        if data.history
-          history = element.data('history') || []
-          history.push element[0].value
-          element.data('history', history)
-          element.data('history-index', history.length)
-        if data.autoclear
-          element[0].value = ""
+      unless element.hasClass("unclicked") or data.enter_only
+        accept(data)
 
     offset_history = (e, amt) =>
       history = element.data('history') || []
@@ -69,6 +72,8 @@ $.extend WSClient.prototype.actions,
     element.keydown (e) =>
       offset_history(e, -1) if e.which is 38 and data.history
       offset_history(e, +1) if e.which is 40 and data.history
+      if e.which is 13 and data.enter_only
+        accept(data)
 
     target.append(element)
 

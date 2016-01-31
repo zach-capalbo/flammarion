@@ -22,3 +22,21 @@ box-shadow-inset(ammount = 2)
 drop-shadow(ammount = 2)
   if $enable-gradients
     box-shadow 2px 2px 4px 2px darken($bg-color, 20%)
+
+button-gradient(bcolor, reverse = false)
+  if $enable-gradients
+    start = lighten(bcolor, 10%)
+    end = darken(bcolor, 10%)
+    if reverse
+      tmp = end
+      end = start
+      start = tmp
+
+    if dark($bg-color)
+      gstart = 0%
+      gend = 20%
+    else
+      gstart = 40%
+      gend = 100%
+
+    background-linear-gradient top, start, gstart, end, gend
