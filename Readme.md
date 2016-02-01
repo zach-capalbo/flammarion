@@ -32,6 +32,8 @@ or add it to your Gemfile.
 
 The easiest way to use Flammarion, is similar to how you might use STDOUT:
 
+_(Note: these examples are inteneded to be run from an interactive session such as IRB or [pry](http://pryrepl.org/). If you wish to use them as part of a script, you should use `f.wait_until_closed` at the end, in order to block termination of the script.)_
+
 ```ruby
 require 'flammarion'
 f = Flammarion::Engraving.new

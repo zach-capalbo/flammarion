@@ -224,6 +224,8 @@ module Flammarion
     #  to change the text.
     # @option options [Boolean] :keep_label (false) If +:once+ is also set, this
     #  will prepend +label+ when converting the input to plain text.
+    # @option options [Boolean] :enter_only (false) Only accept the users input
+    #  when the enter key is pressed, not merely when it changes.
     # @overload input(label, options = {})
     #  @return [DeferredValue] An object representing the current value of the
     #   input, which can be converted to text using +#to_s+.

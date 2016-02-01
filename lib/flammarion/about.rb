@@ -1,5 +1,4 @@
 module Flammarion
-  
   # Pops up a little about box.
   def self.about
     f = Engraving.new(close_on_exit:true)
@@ -9,5 +8,6 @@ module Flammarion
     f.markdown(File.read(readme))
     f.break
     f.markdown(File.read(license))
+    f.wait_until_closed
   end
 end
