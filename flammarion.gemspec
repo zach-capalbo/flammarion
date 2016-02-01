@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "coffee-script"
   s.add_runtime_dependency "redcarpet"
   s.add_runtime_dependency "launchy"
+  s.add_runtime_dependency "websocket"
 
   s.add_development_dependency "bundler", "~> 1.7"
   s.add_development_dependency "middleman", "~> 3.3"
