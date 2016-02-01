@@ -31,6 +31,8 @@ works, but you don&#39;t need to worry about putting it in your path.)</p>
 <h2>Tutorial</h2>
 
 <p>The easiest way to use Flammarion, is similar to how you might use STDOUT:</p>
+
+<p><em>(Note: these examples are inteneded to be run from an interactive session such as IRB or <a href="http://pryrepl.org/">pry</a>. If you wish to use them as part of a script, you should use `f.wait</em>until<em>closed` at the end, in order to block termination of the script.)</em></p>
 <pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'flammarion'</span>
 <span class="n">f</span> <span class="o">=</span> <span class="no">Flammarion</span><span class="o">::</span><span class="no">Engraving</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">f</span><span class="p">.</span><span class="nf">puts</span> <span class="s2">"Hello World!"</span>
