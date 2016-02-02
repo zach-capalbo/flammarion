@@ -78,7 +78,7 @@ f.button("Click Here!!!") {f.puts "You clicked the button!"}
 f.input("Placeholder > ") {|msg| f.puts "You wrote: #{msg['text'].light_magenta}"}
 ```
 
-The [api documetaion](http://zach-capalbo.github.io/flammarion/doc/Flammarion.html)
+The [api documentation](http://zach-capalbo.github.io/flammarion/doc/Flammarion.html)
 is available at <http://zach-capalbo.github.io/flammarion/doc/Flammarion.html>.
 
 ## Screenshots / Samples
