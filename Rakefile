@@ -65,4 +65,5 @@ task :publish => [:build, :documentation] do
   bump_version
   system("sudo gem install flammarion-#{Flammarion::VERSION}.gem")
   system("git push")
+  system("git push --tags")
 end

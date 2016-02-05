@@ -6,8 +6,6 @@
 
   BrowserWindow = require('browser-window');
 
-  require('crash-reporter').start();
-
   path = require('path');
 
   app.on('ready', function() {
@@ -18,9 +16,10 @@
       height: 600,
       "node-integration": false,
       "web-security": false,
+      icon: "icon.png",
       preload: preload
     });
-    return main_window.loadUrl(process.argv[2]);
+    return main_window.loadURL(process.argv[2]);
   });
 
 }).call(this);

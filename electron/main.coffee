@@ -1,6 +1,5 @@
 app = require 'app'
 BrowserWindow = require('browser-window')
-require('crash-reporter').start()
 path = require('path')
 
 app.on 'ready', ->
@@ -10,5 +9,6 @@ app.on 'ready', ->
     height: 600
     "node-integration": false
     "web-security":false
+    icon:"icon.png"
     preload:preload
-  main_window.loadUrl(process.argv[2])
+  main_window.loadURL(process.argv[2])
