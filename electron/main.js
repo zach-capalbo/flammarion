@@ -14,8 +14,8 @@
     var main_window, preload;
     preload = path.resolve(path.join(__dirname, 'preload.js'));
     main_window = new BrowserWindow({
-      width: 800,
-      height: 600,
+      width: parseInt(process.argv[3]) || 800,
+      height: parseInt(process.argv[4]) || 600,
       "node-integration": false,
       "web-security": false,
       icon: "icon.png",

@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.description = 'The nifty Ruby gui toolkit. An easy to use gui toolkit built with scripting in mind.'
   s.authors     = ["Zach Capalbo"]
   s.email       = "zach.geek@gmail.com"
-  s.files       = Dir["lib/**/*"] + %w[LICENSE Readme.md] + Dir["electron/**/*"]
+  s.files       = Dir["lib/**/*"] + %w[LICENSE Readme.md] + Dir["electron/*"]
   s.homepage    = 'https://github.com/zach-capalbo/flammarion'
   s.license     = 'MIT'
   s.add_runtime_dependency "rubame", "~> 0.0.2"

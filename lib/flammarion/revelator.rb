@@ -72,7 +72,7 @@ module Flammarion
 
     browser :electron do |options|
       if which('electron') then
-        Process.detach(spawn("electron #{File.dirname(File.absolute_path(__FILE__))}/../../electron '#{options[:url]}'"))
+        Process.detach(spawn("electron #{File.dirname(File.absolute_path(__FILE__))}/../../electron '#{options[:url]}' #{options[:width]} #{options[:height]}"))
         return true
       end
       false
