@@ -1,5 +1,13 @@
 {
   "name" : "flammarion",
   "version" : "0.1.0",
-  "main" : "main.js"
+  "main" : "main.js",
+  "dependencies": {
+    "spellchecker": "^3.2.1",
+    "nan": "^2.0.0"
+  },
+  "packageDependencies": {
+    "spellchecker": "^3.2.1",
+    "nan": "^2.0.0"
+  }
 }

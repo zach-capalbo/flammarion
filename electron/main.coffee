@@ -1,6 +1,7 @@
 app = require 'app'
 BrowserWindow = require('browser-window')
 path = require('path')
+shell = require('electron').shell
 
 app.on 'ready', ->
   preload = path.resolve(path.join(__dirname, 'preload.js'))
@@ -12,3 +13,6 @@ app.on 'ready', ->
     icon:"icon.png"
     preload:preload
   main_window.loadURL(process.argv[2])
+  main_window.webContents.on 'new-window', (event, url) ->
+    event.preventDefault()
+    shell.openExternal(url)

@@ -21,7 +21,12 @@ task :html do
   end
 end
 
-task :build => [:html] do
+desc "Compile electron javascript"
+task :electron do
+  system("coffee -c electron/")
+end
+
+task :build => [:html, :electron] do
   system("gem build flammarion.gemspec")
 end
 

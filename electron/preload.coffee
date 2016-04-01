@@ -9,7 +9,7 @@ try
     spellCheck: (text) ->
       return !spellcheck.isMisspelled(text)
     })
-catch (error)
+catch error
   console.log("Could not load spellchecker: #{error}")
 
 window.onkeyup = (e) ->

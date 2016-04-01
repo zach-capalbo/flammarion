@@ -34,15 +34,17 @@ sample :table_with_side_panes do |f|
   f.table( 20.times.map do |i|
     [i, Faker::Name.name, Faker::Address.street_address]
   end, headers: ["Id", "Name", "Address"].map{|h| h.light_magenta})
+  f.pane("sidebar").pane("side1").puts("<a href='https://github.com/zach-capalbo/flammarion'>Home Page</a>", escape_html:false)
   f.pane("sidebar").pane("side1").puts Faker::Hipster.paragraph.red
   f.pane("sidebar").pane("side2").puts Faker::Hipster.paragraph.green
+  f.pane("sidebar").pane("side2").markdown("#{Faker::Hipster.paragraph} [And Such](https://github.com/zach-capalbo/flammarion)")
 
   3.times { f.status(Faker::Hipster.sentence.light_green)}
 end
 
 sample :log_viewer do |f|
   f.button_box("b").button("Clear", right_icon:'trash-o') {f.subpane('s').clear}
-  f.button_box("b").button("w-w") { f.subpane('s').style('word-wrap', 'initial')}
+  f.button_box("b").button("w-w") { f.subpane('s').style({'word-wrap' => 'initial', 'white-space' => 'pre'})}
   20.times { f.subpane('s', fill:true).puts(Faker::Hipster.paragraph) }
 end
 

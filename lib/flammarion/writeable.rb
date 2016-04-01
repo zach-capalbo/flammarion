@@ -311,13 +311,24 @@ module Flammarion
       send_json({action:'script', data:data}.merge(options))
     end
 
-    # Sets a CSS styles attribute on the current pane.
-    # @param attribute [String] The css attribute to set. Currently does not
-    #  support selectors or anything.
-    # @param value [#to_s] The value to set the attribute to. (Don't forget
-    #  units!)
-    def style(attribute, value)
-      send_json({action: 'style', attribute: attribute, value: value})
+    # Sets CSS styles attributes on the current pane.
+    # @overload style(attribute, value)
+    #   @param attribute [String] The css attribute to set. Currently does not
+    #    support selectors or anything.
+    #   @param value [#to_s] The value to set the attribute to. (Don't forget
+    #    units!)
+    # @overload style(attributes)
+    #   @param attributes [Hash] Table of css attribute to value mapping to set.
+    def style(*args)
+      case args.length
+      when 1
+        # @todo Pass this as a whole hash, rather than individually.
+        args[0].each{|a,v| send_json({action: 'style', attribute: a, value: v})}
+      when 2
+        send_json({action: 'style', attribute: args[0], value: args[1]})
+      else
+        raise ArgumentError.new("Invalid number of arguments (Expected 1 or 2)")
+      end
     end
 
     # Will render the given Slim template into the Writeable area. This is

@@ -59,6 +59,11 @@ class WSClient
         $(pane).css "height", p_height(pane)
         $(pane).css "width", '100%'
 
+  relink: (text) ->
+    text.replace(/\<a href=['"](https?:\/\/[^\s]+)["']>/gm, (str, l) ->
+      "<a href=\"#{l}\" target='_blank'>"
+    )
+
   escape: (text, input_options) ->
     options =
       raw: false
@@ -70,11 +75,15 @@ class WSClient
     text = "#{text}"
     text = ansi_up.escape_for_html(text) if options.escape_html
     text = ansi_up.ansi_to_html(text, {use_classes:true}) if options.colorize
+    # text = @relink(text)
     text = text.replace(/:[\w-]+:/g, (match) ->
       "<i class='fa fa-#{match[1..-2]}'></i>") if options.escape_icons
-    return text
+    text = $("<div>#{text}</div>")
+    text.find("a[href^='http']").attr('target','_blank')
+    return text.html()
 
   add: (object, target, data) ->
+    object.find("a[href^='http']").attr('target','_blank')
     if data.style
       object.css(key, val) for own key, val of data.style
     if data.replace
