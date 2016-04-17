@@ -32,7 +32,7 @@ or add it to your Gemfile.
 
 The easiest way to use Flammarion, is similar to how you might use STDOUT:
 
-_(Note: these examples are inteneded to be run from an interactive session such as IRB or [pry](http://pryrepl.org/). If you wish to use them as part of a script, you should use `f.wait_until_closed` at the end, in order to block termination of the script.)_
+_(Note: these examples are intended to be run from an interactive session such as IRB or [pry](http://pryrepl.org/). If you wish to use them as part of a script, you should use `f.wait_until_closed` at the end, in order to block termination of the script.)_
 
 ```ruby
 require 'flammarion'
@@ -165,7 +165,7 @@ Flammarion is distributed with a bunch of useful tools to make everyone's life e
 They are:
 
  * [ansi up](https://github.com/drudru/ansi_up)
- * [highlihgt.js](https://highlightjs.org/)
+ * [highlight.js](https://highlightjs.org/)
  * [jquery](https://jquery.com/)
  * [jquery transit](http://ricostacruz.com/jquery.transit/)
  * [leaflet](http://leafletjs.com/)
