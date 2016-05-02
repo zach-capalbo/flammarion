@@ -38,6 +38,9 @@
 # Reload the browser automatically whenever files change
  configure :development do
    activate :livereload
+   config[:file_watcher_ignore] += [
+     /source\/images\/emoji\//
+   ]
  end
 
 # Methods defined in the helpers block are available in templates

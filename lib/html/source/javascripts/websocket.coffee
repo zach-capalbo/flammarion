@@ -1,5 +1,7 @@
 #= require vendor/jquery.js
 #= require status.coffee
+#= require fontawesome.js
+#= require vendor/emojione.min.js
 
 class WSClient
   constructor: ->
@@ -75,9 +77,11 @@ class WSClient
     text = "#{text}"
     text = ansi_up.escape_for_html(text) if options.escape_html
     text = ansi_up.ansi_to_html(text, {use_classes:true}) if options.colorize
-    # text = @relink(text)
-    text = text.replace(/:[\w-]+:/g, (match) ->
-      "<i class='fa fa-#{match[1..-2]}'></i>") if options.escape_icons
+    if options.escape_icons
+      text = text.replace /:[\w-]+:/g, (match) ->
+        if font_awesome_list.includes(match[1..-2]) then "<i class='fa fa-#{match[1..-2]}'></i>" else match
+    emojione.imagePathPNG = '/images/emoji/'
+    text = emojione.toImage(text) if options.escape_icons
     text = $("<div>#{text}</div>")
     text.find("a[href^='http']").attr('target','_blank')
     return text.html()

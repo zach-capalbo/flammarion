@@ -79,7 +79,7 @@ $.extend WSClient.prototype.actions,
   markdown: (data) ->
     target = @__parent.check_target(data)
     newblock = $("<div class='markdown'></div>")
-    newblock.html(data.text)
+    newblock.html(@__parent.escape(data.text, $.extend({escape_html:false, escape_icons:true}, data)))
     @__parent.add(newblock, target, data)
     hljs.highlightBlock(code) for code in newblock.find('code')
 

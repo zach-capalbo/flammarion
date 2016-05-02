@@ -16,3 +16,7 @@
 
 # Ignore .DS_store file
 .DS_Store
+
+# Ignore emoji
+/emoji
+/node_modules

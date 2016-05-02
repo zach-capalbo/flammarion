@@ -27,4 +27,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "bundler", "~> 1.7"
   s.add_development_dependency "middleman", "~> 3.3"
   s.add_development_dependency "faker"
+  s.add_development_dependency "gemojione"
 end

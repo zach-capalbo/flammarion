@@ -72,3 +72,18 @@ task :publish => [:build, :documentation] do
   system("git push")
   system("git push --tags")
 end
+
+desc "Install Emoji Assets"
+task :emoji do
+  require 'gemojione'
+  target = File.join(File.dirname(__FILE__), "lib/html/source/images/emoji")
+  source = Gemojione.index.images_path
+  FileUtils.mkdir_p target
+  Dir["#{source}/*.png"].each do |png|
+    FileUtils.cp(png, "#{target}/#{File.basename(png).downcase}")
+  end
+
+  # Update font awesome json
+  fa_list = File.read(File.join(File.dirname(__FILE__), "lib/html/source/stylesheets/font-awesome/css/font-awesome.css")).each_line.collect{|l| l.scan(/fa-([a-z\-]+):before/)[0]}.reject{|n| n.nil?}.flatten.to_json
+  File.write(File.join(File.dirname(__FILE__), "lib/html/source/javascripts/fontawesome.js"), "window.font_awesome_list = #{fa_list};")
+end
