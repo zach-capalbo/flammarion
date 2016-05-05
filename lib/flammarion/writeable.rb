@@ -50,7 +50,12 @@ module Flammarion
       end
 
       def plot(data, options = {})
-        @engraving.send_json({action:'plot', id:@id, target:@target, data:data}.merge(options))
+        unless data.respond_to?(:keys)
+          data = {y:data, x:(1..data.size).to_a}
+        else
+          options = options.merge(data)
+        end
+        @engraving.send_json({action:'plot', id:@id, target:@target, data:[{type:'scatter'}.merge(data)]}.merge(options))
       end
     end
 
@@ -137,10 +142,11 @@ module Flammarion
     #  and zero
     # @note You can press 'a' while hovering the plot to reset the zoom.
     # @return [Plot] A Plot object for manipulation after creation.
-    def plot(values, options = {})
+    def plot(data, options = {})
       id = @engraving.make_id
-      send_json({action:'plot', data:values, id:id}.merge(options))
-      return Plot.new(id, @pane_name, @engraving)
+      p = Plot.new(id, @pane_name, @engraving)
+      p.plot(data, options)
+      return p
     end
 
     # Adds a pretty-printed, colorful display of data or code
