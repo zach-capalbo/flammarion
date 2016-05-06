@@ -39,7 +39,7 @@
  configure :development do
    activate :livereload
    config[:file_watcher_ignore] += [
-     /source\/images\/emoji\//
+     /emoji\//
    ]
  end
 

@@ -7,6 +7,7 @@ class VersionControlError < CommandFailedError; end
 desc "Run html development server"
 task :serve do
   Dir.chdir("lib/html") do
+    system("rm -r source/images/emoji/*")
     system("middleman server")
   end
 end
@@ -15,7 +16,7 @@ task :server => [:serve] do
 end
 
 desc "Build all html/css/js files"
-task :html do
+task :html => [:emoji] do
   Dir.chdir("lib/html") do
     system("middleman build")
   end
@@ -26,7 +27,7 @@ task :electron do
   system("coffee -c electron/")
 end
 
-task :build => [:html, :electron, :emoji] do
+task :build => [:html, :electron] do
   system("gem build flammarion.gemspec")
 end
 

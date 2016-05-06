@@ -68,7 +68,7 @@ module Flammarion
     #   plain text. If false, allows any arbitrary html to be rendered in the
     #   writeable area.
     #  @option options [Boolean] :escape_icons (false) If true, will translate
-    #   any text between two `:` into a font-awesome icon. (E.g. :thumbs-up:)
+    #   any text between two `:` into a font-awesome or emojione icon. (E.g. :thumbs-up:)
 
     # @!macro [new] string_representation
     #   The string can be included in text for text-accepting methods (such as
@@ -124,12 +124,29 @@ module Flammarion
       return nil
     end
 
-    # Creates a new plot to display single axis data
+    # Creates a new plot to display single axis data. Uses Plotly javascript
+    # library for plotting, options are passed directly to Plotly, so all
+    # types of plots and options are supported.
+    #
     # @macro add_options
+    # @see https://plot.ly/javascript/
     # @return [Plot] A Plot object for manipulation after creation.
     # @overload plot(array, options)
     #   @param [Array<Number>] values A list of numbers to plot
+    #   @example
+    #     f.plot([1,3,4,2])
+    #   @example
+    #     f.plot(100.times.map{rand}, mode: 'markers')
     # @overload plot(dataset, options)
+    #   @param [Hash] A hash representing a Plotly dataset
+    #   @example
+    #     f.plot(x: (1..314).to_a.map{|x| Math.sin(x.to_f / 20.0)}, y:(1..314).to_a.map{|x| Math.sin(x.to_f / 10)}, replace:true)
+    #   @example
+    #     f.plot(x: [Time.now, Time.now + 24*60*60].map(&:to_s), y: [55, 38], type:'bar', replace:true)
+    # @overload plot(dataset, options)
+    #   @param [Array<Hash>] An array of Plotly datasets
+    #   @example
+    #     f.plot(5.times.map{|t| {y: 100.times.map{rand * t}}})f.plot(5.times.map{|t| {y: 100.times.map{rand * t}}})
     def plot(data, options = {})
       id = @engraving.make_id
       p = Plot.new(id, @pane_name, @engraving)

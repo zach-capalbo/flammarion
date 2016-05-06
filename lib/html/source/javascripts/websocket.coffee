@@ -3,6 +3,8 @@
 #= require fontawesome.js
 #= require vendor/emojione.min.js
 
+emojione.imagePathPNG = 'images/emoji/'
+
 class WSClient
   constructor: ->
     host = $qs.get("host") || "localhost"
@@ -80,7 +82,7 @@ class WSClient
     if options.escape_icons
       text = text.replace /:[\w-]+:/g, (match) ->
         if font_awesome_list.includes(match[1..-2]) then "<i class='fa fa-#{match[1..-2]}'></i>" else match
-    emojione.imagePathPNG = 'images/emoji/'
+
     text = emojione.toImage(text) if options.escape_icons
     text = $("<div>#{text}</div>")
     text.find("a[href^='http']").attr('target','_blank')

@@ -5,9 +5,19 @@ $.extend WSClient.prototype.actions,
     class_name = if data.inline then 'inline-button' else 'full-button'
     left_icon = ""
     data.right_icon ||= data.icon
-    left_icon = "<i class='fa fa-#{data.left_icon} label-icon-left'></i>" if data.left_icon
+    if data.left_icon
+      if ":#{data.left_icon}:" of emojione.emojioneList
+        left_icon = "<i class='label-icon-left'>" + emojione.shortnameToImage(":#{data.left_icon}:") + "</i>"
+        console.log left_icon
+      else
+        left_icon = "<i class='fa fa-#{data.left_icon} label-icon-left'></i>"
+
     right_icon = ""
-    right_icon = "<i class='fa fa-#{data.right_icon} label-icon-right'></i>" if data.right_icon
+    if data.right_icon
+      if ":#{data.right_icon}:" of emojione.emojioneList
+        left_icon = "<i class='label-icon-right'>" + emojione.shortnameToImage(":#{data.right_icon}:") + "</i>"
+      else
+        right_icon = "<i class='fa fa-#{data.right_icon} label-icon-right'></i>"
 
     element = $("<a href='#' class='#{class_name}'>#{left_icon}#{@__parent.escape(data.label, data)}#{right_icon}</a>")
     element.click =>
