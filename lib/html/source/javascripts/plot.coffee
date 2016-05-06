@@ -31,3 +31,6 @@ $.extend WSClient.prototype.actions,
       @__parent.add(plotDiv, target, data)
       console.log(default_plot_options)
       Plotly.newPlot(plotDiv[0], data.data, $.extend(width: plotDiv.width(), window.default_plot_options, data))
+    else
+      plotDiv[0].data = data.data
+      Plotly.redraw(plotDiv[0])

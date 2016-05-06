@@ -26,7 +26,7 @@ task :electron do
   system("coffee -c electron/")
 end
 
-task :build => [:html, :electron] do
+task :build => [:html, :electron, :emoji] do
   system("gem build flammarion.gemspec")
 end
 

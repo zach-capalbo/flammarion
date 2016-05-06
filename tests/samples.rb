@@ -18,7 +18,7 @@ sample :message_sender_with_contacts do |f|
   f.input("Body", multiline:true)
   f.button("Send") {f.status("Error: #{ArgumentError.new("Dummy Error")}".red)}
   f.pane("contacts", weight:0.7).puts("Contacts", replace:true)
-  icons = %w[thumbs-up meh-o bicycle gears star-o star] + [nil] * 5
+  icons = %w[thumbs-up meh-o bicycle gears star-o star cow japanese_ogre] + [nil] * 5
   30.times do |i|
     right_icon = icons.sample
     left_icon = icons.sample
@@ -37,7 +37,7 @@ sample :table_with_side_panes do |f|
   f.pane("sidebar").pane("side1").puts("<a href='https://github.com/zach-capalbo/flammarion'>Home Page</a>", escape_html:false)
   f.pane("sidebar").pane("side1").puts Faker::Hipster.paragraph.red
   f.pane("sidebar").pane("side2").puts Faker::Hipster.paragraph.green
-  f.pane("sidebar").pane("side2").markdown("#{Faker::Hipster.paragraph} [And Such](https://github.com/zach-capalbo/flammarion)")
+  f.pane("sidebar").pane("side2").markdown("#{Faker::Hipster.paragraph.gsub(/\s/){|m| m + ((rand > 0.75) ? " :#{%w[cow cat smile thumbsup].sample}: " : "")}} [And Such](https://github.com/zach-capalbo/flammarion)", escape_icons:true)
 
   3.times { f.status(Faker::Hipster.sentence.light_green)}
 end
@@ -67,6 +67,14 @@ end
 sample :sine_wave_plot do |f|
   data = 100.times.collect {|x| Math.sin(x / 100.0 * 5.0 * Math::PI)}
   f.plot(data)
+end
+
+sample :date_time_plot do |f|
+  f.plot(x: (1..10).to_a.map{|t| Time.now + t * 60 * 60 * 24}, y:(1..10).to_a.map{|x| Math.exp(x)}, type:'bar')
+end
+
+sample :multi_plot do |f|
+  f.plot(5.times.map{|t| {y:100.times.map{rand * t}}})
 end
 
 sample :echo do |f|

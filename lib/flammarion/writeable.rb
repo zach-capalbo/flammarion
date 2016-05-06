@@ -50,12 +50,13 @@ module Flammarion
       end
 
       def plot(data, options = {})
-        unless data.respond_to?(:keys)
-          data = {y:data, x:(1..data.size).to_a}
-        else
+        if data.respond_to?(:keys)
           options = options.merge(data)
+          data = [data]
+        elsif not data.first.respond_to?(:keys)
+          data = [{y:data, x:(1..data.size).to_a}.merge(options)]
         end
-        @engraving.send_json({action:'plot', id:@id, target:@target, data:[{type:'scatter'}.merge(data)]}.merge(options))
+        @engraving.send_json({action:'plot', id:@id, target:@target, data:data}.merge(options))
       end
     end
 
@@ -124,24 +125,11 @@ module Flammarion
     end
 
     # Creates a new plot to display single axis data
-    # @param [Array<Number>] values A list of numbers to plot
     # @macro add_options
-    # @option options [Integer] :number_of_ticks The number of tick marks to
-    #  display across the bottom
-    # @option options [Integer] :tick_precision The number of digits after the
-    #  decimal point to display next to the tick marks
-    # @option options [Float] :xstart (0.0) The starting value for the x-axis
-    # @option options [Float, String] :ystart ('min') The starting value for the
-    #  y-axis. Can be 'min' to start at the minimum value.
-    # @option options [Boolean] :draw_zero (true) draw a line through y = 0
-    # @option options [Boolean] :draw_mark (false) place a + at each point on
-    #  the line.
-    # @option options [Boolean] :draw_line (true) draw a line through all the
-    #  points.
-    # @option options [Boolean] :fill (false) fill in the area between the curve
-    #  and zero
-    # @note You can press 'a' while hovering the plot to reset the zoom.
     # @return [Plot] A Plot object for manipulation after creation.
+    # @overload plot(array, options)
+    #   @param [Array<Number>] values A list of numbers to plot
+    # @overload plot(dataset, options)
     def plot(data, options = {})
       id = @engraving.make_id
       p = Plot.new(id, @pane_name, @engraving)

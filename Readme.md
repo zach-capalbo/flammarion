@@ -170,3 +170,5 @@ They are:
  * [jquery transit](http://ricostacruz.com/jquery.transit/)
  * [leaflet](http://leafletjs.com/)
  * [font awesome](https://fortawesome.github.io/Font-Awesome/)
+ * [emojione](http://emojione.com/)
+ * [Plotly](htps://plot.ly/)
