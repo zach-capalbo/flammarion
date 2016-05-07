@@ -40,12 +40,13 @@ f = Flammarion::Engraving.new
 f.puts "Hello World!"
 ```
 
-It can even support standard console color codes: (Thanks to [ansi_up](http://github.com/drudru/ansi_up)!)
+It can even support standard console color codes (Thanks to [ansi_up](http://github.com/drudru/ansi_up)!) and emoji / icons (Thanks to [emojione](http://emojione.com/) and [font awesome](https://fortawesome.github.io/Font-Awesome/))
 
 ```ruby
 require 'colorized'
 f.puts "This line will be red!".red
 f.puts "This #{"word".colorize(:green)} will not be blue."
+f.puts "This line will have cows :cow: :cow2:", escape_icons: true
 ```
 
 However, you can also do more advanced things. Say you want to show a table. Easy!
@@ -54,6 +55,13 @@ However, you can also do more advanced things. Say you want to show a table. Eas
 f.table(
   [%w[Number Squared Sqrt].map{|h| h.light_magenta}] + # Make the header a different color
   10.times.collect{|x| [x, x * x, Math.sqrt(x)]})
+```
+
+Now, instead of a table, you decide you want a plot. No problem.
+
+```ruby
+x = 10.times.to_a
+f.plot([{x:x, y:x}, {x: x, y: x.map{|i| i*i}}, {x: x, y: x.map{|i| Math.sqrt(i)}}])
 ```
 
 Or maybe you want to know where something is:
@@ -92,7 +100,7 @@ recipient = f.subpane("number").input("Phone Number")
 text = f.input("Body", multiline:true)
 f.button("Send") { send_message(recipient.to_s, text.to_s); f.status("Message Sent!")}
 f.pane("contacts").puts("Contacts", replace:true)
-icons = %w[thumbs-up meh-o bicycle gears star-o star] + [nil] * 5
+icons = %w[thumbs-up meh-o bicycle gears star-o star cow cat cactus] + [nil] * 5
 30.times do |i|
   name = Faker::Name.name
   f.pane("contacts").button(name, right_icon:icons.sample, left_icon:icons.sample) do
@@ -154,6 +162,12 @@ f.pane("sidebar").pane("side2").puts Faker::Hipster.paragraph.green
 
 ![Table Sample](http://zach-capalbo.github.io/flammarion/img/table.png)
 
+```ruby
+f = Flammarion::Engraving.new
+f.plot(5.times.map{|t| {y:100.times.map{rand * t}}})
+```
+
+![Plot Sample](http://zach-capalbo.github.io/flammarion/img/plot.png)
 
 ## Examples
 

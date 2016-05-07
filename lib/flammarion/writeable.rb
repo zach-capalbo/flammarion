@@ -131,19 +131,19 @@ module Flammarion
     # @macro add_options
     # @see https://plot.ly/javascript/
     # @return [Plot] A Plot object for manipulation after creation.
-    # @overload plot(array, options)
+    # @overload plot(array, options = {})
     #   @param [Array<Number>] values A list of numbers to plot
     #   @example
     #     f.plot([1,3,4,2])
     #   @example
     #     f.plot(100.times.map{rand}, mode: 'markers')
-    # @overload plot(dataset, options)
+    # @overload plot(dataset, options = {})
     #   @param [Hash] A hash representing a Plotly dataset
     #   @example
     #     f.plot(x: (1..314).to_a.map{|x| Math.sin(x.to_f / 20.0)}, y:(1..314).to_a.map{|x| Math.sin(x.to_f / 10)}, replace:true)
     #   @example
     #     f.plot(x: [Time.now, Time.now + 24*60*60].map(&:to_s), y: [55, 38], type:'bar', replace:true)
-    # @overload plot(dataset, options)
+    # @overload plot(datasets, options = {})
     #   @param [Array<Hash>] An array of Plotly datasets
     #   @example
     #     f.plot(5.times.map{|t| {y: 100.times.map{rand * t}}})f.plot(5.times.map{|t| {y: 100.times.map{rand * t}}})

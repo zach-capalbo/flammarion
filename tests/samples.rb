@@ -18,7 +18,7 @@ sample :message_sender_with_contacts do |f|
   f.input("Body", multiline:true)
   f.button("Send") {f.status("Error: #{ArgumentError.new("Dummy Error")}".red)}
   f.pane("contacts", weight:0.7).puts("Contacts", replace:true)
-  icons = %w[thumbs-up meh-o bicycle gears star-o star cow japanese_ogre] + [nil] * 5
+  icons = %w[thumbs-up meh-o bicycle gears star-o star cow cat cactus] + [nil] * 5
   30.times do |i|
     right_icon = icons.sample
     left_icon = icons.sample
