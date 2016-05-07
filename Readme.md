@@ -185,4 +185,4 @@ They are:
  * [leaflet](http://leafletjs.com/)
  * [font awesome](https://fortawesome.github.io/Font-Awesome/)
  * [emojione](http://emojione.com/)
- * [Plotly](htps://plot.ly/)
+ * [Plotly](https://plot.ly/)
