@@ -32,22 +32,28 @@ works, but you don&#39;t need to worry about putting it in your path.)</p>
 
 <p>The easiest way to use Flammarion, is similar to how you might use STDOUT:</p>
 
-<p><em>(Note: these examples are inteneded to be run from an interactive session such as IRB or <a href="http://pryrepl.org/">pry</a>. If you wish to use them as part of a script, you should use `f.wait</em>until<em>closed` at the end, in order to block termination of the script.)</em></p>
+<p><em>(Note: these examples are intended to be run from an interactive session such as IRB or <a href="http://pryrepl.org/">pry</a>. If you wish to use them as part of a script, you should use `f.wait</em>until<em>closed` at the end, in order to block termination of the script.)</em></p>
 <pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'flammarion'</span>
 <span class="n">f</span> <span class="o">=</span> <span class="no">Flammarion</span><span class="o">::</span><span class="no">Engraving</span><span class="p">.</span><span class="nf">new</span>
 <span class="n">f</span><span class="p">.</span><span class="nf">puts</span> <span class="s2">"Hello World!"</span>
 </code></pre>
 
-<p>It can even support standard console color codes: (Thanks to <a href="http://github.com/drudru/ansi_up">ansi_up</a>!)</p>
+<p>It can even support standard console color codes (Thanks to <a href="http://github.com/drudru/ansi_up">ansi_up</a>!) and emoji / icons (Thanks to <a href="http://emojione.com/">emojione</a> and <a href="https://fortawesome.github.io/Font-Awesome/">font awesome</a>)</p>
 <pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'colorized'</span>
 <span class="n">f</span><span class="p">.</span><span class="nf">puts</span> <span class="s2">"This line will be red!"</span><span class="p">.</span><span class="nf">red</span>
 <span class="n">f</span><span class="p">.</span><span class="nf">puts</span> <span class="s2">"This </span><span class="si">#{</span><span class="s2">"word"</span><span class="p">.</span><span class="nf">colorize</span><span class="p">(</span><span class="ss">:green</span><span class="p">)</span><span class="si">}</span><span class="s2"> will not be blue."</span>
+<span class="n">f</span><span class="p">.</span><span class="nf">puts</span> <span class="s2">"This line will have cows :cow: :cow2:"</span><span class="p">,</span> <span class="ss">escape_icons: </span><span class="kp">true</span>
 </code></pre>
 
 <p>However, you can also do more advanced things. Say you want to show a table. Easy!</p>
 <pre class="highlight ruby"><code><span class="n">f</span><span class="p">.</span><span class="nf">table</span><span class="p">(</span>
   <span class="p">[</span><span class="sx">%w[Number Squared Sqrt]</span><span class="p">.</span><span class="nf">map</span><span class="p">{</span><span class="o">|</span><span class="n">h</span><span class="o">|</span> <span class="n">h</span><span class="p">.</span><span class="nf">light_magenta</span><span class="p">}]</span> <span class="o">+</span> <span class="c1"># Make the header a different color</span>
   <span class="mi">10</span><span class="p">.</span><span class="nf">times</span><span class="p">.</span><span class="nf">collect</span><span class="p">{</span><span class="o">|</span><span class="n">x</span><span class="o">|</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="no">Math</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)]})</span>
+</code></pre>
+
+<p>Now, instead of a table, you decide you want a plot. No problem.</p>
+<pre class="highlight ruby"><code><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">.</span><span class="nf">times</span><span class="p">.</span><span class="nf">to_a</span>
+<span class="n">f</span><span class="p">.</span><span class="nf">plot</span><span class="p">([{</span><span class="n">x</span><span class="ss">:x</span><span class="p">,</span> <span class="n">y</span><span class="ss">:x</span><span class="p">},</span> <span class="p">{</span><span class="ss">x: </span><span class="n">x</span><span class="p">,</span> <span class="ss">y: </span><span class="n">x</span><span class="p">.</span><span class="nf">map</span><span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="p">}},</span> <span class="p">{</span><span class="ss">x: </span><span class="n">x</span><span class="p">,</span> <span class="ss">y: </span><span class="n">x</span><span class="p">.</span><span class="nf">map</span><span class="p">{</span><span class="o">|</span><span class="n">i</span><span class="o">|</span> <span class="no">Math</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)}}])</span>
 </code></pre>
 
 <p>Or maybe you want to know where something is:</p>
@@ -78,7 +84,7 @@ is available at <a href="http://zach-capalbo.github.io/flammarion/doc/Flammarion
 <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">input</span><span class="p">(</span><span class="s2">"Body"</span><span class="p">,</span> <span class="n">multiline</span><span class="ss">:true</span><span class="p">)</span>
 <span class="n">f</span><span class="p">.</span><span class="nf">button</span><span class="p">(</span><span class="s2">"Send"</span><span class="p">)</span> <span class="p">{</span> <span class="n">send_message</span><span class="p">(</span><span class="n">recipient</span><span class="p">.</span><span class="nf">to_s</span><span class="p">,</span> <span class="n">text</span><span class="p">.</span><span class="nf">to_s</span><span class="p">);</span> <span class="n">f</span><span class="p">.</span><span class="nf">status</span><span class="p">(</span><span class="s2">"Message Sent!"</span><span class="p">)}</span>
 <span class="n">f</span><span class="p">.</span><span class="nf">pane</span><span class="p">(</span><span class="s2">"contacts"</span><span class="p">).</span><span class="nf">puts</span><span class="p">(</span><span class="s2">"Contacts"</span><span class="p">,</span> <span class="n">replace</span><span class="ss">:true</span><span class="p">)</span>
-<span class="n">icons</span> <span class="o">=</span> <span class="sx">%w[thumbs-up meh-o bicycle gears star-o star]</span> <span class="o">+</span> <span class="p">[</span><span class="kp">nil</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span>
+<span class="n">icons</span> <span class="o">=</span> <span class="sx">%w[thumbs-up meh-o bicycle gears star-o star cow cat cactus]</span> <span class="o">+</span> <span class="p">[</span><span class="kp">nil</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span>
 <span class="mi">30</span><span class="p">.</span><span class="nf">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
   <span class="nb">name</span> <span class="o">=</span> <span class="no">Faker</span><span class="o">::</span><span class="no">Name</span><span class="p">.</span><span class="nf">name</span>
   <span class="n">f</span><span class="p">.</span><span class="nf">pane</span><span class="p">(</span><span class="s2">"contacts"</span><span class="p">).</span><span class="nf">button</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">right_icon</span><span class="ss">:icons</span><span class="p">.</span><span class="nf">sample</span><span class="p">,</span> <span class="n">left_icon</span><span class="ss">:icons</span><span class="p">.</span><span class="nf">sample</span><span class="p">)</span> <span class="k">do</span>
@@ -135,6 +141,11 @@ is available at <a href="http://zach-capalbo.github.io/flammarion/doc/Flammarion
 </code></pre>
 
 <p><img src="http://zach-capalbo.github.io/flammarion/img/table.png" alt="Table Sample"></p>
+<pre class="highlight ruby"><code><span class="n">f</span> <span class="o">=</span> <span class="no">Flammarion</span><span class="o">::</span><span class="no">Engraving</span><span class="p">.</span><span class="nf">new</span>
+<span class="n">f</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="mi">5</span><span class="p">.</span><span class="nf">times</span><span class="p">.</span><span class="nf">map</span><span class="p">{</span><span class="o">|</span><span class="n">t</span><span class="o">|</span> <span class="p">{</span><span class="n">y</span><span class="p">:</span><span class="mi">100</span><span class="p">.</span><span class="nf">times</span><span class="p">.</span><span class="nf">map</span><span class="p">{</span><span class="nb">rand</span> <span class="o">*</span> <span class="n">t</span><span class="p">}}})</span>
+</code></pre>
+
+<p><img src="http://zach-capalbo.github.io/flammarion/img/plot.png" alt="Plot Sample"></p>
 
 <h2>Examples</h2>
 
@@ -147,10 +158,12 @@ They are:</p>
 
 <ul>
 <li><a href="https://github.com/drudru/ansi_up">ansi up</a></li>
-<li><a href="https://highlightjs.org/">highlihgt.js</a></li>
+<li><a href="https://highlightjs.org/">highlight.js</a></li>
 <li><a href="https://jquery.com/">jquery</a></li>
 <li><a href="http://ricostacruz.com/jquery.transit/">jquery transit</a></li>
 <li><a href="http://leafletjs.com/">leaflet</a></li>
 <li><a href="https://fortawesome.github.io/Font-Awesome/">font awesome</a></li>
+<li><a href="http://emojione.com/">emojione</a></li>
+<li><a href="htps://plot.ly/">Plotly</a></li>
 </ul>
 <footer class="site-footer"><span class="site-footer-owner"><a href="https://github.com/zach-capalbo/flammarion">Flammarion</a> is maintained by <a href="http://zachcapalbo.com">Zach Capalbo</a>.</span><span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span></footer></section></body></html>
