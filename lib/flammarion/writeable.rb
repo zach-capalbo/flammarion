@@ -52,11 +52,24 @@ module Flammarion
       def plot(data, options = {})
         if data.respond_to?(:keys)
           options = options.merge(data)
+          if data.include?(:xy) then
+            data = data.clone
+            data[:x] = data[:xy].map(&:first)
+            data[:y] = data[:xy].map(&:last)
+            data.delete(:xy)
+          end
           data = [data]
         elsif not data.first.respond_to?(:keys)
           data = [{y:data, x:(1..data.size).to_a}.merge(options)]
         end
         @engraving.send_json({action:'plot', id:@id, target:@target, data:data}.merge(options))
+      end
+
+      def to_svg
+        svg = nil
+        @engraving.script(%|$('#plot-i9').find('svg')[0].outerHTML|, coffee:false) {|r| svg = r['result'] || "Error"}
+        sleep(0.1) while svg.nil?
+        return svg
       end
     end
 
@@ -138,13 +151,13 @@ module Flammarion
     #   @example
     #     f.plot(100.times.map{rand}, mode: 'markers')
     # @overload plot(dataset, options = {})
-    #   @param [Hash] A hash representing a Plotly dataset
+    #   @param [Hash] A hash representing a Plotly trace
     #   @example
     #     f.plot(x: (1..314).to_a.map{|x| Math.sin(x.to_f / 20.0)}, y:(1..314).to_a.map{|x| Math.sin(x.to_f / 10)}, replace:true)
     #   @example
     #     f.plot(x: [Time.now, Time.now + 24*60*60].map(&:to_s), y: [55, 38], type:'bar', replace:true)
     # @overload plot(datasets, options = {})
-    #   @param [Array<Hash>] An array of Plotly datasets
+    #   @param [Array<Hash>] An array of Plotly traces
     #   @example
     #     f.plot(5.times.map{|t| {y: 100.times.map{rand * t}}})f.plot(5.times.map{|t| {y: 100.times.map{rand * t}}})
     def plot(data, options = {})
@@ -317,9 +330,18 @@ module Flammarion
     #  the options given. Defaults to CoffeeScript
     # @option options [Boolean] :coffee (true) If true, will compile +text+ from
     #  CoffeeScript to JavaScript. If false, will pass text as plain JavaScript
-    def script(text, options = {})
+    def script(text, options = {}, &block)
       data = options.fetch(:coffee, true) ? CoffeeScript.compile(text) : text
-      send_json({action:'script', data:data}.merge(options))
+      id = @engraving.make_id
+      d = nil
+      if block_given?
+        @engraving.callbacks[id] = block
+      else
+        d = DeferredValue.new
+        @engraving.callbacks[id] = Proc.new {|v| d.__setobj__(v["result"])}
+      end
+      send_json({action:'script', data:data, id: id}.merge(options))
+      return d
     end
 
     # Sets CSS styles attributes on the current pane.

@@ -108,7 +108,14 @@ $.extend WSClient.prototype.actions,
     $("body").html(data.data)
 
   script: (data) ->
-    eval(data.data)
+    r = eval(data.data)
+    @__parent.send({
+      id:data.id
+      action:'callback'
+      source:'script'
+      original_msg:data
+      result: r
+      })
 
   style: (data) ->
     target = @__parent.check_target(data)
