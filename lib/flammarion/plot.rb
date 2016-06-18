@@ -64,9 +64,6 @@ module Flammarion
       @engraving.send_json({action:'plot', id:@id, target:@target, data:data}.merge(options))
     end
 
-    def to_png
-    end
-
     # Changes the layout of an already existing plot.
     # @see https://plot.ly/javascript/#layout-options
     def layout(options)
