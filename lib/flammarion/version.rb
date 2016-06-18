@@ -1,3 +1,3 @@
   module Flammarion
-    VERSION = "0.1.8pre"
+    VERSION = "0.1.8pre1"
   end

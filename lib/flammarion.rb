@@ -15,6 +15,7 @@ begin
 rescue LoadError
 end
 
+require_relative 'flammarion/plot.rb'
 require_relative 'flammarion/writeable.rb'
 require_relative 'flammarion/pane.rb'
 require_relative 'flammarion/server.rb'

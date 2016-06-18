@@ -83,3 +83,7 @@ sample :echo do |f|
     f.subpane("o").highlight(m)
   end
 end
+
+sample :emoji do |f|
+  f.emoji.keys.each_slice(20) {|e| f.puts e.join(" "), escape_icons:true}
+end

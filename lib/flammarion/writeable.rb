@@ -40,39 +40,6 @@ module Flammarion
       end
     end
 
-    # A representation of a plot in a writeable area. See {Writeable#plot}
-    class Plot
-      attr_reader :engraving
-      def initialize(id, target, engraving)
-        @id = id
-        @target = target
-        @engraving = engraving
-      end
-
-      def plot(data, options = {})
-        if data.respond_to?(:keys)
-          options = options.merge(data)
-          if data.include?(:xy) then
-            data = data.clone
-            data[:x] = data[:xy].map(&:first)
-            data[:y] = data[:xy].map(&:last)
-            data.delete(:xy)
-          end
-          data = [data]
-        elsif not data.first.respond_to?(:keys)
-          data = [{y:data, x:(1..data.size).to_a}.merge(options)]
-        end
-        @engraving.send_json({action:'plot', id:@id, target:@target, data:data}.merge(options))
-      end
-
-      def to_svg
-        svg = nil
-        @engraving.script(%|$('#plot-i9').find('svg')[0].outerHTML|, coffee:false) {|r| svg = r['result'] || "Error"}
-        sleep(0.1) while svg.nil?
-        return svg
-      end
-    end
-
     # @!macro [new] escape_options
     #  @option options [Boolean] :raw (false) Perform no escaping at all.
     #  @option options [Boolean] :colorize (true) Translate ANSI color escape
@@ -137,29 +104,11 @@ module Flammarion
       return nil
     end
 
-    # Creates a new plot to display single axis data. Uses Plotly javascript
+    # Creates a new plot to display data. Uses Plotly javascript
     # library for plotting, options are passed directly to Plotly, so all
     # types of plots and options are supported.
-    #
     # @macro add_options
-    # @see https://plot.ly/javascript/
-    # @return [Plot] A Plot object for manipulation after creation.
-    # @overload plot(array, options = {})
-    #   @param [Array<Number>] values A list of numbers to plot
-    #   @example
-    #     f.plot([1,3,4,2])
-    #   @example
-    #     f.plot(100.times.map{rand}, mode: 'markers')
-    # @overload plot(dataset, options = {})
-    #   @param [Hash] A hash representing a Plotly trace
-    #   @example
-    #     f.plot(x: (1..314).to_a.map{|x| Math.sin(x.to_f / 20.0)}, y:(1..314).to_a.map{|x| Math.sin(x.to_f / 10)}, replace:true)
-    #   @example
-    #     f.plot(x: [Time.now, Time.now + 24*60*60].map(&:to_s), y: [55, 38], type:'bar', replace:true)
-    # @overload plot(datasets, options = {})
-    #   @param [Array<Hash>] An array of Plotly traces
-    #   @example
-    #     f.plot(5.times.map{|t| {y: 100.times.map{rand * t}}})f.plot(5.times.map{|t| {y: 100.times.map{rand * t}}})
+    # @see Flammarion::Plot.plot
     def plot(data, options = {})
       id = @engraving.make_id
       p = Plot.new(id, @pane_name, @engraving)
@@ -218,12 +167,22 @@ module Flammarion
       %|<a href="#" onClick="$ws.send({id:'#{id}', action:'callback', source:'link'})">#{label}</a>|
     end
 
-    # Creates a string representing a Font Awesome icon.
+    # Creates a string representing a Emojione or Font Awesome icon.
     # @macro string_representation
     # @param name [String] The name of a Font Awesome icon class. See
     # @see https://fortawesome.github.io/Font-Awesome/icons/
+    # @see http://emojione.com/
     def icon(name, additional_classes = [])
-      %|<i class="fa fa-#{name} #{additional_classes.collect{|c| "fa-#{c}"}.join(" ")}"></i>|
+      e = emoji[":#{name}:"]
+      if e.nil? then
+        return %|<i class="fa fa-#{name} #{additional_classes.collect{|c| "fa-#{c}"}.join(" ")}"></i>|
+      else
+        return %|<img class="emojione" alt="#{name}" src="images/emoji/#{e['unicode'].last.downcase}.png">|
+      end
+    end
+
+    def image(url, options = {})
+      puts(%|<img src="#{url}">|, {escape_html: false}.merge(options))
     end
 
     # Creates a new text-input field into which the user can enter text.
@@ -548,6 +507,12 @@ module Flammarion
     # Searches for and highlights the string in the engraving.
     def search(string)
       send_json({action:'search', text: string})
+    end
+
+    # Returns the list of currently installed emoji from Emojione
+    def emoji
+      @@emoji ||= JSON.parse(File.read(File.join(File.dirname(__FILE__), "../html/build/javascripts/vendor/emojione.js")).each_line.find{|l| l.start_with?("    ns.emojioneList")}.scan(/= (\{[^;]+);/).flatten.first)
+      return @@emoji
     end
   end
 end

@@ -35,3 +35,4 @@ $.extend WSClient.prototype.actions,
     else
       plotDiv[0].data = data.data
       Plotly.redraw(plotDiv[0])
+      Plotly.relayout(plotDiv[0], data) if data.layout
