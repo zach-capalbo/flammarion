@@ -70,6 +70,13 @@ module Flammarion
       Process.detach(spawn(chrome_path, %[--app=#{resource}?path=#{@window_id}&port=#{server.port}&title="#{options[:title] || "Flammarion%20Engraving"}"]))
     end
 
+    browser :osx do |options|
+      return false unless RbConfig::CONFIG["host_os"] =~ /darwin|mac os/
+      executable = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+      @chrome.in, @chrome.out, @chrome.err, @chrome.thread = Open3.popen3("'#{executable}' --app='#{options[:url]}'")
+      return true if @chrome.in
+    end
+
     browser :electron do |options|
       if which('electron') then
         Process.detach(spawn("electron #{File.dirname(File.absolute_path(__FILE__))}/../../electron '#{options[:url]}' #{options[:width]} #{options[:height]}"))
