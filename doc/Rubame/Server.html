@@ -539,7 +539,7 @@
       <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 76</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_blk'>blk</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_readable'>readable</span><span class='comma'>,</span> <span class='id identifier rubyid_writable'>writable</span> <span class='op'>=</span> <span class='const'>IO</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span><span class='lparen'>(</span><span class='ivar'>@reading</span><span class='comma'>,</span> <span class='ivar'>@writing</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_readable'>readable</span><span class='comma'>,</span> <span class='id identifier rubyid_writable'>writable</span> <span class='op'>=</span> <span class='const'>IO</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span><span class='lparen'>(</span><span class='ivar'>@reading</span><span class='comma'>,</span> <span class='ivar'>@writing</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='int'>5</span><span class='rparen'>)</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_readable'>readable</span>
     <span class='id identifier rubyid_readable'>readable</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_socket'>socket</span><span class='op'>|</span>
@@ -595,7 +595,7 @@
 </div>
 
     <div id="footer">
-  Generated on Sat Jun 18 16:15:27 2016 by
+  Generated on Wed Jul 27 08:24:45 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>
