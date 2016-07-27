@@ -1,30 +1,22 @@
 module Flammarion
   # @api private
   class Server
-    attr_reader :port
+    attr_reader :port, :server_thread
     def initialize
       @windows = {}
       @socket_paths = {}
       @started = false
-      Thread.new do
+      @launch_thread = Thread.current
+      @server_thread = Thread.new do
         begin
           start_server_internal
-        rescue SystemExit
-          raise
-        rescue Exception => e
-          if binding.respond_to? :pry
-            binding.pry
-          else
-            raise
-          end
+        rescue StandardError
+          handle_exception($!)
         end
       end
       sleep 0.5 while not @started
-
-      # This is a hack. For some reason, you need to wait a bit for everything
-      # to get written.
-      at_exit { sleep 0.1 }
     end
+
     def start_server_internal
       @port = 7870
       @port = rand(65000 - 1024) + 1024 if Gem.win_platform?
@@ -53,13 +45,8 @@ module Flammarion
               Thread.new do
                 begin
                   @windows[@socket_paths[ws]].process_message(msg)
-                rescue Exception => e
-                  Kernel.puts "#{e.message.to_s.red}\n#{e.backtrace.join("\n").light_red}"
-                  if binding.respond_to? :pry
-                    binding.pry
-                  else
-                    raise
-                  end
+                rescue StandardError => e
+                  handle_exception($!)
                 end
               end
             }
@@ -74,14 +61,6 @@ module Flammarion
         end
       end
       @started = true
-    rescue Exception => e
-      unless e.is_a? SystemExit or e.is_a? Interrupt
-        Kernel.puts "Error in server:"
-        binding.pry if binding.respond_to? :pry
-        Kernel.puts e.message
-        Kernel.puts e.backtrace.inspect
-      end
-      raise
     end
 
     def stop
@@ -89,6 +68,10 @@ module Flammarion
 
     def log(str)
       # Kernel.puts str
+    end
+
+    def handle_exception(e)
+      @launch_thread.raise(e)
     end
 
     def register_window(window)
