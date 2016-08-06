@@ -303,6 +303,10 @@ module Flammarion
       return d
     end
 
+    def js(text, options = {}, &block)
+      script(text, options.merge(coffee:false), &block)
+    end
+
     # Sets CSS styles attributes on the current pane.
     # @overload style(attribute, value)
     #   @param attribute [String] The css attribute to set. Currently does not

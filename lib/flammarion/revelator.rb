@@ -25,7 +25,9 @@ module Flammarion
       else
         development_mode = system("lsof -i:#{4567}", out: '/dev/null') and File.exist?("#{File.dirname(__FILE__)}/../html/source/index.html.slim")
       end
-      host = "file://#{File.dirname(File.absolute_path(__FILE__))}/../html/build/index.html"
+      host_path = File.absolute_path(File.join(File.dirname(File.absolute_path(__FILE__)), "/../html/build/index.html"))
+      host_path = `cygpath -w '#{host_path}'`.strip if RbConfig::CONFIG["host_os"] == "cygwin"
+      host = "file://#{host_path}"
       host = "http://localhost:4567/" if development_mode
 
       @expect_title = options[:title] || "Flammarion-#{rand.to_s[2..-1]}"
@@ -58,6 +60,23 @@ module Flammarion
       @@browsers << OpenStruct.new(name: name, method:define_method(name, block))
     end
 
+    browser :osx do |options|
+      return false unless RbConfig::CONFIG["host_os"] =~ /darwin|mac os/
+      executable = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+      @chrome.in, @chrome.out, @chrome.err, @chrome.thread = Open3.popen3("'#{executable}' --app='#{options[:url]}'")
+      return true if @chrome.in
+    end
+
+    browser :electron do |options|
+      if which('electron') then
+        electron_path = "#{File.dirname(File.absolute_path(__FILE__))}/../../electron"
+        electron_path = `cygpath -w #{electron_path}`.strip if RbConfig::CONFIG["host_os"] == "cygwin"
+        Process.detach(spawn("electron '#{electron_path}' '#{options[:url]}' #{options[:width]} #{options[:height]}"))
+        return true
+      end
+      false
+    end
+
     browser :chrome_windows do |options|
       return false unless RbConfig::CONFIG["host_os"] =~ /cygwin|mswin|mingw/
       file_path = File.absolute_path(File.join(File.dirname(__FILE__), ".."))
@@ -68,21 +87,6 @@ module Flammarion
       chrome_path = `cygpath -u '#{CHROME_PATH}'`.strip if RbConfig::CONFIG["host_os"] == "cygwin"
       return false unless File.exist?(chrome_path)
       Process.detach(spawn(chrome_path, %[--app=#{resource}?path=#{@window_id}&port=#{server.port}&title="#{options[:title] || "Flammarion%20Engraving"}"]))
-    end
-
-    browser :osx do |options|
-      return false unless RbConfig::CONFIG["host_os"] =~ /darwin|mac os/
-      executable = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-      @chrome.in, @chrome.out, @chrome.err, @chrome.thread = Open3.popen3("'#{executable}' --app='#{options[:url]}'")
-      return true if @chrome.in
-    end
-
-    browser :electron do |options|
-      if which('electron') then
-        Process.detach(spawn("electron #{File.dirname(File.absolute_path(__FILE__))}/../../electron '#{options[:url]}' #{options[:width]} #{options[:height]}"))
-        return true
-      end
-      false
     end
 
     browser :chrome do |options|

@@ -6,15 +6,17 @@
   margin 0px
   padding 5px
   padding-bottom 10px
-  font-family Monospace
+  font-family $main-font
   height 1em
   white-space nowrap
   overflow hidden
   text-overflow ellipsis
   user-select none
-  if $enable-gradients
-
-    background-linear-gradient top, lighten($status-bg-color, 10%), 10%, darken($status-bg-color, 10%), 100%
+  if false //$enable-gradients
+    //background-linear-gradient top, lighten($status-bg-color, 10%), 10%, darken($status-bg-color, 10%), 100%
+    button-gradient $status-bg-color
+  else
+   border-top 1px solid activate($status-bg-color, 10%)
   &:before
     color #781111
     content "Detached"

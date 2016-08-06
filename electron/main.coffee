@@ -1,5 +1,5 @@
-app = require 'app'
-BrowserWindow = require('browser-window')
+app = require('electron').app
+{BrowserWindow} = require('electron')
 path = require('path')
 shell = require('electron').shell
 
@@ -8,8 +8,9 @@ app.on 'ready', ->
   main_window = new BrowserWindow
     width: parseInt(process.argv[3]) || 800
     height: parseInt(process.argv[4]) || 600
-    "node-integration": false
-    "web-security":false
+    webPreferences:
+      nodeIntegration: false
+      webSecurity: false
     icon:"icon.png"
     preload:preload
   main_window.loadURL(process.argv[2])

@@ -10,12 +10,12 @@ activate(color, ammount)
 $bg-color = rgb(29, 31, 33)
 
 if dark($bg-color)
-  $fg-color = #eee
+  $fg-color = #ccc
 else
   $fg-color = #333
 
 if dark($bg-color)
-  $status-bg-color = #000
+  $status-bg-color = mix(#000, $bg-color, 10%)
 else
   $status-bg-color = #aaa
 
@@ -26,11 +26,12 @@ else
 
 $highlight = activate($bg-color, 10%)
 $active-highlight = activate($bg-color, 20%)
-$normal-border = 1px solid darken($fg-color, 30%)
+$normal-border = 1px solid activate($fg-color, 30%)
 $scrollbar-track-color = desaturate($active-highlight, 80%)
 $scrollbar-thumb-color = desaturate(activate($scrollbar-track-color, 30%), 20%)
 $fg-highlight = mix($fg-color, $highlight, 50%)
 $fg-active-highlight = mix($fg-color, $active-highlight, 50%)
 
 $enable-gradients = true
-$main-font = monospace
+$main-font =  Menlo, Consolas, monospace
+$default-font-size = 14px

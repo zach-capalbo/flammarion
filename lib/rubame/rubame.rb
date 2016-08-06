@@ -60,7 +60,6 @@ module Rubame
       end
 
       return messages
-
     end
 
     def close(client)
@@ -74,7 +73,7 @@ module Rubame
     end
 
     def run(&blk)
-      readable, writable = IO.select(@reading, @writing, nil, 5)
+      readable, writable = IO.select(@reading, @writing, nil, 1)
 
       if readable
         readable.each do |socket|
