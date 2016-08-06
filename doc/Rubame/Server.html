@@ -403,6 +403,7 @@
       <pre class="lines">
 
 
+65
 66
 67
 68
@@ -410,11 +411,10 @@
 70
 71
 72
-73
-74</pre>
+73</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 66</span>
+      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 65</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_close'>close</span><span class='lparen'>(</span><span class='id identifier rubyid_client'>client</span><span class='rparen'>)</span>
   <span class='ivar'>@reading</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_client'>client</span><span class='period'>.</span><span class='id identifier rubyid_socket'>socket</span>
@@ -467,8 +467,7 @@
 60
 61
 62
-63
-64</pre>
+63</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 41</span>
@@ -495,7 +494,6 @@
   <span class='kw'>end</span>
 
   <span class='kw'>return</span> <span class='id identifier rubyid_messages'>messages</span>
-
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -517,6 +515,7 @@
       <pre class="lines">
 
 
+75
 76
 77
 78
@@ -532,14 +531,13 @@
 88
 89
 90
-91
-92</pre>
+91</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 75</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_run'>run</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_blk'>blk</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_readable'>readable</span><span class='comma'>,</span> <span class='id identifier rubyid_writable'>writable</span> <span class='op'>=</span> <span class='const'>IO</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span><span class='lparen'>(</span><span class='ivar'>@reading</span><span class='comma'>,</span> <span class='ivar'>@writing</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='int'>5</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_readable'>readable</span><span class='comma'>,</span> <span class='id identifier rubyid_writable'>writable</span> <span class='op'>=</span> <span class='const'>IO</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span><span class='lparen'>(</span><span class='ivar'>@reading</span><span class='comma'>,</span> <span class='ivar'>@writing</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='int'>1</span><span class='rparen'>)</span>
 
   <span class='kw'>if</span> <span class='id identifier rubyid_readable'>readable</span>
     <span class='id identifier rubyid_readable'>readable</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_socket'>socket</span><span class='op'>|</span>
@@ -575,12 +573,12 @@
       <pre class="lines">
 
 
+93
 94
-95
-96</pre>
+95</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 94</span>
+      <pre class="code"><span class="info file"># File 'lib/rubame/rubame.rb', line 93</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_stop'>stop</span>
   <span class='ivar'>@socket</span><span class='period'>.</span><span class='id identifier rubyid_close'>close</span>
@@ -595,7 +593,7 @@
 </div>
 
     <div id="footer">
-  Generated on Wed Jul 27 08:24:45 2016 by
+  Generated on Sat Aug  6 13:23:17 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>

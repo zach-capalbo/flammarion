@@ -267,7 +267,9 @@
 43
 44
 45
-46</pre>
+46
+47
+48</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/flammarion/revelator.rb', line 22</span>
@@ -278,7 +280,9 @@
   <span class='kw'>else</span>
     <span class='id identifier rubyid_development_mode'>development_mode</span> <span class='op'>=</span> <span class='id identifier rubyid_system'>system</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lsof -i:</span><span class='embexpr_beg'>#{</span><span class='int'>4567</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='label'>out:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>/dev/null</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='kw'>and</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_dirname'>dirname</span><span class='lparen'>(</span><span class='kw'>__FILE__</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_content'>/../html/source/index.html.slim</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='kw'>end</span>
-  <span class='id identifier rubyid_host'>host</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>file://</span><span class='embexpr_beg'>#{</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_dirname'>dirname</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_absolute_path'>absolute_path</span><span class='lparen'>(</span><span class='kw'>__FILE__</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rbrace'>}</span><span class='tstring_content'>/../html/build/index.html</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_host_path'>host_path</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_absolute_path'>absolute_path</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_dirname'>dirname</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_absolute_path'>absolute_path</span><span class='lparen'>(</span><span class='kw'>__FILE__</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/../html/build/index.html</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_host_path'>host_path</span> <span class='op'>=</span> <span class='backtick'>`</span><span class='tstring_content'>cygpath -w '</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_host_path'>host_path</span><span class='rbrace'>}</span><span class='tstring_content'>'</span><span class='tstring_end'>`</span></span><span class='period'>.</span><span class='id identifier rubyid_strip'>strip</span> <span class='kw'>if</span> <span class='const'>RbConfig</span><span class='op'>::</span><span class='const'>CONFIG</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>host_os</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>cygwin</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_host'>host</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>file://</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_host_path'>host_path</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='id identifier rubyid_host'>host</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>http://localhost:4567/</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_development_mode'>development_mode</span>
 
   <span class='ivar'>@expect_title</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:title</span><span class='rbracket'>]</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Flammarion-</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_rand'>rand</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='lbracket'>[</span><span class='int'>2</span><span class='op'>..</span><span class='op'>-</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
@@ -330,14 +334,14 @@
       <pre class="lines">
 
 
-49
-50
 51
 52
-53</pre>
+53
+54
+55</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/revelator.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/revelator.rb', line 51</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wait_for_a_connection'>wait_for_a_connection</span>
    <span class='const'>Timeout</span><span class='period'>.</span><span class='id identifier rubyid_timeout'>timeout</span><span class='lparen'>(</span><span class='int'>20</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_sleep'>sleep</span> <span class='float'>0.5</span> <span class='kw'>while</span> <span class='ivar'>@sockets</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> <span class='rbrace'>}</span>
@@ -354,7 +358,7 @@
 </div>
 
     <div id="footer">
-  Generated on Wed Jul 27 08:24:45 2016 by
+  Generated on Sat Aug  6 13:23:17 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>
