@@ -1,4 +1,3 @@
-require "bundler/gem_tasks"
 require_relative 'lib/flammarion/version'
 
 class CommandFailedError < StandardError; end
@@ -63,13 +62,29 @@ task :documentation do
   end
 end
 
+task :bin_utils do
+  FileUtils.mkdir_p 'bin'
+  Dir["examples/*.rb"].each do |example|
+    text = File.read(example).sub(%|require_relative '../lib/flammarion'|, %|require 'flammarion'|)
+    dest = "bin/#{File.basename(example, '.rb')}"
+    File.write(dest,text)
+    chmod 'a+rx', dest
+  end
+end
+
+task :utils => [:bin_utils] do
+  system("gem build flammarion-utils.gemspec")
+end
+
 desc "Build and push to rubgems"
-task :publish => [:build, :documentation] do
+task :publish => [:build, :documentation, :utils] do
   raise VersionControlError.new("Uncommited Changes!") unless system("git diff --quiet HEAD")
   system("git tag v#{Flammarion::VERSION}")
   system("gem push flammarion-#{Flammarion::VERSION}.gem")
+  system("gem push flammarion-utils-#{Flammarion::VERSION}.gem")
   bump_version
   system("sudo gem install flammarion-#{Flammarion::VERSION}.gem")
+  system("sudo gem install flammarion-utils-#{Flammarion::VERSION}.gem")
   system("git push")
   system("git push --tags")
 end

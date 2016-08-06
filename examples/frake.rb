@@ -2,8 +2,9 @@
 #
 # frake.rb: Wraps a little gui around rake tasks
 
-require_relative '../lib/flammarion.rb'
+require_relative '../lib/flammarion'
 require 'open3'
+
 f = Flammarion::Engraving.new(exit_on_disconnect:true)
 f.title "frake #{Dir.pwd}"
 

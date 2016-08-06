@@ -2,7 +2,7 @@
 #
 # A simple example that will wrap any command into a flammarion window.
 require 'open3'
-require 'flammarion'
+require_relative '../lib/flammarion'
 
 f = Flammarion::Engraving.new(exit_on_disconnect:true)
 i, o, e, t = Open3.popen3(*ARGV.to_a)

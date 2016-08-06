@@ -9,3 +9,4 @@ electron/node_modules
 doc
 pkg
 flammarion-*.gem
+bin/*
