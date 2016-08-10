@@ -82,7 +82,7 @@ task :publish => [:build, :documentation, :utils] do
   system("git tag v#{Flammarion::VERSION}")
   system("gem push flammarion-#{Flammarion::VERSION}.gem")
   system("gem push flammarion-utils-#{Flammarion::VERSION}.gem")
-  bump_version
+  bump_version unless Flammarion::VERSION.include?("pre")
   system("sudo gem install flammarion-#{Flammarion::VERSION}.gem")
   system("sudo gem install flammarion-utils-#{Flammarion::VERSION}.gem")
   system("git push")
