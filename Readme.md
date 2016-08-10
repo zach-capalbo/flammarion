@@ -110,7 +110,7 @@ icons = %w[thumbs-up meh-o bicycle gears star-o star cow cat cactus] + [nil] * 5
 end
 ```
 
-![Message Sample](http://zach-capalbo.github.io/flammarion/img/messagesample.png)
+![Message Sample](http://zach-capalbo.github.io/flammarion/img/message_sender_with_contacts.png)
 
 ### Rake Task Runner
 

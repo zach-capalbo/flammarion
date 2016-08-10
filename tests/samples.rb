@@ -94,3 +94,20 @@ end
 sample :emoji do |f|
   f.emoji.keys.each_slice(20) {|e| f.puts e.join(" "), escape_icons:true}
 end
+
+sample :frake do |f|
+  Dir.chdir(File.join(File.dirname(__FILE__), "../")) do
+    f.markdown "# Rake Tasks: "
+    f.break
+    `rake -T`.each_line do |l|
+      f.puts
+      parts = l.split("#")
+      task = parts[0]
+      desc = parts[1]
+      f.puts desc.strip
+      f.button(task) do
+        run(task)
+      end
+    end
+  end
+end

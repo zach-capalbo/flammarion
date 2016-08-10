@@ -52,8 +52,9 @@ end
 
 task :documentation do
   system("yardoc")
-  system("rm -r ../../html/flammarion/doc")
-  system("mv doc ../../html/flammarion")
+  rm_r "../../html/flammarion/doc"
+  mv "doc", "../../html/flammarion"
+  system("cp snapshots/* ../../html/flammarion/img")
   Dir.chdir("../../html/flammarion") do
     system(%|slimrb index.slim --trace -r 'redcarpet' -r 'rouge' -r 'rouge/plugins/redcarpet' > index.html|)
     system("git add doc")
