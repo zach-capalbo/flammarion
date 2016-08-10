@@ -15,7 +15,6 @@ catch error
   console.log("Could not load spellchecker: #{error}")
 
 window.onkeyup = (e) ->
-  window.console.log("OK")
   if e.ctrlKey and e.keyCode is 70
     window.show_search_bar()
   if e.ctrlKey and e.shiftKey and e.keyCode is 73

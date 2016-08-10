@@ -17,7 +17,6 @@ app.on 'ready', ->
     preload:preload
   main_window.loadURL(process.argv[2])
   main_window.setMenu(null)
-  main_window.toggleDevTools()
   main_window.webContents.on 'new-window', (event, url) ->
     event.preventDefault()
     shell.openExternal(url)

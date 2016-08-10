@@ -27,7 +27,6 @@
     });
     main_window.loadURL(process.argv[2]);
     main_window.setMenu(null);
-    main_window.toggleDevTools();
     return main_window.webContents.on('new-window', function(event, url) {
       event.preventDefault();
       return shell.openExternal(url);

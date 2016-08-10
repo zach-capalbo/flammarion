@@ -24,7 +24,6 @@
   }
 
   window.onkeyup = function(e) {
-    window.console.log("OK");
     if (e.ctrlKey && e.keyCode === 70) {
       window.show_search_bar();
     }
