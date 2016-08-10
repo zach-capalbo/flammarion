@@ -68,7 +68,7 @@ task :bin_utils do
     text = File.read(example).sub(%|require_relative '../lib/flammarion'|, %|require 'flammarion'|)
     dest = "bin/#{File.basename(example, '.rb')}"
     File.write(dest,text)
-    chmod 'a+rx', dest
+    chmod 0755, dest
   end
 end
 
