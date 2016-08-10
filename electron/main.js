@@ -13,7 +13,6 @@
   app.on('ready', function() {
     var main_window, preload;
     preload = path.resolve(path.join(__dirname, 'preload.js'));
-    console.log(preload);
     main_window = new BrowserWindow({
       width: parseInt(process.argv[3]) || 800,
       height: parseInt(process.argv[4]) || 600,

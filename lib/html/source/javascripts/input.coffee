@@ -133,7 +133,10 @@ $.extend WSClient.prototype.actions,
     element.change (e) =>
       val = element.find('option:selected').text()
       if element.find('option:selected')[0].value
-        val = $.parseJSON(element.find('option:selected')[0].value)
+        try
+          val = $.parseJSON(element.find('option:selected')[0].value)
+        catch error
+          val = element.find('option:selected')[0].value
       @__parent.send({
         id:data.id
         action:'callback'
