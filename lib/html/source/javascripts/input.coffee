@@ -129,6 +129,7 @@ $.extend WSClient.prototype.actions,
         option = $("<option>#{k}</option>")
         option.val(JSON.stringify(v))
         element.append(option)
+    element.val(data.value) if data.value
     element.change (e) =>
       val = element.find('option:selected').text()
       if element.find('option:selected')[0].value
