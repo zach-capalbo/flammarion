@@ -19,12 +19,18 @@ class WSClient
       $('body').removeClass("connected")
 
     @ws.onmessage = (msg) =>
-      console.log(msg)
-      data = $.parseJSON(msg.data)
-      if @actions[data.action]
-        @actions[data.action](data)
-      else
-        console.error("No such action: #{data.action}")
+      # Just keeping this around for debug purposes
+      @lastMessage = msg
+      try
+        data = $.parseJSON(msg.data)
+        if @actions[data.action]
+          @actions[data.action](data)
+        else
+          console.log msg
+          console.error("No such action: #{data.action}")
+      catch error
+        console.log msg
+        console.error error
 
     @status = new StatusDisplay(this, $('#status > .right'))
 

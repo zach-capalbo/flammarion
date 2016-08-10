@@ -3,14 +3,12 @@ class StatusDisplay
   waiting_statuses: []
   max_statuses: 10
   constructor: (@ws, @target) ->
-    console.log("Setting up status bar at #{@target}")
     @target.click =>
       @show_history()
 
   show_status: (data) ->
     @target.html(@ws.escape(data.text, data))
     @status_history.push data
-    console.log(@status_history)
 
   show_history: ->
     console.log(@status_history)

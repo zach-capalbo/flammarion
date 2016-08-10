@@ -43,8 +43,15 @@ sample :table_with_side_panes do |f|
 end
 
 sample :log_viewer do |f|
+  wordwrap = false
   f.button_box("b").button("Clear", right_icon:'trash-o') {f.subpane('s').clear}
-  f.button_box("b").button("w-w") { f.subpane('s').style({'word-wrap' => 'initial', 'white-space' => 'pre'})}
+  unless wordwrap then
+    f.button_box("b").button("w-w") { f.subpane('s').style({'word-wrap' => 'initial', 'white-space' => 'pre'})}
+    wordwrap = true
+  else
+    f.button_box("b").button("w-w") { f.subpane('s').style({'word-wrap' => 'break-word', 'white-space' => 'pre-wrap'})}
+    wordwrap = false
+  end
   20.times { f.subpane('s', fill:true).puts(Faker::Hipster.paragraph) }
 end
 

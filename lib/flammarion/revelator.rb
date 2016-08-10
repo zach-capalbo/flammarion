@@ -30,7 +30,7 @@ module Flammarion
       host = "file://#{host_path}"
       host = "http://localhost:4567/" if development_mode
 
-      @expect_title = options[:title] || "Flammarion-#{rand.to_s[2..-1]}"
+      @expect_title = options[:title] || "Flammarion"
       url = "#{host}?path=#{@window_id}&port=#{server.port}&title=#{@expect_title}"
       @browser_options = options.merge({url: url, development_mode: development_mode})
       @requested_browser = ENV["FLAMMARION_BROWSER"] || options[:browser]

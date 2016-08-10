@@ -173,6 +173,14 @@ f.plot(5.times.map{|t| {y:100.times.map{rand * t}}})
 
 There are a number of useful examples in the [examples directory.](https://github.com/zach-capalbo/flammarion/tree/master/examples)
 
+Some of these examples can be quite handy in their own right. If you wish to
+install these as executables, you can install the `flammarion-utils` gem with
+the command
+
+```bash
+gem install flammarion-utils
+```
+
 # Bundled Packages
 
 Flammarion is distributed with a bunch of useful tools to make everyone's life easier.

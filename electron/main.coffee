@@ -8,6 +8,7 @@ app.on 'ready', ->
   main_window = new BrowserWindow
     width: parseInt(process.argv[3]) || 800
     height: parseInt(process.argv[4]) || 600
+    backgroundColor: '#1d1f21'
     webPreferences:
       nodeIntegration: false
       webSecurity: false

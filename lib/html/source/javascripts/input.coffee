@@ -8,7 +8,6 @@ $.extend WSClient.prototype.actions,
     if data.left_icon
       if ":#{data.left_icon}:" of emojione.emojioneList
         left_icon = "<i class='label-icon-left'>" + emojione.shortnameToImage(":#{data.left_icon}:") + "</i>"
-        console.log left_icon
       else
         left_icon = "<i class='fa fa-#{data.left_icon} label-icon-left'></i>"
 
@@ -110,7 +109,6 @@ $.extend WSClient.prototype.actions,
         all_boxes = $('.inline-checkbox')
         start = all_boxes.index(@__lastChecked)
         stop = all_boxes.index(element)
-        console.log start, stop
 
         all_boxes.slice(Math.min(start, stop), Math.max(start, stop) + 1).find('input').prop("checked", @__lastChecked.find('input').prop("checked"))
         all_boxes.change()
@@ -121,7 +119,6 @@ $.extend WSClient.prototype.actions,
   dropdown: (data) ->
     target = @__parent.check_target(data)
     element = $("<select class='inline-dropdown' name='#{data.id}'></select>")
-    console.log data.options
     if data.options instanceof Array
       element.append($("<option>#{item}</option>")) for item in data.options
     else
