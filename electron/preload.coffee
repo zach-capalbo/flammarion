@@ -19,3 +19,5 @@ window.onkeyup = (e) ->
     window.show_search_bar()
   if e.ctrlKey and e.shiftKey and e.keyCode is 73
     $remote.getCurrentWindow().toggleDevTools()
+  if e.keyCode is 122
+    $remote.getCurrentWindow().setFullScreen(!$remote.getCurrentWindow().isFullScreen())
