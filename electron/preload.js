@@ -28,7 +28,10 @@
       window.show_search_bar();
     }
     if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
-      return $remote.getCurrentWindow().toggleDevTools();
+      $remote.getCurrentWindow().toggleDevTools();
+    }
+    if (e.code === "F11") {
+      return $remote.getCurrentWindow().setFullScreen(!$remote.getCurrentWindow().isFullScreen());
     }
   };
 
