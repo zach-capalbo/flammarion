@@ -93,9 +93,9 @@ end
 desc "Install Emoji Assets"
 task :emoji do
   require 'gemojione'
-  next warn "Gemojione.index does not respond to images_path. Emoji will be disabled :(" unless Gemojione.index.respond_to?(:images_path)
+  #next warn "Gemojione.index does not respond to images_path. Emoji will be disabled :(" unless Gemojione.index.respond_to?(:images_path)
   target = File.join(File.dirname(__FILE__), "lib/html/source/images/emoji")
-  source = Gemojione.index.images_path
+  source = Gemojione.images_path
   FileUtils.mkdir_p target
   Dir["#{source}/*.png"].each do |png|
     FileUtils.cp(png, "#{target}/#{File.basename(png).downcase}")
