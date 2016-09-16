@@ -31,6 +31,7 @@ class WSClient
       catch error
         console.log msg
         console.error error
+        console.error error.stack
 
     @status = new StatusDisplay(this, $('#status > .right'))
 
