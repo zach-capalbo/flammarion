@@ -14,6 +14,7 @@ f.emoji.keys.each do |emoji|
   f.button(emoji, escape_icons: true, inline: true) do
     unicode_char = f.emoji[emoji]['unicode'].last.split("-").map(&:hex).pack("U")
     f.pane("output").send unicode_char
+    f.status(f.emoji[emoji]['unicode'].last)
     print unicode_char
   end
 end

@@ -69,5 +69,49 @@ module Flammarion
     def layout(options)
       @engraving.send_json({action:'plot', id:@id, target: @target, layout: options})
     end
+
+    # Saves the plot as a static image. +block+ will be called with a hash
+    # argurment when the plot is finished being converted to an image
+    def save(options = {}, &block)
+      id = @engraving.make_id
+      @engraving.callbacks[id] = block
+      @engraving.send_json({action:'savePlot', id:@id, target:@target, callback_id: id, format: options})
+    end
+
+    # Converts the plot to a png image. If a block is given, it will be called
+    # with the png data. Otherwise this function will wait until the image has
+    # been created, and then return a string containing the png data
+    def to_png(options = {})
+      png = nil
+      save(options.merge({format: 'png'})) do |data|
+        d = data['data']
+        png = Base64.decode64(d[d.index(',') + 1..-1])
+        if block_given?
+          yield png
+        end
+      end
+      unless block_given?
+        sleep 0.1 while png.nil?
+        return png
+      end
+    end
+
+    # Converts the plot to an svg image. If a block is given, it will be called
+    # with the svg xml string. Otherwise this function will wait until the image has
+    # been created, and then return a string containing the svg xml string
+    def to_svg(options = {})
+      svg = nil
+      save(options.merge({format: 'svg'})) do |data|
+        d = data['data']
+        svg = URI.unescape(d[d.index(',') + 1 .. -1])
+        if block_given?
+          yield svg
+        end
+      end
+      unless block_given?
+        sleep 0.1 while svg.nil?
+        return svg
+      end
+    end
   end
 end

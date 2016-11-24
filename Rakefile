@@ -105,3 +105,6 @@ task :emoji do
   fa_list = File.read(File.join(File.dirname(__FILE__), "lib/html/source/stylesheets/font-awesome/css/font-awesome.css")).each_line.collect{|l| l.scan(/fa-([a-z\-]+):before/)[0]}.reject{|n| n.nil?}.flatten.to_json
   File.write(File.join(File.dirname(__FILE__), "lib/html/source/javascripts/fontawesome.js"), "window.font_awesome_list = #{fa_list};")
 end
+
+task :pre => [:pre_version, :build] do
+end

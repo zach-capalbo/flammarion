@@ -36,3 +36,15 @@ $.extend WSClient.prototype.actions,
       plotDiv[0].data = data.data
       Plotly.redraw(plotDiv[0])
       Plotly.relayout(plotDiv[0], data) if data.layout
+  savePlot: (data) ->
+    target = @__parent.check_target(data)
+    @__plots ||= {}
+    plotDiv = target.find("#plot-#{data.id}")[0]
+    Plotly.toImage(plotDiv, data.format).then (imgData) =>
+      @__parent.send({
+        id:data.callback_id
+        action:'callback'
+        source:'plot'
+        data: imgData
+        original_msg:data
+        })

@@ -290,6 +290,7 @@ module Flammarion
     # @option options [Boolean] :coffee (true) If true, will compile +text+ from
     #  CoffeeScript to JavaScript. If false, will pass text as plain JavaScript
     def script(text, options = {}, &block)
+      return script_src(text) if !options.fetch(:no_file, false) && File.exist?(text)
       data = options.fetch(:coffee, true) ? CoffeeScript.compile(text) : text
       id = @engraving.make_id
       d = nil
@@ -305,6 +306,14 @@ module Flammarion
 
     def js(text, options = {}, &block)
       script(text, options.merge(coffee:false), &block)
+    end
+
+    def script_src(src)
+      if File.exist?(src) then
+        html("<script>#{File.read(src)}</script>")
+      else
+        html("<script src='#{src}'></src>")
+      end
     end
 
     # Sets CSS styles attributes on the current pane.
