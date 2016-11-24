@@ -233,6 +233,78 @@
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#save-instance_method" title="#save (instance method)">- (Object) <strong>save</strong>(options = {}, &amp;block) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Saves the plot as a static image.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_png-instance_method" title="#to_png (instance method)">- (Object) <strong>to_png</strong>(options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Converts the plot to a png image.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_svg-instance_method" title="#to_svg (instance method)">- (Object) <strong>to_svg</strong>(options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Converts the plot to an svg image.</p>
+</div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -678,12 +750,188 @@ then use <tt>Flammarion::Writeable.plot</tt>.</p>
 </table>
 </div>
     
+      <div class="method_details ">
+  <h3 class="signature " id="save-instance_method">
+  
+    - (<tt>Object</tt>) <strong>save</strong>(options = {}, &amp;block) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Saves the plot as a static image. <tt>block</tt> will be called with a hash
+argurment when the plot is finished being converted to an image</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+75
+76
+77
+78
+79</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/plot.rb', line 75</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_save'>save</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_id'>id</span> <span class='op'>=</span> <span class='ivar'>@engraving</span><span class='period'>.</span><span class='id identifier rubyid_make_id'>make_id</span>
+  <span class='ivar'>@engraving</span><span class='period'>.</span><span class='id identifier rubyid_callbacks'>callbacks</span><span class='lbracket'>[</span><span class='id identifier rubyid_id'>id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_block'>block</span>
+  <span class='ivar'>@engraving</span><span class='period'>.</span><span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>action:</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>savePlot</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>id:</span><span class='ivar'>@id</span><span class='comma'>,</span> <span class='label'>target:</span><span class='ivar'>@target</span><span class='comma'>,</span> <span class='label'>callback_id:</span> <span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='label'>format:</span> <span class='id identifier rubyid_options'>options</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_png-instance_method">
+  
+    - (<tt>Object</tt>) <strong>to_png</strong>(options = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Converts the plot to a png image. If a block is given, it will be called
+with the png data. Otherwise this function will wait until the image has
+been created, and then return a string containing the png data</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/plot.rb', line 84</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_png'>to_png</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_png'>png</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_save'>save</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>format:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>png</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_data'>data</span><span class='op'>|</span>
+    <span class='id identifier rubyid_d'>d</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>data</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_png'>png</span> <span class='op'>=</span> <span class='const'>Base64</span><span class='period'>.</span><span class='id identifier rubyid_decode64'>decode64</span><span class='lparen'>(</span><span class='id identifier rubyid_d'>d</span><span class='lbracket'>[</span><span class='id identifier rubyid_d'>d</span><span class='period'>.</span><span class='id identifier rubyid_index'>index</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>,</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='op'>+</span> <span class='int'>1</span><span class='op'>..</span><span class='op'>-</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+      <span class='kw'>yield</span> <span class='id identifier rubyid_png'>png</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+    <span class='id identifier rubyid_sleep'>sleep</span> <span class='float'>0.1</span> <span class='kw'>while</span> <span class='id identifier rubyid_png'>png</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_png'>png</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_svg-instance_method">
+  
+    - (<tt>Object</tt>) <strong>to_svg</strong>(options = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Converts the plot to an svg image. If a block is given, it will be called
+with the svg xml string. Otherwise this function will wait until the image
+has been created, and then return a string containing the svg xml string</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/plot.rb', line 102</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_svg'>to_svg</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_svg'>svg</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_save'>save</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_merge'>merge</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>format:</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>svg</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_data'>data</span><span class='op'>|</span>
+    <span class='id identifier rubyid_d'>d</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>data</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_svg'>svg</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_unescape'>unescape</span><span class='lparen'>(</span><span class='id identifier rubyid_d'>d</span><span class='lbracket'>[</span><span class='id identifier rubyid_d'>d</span><span class='period'>.</span><span class='id identifier rubyid_index'>index</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>,</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span> <span class='op'>+</span> <span class='int'>1</span> <span class='op'>..</span> <span class='op'>-</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+    <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+      <span class='kw'>yield</span> <span class='id identifier rubyid_svg'>svg</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+  <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
+    <span class='id identifier rubyid_sleep'>sleep</span> <span class='float'>0.1</span> <span class='kw'>while</span> <span class='id identifier rubyid_svg'>svg</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_svg'>svg</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 </div>
 
     <div id="footer">
-  Generated on Sat Oct  1 09:37:21 2016 by
+  Generated on Thu Nov 24 13:46:45 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>
