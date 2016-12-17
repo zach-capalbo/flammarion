@@ -12,7 +12,7 @@ module Flammarion
   #   blank window, and then display that thing.
   class Engraving
     include Revelator
-    attr_accessor :on_disconnect, :on_connect, :actions
+    attr_accessor :on_disconnect, :on_callback_exception, :on_connect, :actions
     attr_accessor :callbacks, :sockets # @api private
     include Writeable
 
@@ -21,6 +21,10 @@ module Flammarion
     #  connected (i.e., displayed)
     # @option options [Proc] :on_disconnect Called when the display windows is
     #  disconnected (i.e., closed)
+    # @option options [Proc] :on_callback_exception Called when there is an
+    #  exception executing a provided callback. (e.g., so you can log it)
+    #  If no handler is provided, Flammarion will attempt to pass the exception
+    #  back to the original calling thread.
     # @option options [Boolean] :exit_on_disconnect (false) Will call +exit+
     #  when the widow is closed if this option is true.
     # @option options [Boolean] :close_on_exit (false) Will close the window
@@ -39,6 +43,7 @@ module Flammarion
       @pane_name = "default"
       @on_connect = options[:on_connect]
       @on_disconnect = options[:on_disconnect]
+      @on_callback_exception = options[:on_callback_exception]
       @exit_on_disconnect = options.fetch(:exit_on_disconnect, false)
 
       start_server
@@ -154,6 +159,12 @@ module Flammarion
         end
       end
       @actions[m["action"]].call(m) if @actions.include?(m["action"])
+    rescue Exception
+      if @on_callback_exception then
+        @on_callback_exception.call($!)
+      else
+        raise
+      end
     end
 
     # @api private

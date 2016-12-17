@@ -45,7 +45,7 @@ module Flammarion
               Thread.new do
                 begin
                   @windows[@socket_paths[ws]].process_message(msg)
-                rescue StandardError => e
+                rescue Exception
                   handle_exception($!)
                 end
               end
