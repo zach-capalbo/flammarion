@@ -11,7 +11,7 @@ begin
   require 'sass'
   require 'slim'
   require 'coffee-script'
-  require 'redcarpet'
+  require 'kramdown' unless defined?(Redcarpet::Markdown)
 rescue LoadError
 end
 

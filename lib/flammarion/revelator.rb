@@ -20,11 +20,7 @@ module Flammarion
     CHROME_PATH = ENV["FLAMMARION_REVELATOR_PATH"] || 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
 
     def open_a_window(options = {})
-      if RbConfig::CONFIG["host_os"] =~ /cygwin|mswin|mingw/
-        development_mode = ENV["FLAMMARION_DEVELOPMENT"] == "true"
-      else
-        development_mode = system("lsof -i:#{4567}", out: '/dev/null') and File.exist?("#{File.dirname(__FILE__)}/../html/source/index.html.slim")
-      end
+      development_mode = Flammarion.development_mode?
       host_path = File.absolute_path(File.join(File.dirname(File.absolute_path(__FILE__)), "/../html/build/index.html"))
       host_path = `cygpath -w '#{host_path}'`.strip if RbConfig::CONFIG["host_os"] == "cygwin"
       host = "file://#{host_path}"
@@ -116,5 +112,19 @@ module Flammarion
       end
       return nil
     end
+  end
+
+  private
+  def self.development_mode?
+    if RbConfig::CONFIG["host_os"] =~ /cygwin|mswin|mingw/
+      development_mode = ENV["FLAMMARION_DEVELOPMENT"] == "true"
+    else
+      development_mode = system("lsof -i:#{4567}", out: '/dev/null') and File.exist?("#{File.dirname(__FILE__)}/../html/source/index.html.slim")
+    end
+  end
+
+  def self.development_mode=(turnOn)
+    raise StandardError.new("Can't turn on development mode on unix system. (Just start the middleman server, and flammarion will detect it automatically.") unless RbConfig::CONFIG["host_os"] =~ /cygwin|mswin|mingw/
+    ENV["FLAMMARION_DEVELOPMENT"] = "true"
   end
 end

@@ -14,10 +14,11 @@ $.extend WSClient.prototype.actions,
     element = $("#console-#{data.target}")
     element.append(@__parent.escape(data.text, data))
 
-    while element.hasClass("pane")
-      atBottom = atBottomStack.shift()
-      element.scrollTop(element[0].scrollHeight - element.height() - marginSize) if atBottom
-      element = element.parent()
+    unless data.auto_scroll is false
+      while element.hasClass("pane")
+        atBottom = atBottomStack.shift()
+        element.scrollTop(element[0].scrollHeight - element.height() - marginSize) if atBottom
+        element = element.parent()
 
   replace: (data) ->
     @__parent.check_target(data)

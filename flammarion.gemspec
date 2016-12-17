@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "sass"
   s.add_runtime_dependency "slim"
   s.add_runtime_dependency "coffee-script"
-  s.add_runtime_dependency "redcarpet"
+  s.add_runtime_dependency "kramdown"
   s.add_runtime_dependency "launchy"
   s.add_runtime_dependency "websocket"
 

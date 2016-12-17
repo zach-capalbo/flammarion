@@ -32,7 +32,7 @@ end
 
 def new_version
   parts = Flammarion::VERSION.split(".")
-  parts[2] = (parts[2].to_i + 1).to_s
+  parts[1] = (parts[1].to_i + 1).to_s
   return parts.join(".")
 end
 
