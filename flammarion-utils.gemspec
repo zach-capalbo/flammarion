@@ -19,4 +19,5 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/zach-capalbo/flammarion'
   s.license     = 'MIT'
   s.add_runtime_dependency "flammarion", "= #{Flammarion::VERSION}"
+  s.add_runtime_dependency "oga"
 end
