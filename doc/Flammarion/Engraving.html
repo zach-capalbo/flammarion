@@ -213,6 +213,33 @@ included in <span class='object_link'><a href="" title="Flammarion::Engraving (c
       <li class="public ">
   <span class="summary_signature">
     
+      <a href="#on_callback_exception-instance_method" title="#on_callback_exception (instance method)">- (Object) <strong>on_callback_exception</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute on_callback_exception.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#on_connect-instance_method" title="#on_connect (instance method)">- (Object) <strong>on_connect</strong> </a>
     
 
@@ -805,6 +832,21 @@ included in <span class='object_link'><a href="" title="Flammarion::Engraving (c
         </li>
       
         <li>
+          <span class="name">:on_callback_exception</span>
+          <span class="type">(<tt>Proc</tt>)</span>
+          <span class="default">
+            
+          </span>
+          
+            &mdash; <div class='inline'>
+<p>Called when there is an exception executing a provided callback. (e.g., so
+you can log it) If no handler is provided, Flammarion will attempt to pass
+the exception back to the original calling thread.</p>
+</div>
+          
+        </li>
+      
+        <li>
           <span class="name">:exit_on_disconnect</span>
           <span class="type">(<tt>Boolean</tt>)</span>
           <span class="default">
@@ -880,10 +922,6 @@ unable to display the engraving.</p>
       <pre class="lines">
 
 
-33
-34
-35
-36
 37
 38
 39
@@ -900,10 +938,15 @@ unable to display the engraving.</p>
 50
 51
 52
-53</pre>
+53
+54
+55
+56
+57
+58</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_options'>options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='symbol'>:title</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_options'>options</span><span class='rbrace'>}</span> <span class='kw'>if</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>String</span><span class='rparen'>)</span>
@@ -914,6 +957,7 @@ unable to display the engraving.</p>
   <span class='ivar'>@pane_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>default</span><span class='tstring_end'>&quot;</span></span>
   <span class='ivar'>@on_connect</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:on_connect</span><span class='rbracket'>]</span>
   <span class='ivar'>@on_disconnect</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:on_disconnect</span><span class='rbracket'>]</span>
+  <span class='ivar'>@on_callback_exception</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='lbracket'>[</span><span class='symbol'>:on_callback_exception</span><span class='rbracket'>]</span>
   <span class='ivar'>@exit_on_disconnect</span> <span class='op'>=</span> <span class='id identifier rubyid_options'>options</span><span class='period'>.</span><span class='id identifier rubyid_fetch'>fetch</span><span class='lparen'>(</span><span class='symbol'>:exit_on_disconnect</span><span class='comma'>,</span> <span class='kw'>false</span><span class='rparen'>)</span>
 
   <span class='id identifier rubyid_start_server'>start_server</span>
@@ -1018,6 +1062,49 @@ unable to display the engraving.</p>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_callbacks'>callbacks</span>
   <span class='ivar'>@callbacks</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="on_callback_exception=-instance_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="on_callback_exception-instance_method">
+  
+    - (<tt>Object</tt>) <strong>on_callback_exception</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute on_callback_exception</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+15
+16
+17</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 15</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_on_callback_exception'>on_callback_exception</span>
+  <span class='ivar'>@on_callback_exception</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1188,12 +1275,12 @@ unable to display the engraving.</p>
       <pre class="lines">
 
 
-67
-68
-69</pre>
+72
+73
+74</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 67</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 72</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_alert'>alert</span><span class='lparen'>(</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='label'>action:</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>alert</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>text:</span><span class='id identifier rubyid_text'>text</span><span class='rparen'>)</span>
@@ -1229,12 +1316,12 @@ unable to display the engraving.</p>
       <pre class="lines">
 
 
-85
-86
-87</pre>
+90
+91
+92</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 85</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 90</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_close'>close</span>
   <span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>action:</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>close</span><span class='tstring_end'>'</span></span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -1272,14 +1359,14 @@ unable to display the engraving.</p>
       <pre class="lines">
 
 
-128
-129
-130
-131
-132</pre>
+133
+134
+135
+136
+137</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 128</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 133</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_disconnect'>disconnect</span><span class='lparen'>(</span><span class='id identifier rubyid_ws'>ws</span><span class='rparen'>)</span>
   <span class='ivar'>@sockets</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span> <span class='id identifier rubyid_ws'>ws</span>
@@ -1317,16 +1404,16 @@ unable to display the engraving.</p>
       <pre class="lines">
 
 
-90
-91
-92
-93
-94
 95
-96</pre>
+96
+97
+98
+99
+100
+101</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 95</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_save_path'>get_save_path</span>
   <span class='kw'>if</span> <span class='const'>Gem</span><span class='period'>.</span><span class='id identifier rubyid_win_platform?'>win_platform?</span>
@@ -1368,13 +1455,13 @@ writing a very complex application.</p>
       <pre class="lines">
 
 
-117
-118
-119
-120</pre>
+122
+123
+124
+125</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 117</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 122</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_layout'>layout</span><span class='lparen'>(</span><span class='id identifier rubyid_file'>file</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='const'>Slim</span><span class='op'>::</span><span class='const'>Template</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_file'>file</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_render'>render</span>
@@ -1400,13 +1487,13 @@ writing a very complex application.</p>
       <pre class="lines">
 
 
-122
-123
-124
-125</pre>
+127
+128
+129
+130</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 122</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 127</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_live_reload_layout'>live_reload_layout</span><span class='lparen'>(</span><span class='id identifier rubyid_file'>file</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_layout'>layout</span><span class='lparen'>(</span><span class='id identifier rubyid_file'>file</span><span class='rparen'>)</span><span class='semicolon'>;</span> <span class='kw'>yield</span> <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -1445,14 +1532,14 @@ writing a very complex application.</p>
       <pre class="lines">
 
 
-160
-161
-162
-163
-164</pre>
+171
+172
+173
+174
+175</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 160</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 171</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_make_id'>make_id</span>
   <span class='ivar'>@id</span> <span class='op'>||=</span> <span class='int'>0</span>
@@ -1508,13 +1595,13 @@ writing a very complex application.</p>
       <pre class="lines">
 
 
-74
-75
-76
-77</pre>
+79
+80
+81
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 79</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_orientation='>orientation=</span><span class='lparen'>(</span><span class='id identifier rubyid_orientation'>orientation</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Orientation must be :horizontal or :vertical</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='lbracket'>[</span><span class='symbol'>:horizontal</span><span class='comma'>,</span> <span class='symbol'>:vertical</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_orientation'>orientation</span><span class='rparen'>)</span>
@@ -1553,11 +1640,6 @@ writing a very complex application.</p>
       <pre class="lines">
 
 
-135
-136
-137
-138
-139
 140
 141
 142
@@ -1575,10 +1657,21 @@ writing a very complex application.</p>
 154
 155
 156
-157</pre>
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 135</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 140</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_process_message'>process_message</span><span class='lparen'>(</span><span class='id identifier rubyid_msg'>msg</span><span class='rparen'>)</span>
   <span class='ivar'>@last_msg</span> <span class='op'>=</span> <span class='id identifier rubyid_msg'>msg</span>
@@ -1602,6 +1695,12 @@ writing a very complex application.</p>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
   <span class='ivar'>@actions</span><span class='lbracket'>[</span><span class='id identifier rubyid_m'>m</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>action</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_m'>m</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='ivar'>@actions</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_m'>m</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>action</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
+<span class='kw'>rescue</span> <span class='const'>Exception</span>
+  <span class='kw'>if</span> <span class='ivar'>@on_callback_exception</span> <span class='kw'>then</span>
+    <span class='ivar'>@on_callback_exception</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='gvar'>$!</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_raise'>raise</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1636,17 +1735,17 @@ writing a very complex application.</p>
       <pre class="lines">
 
 
-175
-176
-177
-178
-179
-180
-181
-182</pre>
+186
+187
+188
+189
+190
+191
+192
+193</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 175</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 186</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='id identifier rubyid_val'>val</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='ivar'>@sockets</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> <span class='kw'>then</span>
@@ -1689,10 +1788,10 @@ writing a very complex application.</p>
       <pre class="lines">
 
 
-172</pre>
+183</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 172</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 183</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_server'>server</span><span class='semicolon'>;</span> <span class='cvar'>@@server</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
@@ -1726,11 +1825,6 @@ writing a very complex application.</p>
       <pre class="lines">
 
 
-99
-100
-101
-102
-103
 104
 105
 106
@@ -1739,10 +1833,15 @@ writing a very complex application.</p>
 109
 110
 111
-112</pre>
+112
+113
+114
+115
+116
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 99</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 104</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_snapshot'>snapshot</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -1791,12 +1890,12 @@ writing a very complex application.</p>
       <pre class="lines">
 
 
-167
-168
-169</pre>
+178
+179
+180</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 167</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 178</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_start_server'>start_server</span>
   <span class='cvar'>@@server</span> <span class='op'>||=</span> <span class='const'>Server</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
@@ -1832,12 +1931,12 @@ writing a very complex application.</p>
       <pre class="lines">
 
 
-80
-81
-82</pre>
+85
+86
+87</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 80</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 85</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_title'>title</span><span class='lparen'>(</span><span class='id identifier rubyid_str'>str</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_send_json'>send_json</span><span class='lparen'>(</span><span class='lbrace'>{</span><span class='label'>action:</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>title</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='label'>title:</span><span class='id identifier rubyid_str'>str</span><span class='rbrace'>}</span><span class='rparen'>)</span>
@@ -1874,12 +1973,12 @@ interactions and callbacks will continue in other threads.</p>
       <pre class="lines">
 
 
-57
-58
-59</pre>
+62
+63
+64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 57</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 62</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wait_until_closed'>wait_until_closed</span>
   <span class='id identifier rubyid_sleep'>sleep</span> <span class='int'>1</span> <span class='kw'>until</span> <span class='ivar'>@sockets</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -1928,12 +2027,12 @@ interactions and callbacks will continue in other threads.</p>
       <pre class="lines">
 
 
-62
-63
-64</pre>
+67
+68
+69</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/flammarion/engraving.rb', line 67</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_window_open?'>window_open?</span>
   <span class='kw'>not</span> <span class='ivar'>@sockets</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
@@ -1948,7 +2047,7 @@ interactions and callbacks will continue in other threads.</p>
 </div>
 
     <div id="footer">
-  Generated on Thu Nov 24 13:46:46 2016 by
+  Generated on Sat Dec 17 13:44:03 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>

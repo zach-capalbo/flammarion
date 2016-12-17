@@ -737,7 +737,7 @@
           <span class='const'>Thread</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='kw'>do</span>
             <span class='kw'>begin</span>
               <span class='ivar'>@windows</span><span class='lbracket'>[</span><span class='ivar'>@socket_paths</span><span class='lbracket'>[</span><span class='id identifier rubyid_ws'>ws</span><span class='rbracket'>]</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_process_message'>process_message</span><span class='lparen'>(</span><span class='id identifier rubyid_msg'>msg</span><span class='rparen'>)</span>
-            <span class='kw'>rescue</span> <span class='const'>StandardError</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span>
+            <span class='kw'>rescue</span> <span class='const'>Exception</span>
               <span class='id identifier rubyid_handle_exception'>handle_exception</span><span class='lparen'>(</span><span class='gvar'>$!</span><span class='rparen'>)</span>
             <span class='kw'>end</span>
           <span class='kw'>end</span>
@@ -805,7 +805,7 @@
 </div>
 
     <div id="footer">
-  Generated on Thu Nov 24 13:46:45 2016 by
+  Generated on Sat Dec 17 13:44:03 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>
