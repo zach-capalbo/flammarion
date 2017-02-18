@@ -14,7 +14,7 @@ module Flammarion
           handle_exception($!)
         end
       end
-      sleep 0.5 while not @started
+      sleep 0.01 while not @started
     end
 
     def start_server_internal

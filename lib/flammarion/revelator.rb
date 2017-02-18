@@ -45,7 +45,7 @@ module Flammarion
 
     # @api private
     def wait_for_a_connection
-       Timeout.timeout(20) { sleep 0.5 while @sockets.empty? }
+       Timeout.timeout(20) { sleep 0.01 while @sockets.empty? }
      rescue Timeout::Error
        raise SetupError.new("Timed out while waiting for a connecting using #{@browser.name}.")
     end
