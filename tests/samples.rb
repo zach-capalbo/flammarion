@@ -91,6 +91,13 @@ sample :echo do |f|
   end
 end
 
+sample :password do |f|
+  f.subpane("o")
+  f.input('Enter password', history:true, autoclear: true, enter_only:true, password:true, value:'ignored') do |m|
+    f.subpane("o").puts("The password is #{m['text'].magenta}")
+  end
+end
+
 sample :emoji do |f|
   f.emoji.keys.each_slice(20) {|e| f.puts e.join(" "), escape_icons:true}
 end

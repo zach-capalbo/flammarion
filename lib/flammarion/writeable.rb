@@ -194,6 +194,8 @@ module Flammarion
     #  {DeferredValue}. Use the +:value+ option for that.
     # @option options [Boolean] :multiline (false) Creates a large text box if
     #  true; otherwise creates a single line input box.
+    # @option options [Boolean] :password (false) Creates a password input text box if
+    #  true; otherwise creates a normal single line input box.
     # @option options [Boolean] :autoclear (false) Automatically clears the
     #  input field every time the user changes the value. The callback will only
     #  be called for user initiated changes, not for auto-clear changes.

@@ -41,9 +41,11 @@ $.extend WSClient.prototype.actions,
     target = @__parent.check_target(data)
     if data.multiline
       element = $("<textarea placeholder='#{data.label}' class='inline-text-input'></textarea>")
+    else if data.password
+      element = $("<input type='password' placeholder='#{data.label}' class='inline-text-input'>")
     else
       element = $("<input type='text' placeholder='#{data.label}' class='inline-text-input'>")
-    if data.value
+    if data.value && !data.password
       element[0].value = data.value
 
     accept = (data) =>
