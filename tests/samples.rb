@@ -93,9 +93,13 @@ end
 
 sample :password do |f|
   f.subpane("o")
-  f.input('Enter password', history:true, autoclear: true, enter_only:true, password:true, value:'ignored') do |m|
-    f.subpane("o").puts("The password is #{m['text'].magenta}")
-  end
+  f.puts('Deferred Password:'.green)
+  pw = f.input('Enter deferred password', password:true, value:'deferred pw')
+  f.puts('Block Password:'.green)
+  f.input('Enter block password', history:true, autoclear: true, enter_only:true, password:true, value:'block pw') { |m|
+    f.subpane("o").puts("Block password is #{m['text'].magenta}. Deferred password is #{pw.to_s.magenta}.")
+  }
+  f.subpane("o").puts("Initial deferred password is #{pw.to_s.magenta}.")
 end
 
 sample :emoji do |f|

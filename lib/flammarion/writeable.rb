@@ -225,6 +225,7 @@ module Flammarion
         @engraving.callbacks[id] = block
       else
         d = DeferredValue.new
+        d.__setobj__(options[:value] || options['value'])
         @engraving.callbacks[id] = Proc.new {|v| d.__setobj__ v["text"] }
         return d
       end
