@@ -1,7 +1,3 @@
-lib/html/build/javascripts/*
-lib/html/build/images/*
-lib/html/build/stylesheets/*
-lib/html/build/*
 lib/html/build/**/*
 lib/html/source/images/emoji/*
 electron/node_modules
@@ -11,3 +7,4 @@ pkg
 flammarion-*.gem
 bin/*
 snapshots/*
+.idea

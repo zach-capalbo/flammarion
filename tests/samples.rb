@@ -91,6 +91,16 @@ sample :echo do |f|
   end
 end
 
+sample :password do |f|
+  f.puts('Deferred Password:'.green)
+  pw = f.input('Enter deferred password', password:true, value:'deferred pw')
+  f.puts('Block Password:'.green)
+  f.input('Enter block password', history:true, autoclear: true, enter_only:true, password:true, value:'block pw') { |m|
+    f.puts("Block password is #{m['text'].magenta}. Deferred password is #{pw.to_s.magenta}.")
+  }
+  f.puts("Initial deferred password is #{pw.to_s.magenta}.")
+end
+
 sample :emoji do |f|
   f.emoji.keys.each_slice(20) {|e| f.puts e.join(" "), escape_icons:true}
 end

@@ -42,7 +42,8 @@ $.extend WSClient.prototype.actions,
     if data.multiline
       element = $("<textarea placeholder='#{data.label}' class='inline-text-input'></textarea>")
     else
-      element = $("<input type='text' placeholder='#{data.label}' class='inline-text-input'>")
+      input_type = if data.password then 'password' else 'text'
+      element = $("<input type='#{input_type}' placeholder='#{data.label}' class='inline-text-input'>")
     if data.value
       element[0].value = data.value
 
