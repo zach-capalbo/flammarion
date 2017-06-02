@@ -149,3 +149,4 @@ DEPENDENCIES
   faker
   flammarion!
   middleman (~> 3.3)
+  
