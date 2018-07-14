@@ -54,15 +54,15 @@ task :bump_version do
 end
 
 task :documentation do
-  system("yardoc")
-  rm_r "../../html/flammarion/doc"
+  sh "yardoc"
+  rm_r "../../html/flammarion/doc" rescue nil
   mv "doc", "../../html/flammarion"
   system("cp snapshots/* ../../html/flammarion/img")
   Dir.chdir("../../html/flammarion") do
-    system(%|slimrb index.slim --trace -r 'redcarpet' -r 'rouge' -r 'rouge/plugins/redcarpet' > index.html|)
-    system("git add doc")
-    system("git commit -a -m 'Updated Documentation'")
-    system("git push")
+    sh(%|slimrb index.slim --trace -r 'redcarpet' -r 'rouge' -r 'rouge/plugins/redcarpet' > index.html|)
+    sh("git add doc *.html")
+    sh(%|git commit -a -m "Updated Documentation"|)
+    sh("git push")
   end
 end
 

@@ -145,6 +145,7 @@ DEPENDENCIES
   middleman-syntax
   slim
   slugify
+  sprockets (~> 2.12.5)
   stylus
 
 BUNDLED WITH
