@@ -66,8 +66,8 @@ module Flammarion
     browser :electron do |options|
       if which('electron') then
         electron_path = "#{File.dirname(File.absolute_path(__FILE__))}/../../electron"
-        electron_path = `cygpath -w #{electron_path}`.strip if RbConfig::CONFIG["host_os"] == "cygwin"
-        Process.detach(spawn("electron '#{electron_path}' '#{options[:url]}' #{options[:width]} #{options[:height]}"))
+        electron_path = `cygpath -w '#{electron_path}'`.strip if RbConfig::CONFIG["host_os"] == "cygwin"
+        Process.detach(spawn(%|electron "#{electron_path}" "#{options[:url]}" #{options[:width]} #{options[:height]}|))
         return true
       end
       false
