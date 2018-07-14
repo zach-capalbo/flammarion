@@ -50,8 +50,6 @@ GEM
     ffi (1.9.10)
     filewatcher (0.5.3)
       trollop (~> 2.0)
-    gemojione (2.6.0)
-      json
     haml (4.0.7)
       tilt
     hike (1.2.3)
@@ -149,4 +147,3 @@ DEPENDENCIES
   faker
   flammarion!
   middleman (~> 3.3)
-  

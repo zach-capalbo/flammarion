@@ -7,14 +7,14 @@ $.extend WSClient.prototype.actions,
     data.right_icon ||= data.icon
     if data.left_icon
       if ":#{data.left_icon}:" of emojione.emojioneList
-        left_icon = "<i class='label-icon-left'>" + emojione.shortnameToImage(":#{data.left_icon}:") + "</i>"
+        left_icon = "<i class='label-icon-left'>" + @__parent.parse_emoji(":#{data.left_icon}:") + "</i>"
       else
         left_icon = "<i class='fa fa-#{data.left_icon} label-icon-left'></i>"
 
     right_icon = ""
     if data.right_icon
       if ":#{data.right_icon}:" of emojione.emojioneList
-        left_icon = "<i class='label-icon-right'>" + emojione.shortnameToImage(":#{data.right_icon}:") + "</i>"
+        left_icon = "<i class='label-icon-right'>" + @__parent.parse_emoji(":#{data.right_icon}:") + "</i>"
       else
         right_icon = "<i class='fa fa-#{data.right_icon} label-icon-right'></i>"
 

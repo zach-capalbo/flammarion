@@ -40,7 +40,7 @@ f = Flammarion::Engraving.new
 f.puts "Hello World!"
 ```
 
-It can even support standard console color codes (Thanks to [ansi_up](http://github.com/drudru/ansi_up)!) and emoji / icons (Thanks to [emojione](http://emojione.com/) and [font awesome](https://fortawesome.github.io/Font-Awesome/))
+It can even support standard console color codes (Thanks to [ansi_up](http://github.com/drudru/ansi_up)!) and emoji / icons (Thanks to [tweomji](https://github.com/twitter/twemoji) and [font awesome](https://fortawesome.github.io/Font-Awesome/))
 
 ```ruby
 require 'colorized'
@@ -192,5 +192,6 @@ They are:
  * [jquery transit](http://ricostacruz.com/jquery.transit/)
  * [leaflet](http://leafletjs.com/)
  * [font awesome](https://fortawesome.github.io/Font-Awesome/)
- * [emojione](http://emojione.com/)
+ * [twemoji](https://github.com/twitter/twemoji)
+ * [emojione v2](https://github.com/emojione/emojione/releases/tag/v2.2.7)
  * [Plotly](https://plot.ly/)

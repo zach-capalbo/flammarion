@@ -48,7 +48,7 @@ module Flammarion
     #   plain text. If false, allows any arbitrary html to be rendered in the
     #   writeable area.
     #  @option options [Boolean] :escape_icons (false) If true, will translate
-    #   any text between two `:` into a font-awesome or emojione icon. (E.g. :thumbs-up:)
+    #   any text between two `:` into a font-awesome icon or emoji (E.g. :thumbs-up:)
 
     # @!macro [new] string_representation
     #   The string can be included in text for text-accepting methods (such as
@@ -167,17 +167,17 @@ module Flammarion
       %|<a href="#" onClick="$ws.send({id:'#{id}', action:'callback', source:'link'})">#{label}</a>|
     end
 
-    # Creates a string representing a Emojione or Font Awesome icon.
+    # Creates a string representing a emoji or Font Awesome icon.
     # @macro string_representation
     # @param name [String] The name of a Font Awesome icon class. See
     # @see https://fortawesome.github.io/Font-Awesome/icons/
-    # @see http://emojione.com/
+    # @see https://github.com/twitter/twemoji
     def icon(name, additional_classes = [])
       e = emoji[":#{name}:"]
       if e.nil? then
         return %|<i class="fa fa-#{name} #{additional_classes.collect{|c| "fa-#{c}"}.join(" ")}"></i>|
       else
-        return %|<img class="emojione" alt="#{name}" src="images/emoji/#{e['unicode'].last.downcase}.png">|
+        return %|<img class="emoji" alt="#{name}" src="images/emoji/#{e['unicode'].last.downcase}.png">|
       end
     end
 

@@ -76,6 +76,9 @@ class WSClient
       "<a href=\"#{l}\" target='_blank'>"
     )
 
+  parse_emoji: (text) ->
+    twemoji.parse(emojione.shortnameToUnicode(text), (i) -> "images/emoji/#{i}.png")
+
   escape: (text, input_options) ->
     options =
       raw: false
@@ -91,7 +94,7 @@ class WSClient
       text = text.replace /:[\w-]+:/g, (match) ->
         if font_awesome_list.includes(match[1..-2]) then "<i class='fa fa-#{match[1..-2]}'></i>" else match
 
-    text = twemoji.parse(emojione.shortnameToUnicode(text), (i) -> "images/emoji/#{i}.png") if options.escape_icons or options.escape_emoji
+    text = @parse_emoji text if options.escape_icons or options.escape_emoji
     text = $("<div>#{text}</div>")
     text.find("a[href^='http']").attr('target','_blank')
     return text.html()
