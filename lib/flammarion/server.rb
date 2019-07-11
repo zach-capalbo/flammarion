@@ -17,11 +17,18 @@ module Flammarion
       sleep 0.01 while not @started
     end
 
+    def wsl_platform
+      return File.file?('/proc/version') &&
+        File.open('/proc/version', &:gets).downcase.include?("microsoft")
+    end
+
     def start_server_internal
       @port = 7870
-      @port = rand(65000 - 1024) + 1024 if Gem.win_platform?
+      @port = rand(65000 - 1024) + 1024 if Gem.win_platform? || wsl_platform
+
       begin
         @server = Rubame::Server.new("0.0.0.0", @port)
+        log "WebServer started on port #{@port}"
         while true do
           @started = true
           @server.run do |ws|
@@ -67,7 +74,7 @@ module Flammarion
     end
 
     def log(str)
-      # Kernel.puts str
+      Kernel.puts str
     end
 
     def handle_exception(e)
