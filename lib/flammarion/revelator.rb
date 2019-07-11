@@ -100,11 +100,8 @@ module Flammarion
       resource = "http://localhost:4567/" if options[:development_mode]
       chrome_path = CHROME_PATH
       chrome_path = `cygpath -u '#{CHROME_PATH}'`.strip if RbConfig::CONFIG["host_os"] == "cygwin"
-
       return false unless File.exist?(chrome_path)
-
       Process.detach(spawn(chrome_path, %[--app=#{resource}?path=#{@window_id}&port=#{server.port}&title="#{options[:title] || "Flammarion%20Engraving"}"]))
-
     end
 
     browser :chrome do |options|
