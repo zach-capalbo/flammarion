@@ -84,6 +84,13 @@ module Flammarion
       return nil
     end
 
+    # Adds raw html to the writeable area without appending a newline.
+    # @param data [String] The raw html to append
+    # @see #html in case you want to replace rather than append html
+    def raw(data)
+      send data, raw: true
+    end
+
     # Replaces the contents of the writeable area with text
     # @param str [String] The text to append
     # @macro escape_options
@@ -282,7 +289,7 @@ module Flammarion
       send_json({action:'break'}.merge(options))
     end
 
-    # Renders raw html into the writeable area
+    # Renders raw html into the writeable area by replacing the previous content
     def html(data)
       send_json({action:'replace', text:data, raw:true})
     end
