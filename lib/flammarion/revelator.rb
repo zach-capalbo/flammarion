@@ -73,6 +73,25 @@ module Flammarion
       false
     end
 
+    browser :chrome_wsl do |options|
+      # Check for WSL, idea from https://github.com/hashicorp/vagrant/blob/master/lib/vagrant/util/platform.rb
+      return false unless File.file?('/proc/version') &&
+        File.open('/proc/version', &:gets).downcase.include?("microsoft")
+
+      # Convert to path in WSL
+      chrome_path = `wslpath '#{CHROME_PATH}'`.strip
+      return false unless File.exist?(chrome_path)
+
+      # Convert index.html path to Windows
+      file_path = %[#{File.absolute_path(File.join(File.dirname(__FILE__), ".."))}/html/build/index.html]
+      url = "file://#{`wslpath -m '#{file_path}'`.strip}"
+
+      cmdString = %['#{chrome_path}' --app='#{url}?port=#{server.port}&path=#{@window_id}&title="#{options[:title] || "Flammarion%20Engraving"}"']
+
+      @chrome.in, @chrome.out, @chrome.err, @chrome.thread = Open3.popen3(cmdString)
+      return true if @chrome.in
+    end
+
     browser :chrome_windows do |options|
       return false unless RbConfig::CONFIG["host_os"] =~ /cygwin|mswin|mingw/
       file_path = File.absolute_path(File.join(File.dirname(__FILE__), ".."))
