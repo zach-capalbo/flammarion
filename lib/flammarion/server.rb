@@ -74,7 +74,7 @@ module Flammarion
     end
 
     def log(str)
-      Kernel.puts str
+      # Kernel.puts str
     end
 
     def handle_exception(e)
