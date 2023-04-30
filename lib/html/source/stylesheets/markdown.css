@@ -1,0 +1,15 @@
+.markdown {
+  white-space: normal;
+  font-family: 'Source Sans Pro';
+  max-width: 45em;
+  margin: auto;
+}
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  font-family: 'Lora';
+}
+.markdown h1,
+.markdown h2 {
+  text-decoration: underline;
+}

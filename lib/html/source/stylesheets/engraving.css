@@ -1,0 +1,85 @@
+@charset "utf-8";
+body {
+  background-color: #1d1f21;
+  color: #ccc;
+  padding: 0px;
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+html {
+  padding: 0px;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  padding: 2px;
+  padding-bottom: 0px;
+  height: calc(100% - 2px);
+  width: calc(100% - 4px);
+  box-shadow: inset 0px 0px 2px 2px #17191a;
+}
+a {
+  text-decoration: none;
+  color: #7f8082;
+}
+a:hover {
+  color: #898c8e;
+}
+p a,
+.markdown a {
+  text-decoration: underline;
+}
+.hidden {
+  display: none;
+}
+.pane {
+  margin: 0px;
+  overflow: auto;
+  padding: 8px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  position: relative;
+  -webkit-touch-callout: text;
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  font-family: Menlo, Consolas, monospace;
+  font-size: 14px;
+  white-space: pre-wrap;
+}
+.pane > .pane {
+  width: calc(100% + 16px);
+  height: initial;
+  margin: -8px;
+}
+.pane > .pane.subpane-fill {
+  height: calc(100% + 16px);
+}
+#panes {
+  height: calc(100% - 1em - 14px);
+  width: 100%;
+  box-sizing: border-box;
+}
+.horizontal > .pane {
+  height: 100%;
+  float: left;
+}
+hr {
+  width: 95%;
+  background-color: #ccc;
+  border: 1px solid #323539;
+}
+.emoji {
+  height: 1.5em;
+}

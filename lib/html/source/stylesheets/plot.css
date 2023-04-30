@@ -1,0 +1,35 @@
+.plot {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #333;
+  margin: -1px;
+  overflow: none;
+}
+#plot-mouseover {
+  position: absolute;
+  background-color: rgba(71,76,81,0.5);
+  color: #ccc;
+  pointer-events: none;
+  font-family: Monospace;
+  padding: 0.25em;
+  box-shadow: 2px 2px 4px 2px #17191a;
+}
+#plot-zoom-element {
+  position: absolute;
+  background-color: rgba(0,3,10,0.75);
+  pointer-events: none;
+  border: 1px solid #012;
+}
+#plot-style {
+  color: #ccc;
+  background-color: #1d1f21;
+}
+#plot-style .tickmarks {
+  color: #8f8f8f;
+}
+#plot-style .markers {
+  color: #8f8f8f;
+}
+#plot-style .zero {
+  color: rgba(71,76,81,0.75);
+}

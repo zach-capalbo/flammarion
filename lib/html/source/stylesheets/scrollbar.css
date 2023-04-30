@@ -1,0 +1,26 @@
+::-webkit-scrollbar {
+  font-size: 14px;
+  width: 0.666em;
+  height: 0.666em;
+}
+::-webkit-scrollbar-thumb {
+  background: #808283;
+  background-color: #a6a8a8;
+  background-image: -webkit-linear-gradient(left, #a6a8a8 40%, #737576 50%);
+  background-image: -moz-linear-gradient(left, #a6a8a8 40%, #737576 50%);
+  background-image: -ms-linear-gradient(left, #a6a8a8 40%, #737576 50%);
+  background-image: -o-linear-gradient(left, #a6a8a8 40%, #737576 50%);
+  background-image: linear-gradient(left, #a6a8a8 40%, #737576 50%);
+}
+::-webkit-scrollbar-thumb:horizontal {
+  background-color: #a6a8a8;
+  background-image: -webkit-linear-gradient(top, #a6a8a8 40%, #737576 50%);
+  background-image: -moz-linear-gradient(top, #a6a8a8 40%, #737576 50%);
+  background-image: -ms-linear-gradient(top, #a6a8a8 40%, #737576 50%);
+  background-image: -o-linear-gradient(top, #a6a8a8 40%, #737576 50%);
+  background-image: linear-gradient(top, #a6a8a8 40%, #737576 50%);
+}
+::-webkit-scrollbar-track {
+  background: #4b4c4d;
+  box-shadow: inset 0px 0px 1px 1px #1a1c1e;
+}

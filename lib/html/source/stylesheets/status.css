@@ -1,0 +1,40 @@
+#status {
+  background-color: #1a1b1d;
+  margin: 0px;
+  padding: 5px;
+  padding-bottom: 10px;
+  font-family: Menlo, Consolas, monospace;
+  height: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-top: 1px solid #303135;
+}
+#status:before {
+  color: #781111;
+  content: "Detached";
+}
+#status > .left {
+  float: left;
+  cursor: pointer;
+}
+#status > .right {
+  float: right;
+  cursor: pointer;
+  text-align: right;
+}
+#status > .center {
+  display: none;
+}
+.connected #status:before {
+  color: #378137;
+  content: "";
+  margin-right: 2em;
+  float: left;
+}

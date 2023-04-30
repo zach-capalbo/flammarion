@@ -1,0 +1,49 @@
+#dialog {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  position: absolute;
+  left: 0;
+  top: 0;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#dialog > #content {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 70%;
+  height: 70%;
+  padding: 1em;
+  background-color: #17191a;
+  border: 1px solid #8f8f8f;
+  box-shadow: 2px 2px 4px 2px #333;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#dialog > #content > #message {
+  -webkit-touch-callout: all;
+  -webkit-user-select: all;
+  -khtml-user-select: all;
+  -moz-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
+  margin: 0;
+  height: calc(100% - 3em);
+  word-wrap: normal;
+  overflow: auto;
+}
+#dialog > #content > .full-button {
+  height: 1em;
+}
+#dialog > #content pre {
+  font-family: Menlo, Consolas, monospace;
+}

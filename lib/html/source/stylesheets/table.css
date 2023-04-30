@@ -1,0 +1,22 @@
+table {
+  border-collapse: collapse;
+}
+td {
+  border: none;
+  padding: 0.4em;
+  box-sizing: padding-box;
+}
+td.hover {
+  background: #272a2d;
+}
+tr {
+  padding: 0;
+}
+tr:hover {
+  background: #272a2d;
+}
+tr:hover td.hover {
+  outline: 1px solid #333;
+  background: #1d1f21;
+  box-shadow: inset 0px 0px 2px 2px #17191a;
+}
