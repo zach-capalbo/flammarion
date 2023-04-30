@@ -1,1 +1,16 @@
-//=require_tree
+@import "colors.css";
+@import "ansi_colors.css";
+@import "buttons.css";
+@import "code.css";
+@import "dialog.css";
+@import "engraving.css";
+@import "google_fonts.css";
+@import "leaflet.css";
+@import "map.css";
+@import "markdown.css";
+@import "mixins.css";
+@import "plot.css";
+@import "scrollbar.css";
+@import "searchbar.css";
+@import "status.css";
+@import "table.css";

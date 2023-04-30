@@ -538,7 +538,7 @@ module Flammarion
 
     # Returns the list of currently installed emoji from Emojione
     def emoji
-      @@emoji ||= JSON.parse(File.read(File.join(File.dirname(__FILE__), "../html/build/javascripts/vendor/emojione.js")).each_line.find{|l| l.start_with?("    ns.emojioneList")}.scan(/= (\{[^;]+);/).flatten.first)
+      @@emoji ||= JSON.parse(File.read(File.join(File.dirname(__FILE__), "../html/source/javascripts/vendor/emojione.js")).each_line.find{|l| l.start_with?("    ns.emojioneList")}.scan(/= (\{[^;]+);/).flatten.first)
       return @@emoji
     end
   end
