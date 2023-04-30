@@ -7,7 +7,7 @@ Railscasts-like style (c) Visoft, Inc. (Damien White)
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  background-color: #1d1f21;
+  background-color: var(--bg-color);
   color: #e6e1dc;
   -webkit-text-size-adjust: none;
   border-radius: 5px;

@@ -4,8 +4,8 @@
   top: 0px;
   padding: 5px;
   padding-top: 0px;
-  background-color: #1d1f21;
-  border: 1px solid #8f8f8f;
+  background-color: var(--bg-color);
+  border: var(--normal-border);
   border-top: 0px;
   border-radius: 0 0 4px 4px;
   box-shadow: 2px 2px 4px 2px #17191a;

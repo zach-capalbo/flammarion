@@ -1,8 +1,8 @@
 .full-button {
-  background-color: #1d1f21;
+  background-color: var(--bg-color);
   color: #ccc;
   font-family: Menlo, Consolas, monospace;
-  border: 1px solid #8f8f8f;
+  border: var(--normal-border);
   padding: 1em;
   text-decoration: none;
   display: block;
@@ -15,31 +15,31 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background-color: #323539;
-  background-image: -webkit-linear-gradient(top, #323539 0%, #1a1c1e 20%);
-  background-image: -moz-linear-gradient(top, #323539 0%, #1a1c1e 20%);
-  background-image: -ms-linear-gradient(top, #323539 0%, #1a1c1e 20%);
-  background-image: -o-linear-gradient(top, #323539 0%, #1a1c1e 20%);
-  background-image: linear-gradient(top, #323539 0%, #1a1c1e 20%);
+  background-color: var(--highlight);
+  background-image: -webkit-linear-gradient(top, var(--highlight) 0%, #1a1c1e 20%);
+  background-image: -moz-linear-gradient(top, var(--highlight) 0%, #1a1c1e 20%);
+  background-image: -ms-linear-gradient(top, var(--highlight) 0%, #1a1c1e 20%);
+  background-image: -o-linear-gradient(top, var(--highlight) 0%, #1a1c1e 20%);
+  background-image: linear-gradient(top, var(--highlight) 0%, #1a1c1e 20%);
 }
 .full-button:hover {
   color: #ccc;
-  background-color: #323539;
-  background-color: #45494e;
-  background-image: -webkit-linear-gradient(top, #45494e 0%, #2d3033 20%);
-  background-image: -moz-linear-gradient(top, #45494e 0%, #2d3033 20%);
-  background-image: -ms-linear-gradient(top, #45494e 0%, #2d3033 20%);
-  background-image: -o-linear-gradient(top, #45494e 0%, #2d3033 20%);
-  background-image: linear-gradient(top, #45494e 0%, #2d3033 20%);
+  background-color: var(--highlight);
+  background-color: var(--active-highlight);
+  background-image: -webkit-linear-gradient(top, var(--active-highlight) 0%, #2d3033 20%);
+  background-image: -moz-linear-gradient(top, var(--active-highlight) 0%, #2d3033 20%);
+  background-image: -ms-linear-gradient(top, var(--active-highlight) 0%, #2d3033 20%);
+  background-image: -o-linear-gradient(top, var(--active-highlight) 0%, #2d3033 20%);
+  background-image: linear-gradient(top, var(--active-highlight) 0%, #2d3033 20%);
 }
 .full-button:active {
   background-color: #474c51;
   background-color: #2d3033;
-  background-image: -webkit-linear-gradient(top, #2d3033 0%, #45494e 20%);
-  background-image: -moz-linear-gradient(top, #2d3033 0%, #45494e 20%);
-  background-image: -ms-linear-gradient(top, #2d3033 0%, #45494e 20%);
-  background-image: -o-linear-gradient(top, #2d3033 0%, #45494e 20%);
-  background-image: linear-gradient(top, #2d3033 0%, #45494e 20%);
+  background-image: -webkit-linear-gradient(top, #2d3033 0%, var(--active-highlight) 20%);
+  background-image: -moz-linear-gradient(top, #2d3033 0%, var(--active-highlight) 20%);
+  background-image: -ms-linear-gradient(top, #2d3033 0%, var(--active-highlight) 20%);
+  background-image: -o-linear-gradient(top, #2d3033 0%, var(--active-highlight) 20%);
+  background-image: linear-gradient(top, #2d3033 0%, var(--active-highlight) 20%);
 }
 .full-button > .label-icon-left {
   float: left;
@@ -49,10 +49,10 @@
 }
 .inline-text-input,
 .inline-dropdown {
-  background-color: #1d1f21;
+  background-color: var(--bg-color);
   color: #ccc;
   font-family: Menlo, Consolas, monospace;
-  border: 1px solid #8f8f8f;
+  border: var(--normal-border);
   padding: 1em;
   text-decoration: none;
   display: block;
@@ -73,7 +73,7 @@
 .inline-text-input:hover,
 .inline-dropdown:hover {
   color: #ccc;
-  background-color: #323539;
+  background-color: var(--highlight);
 }
 .inline-text-input:active,
 .inline-dropdown:active {
@@ -126,14 +126,14 @@ input:focus::-webkit-input-placeholder {
   content: " ";
   width: 1em;
   height: 1em;
-  border: 1px solid #8f8f8f;
+  border: var(--normal-border);
   margin-right: 0.5em;
-  background-color: #323539;
-  background-image: -webkit-linear-gradient(top, #323539 0%, #1a1c1e 20%);
-  background-image: -moz-linear-gradient(top, #323539 0%, #1a1c1e 20%);
-  background-image: -ms-linear-gradient(top, #323539 0%, #1a1c1e 20%);
-  background-image: -o-linear-gradient(top, #323539 0%, #1a1c1e 20%);
-  background-image: linear-gradient(top, #323539 0%, #1a1c1e 20%);
+  background-color: var(--highlight);
+  background-image: -webkit-linear-gradient(top, var(--highlight) 0%, #1a1c1e 20%);
+  background-image: -moz-linear-gradient(top, var(--highlight) 0%, #1a1c1e 20%);
+  background-image: -ms-linear-gradient(top, var(--highlight) 0%, #1a1c1e 20%);
+  background-image: -o-linear-gradient(top, var(--highlight) 0%, #1a1c1e 20%);
+  background-image: linear-gradient(top, var(--highlight) 0%, #1a1c1e 20%);
 }
 .inline-checkbox.checked:before {
   content: "X";
@@ -141,14 +141,14 @@ input:focus::-webkit-input-placeholder {
   color: #717980;
   text-align: center;
   background-color: #2d3033;
-  background-image: -webkit-linear-gradient(top, #2d3033 0%, #45494e 20%);
-  background-image: -moz-linear-gradient(top, #2d3033 0%, #45494e 20%);
-  background-image: -ms-linear-gradient(top, #2d3033 0%, #45494e 20%);
-  background-image: -o-linear-gradient(top, #2d3033 0%, #45494e 20%);
-  background-image: linear-gradient(top, #2d3033 0%, #45494e 20%);
+  background-image: -webkit-linear-gradient(top, #2d3033 0%, var(--active-highlight) 20%);
+  background-image: -moz-linear-gradient(top, #2d3033 0%, var(--active-highlight) 20%);
+  background-image: -ms-linear-gradient(top, #2d3033 0%, var(--active-highlight) 20%);
+  background-image: -o-linear-gradient(top, #2d3033 0%, var(--active-highlight) 20%);
+  background-image: linear-gradient(top, #2d3033 0%, var(--active-highlight) 20%);
 }
 .inline-checkbox:hover {
-  background-color: #323539;
+  background-color: var(--highlight);
 }
 #toolbar {
   background-color: #000;
@@ -167,7 +167,7 @@ input:focus::-webkit-input-placeholder {
   margin-right: 0em;
 }
 .tool-button:hover {
-  background-color: #333;
+  background-color: var(--fg-color);
 }
 .button-box {
   position: absolute;
@@ -195,7 +195,7 @@ input:focus::-webkit-input-placeholder {
   width: auto;
 }
 .button-box .inline-checkbox {
-  border: 1px solid #8f8f8f;
+  border: var(--normal-border);
 }
 .button-box .inline-checkbox:before {
   border: 1px solid #3d3d3d;
@@ -206,10 +206,10 @@ input:focus::-webkit-input-placeholder {
   margin: 0px 5px;
 }
 .inline-button {
-  background-color: #1d1f21;
+  background-color: var(--bg-color);
   color: #ccc;
   font-family: Menlo, Consolas, monospace;
-  border: 1px solid #8f8f8f;
+  border: var(--normal-border);
   padding: 1em;
   text-decoration: none;
   display: block;
@@ -226,7 +226,7 @@ input:focus::-webkit-input-placeholder {
 }
 .inline-button:hover {
   color: #ccc;
-  background-color: #323539;
+  background-color: var(--highlight);
 }
 .inline-button:active {
   background-color: #474c51;
@@ -238,10 +238,10 @@ input:focus::-webkit-input-placeholder {
   float: right;
 }
 .floating-button {
-  background-color: #1d1f21;
+  background-color: var(--bg-color);
   color: #ccc;
   font-family: Menlo, Consolas, monospace;
-  border: 1px solid #8f8f8f;
+  border: var(--normal-border);
   padding: 1em;
   text-decoration: none;
   display: block;
@@ -260,7 +260,7 @@ input:focus::-webkit-input-placeholder {
 }
 .floating-button:hover {
   color: #ccc;
-  background-color: #323539;
+  background-color: var(--highlight);
 }
 .floating-button:active {
   background-color: #474c51;

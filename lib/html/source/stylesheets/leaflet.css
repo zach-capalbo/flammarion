@@ -300,7 +300,7 @@
 	}
 .leaflet-control-layers-expanded {
 	padding: 6px 10px 6px 6px;
-	color: #333;
+	color: var(--fg-color);
 	background: #fff;
 	}
 .leaflet-control-layers-selector {
@@ -328,7 +328,7 @@
 .leaflet-control-attribution,
 .leaflet-control-scale-line {
 	padding: 0 5px;
-	color: #333;
+	color: var(--fg-color);
 	}
 .leaflet-control-attribution a {
 	text-decoration: none;

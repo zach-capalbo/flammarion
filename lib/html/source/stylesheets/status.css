@@ -1,5 +1,5 @@
 #status {
-  background-color: #1a1b1d;
+  background-color: var(--status-bg-color);
   margin: 0px;
   padding: 5px;
   padding-bottom: 10px;

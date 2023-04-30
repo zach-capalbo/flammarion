@@ -20,8 +20,8 @@
   height: 70%;
   padding: 1em;
   background-color: #17191a;
-  border: 1px solid #8f8f8f;
-  box-shadow: 2px 2px 4px 2px #333;
+  border: var(--normal-border);
+  box-shadow: 2px 2px 4px 2px var(--fg-color);
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;

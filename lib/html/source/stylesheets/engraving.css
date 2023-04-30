@@ -1,6 +1,6 @@
 @charset "utf-8";
 body {
-  background-color: #1d1f21;
+  background-color: var(--bg-color);
   color: #ccc;
   padding: 0px;
   margin: 0px;
@@ -27,10 +27,10 @@ html {
 }
 a {
   text-decoration: none;
-  color: #7f8082;
+  color: var(--fg-highlight);
 }
 a:hover {
-  color: #898c8e;
+  color: var(--fg-active-highlight);
 }
 p a,
 .markdown a {
@@ -78,7 +78,7 @@ p a,
 hr {
   width: 95%;
   background-color: #ccc;
-  border: 1px solid #323539;
+  border: 1px solid var(--highlight);
 }
 .emoji {
   height: 1.5em;
