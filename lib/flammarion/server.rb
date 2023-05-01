@@ -1,7 +1,8 @@
+require 'webrick'
 module Flammarion
   # @api private
   class Server
-    attr_reader :port, :server_thread
+    attr_reader :port, :server_thread, :webrick_port
     def initialize
       @windows = {}
       @socket_paths = {}
@@ -9,6 +10,7 @@ module Flammarion
       @launch_thread = Thread.current
       @server_thread = Thread.new do
         begin
+          start_http_server
           start_server_internal
         rescue StandardError
           handle_exception($!)
@@ -22,12 +24,28 @@ module Flammarion
         File.open('/proc/version', &:gets).downcase.include?("microsoft")
     end
 
+    def start_http_server
+      source_dir = File.absolute_path(File.join(File.dirname(File.absolute_path(__FILE__)), "/../html/source/"))
+      begin
+        @webrick_port = rand(65000 - 1024) + 1024
+        @webrick = WEBrick::HTTPServer.new(Host: '127.0.0.1', Port: @webrick_port, DocumentRoot: source_dir, AccessLog: [], Logger: WEBrick::Log.new(File.open(File::NULL, 'w')))
+      rescue RuntimeError, Errno::EADDRINUSE
+        if $!.message == "no acceptor (port is in use or requires root privileges)" or $!.is_a? Errno::EADDRINUSE
+          @webrick_port = rand(65000 - 1024) + 1024
+          retry
+        else
+          raise
+        end
+      end
+      Thread.new { @webrick.start }
+    end
+
     def start_server_internal
       @port = 7870
       @port = rand(65000 - 1024) + 1024 if Gem.win_platform? || wsl_platform
 
       begin
-        @server = Rubame::Server.new("0.0.0.0", @port)
+        @server = Rubame::Server.new("127.0.0.1", @port)
         log "WebServer started on port #{@port}"
         while true do
           @started = true

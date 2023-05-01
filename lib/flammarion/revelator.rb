@@ -21,10 +21,7 @@ module Flammarion
 
     def open_a_window(options = {})
       development_mode = Flammarion.development_mode?
-      host_path = File.absolute_path(File.join(File.dirname(File.absolute_path(__FILE__)), "/../html/source/index.html"))
-      host_path = `cygpath -w '#{host_path}'`.strip if RbConfig::CONFIG["host_os"] == "cygwin"
-      host = "file://#{host_path}"
-      host = "http://localhost:4567/" if development_mode
+      host = "http://localhost:#{server.webrick_port}/"
 
       @expect_title = options[:title] || "Flammarion"
       url = "#{host}?path=#{@window_id}&port=#{server.port}&title=#{@expect_title}"
@@ -82,10 +79,8 @@ module Flammarion
       chrome_path = `wslpath '#{CHROME_PATH}'`.strip
       return false unless File.exist?(chrome_path)
 
-      # Convert index.html path to Windows
-      file_path = %[#{File.absolute_path(File.join(File.dirname(__FILE__), ".."))}/html/source/index.html]
-      url = "file://#{`wslpath -m '#{file_path}'`.strip}"
-      url = "http://localhost:4567/" if Flammarion.development_mode?
+      # url = "file://#{`wslpath -m '#{file_path}'`.strip}"
+      url = "http://localhost:#{server.webrick_port}/"
 
       cmdString = %['#{chrome_path}' --app='#{url}?port=#{server.port}&path=#{@window_id}&title="#{options[:title] || "Flammarion%20Engraving"}"']
 
@@ -97,8 +92,7 @@ module Flammarion
       return false unless RbConfig::CONFIG["host_os"] =~ /cygwin|mswin|mingw/
       file_path = File.absolute_path(File.join(File.dirname(__FILE__), ".."))
       file_path = `cygpath -w '#{file_path}'`.strip if RbConfig::CONFIG["host_os"] == "cygwin"
-      resource = %[file\://#{file_path}/html/source/index.html]
-      resource = "http://localhost:4567/" if options[:development_mode]
+      resource = "http://localhost:#{server.webrick_port}/"
       chrome_path = CHROME_PATH
       chrome_path = `cygpath -u '#{CHROME_PATH}'`.strip if RbConfig::CONFIG["host_os"] == "cygwin"
       return false unless File.exist?(chrome_path)

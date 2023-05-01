@@ -371,18 +371,18 @@ module Flammarion
     #  extensions to enable.
     # @macro add_options
     def markdown(text, options = {})
-      if defined?(Redcarpet::Markdown) then
-        markdown_html = Redcarpet::Markdown.new(Redcarpet::Render::HTML, {
-          tables: true,
-          fenced_code_blocks: true,
-          autolink: true,
-          strikethrough: true,
-          superscript: true,
-        }.merge(options[:markdown_extensions] || {})).render(text)
-      else
-        markdown_html = Kramdown::Document.new(text, {input: 'GFM', hard_wrap: false, syntax_highlighter: nil}.merge(options)).to_html
-      end
-      send_json({action:'markdown', text: markdown_html, hard_wrap:false}.merge(options))
+      # if defined?(Redcarpet::Markdown) then
+      #   markdown_html = Redcarpet::Markdown.new(Redcarpet::Render::HTML, {
+      #     tables: true,
+      #     fenced_code_blocks: true,
+      #     autolink: true,
+      #     strikethrough: true,
+      #     superscript: true,
+      #   }.merge(options[:markdown_extensions] || {})).render(text)
+      # else
+      #   markdown_html = Kramdown::Document.new(text, {input: 'GFM', hard_wrap: false, syntax_highlighter: nil}.merge(options)).to_html
+      # end
+      send_json({action:'markdown', text: text, hard_wrap:false}.merge(options))
     end
 
     # Hides (but doesn't close) the pane. This allows the pane to be written
