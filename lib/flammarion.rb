@@ -23,6 +23,7 @@ require_relative 'flammarion/version.rb'
 require_relative 'flammarion/revelator.rb'
 require_relative 'flammarion/about.rb'
 require_relative 'flammarion/engraving.rb'
+require_relative 'flammarion/electron.rb'
 
 # This is the main namespace for Flammarion. You really need an {Engraving} to
 # do anything useful. If you just want to test that everything is setup

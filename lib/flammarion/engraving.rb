@@ -100,22 +100,6 @@ module Flammarion
       end
     end
 
-    # Currently only works with Electron. Returns a PNG image of the Engraving
-    def snapshot(&block)
-      if block_given?
-        id = make_id
-        callbacks[id] = Proc.new {|d| block.call(d.fetch('data', {}).fetch('data', []).pack('c*')) }
-        send_json(action:'snapshot', id: id)
-      else
-        return_value = nil
-        snapshot {|d| return_value = d}
-        Timeout.timeout(10) do
-          sleep(0.01) until return_value
-        end
-        return return_value
-      end
-    end
-
     # Allows you to load a custom layout file. This replaces all html in the
     # window with a custom slim layout. You probably don't want this unless your
     # writing a very complex application.

@@ -3,6 +3,7 @@ app = require('electron').app
 path = require('path')
 shell = require('electron').shell
 
+app.setAppUserModelId "flammarion" if electron.app.setAppUserModelId?
 app.on 'ready', ->
   preload = path.resolve(path.join(__dirname, 'preload.js'))
   main_window = new BrowserWindow
