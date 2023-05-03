@@ -18,6 +18,7 @@ class Server {
     this.serverThread = null;
     // this.launchThread = Thread.current;
     this.start();
+    this.newPath = 0;
   }
 
   wslPlatform() {
@@ -36,119 +37,83 @@ class Server {
     return this._starting = this._start();
   }
 
-  async _start() {
-    // globalServer = http.createServer((r, rr) => console.log(r)).listen(4567, '0.0.0.0');
-    this.webrick_port = 4567
-    let webrickPort;
+  async startHttpServer() {
+    let port;
 
-    while (!webrickPort) {
+    while (!port) {
       try {
-        webrickPort = Math.floor(Math.random() * (65000 - 1024) + 1024);
+        port = Math.floor(Math.random() * (65000 - 1024) + 1024);
         
           const webrick = http.createServer((req, res) => {
-            console.log("Handling http", req.path, htmlDir)
             var done = finalhandler(req, res);
             serve(req, res, done);
           });
-          this.webrick_port = webrickPort;
+          webrick.on('close', () => console.error("Server has shutdown!!"))
+          this.webrick_port = port;
           this.webrick = webrick;
 
           await new Promise((resolve, reject) => {
-            webrick.listen(webrickPort, '127.0.0.1', (err) => {
+            webrick.listen(port, '127.0.0.1', (err) => {
               if (err) {
                 if (err.code === 'EADDRINUSE') {
-                  webrickPort = null;
+                  port = null;
                 } else {
                   reject(err);
                 }
               } else {
-                console.log("Http server running on", webrickPort)
-                console.log(webrick);
+                console.log("Http server running on", port)
                 resolve();
               }
             });
         });
-
-
-        const wss = new WebSocket.Server({ server: webrick });
-        wss.on('connection', (ws, req) => {
-          if (this.windows[req.url]) {
-            this.windows[req.url].sockets.push(ws);
-            if (this.windows[req.url].onConnect) {
-              this.windows[req.url].onConnect();
-            }
-            this.socketPaths[ws] = req.url;
-          } else {
-            console.log(`No such window: ${req.url}`);
-          }
-          ws.on('message', (msg) => {
-            try {
-              this.windows[this.socketPaths[ws]].processMessage(msg);
-            } catch (e) {
-              this.handleException(e);
-            }
-          });
-          ws.on('close', () => {
-            console.log('Connection closed');
-            const window = this.windows[this.socketPaths[ws]];
-            if (window) {
-              window.disconnect(ws);
-            }
-          });
-        });
-
-        console.log(`HTTP server started on port ${webrickPort}`);
       } catch (e) {
         console.error("Retring start", e)
         if (e.code === 'EADDRINUSE') {
-          webrickPort = null;
+          port = null;
         } else {
           throw e;
         }
       }
     }
+  }
 
-    let port = 7870;
-    if (process.platform === 'win32' || this.wslPlatform()) {
-      port = Math.floor(Math.random() * (65000 - 1024) + 1024);
-    }
+  async _start() {
+    await this.startHttpServer();
+    this.port = this.webrick_port;
+    const wss = new WebSocket.Server({ server: this.webrick });
+    wss.on('connection', (ws, req) => {
+      if (this.windows[req.url]) {
+        this.windows[req.url].registerConnection(ws);
+        if (this.windows[req.url].onConnect) {
+          this.windows[req.url].onConnect();
+        }
+        this.socketPaths[ws] = req.url;
+      } else {
+        console.log(`No such window: ${req.url}`);
+      }
+      ws.on('message', (msg) => {
+        try {
+          this.windows[this.socketPaths[ws]].processMessage(msg);
+        } catch (e) {
+          this.handleException(e);
+        }
+      });
+      ws.on('close', () => {
+        console.log('Connection closed');
+        const window = this.windows[this.socketPaths[ws]];
+        if (window) {
+          window.disconnect(ws);
+        }
+      });
+    });
 
-    // await new Promise((resolve, err) => {
-    //   try {
-    //     const server = http.createServer();
-    //     const wsServer = new WebSocket.Server({ server });
-
-    //     server.listen(port, '127.0.0.1', () => {
-    //       console.log(`WebSocket server started on port ${port}`);
-    //       this.port = port;
-    //       this.started = true;
-    //       resolve();
-    //     });
-
-    //     wsServer.on('connection', (ws) => {
-    //       ws.on('message', (msg) => {
-    //         try {
-    //           this.windows[this.socketPaths[ws]].processMessage(msg);
-    //         } catch (e) {
-    //           this.handleException(e);
-    //         }
-    //       });
-    //       ws.on('close', () => {
-    //         console.log('Connection closed');
-    //         const window = this.windows[this.socketPaths[ws]];
-    //         if (window) {
-    //           window.disconnect(ws);
-    //         }
-    //       });
-    //     });
-
-    //     console.log(`Web server started on port ${port}`);
-    //   }
-    //   catch (e) {
-    //     console.error(e)
-    //     err(e);
-    //   }
-    // });
+    console.log(`HTTP server started on port ${this.port}`);
+  }
+  registerWindow(window)
+  {
+    this.newPath += 1;
+    this.windows[`/w${this.newPath}`] = window
+    return `w${this.newPath}`
   }
 }
 

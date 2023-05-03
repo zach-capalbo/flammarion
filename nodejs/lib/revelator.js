@@ -51,15 +51,14 @@ class Revelator {
         let url = `http://localhost:${this.server.webrick_port}/index.html`;
         // url = "https://zachcapalbo.com"
         const title = options && options.title ? options.title : "Flammarion%20Engraving";
-        const cmdString = `'${chromePath}' --app='${url}?port=${this.server.port}&path=${this.window_id}&title="${title}"'`;
+        // let args = [`--app=${url}?port=${this.server.port}&path=${this.windowId.replace('/', '')}&title=${title}`];
+        let args = [`--app=${url}?port=${this.server.port}&path=${this.windowId }`];
 
-        let args = [`--app=${url}?port=${this.server.port}&path=${this.window_id}&title="${title}"`];
-
-        console.log("Starting chrome", this.server, chromePath, args)
+        console.log("Starting chrome", chromePath, args)
       
-        const proc = spawnSync(cmdString, args, {
+        const proc = spawnSync(chromePath, args, {
           stdio: ["pipe", "pipe", "pipe"],
-          shell: true,
+          shell: false,
         });
 
         console.log("Chrome spawned");
