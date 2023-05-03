@@ -1,0 +1,16 @@
+{
+    "name": "flammarion",
+    "version": "0.1.0",
+    "main": "index.js",
+    "dependencies": {
+        "finalhandler": "^1.2.0",
+        "nan": "^2.0.0",
+        "serve-static": "^1.15.0",
+        "spellchecker": "^3.2.1",
+        "ws": "^8.13.0"
+    },
+    "packageDependencies": {
+        "spellchecker": "^3.2.1",
+        "nan": "^2.0.0"
+    }
+}
