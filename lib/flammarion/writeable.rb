@@ -322,7 +322,7 @@ module Flammarion
       if File.exist?(src) then
         html("<script>#{File.read(src)}</script>")
       else
-        html("<script src='#{src}'></src>")
+        html("<script src='#{src}'></script>")
       end
     end
 

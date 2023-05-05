@@ -1,3 +1,7 @@
+const {existsSync, readFileSync} = require('fs')
+
+let Pane;
+
 class DeferredValue {
     constructor() {}
     get value() {
@@ -68,8 +72,17 @@ class Writeable {
             options = {}
         }
         this.send_json(Object.assign({action: 'button', label, id}, options))
-        this.engraving.callbacks[id] = callback
-        return id
+        if (callback)
+        {
+            this.engraving.callbacks[id] = callback
+            return id
+        }
+        else
+        {
+            return new Promise((r, e) => {
+                this.engraving.callbacks[id] = r
+            });
+        }
     }
     embeddedButton(label, options, callback)  {
         let id = this.engraving.makeId()
@@ -168,6 +181,9 @@ class Writeable {
         this.raw(data)
     }
     script(text, options = {}) {
+        if (existsSync(text)) {
+            return this.scriptSrc(text)
+        }
         let id = this.engraving.makeId();
         if (typeof text === 'function') {
             text = `(${text.toString()})()`;
@@ -179,6 +195,79 @@ class Writeable {
             this.send_json(Object.assign({action: 'script', data: text, id}, options))
         })
     }
+    js(...args) { return this.script(...args); }
+    scriptSrc(src) {
+        if (existsSync(src)) {
+            this.html(`<script>${readFileSync(src)}</script>`)
+        } else {
+            this.html(`<script src="${src}"></script>`)
+        }
+    }
+    style(keyOrObject, valueOrNull)
+    {
+        if (valueOrNull)
+        {
+            this.send_json({action: 'style', attribute: keyOrObject, value:valueOrNull})
+        }
+        else
+        {
+            for (let [k,v] of Object.entries(keyOrObject))
+            {
+                this.send_json({action: 'style', attribute: k, value:v})
+            }
+        }
+    }
+    markdown(text, options = {}) {
+        this.send_json(Object.assign({action: 'markdown', text, hard_wrap: false}, options))
+    }
+    hide() {
+        this.send_json({action: 'hide'})
+    }
+    show() {
+        this.send_json({action: 'show'})
+    }
+    subpane(name, options = {}) {
+        if (!name) {
+            name = this.engraving.makeId()
+        }
+        this.send_json(Object.assign({action: 'subpane', name}, options))
+        return new Pane(this.engraving, name)
+    }
+    pane(name, options = {}) {
+        if (!name) {
+            name = this.engraving.makeId()
+        }
+        this.send_json(Object.assign({action: 'addpane', name}, options))
+        return new Pane(this.engraving, name)
+    }
+    set orientation(orientation) {
+        if (orientation != 'horizontal' && orientation != 'vertical') {
+            throw new Error("Orientation must be 'horizontal' or 'vertical'")
+        }
+        this.send_json({action: 'reorient', orientation})
+    }
+    buttonBox(name = "buttonbox") {
+        this.send_json({action: 'buttonbox', name})
+        return new Pane(this.engraving, name)
+    }
+    status(str, options = {}) {
+        if (typeof options === 'string') {
+            options = {position: options}
+        }
+        this.engraving.send_json(Object.assign({action: 'status', text: str}, options))
+    }
+    table(rows, options = {}) {
+        this.send_json(Object.assign({action: 'table', rows}, options))
+    }
+    async gets(prompt = "", options = {}) {
+        return await new Promise((r, e) => {
+            this.input(prompt, Object.assign({once: true, focus: true}, options), (m) => r(m.text))
+        })
+    }
+    search(string) {
+        this.send_json({action: 'search', text: string})
+    }
 }
 
 module.exports = {Writeable}
+Pane = require('./pane').Pane

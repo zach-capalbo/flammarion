@@ -7,9 +7,15 @@ const {Engraving} = require('./lib/engraving.js');
     f.puts("hi")
     f.highlight({test: 123, abc: ["EFG"]})
     var d, dd;
-    f.button("abc", () => { f.puts(d.value); f.puts(dd.value)})
+    let subpane;
+    f.button("abc", () => { 
+        subpane.clear()
+        subpane.puts(d.value); 
+        subpane.puts(dd.value)
+    })
     d = f.input("Type:")
     dd = f.dropdown(["123", "456", "abc"])
+    subpane = f.subpane("abcd")
     f.puts(await f.script(() => 1 + 1))
     f.puts(await f.script("1 + 1"))
 })();
