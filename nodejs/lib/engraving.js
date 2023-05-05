@@ -13,6 +13,8 @@ class Engraving extends Writeable {
         this.engraving = this;
         this.sockets = []
         this.waitingConnectionResolves = []
+        this.id = 0
+        this.callbacks = {}
         
         this.revelator = new Revelator();
         this.revelator.windowId = this.revelator.server.registerWindow(this)
@@ -30,7 +32,11 @@ class Engraving extends Writeable {
             ws.send(JSON.stringify(val))
         }
     }
-    async openWindow(...args) {
+    openWindow() {
+        if (this._windowOpening) return this._windowOpening;
+        return this._windowOpening = this._openWindow();
+    }
+    async _openWindow(...args) {
         await this.revelator.openWindow(...args)
     }
     waitForAConnection() {
@@ -45,6 +51,29 @@ class Engraving extends Writeable {
             r()
         }
         this.waitingConnectionResolves.length = 0;
+    }
+    processMessage(msg) {
+        this.lastMsg = msg
+        let m = {}
+        try {
+            m = JSON.parse(msg)
+        } catch (e) {
+            console.error("Invalid JSON", e)
+            return
+        }
+
+        switch (m.action) {
+            case 'callback':
+                let callback = this.callbacks[m.id]
+                if (callback) {
+                    callback(m)
+                }
+            break;
+        }
+    }
+    makeId() {
+        this.id += 1
+        return `i${this.id}`
     }
 }
 

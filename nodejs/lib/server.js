@@ -45,8 +45,12 @@ class Server {
         port = Math.floor(Math.random() * (65000 - 1024) + 1024);
         
           const webrick = http.createServer((req, res) => {
-            var done = finalhandler(req, res);
-            serve(req, res, done);
+            try {
+              var done = finalhandler(req, res);
+              serve(req, res, done);
+            } catch (e) {
+              console.error("Could not serve", req.path, e)
+            }
           });
           webrick.on('close', () => console.error("Server has shutdown!!"))
           this.webrick_port = port;
@@ -108,12 +112,16 @@ class Server {
     });
 
     console.log(`HTTP server started on port ${this.port}`);
+    this.started = true
   }
   registerWindow(window)
   {
     this.newPath += 1;
     this.windows[`/w${this.newPath}`] = window
     return `w${this.newPath}`
+  }
+  handleException(e) {
+    console.error(e)
   }
 }
 

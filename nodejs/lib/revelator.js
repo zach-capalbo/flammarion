@@ -1,5 +1,5 @@
 const fs = require('fs');
-const {execSync, spawnSync} = require('child_process');
+const {execSync, spawnSync, spawn } = require('child_process');
 const {Server} = require('./server.js');
 
 class SetupError extends Error {}
@@ -56,7 +56,7 @@ class Revelator {
 
         console.log("Starting chrome", chromePath, args)
       
-        const proc = spawnSync(chromePath, args, {
+        const proc = spawn(chromePath, args, {
           stdio: ["pipe", "pipe", "pipe"],
           shell: false,
         });
