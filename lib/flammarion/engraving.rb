@@ -124,11 +124,6 @@ module Flammarion
       send_json({action:'layout', data:data})
     end
 
-    def live_reload_layout(file)
-      layout(file); yield if block_given?
-      FileWatcher.new(file).watch {|file| layout(file); yield if block_given? }
-    end
-
     # @api private
     def disconnect(ws)
       @sockets.delete ws

@@ -1,7 +1,9 @@
 {
     "name": "flammarion",
-    "version": "0.1.0",
-    "main": "index.js",
+    "version": "0.4.0",
+    "main": "lib/engraving.js",
+    "license": "MIT",
+    "author": "Zach Capalbo <zach.geek@gmail.com>",
     "dependencies": {
         "finalhandler": "^1.2.0",
         "nan": "^2.0.0",

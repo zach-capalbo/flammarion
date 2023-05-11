@@ -105,7 +105,13 @@ class Writeable {
         return `<a href="#" onClick="$ws.send({id:'${id}', action:'callback', source:'link'})">${label}</a>`
     }
     icon(name, additionalClasses = []) {
-        
+        let e = this.emoji[`:${name}:`]
+        if (e) {
+            return `<img class="emoji" alt="${name}" src="images/emoji/${e.unicode.last.downcase}.png">`
+        }
+        else {
+            return `<i class="fa fa-${name} ${additionalClasses.map(c => `fa-${c}`).join(" ")}"></i>`
+        }
     }
     input(label, options = {}, callback) {
         let id = this.engraving.makeId()
@@ -266,6 +272,15 @@ class Writeable {
     }
     search(string) {
         this.send_json({action: 'search', text: string})
+    }
+    get emoji() {
+        if (!this._emoji) {
+            const emojioneFile = readFileSync(__dirname + '/../../lib/html/source/javascripts/vendor/emojione.js', 'utf8');
+            const emojioneList = emojioneFile.split('\n').find(line => line.startsWith('    ns.emojioneList'));
+            const emojiJson = JSON.parse(emojioneList.match(/= ({[^;]+);/)[1]);
+            this._emoji = emojiJson;
+        }
+        return this._emoji;
     }
 }
 

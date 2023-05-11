@@ -358,13 +358,6 @@ module Flammarion
       send_json({action:'replace', text:data, raw:true})
     end
 
-    # Reloads a template every time the file changes. This is mostly just useful
-    # when developing a template file.
-    # @see #template
-    def live_reload_template(file)
-      FileWatcher.new(file).watch {|file| template(file) }
-    end
-
     # Renders the given markdown text into the pane.
     # @param text [String] The markdown text to render.
     # @option options [Hash] :markdown_extensions Additional Redcarpet

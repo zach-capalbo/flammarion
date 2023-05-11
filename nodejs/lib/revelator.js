@@ -25,7 +25,7 @@ class Revelator {
         return false;
       },
       function osx(options) {
-        if (!process.platform === 'darwin') {
+        if (process.platform !== 'darwin') {
           return false;
         }
         const executable = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';

@@ -17,7 +17,7 @@ module Flammarion
   # @api private
   # @todo This all needs a lot of clean up
   module Revelator
-    CHROME_PATH = ENV["FLAMMARION_REVELATOR_PATH"] || 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+    CHROME_PATH = ENV["FLAMMARION_REVELATOR_PATH"] || 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
 
     def open_a_window(options = {})
       development_mode = Flammarion.development_mode?

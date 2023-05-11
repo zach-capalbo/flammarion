@@ -18,4 +18,5 @@ const {Engraving} = require('./lib/engraving.js');
     subpane = f.subpane("abcd")
     f.puts(await f.script(() => 1 + 1))
     f.puts(await f.script("1 + 1"))
+    f.highlight(f.emoji)
 })();

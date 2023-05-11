@@ -16,30 +16,18 @@
   -ms-user-select: none;
   user-select: none;
   background-color: var(--highlight);
-  background-image: -webkit-linear-gradient(top, var(--highlight) 0%, #1a1c1e 20%);
-  background-image: -moz-linear-gradient(top, var(--highlight) 0%, #1a1c1e 20%);
-  background-image: -ms-linear-gradient(top, var(--highlight) 0%, #1a1c1e 20%);
-  background-image: -o-linear-gradient(top, var(--highlight) 0%, #1a1c1e 20%);
-  background-image: linear-gradient(top, var(--highlight) 0%, #1a1c1e 20%);
+  background-image: linear-gradient(180deg, var(--highlight) 0%, #1a1c1e 20%);
 }
 .full-button:hover {
   color: #ccc;
   background-color: var(--highlight);
   background-color: var(--active-highlight);
-  background-image: -webkit-linear-gradient(top, var(--active-highlight) 0%, #2d3033 20%);
-  background-image: -moz-linear-gradient(top, var(--active-highlight) 0%, #2d3033 20%);
-  background-image: -ms-linear-gradient(top, var(--active-highlight) 0%, #2d3033 20%);
-  background-image: -o-linear-gradient(top, var(--active-highlight) 0%, #2d3033 20%);
-  background-image: linear-gradient(top, var(--active-highlight) 0%, #2d3033 20%);
+  background-image: linear-gradient(180deg, var(--active-highlight) 0%, var(--highlight) 20%);
 }
 .full-button:active {
   background-color: #474c51;
   background-color: #2d3033;
-  background-image: -webkit-linear-gradient(top, #2d3033 0%, var(--active-highlight) 20%);
-  background-image: -moz-linear-gradient(top, #2d3033 0%, var(--active-highlight) 20%);
-  background-image: -ms-linear-gradient(top, #2d3033 0%, var(--active-highlight) 20%);
-  background-image: -o-linear-gradient(top, #2d3033 0%, var(--active-highlight) 20%);
-  background-image: linear-gradient(top, #2d3033 0%, var(--active-highlight) 20%);
+  background-image: linear-gradient(180deg, #2d3033 0%, var(--active-highlight) 20%);
 }
 .full-button > .label-icon-left {
   float: left;

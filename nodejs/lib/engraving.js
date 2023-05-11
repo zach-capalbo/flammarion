@@ -13,19 +13,20 @@ class Engraving extends Writeable {
         this.engraving = this;
         this.sockets = []
         this.waitingConnectionResolves = []
+        this.waitingUntilClosedResolves = []
         this.id = 0
         this.callbacks = {}
         
         this.revelator = new Revelator();
         this.revelator.windowId = this.revelator.server.registerWindow(this)
         console.log("Registered window", this.revelator.windowId)
-        // this.revelator.openWindow();
+        this.openWindow();
     }
     async send_json(val) {
         if (this.sockets.length === 0)
         {
-            // await this.openWindow()
-            // await this.waitForAConnection()
+            await this.openWindow()
+            await this.waitForAConnection()
         }
         for (let ws of this.sockets)
         {
@@ -44,6 +45,11 @@ class Engraving extends Writeable {
             this.waitingConnectionResolves.push(r)
         })
     }
+    waitUntilClosed() {
+        return new Promise((r, e) => {
+            this.waitingUntilClosedResolves.push(r)
+        })
+    }
     registerConnection(ws) {
         this.sockets.push(ws);
         for (let r of this.waitingConnectionResolves)
@@ -51,6 +57,23 @@ class Engraving extends Writeable {
             r()
         }
         this.waitingConnectionResolves.length = 0;
+    }
+    disconnect(ws) {
+        this.sockets.splice(this.sockets.indexOf(ws), 1)
+        if (this.exitOnDisconnect) {
+            process.exit(0);
+        }
+        if (this.onDisconnect)
+        {
+            this.onDisconnect()
+        }
+        if (this.sockets.length === 0)
+        {
+            for (let r of this.waitingUntilClosedResolves)
+            {
+                r();
+            }
+        }
     }
     processMessage(msg) {
         this.lastMsg = msg

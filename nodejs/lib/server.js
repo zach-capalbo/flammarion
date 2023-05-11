@@ -8,15 +8,11 @@ const path = require('path');
 const htmlDir = path.join(path.dirname(__filename), '/../../lib/html/source/');
 var serve = serveStatic(htmlDir);
 
-let globalServer;
-
 class Server {
   constructor() {
     this.windows = {};
     this.socketPaths = {};
     this.started = false;
-    this.serverThread = null;
-    // this.launchThread = Thread.current;
     this.start();
     this.newPath = 0;
   }
@@ -107,6 +103,12 @@ class Server {
         const window = this.windows[this.socketPaths[ws]];
         if (window) {
           window.disconnect(ws);
+        }
+        delete this.socketPaths[ws];
+        if (Object.keys(this.socketPaths).length === 0)
+        {
+          wss.close();
+          this.webrick.close();
         }
       });
     });

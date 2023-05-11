@@ -15,9 +15,7 @@ Gem::Specification.new do |s|
   s.files       = Dir["lib/**/*"] + %w[LICENSE Readme.md] + Dir["electron/*"]
   s.homepage    = 'https://github.com/zach-capalbo/flammarion'
   s.license     = 'MIT'
-  s.add_runtime_dependency "rubame", "~> 0.0.2"
   s.add_runtime_dependency "colorize", "~> 0.7"
-  s.add_runtime_dependency "filewatcher", "~> 0.5"
   s.add_runtime_dependency "launchy"
   s.add_runtime_dependency "websocket"
 end
