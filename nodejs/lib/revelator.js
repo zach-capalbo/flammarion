@@ -3,10 +3,9 @@ const {execSync, spawnSync, spawn } = require('child_process');
 const {Server} = require('./server.js');
 
 class SetupError extends Error {}
-const CHROME_PATH = process.env.FLAMMARION_REVELATOR_PATH || 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe';
+const CHROME_PATH = process.env.FLAMMARION_REVELATOR_PATH || 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
 class Revelator {
   
-  static #browsers = [];
 
   constructor() {
     this.server = new Server();
@@ -33,18 +32,15 @@ class Revelator {
         this.chrome = { inStream, outStream, errStream, thread };
         return !!this.chrome.inStream;
       },
-      function chrome_wsl(options) {
-        // Check for WSL, idea from https://github.com/hashicorp/vagrant/blob/master/lib/vagrant/util/platform.rb
-        const versionFile = "/proc/version";
-        const versionContents = fs.readFileSync(versionFile, "utf8").toLowerCase();
-        const isWSL = fs.existsSync(versionFile) && versionContents.includes("microsoft");
-        if (!isWSL) {
-          return false;
+      function chrome(options) {
+        let chromePath = CHROME_PATH;
+        // Convert to path in WSL
+        if (this.wslPlatform()) {
+          chromePath = execSync(`wslpath '${CHROME_PATH}'`).toString().trim();
         }
       
-        // Convert to path in WSL
-        const chromePath = execSync(`wslpath '${CHROME_PATH}'`).toString().trim();
         if (!fs.existsSync(chromePath)) {
+          console.log("NO CHROME", chromePath)
           return false;
         }
       
@@ -64,8 +60,7 @@ class Revelator {
         console.log("Chrome spawned");
       
         return true;
-        return proc.stdin ? true : false;
-      }
+      },
     ];
   }
 
@@ -76,6 +71,17 @@ class Revelator {
     } catch (error) {
       return false;
     }
+  }
+
+  // Check for WSL, idea from https://github.com/hashicorp/vagrant/blob/master/lib/vagrant/util/platform.rb
+  wslPlatform() {
+    return (
+      fs.existsSync('/proc/version') &&
+      fs
+        .readFileSync('/proc/version', 'utf8')
+        .toLowerCase()
+        .includes('microsoft')
+    );
   }
 
   async openWindow(options = {}) {
