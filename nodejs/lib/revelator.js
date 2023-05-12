@@ -32,7 +32,7 @@ class Revelator {
         this.chrome = { inStream, outStream, errStream, thread };
         return !!this.chrome.inStream;
       },
-      function chrome(options) {
+      function chrome_windows(options) {
         let chromePath = CHROME_PATH;
         // Convert to path in WSL
         if (this.wslPlatform()) {
@@ -40,7 +40,6 @@ class Revelator {
         }
       
         if (!fs.existsSync(chromePath)) {
-          console.log("NO CHROME", chromePath)
           return false;
         }
       
@@ -49,18 +48,28 @@ class Revelator {
         const title = options && options.title ? options.title : "Flammarion%20Engraving";
         // let args = [`--app=${url}?port=${this.server.port}&path=${this.windowId.replace('/', '')}&title=${title}`];
         let args = [`--app=${url}?port=${this.server.port}&path=${this.windowId }`];
-
-        console.log("Starting chrome", chromePath, args)
       
         const proc = spawn(chromePath, args, {
           stdio: ["pipe", "pipe", "pipe"],
           shell: false,
         });
-
-        console.log("Chrome spawned");
       
         return true;
       },
+      function chrome_path(options) {
+        const CHROME_CMDS = ['google-chrome', 'google-chrome-stable', 'chromium', 'chromium-browser', 'chrome'];
+        for (let executable of CHROME_CMDS) {
+          if (!Revelator.#which(executable)) { continue; }
+          const proc = spawnSync(`${executable} --app='${options.url}'`, [], {
+            stdio: ['pipe', 'pipe', 'pipe'],
+            shell: true,
+          });
+          if (proc.stdin) {
+            return true;
+          }
+        }
+        return false;
+      }
     ];
   }
 
@@ -92,7 +101,6 @@ class Revelator {
     this.browserOptions = { ...options, url };
     this.requestedBrowser = process.env.FLAMMARION_BROWSER || options.browser;
     this.browser = this.browsers.find(browser => {
-      console.log("Checking function", browser)
       if (this.requestedBrowser && browser.name !== this.requestedBrowser) {
         return false;
       }

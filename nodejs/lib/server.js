@@ -48,7 +48,6 @@ class Server {
               console.error("Could not serve", req.path, e)
             }
           });
-          webrick.on('close', () => console.error("Server has shutdown!!"))
           this.webrick_port = port;
           this.webrick = webrick;
 
@@ -61,7 +60,6 @@ class Server {
                   reject(err);
                 }
               } else {
-                console.log("Http server running on", port)
                 resolve();
               }
             });
@@ -89,7 +87,7 @@ class Server {
         }
         this.socketPaths[ws] = req.url;
       } else {
-        console.log(`No such window: ${req.url}`);
+        console.error(`No such window: ${req.url}`);
       }
       ws.on('message', (msg) => {
         try {
@@ -99,7 +97,6 @@ class Server {
         }
       });
       ws.on('close', () => {
-        console.log('Connection closed');
         const window = this.windows[this.socketPaths[ws]];
         if (window) {
           window.disconnect(ws);
@@ -113,7 +110,6 @@ class Server {
       });
     });
 
-    console.log(`HTTP server started on port ${this.port}`);
     this.started = true
   }
   registerWindow(window)

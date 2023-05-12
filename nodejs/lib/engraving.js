@@ -19,7 +19,6 @@ class Engraving extends Writeable {
         
         this.revelator = new Revelator();
         this.revelator.windowId = this.revelator.server.registerWindow(this)
-        console.log("Registered window", this.revelator.windowId)
         this.openWindow();
     }
     async send_json(val) {
