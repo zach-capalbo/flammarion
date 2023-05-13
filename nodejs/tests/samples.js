@@ -32,6 +32,14 @@ sample("Table with side panes", (f) => {
     f.table(data, {headers: ["Id", "Name", "Address"]})
 })
 
+sample("Plots", (f) => {
+    let p1 = f.plot([1,2,5,6,77])
+    let p2 = f.plot([{x: [5,6, 7], y: [100, 110, 300]}])
+    f.button("to SVG", async () => {
+        f.highlight(await p1.toSVG())
+    })
+})
+
 ;(async () => {
     for (let [name, func] of sampleFuncs)
     {

@@ -49,6 +49,7 @@ class Writeable {
     }
     plot(data, options = {}) {
         let id = this.engraving.makeId()
+        const Plot = require('./plot').Plot
         let p = new Plot(id, this.pane_name, this.engraving);
         p.plot(data, options)
         return p

@@ -29,8 +29,8 @@ module Flammarion
       begin
         @webrick_port = rand(65000 - 1024) + 1024
         @webrick = WEBrick::HTTPServer.new(Host: '127.0.0.1', Port: @webrick_port, DocumentRoot: source_dir, AccessLog: [], Logger: WEBrick::Log.new(File.open(File::NULL, 'w')))
-      rescue RuntimeError, Errno::EADDRINUSE
-        if $!.message == "no acceptor (port is in use or requires root privileges)" or $!.is_a? Errno::EADDRINUSE
+      rescue RuntimeError, Errno::EADDRINUSE, Errno::EACCES
+        if $!.message == "no acceptor (port is in use or requires root privileges)" or $!.is_a? Errno::EADDRINUSE or $!.is_a? Errno::EACCES
           @webrick_port = rand(65000 - 1024) + 1024
           retry
         else
@@ -77,8 +77,8 @@ module Flammarion
             }
           end
         end
-      rescue RuntimeError, Errno::EADDRINUSE
-        if $!.message == "no acceptor (port is in use or requires root privileges)" or $!.is_a? Errno::EADDRINUSE
+      rescue RuntimeError, Errno::EADDRINUSE, Errno::EACCES
+        if $!.message == "no acceptor (port is in use or requires root privileges)" or $!.is_a? Errno::EADDRINUSE or $!.is_a? Errno::EACCES
           @port = rand(65000 - 1024) + 1024
           retry
         else
