@@ -7,6 +7,7 @@ class Engraving extends Writeable {
         let {title = "Flammarion"} = options;
         if (typeof options === 'string') {
             title = options;
+            options = {title};
         }
 
         this.pane_name = "default"
@@ -19,7 +20,7 @@ class Engraving extends Writeable {
         
         this.revelator = new Revelator();
         this.revelator.windowId = this.revelator.server.registerWindow(this)
-        this.openWindow();
+        this.openWindow(options);
     }
     async send_json(val) {
         if (this.sockets.length === 0)
@@ -32,9 +33,9 @@ class Engraving extends Writeable {
             ws.send(JSON.stringify(val))
         }
     }
-    openWindow() {
+    openWindow(options) {
         if (this._windowOpening) return this._windowOpening;
-        return this._windowOpening = this._openWindow();
+        return this._windowOpening = this._openWindow(options);
     }
     async _openWindow(...args) {
         await this.revelator.openWindow(...args)

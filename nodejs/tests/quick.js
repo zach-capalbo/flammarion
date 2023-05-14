@@ -1,4 +1,4 @@
-const {Engraving} = require('./lib/engraving.js');
+const {Engraving} = require('../lib/engraving.js');
 ;(async () => {
     f = new Engraving()
     f.puts("hi")
@@ -15,5 +15,5 @@ const {Engraving} = require('./lib/engraving.js');
     subpane = f.subpane("abcd")
     f.puts(await f.script(() => 1 + 1))
     f.puts(await f.script("1 + 1"))
-    f.highlight(f.emoji)
+    // f.highlight(f.emoji)
 })();

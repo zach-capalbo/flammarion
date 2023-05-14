@@ -68,7 +68,7 @@ class Revelator {
 
   static #which(cmd) {
     try {
-      const stdout = require('child_process').execSync(`which ${cmd}`);
+      const stdout = require('child_process').execSync(`which ${cmd}`, {stdio: [null, 'pipe', null]});
       return String(stdout).trim();
     } catch (error) {
       return false;
@@ -90,7 +90,7 @@ class Revelator {
     await this.started;
     const host = `http://localhost:${this.server.webrick_port}/index.html`;
     this.expectedTitle = options.title || 'Flammarion';
-    const url = `${host}?path=${this.windowId}&port=${this.server.port}`;
+    const url = `${host}?path=${this.windowId}&port=${this.server.port}&title=${encodeURIComponent(this.expectedTitle)}`;
     this.browserOptions = { ...options, url };
     this.requestedBrowser = process.env.FLAMMARION_BROWSER || options.browser;
     this.browser = this.browsers.find(browser => {

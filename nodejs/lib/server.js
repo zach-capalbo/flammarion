@@ -5,7 +5,12 @@ var finalhandler = require('finalhandler');
 var serveStatic = require('serve-static');
 
 const path = require('path');
-const htmlDir = path.join(path.dirname(__filename), '/../../lib/html/source/');
+const htmlDir = [
+                // Installed node_module
+                path.join(path.dirname(__filename), '/../html/source/'),
+                // Development path
+                path.join(path.dirname(__filename), '/../../lib/html/source/'), 
+].find(p => fs.existsSync(p))
 var serve = serveStatic(htmlDir);
 
 class Server {
