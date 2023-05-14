@@ -135,6 +135,11 @@ class Writeable {
             return d
         }
     }
+    inputPromise(label, options = {once: true}) {
+        return new Promise((r) => {
+            this.input(label, options, (d) => r(d.text))
+        })
+    }
     dropdown(items, options = {}, callback) {
         let id = this.engraving.makeId()
         if (typeof options === 'function' && callback == undefined)

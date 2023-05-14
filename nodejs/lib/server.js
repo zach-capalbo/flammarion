@@ -59,7 +59,7 @@ class Server {
           await new Promise((resolve, reject) => {
             webrick.listen(port, '127.0.0.1', (err) => {
               if (err) {
-                if (err.code === 'EADDRINUSE') {
+                if (err.code === 'EADDRINUSE' || err.code === 'EACCES') {
                   port = null;
                 } else {
                   reject(err);
