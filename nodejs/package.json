@@ -1,6 +1,6 @@
 {
     "name": "flammarion",
-    "version": "1.0.0-pre",
+    "version": "1.0.0",
     "main": "lib/engraving.js",
     "files": [
 	"lib",
