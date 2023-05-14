@@ -42,14 +42,8 @@ class Revelator {
         if (!fs.existsSync(chromePath)) {
           return false;
         }
-      
-        let url = `http://localhost:${this.server.webrick_port}/index.html`;
-        // url = "https://zachcapalbo.com"
-        const title = options && options.title ? options.title : "Flammarion%20Engraving";
-        // let args = [`--app=${url}?port=${this.server.port}&path=${this.windowId.replace('/', '')}&title=${title}`];
-        let args = [`--app=${url}?port=${this.server.port}&path=${this.windowId }`];
-      
-        const proc = spawn(chromePath, args, {
+            
+        spawn(chromePath, [`--app=${options.url}`], {
           stdio: ["pipe", "pipe", "pipe"],
           shell: false,
         });
@@ -59,14 +53,13 @@ class Revelator {
       function chrome_path(options) {
         const CHROME_CMDS = ['google-chrome', 'google-chrome-stable', 'chromium', 'chromium-browser', 'chrome'];
         for (let executable of CHROME_CMDS) {
-          if (!Revelator.#which(executable)) { continue; }
-          const proc = spawnSync(`${executable} --app='${options.url}'`, [], {
+          let fullPath = Revelator.#which(executable)
+          if (!fullPath) { continue; }
+          spawn(fullPath, [`--app=${options.url}`],  {
             stdio: ['pipe', 'pipe', 'pipe'],
-            shell: true,
+            shell: false,
           });
-          if (proc.stdin) {
-            return true;
-          }
+          return true;
         }
         return false;
       }
@@ -95,9 +88,9 @@ class Revelator {
 
   async openWindow(options = {}) {
     await this.started;
-    const host = `http://localhost:${this.server.webrickPort}/`;
+    const host = `http://localhost:${this.server.webrick_port}/index.html`;
     this.expectedTitle = options.title || 'Flammarion';
-    const url = `${host}?path=${this.windowId}&port=${this.server.port}&title=${this.expectedTitle}`;
+    const url = `${host}?path=${this.windowId}&port=${this.server.port}`;
     this.browserOptions = { ...options, url };
     this.requestedBrowser = process.env.FLAMMARION_BROWSER || options.browser;
     this.browser = this.browsers.find(browser => {
