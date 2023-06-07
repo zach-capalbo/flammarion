@@ -18,4 +18,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "colorize", "~> 0.7"
   s.add_runtime_dependency "launchy"
   s.add_runtime_dependency "websocket"
+  s.add_runtime_dependency "webrick"
 end

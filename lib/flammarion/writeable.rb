@@ -1,3 +1,5 @@
+require 'delegate'
+
 module Flammarion
   module Writeable
     # @api private
